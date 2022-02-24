@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Smart shop | Technics</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <meta
+            name="description"
+            content="A project to train with Spring and React frameworks"
+    />
+
+    <meta property="og:title" content="Robot Genius"/>
+    <meta property="og:type" content="website"/>
+    <meta
+            property="og:description"
+            content="A joint project to create qualitative site."
+    />
+    <link rel="icon"
+          href="https://ru.seaicons.com/wp-content/uploads/2015/10/Flat-TV-icon.png">
+    <link rel="stylesheet" href="./help.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+
+    <script src="home.js"></script>
+</head>
+<body>
+<header>
+    <nav>
+        <a href="home.html" id="logo"><p class="logo">SmartShop</p></a>
+        <div class="navigation">
+            <a data-langkey="Nav-Our-Work" href="#home">Home</a>
+            <!-- <a data-langkey="Nav-Our-Work" href="#categories">Categories</a> -->
+            <div class="dropdown">
+                <button class="dropbtn">Categories</button>
+                <div class="dropdown-content">
+                    <a href="#">Computers</a>
+                    <a href="#">Phones</a>
+                    <a href="#">Tablets</a>
+                    <a href="#">Watches</a>
+                    <a href="#">Discounts</a>
+                    <a href="#">Drones</a>
+                </div>
+            </div>
+            <a data-langkey="Nav-The-Team" href="#about">About</a>
+            <a data-langkey="Nav-The-Process" href="#help"><span class="active-nav">Help</span></a>
+            <a data-langkey="Nav-Contact" href="#contact_us">Contact</a>
+        </div>
+        <div class="signs">
+            <div class="sign">
+                <img src="img/search.png" style="width: 32px; height: 32px;">
+            </div>
+            <div class="sign">
+                <button onclick="document.getElementById('registration').style.display='block'"
+                        class="user"><img src="img/user.png" style="width: 32px; height: 32px;"></button>
+            </div>
+            <div class="sign">
+                <img src="img/heart.png" style="width: 32px; height: 32px;">
+            </div>
+            <div class="sign">
+                <img src="img/bag.png" style="width: 32px; height: 32px;">
+            </div>
+        </div>
+        <!-- <div id='languages'>
+            <button id="en" onclick="changePlaceholder()" class='language active' data-lang='britain'>en
+            </button>
+            <button class='language' onclick="changePlaceholder()" data-lang='ukraine'>ua</button>
+        </div> -->
+    </nav>
+    <div id="registration" class="modal">
+        <form class="modal-content" action="#">
+            <div class="container">
+                <span onclick="document.getElementById('registration').style.display='none'" class="close">&times;</span>
+                <button class="up-button" onclick="document.getElementById('registration').style.display='none';
+                    document.getElementById('login').style.display='block'">Sign In</button>
+                <button class="up-button active">Sign Up</button>
+                <input class="head-email" type="email" placeholder="Enter Email" name="email" required>
+                <input class="head-password" type="password" placeholder="Enter Password" name="psw" required>
+                <input class="head-password" type="password" placeholder="Repeat Password" name="psw-repeat" required>
+                <div class="clearfix">
+                    <button type="submit" class="signupbtn">Sign Up</button>
+                </div>
+                <p>By creating an account you agree to our <a href="#" style="color:dodgerblue">Terms & Conditions</a>.</p>
+            </div>
+        </form>
+    </div>
+    <div id="login" class="modal">
+        <form class="modal-content" action="#">
+            <div class="container">
+                <span onclick="document.getElementById('login').style.display='none'" class="close">&times;</span>
+                <button class="up-button active">Sign In</button>
+                <button class="up-button" onclick="document.getElementById('registration').style.display='block';
+                    document.getElementById('login').style.display='none'">Sign Up</button>
+                <input class="head-email" type="email" placeholder="Enter Email" name="email" required>
+                <input class="head-password" type="password" placeholder="Enter Password" name="psw" required>
+                <div class="clearfix">
+                    <button type="submit" class="signupbtn">Sign In</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</header>
+<main>
+    <section id="shipping">
+        <h1>Shipping & Returns</h1>
+        <div class="text-block">
+            <h3>Shipping Policy</h3>
+            <p>I’m a Shipping Policy section.
+                I’m a great place to update your customers about your shipping methods,
+                packaging and costs. Use plain, straightforward language to build trust and make sure
+                that your customers stay loyal!</p><br>
+            <p>I'm the second paragraph in your Shipping Policy section.
+                Click here to add your own text and edit me.
+                It’s easy. Just click “Edit Text” or double click me to add details about your
+                policy and make changes to the font.
+                I’m a great place for you to tell a story and let your users know a little more about you.</p>
+        </div>
+        <div class="text-block">
+            <h3>Returns and Exchange Policy</h3>
+            <p>I’m a return policy section.
+                I’m a great place to let your customers know what to do in case they’ve changed their
+                mind about their purchase, or if they’re dissatisfied with a product.
+                Having a straightforward refund or exchange policy is a great way to build trust
+                and reassure your customers that they can buy with confidence.</p><br>
+            <p>I'm the second paragraph in your Return & Exchange policy.
+                Click here to add your own text and edit me. It’s easy.
+                Just click “Edit Text” or double click me to add details about your policy
+                and make changes to the font. I’m a great place for you to tell a story
+                and let your users know a little more about you..</p>
+        </div>
+    </section>
+    <section id="terms">
+        <h1>Terms & Conditions</h1>
+        <div class="text-block">
+            <h3>Customer Care</h3>
+            <p>I’m a Customer Care section.
+                I’m a great place to write a long text about your company and your services,
+                and, most importantly, how to contact your store with queries.
+                Writing a detailed Customer Care policy is a great way to build trust
+                and reassure your customers that they can buy with confidence.</p><br>
+            <p>I'm the second paragraph in your Customer Care section.
+                Click here to add your own text and edit me.
+                It’s easy. Just click “Edit Text” or double click me to add details about
+                your policy and make changes to the font.
+                I’m a great place for you to tell a story and let your users know a little more about you.</p>
+        </div>
+        <div class="text-block">
+            <h3>Privacy & Safety</h3>
+            <p>I’m a Privacy & Safety policy section.
+                I’m a great place to inform your customers about how you use,
+                store, and protect their personal information.
+                Add details such as how you use third-party banking to verify payment,
+                the way you collect data or when will you contact users
+                after their purchase was completed successfully.</p><br>
+            <p>Your user’s privacy is of the highest importance to your business,
+                so take the time to write an accurate and detailed policy.
+                Use straightforward language to gain their trust and make sure they keep coming back to your site!</p>
+        </div>
+    </section>
+    <section id="faq">
+        <h1>Frequently Asked Questions</h1>
+        <div class="questions">
+            <div class="question">
+                <button type="button" class="collapsible">Lorem ipsum dolor sit amet?</button>
+                <div class="content">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                </div>
+            </div>
+            <div class="question">
+                <button type="button" class="collapsible">Lorem ipsum dolor sit amet?</button>
+                <div class="content">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                </div>
+            </div>
+            <div class="question">
+                <button type="button" class="collapsible">Lorem ipsum dolor sit amet?</button>
+                <div class="content">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                </div>
+            </div>
+            <div class="question">
+                <button type="button" class="collapsible">Lorem ipsum dolor sit amet?</button>
+                <div class="content">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+<footer>
+    <div class="footer-padding">
+        <div class="footer-block">
+            <h2>Store Location</h2>
+            <ul>
+                <li>500 Terry Francois Street</li>
+                <li>San Francisco, CA 94158</li>
+                <li>info@mysite.com</li>
+                <li>123-456-7890</li>
+            </ul>
+            <div class="socials">
+                <a href="#" class="fa fa-facebook"></a>
+                <a href="#" class="fa fa-instagram"></a>
+                <a href="#" class="fa fa-twitter"></a>
+                <a href="#" class="fa fa-youtube-play"></a>
+            </div>
+        </div>
+        <div class="footer-block">
+            <h2>Shop</h2>
+            <ul class="footer-links">
+                <a href="#"><li>Shop all</li></a>
+                <a href="#"><li>Computers</li></a>
+                <a href="#"><li>Phones</li></a>
+                <a href="#"><li>Tablets</li></a>
+                <a href="#"><li>Phones</li></a>
+                <a href="#"><li>Watches</li></a>
+                <a href="#"><li>Discounts</li></a>
+            </ul>
+        </div>
+        <div class="footer-block">
+            <h2>Customer support</h2>
+            <ul class="footer-links">
+                <a href="#"><li>Contact us</li></a>
+                <a href="#"><li>FAQ</li></a>
+                <a href="#"><li>About</li></a>
+            </ul>
+        </div>
+        <div class="footer-block">
+            <h2>Policy</h2>
+            <ul class="footer-links">
+                <a href="#"><li>Shipping & Returns</li></a>
+                <a href="#"><li>Terms & Conditions</li></a>
+                <a href="#"><li>Payment Methods</li></a>
+            </ul>
+        </div>
+    </div>
+    <div class="copyright">
+        <p>2022 © by SmartShop. Proudly created by Alexey Lytovchenko.</p>
+    </div>
+</footer>
+<script src="help.js"></script>
+</body>
+</html>

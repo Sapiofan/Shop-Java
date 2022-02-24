@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Smart shop | Technics</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <meta
+            name="description"
+            content="A project to train with Spring and React frameworks"
+    />
+
+    <meta property="og:title" content="Smart shop"/>
+    <meta property="og:type" content="website"/>
+    <meta
+            property="og:description"
+            content="A joint project to create qualitative site."
+    />
+    <link rel="icon"
+          href="https://ru.seaicons.com/wp-content/uploads/2015/10/Flat-TV-icon.png">
+    <link rel="stylesheet" href="./contact.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+
+    <script src="home.js"></script>
+</head>
+<body>
+<header>
+    <nav>
+        <a href="home.html" id="logo"><p class="logo">SmartShop</p></a>
+        <div class="navigation">
+            <a data-langkey="Nav-Our-Work" href="#home">Home</a>
+            <div class="dropdown">
+                <button class="dropbtn">Categories</button>
+                <div class="dropdown-content">
+                    <a href="#">Computers</a>
+                    <a href="#">Phones</a>
+                    <a href="#">Tablets</a>
+                    <a href="#">Watches</a>
+                    <a href="#">Discounts</a>
+                    <a href="#">Drones</a>
+                </div>
+            </div>
+            <!-- <a data-langkey="Nav-Our-Work" href="#categories">Categories</a> -->
+            <a data-langkey="Nav-The-Team" href="#about">About</a>
+            <a data-langkey="Nav-The-Process" href="#help">Help</a>
+            <a data-langkey="Nav-Contact" href="#contact_us"><span class="active-nav">Contact</span></a>
+        </div>
+        <div class="signs">
+            <div class="sign">
+                <img src="img/search.png" style="width: 32px; height: 32px;">
+            </div>
+            <div class="sign">
+                <button onclick="document.getElementById('registration').style.display='block'"
+                        class="user"><img src="img/user.png" style="width: 32px; height: 32px;"></button>
+            </div>
+            <div class="sign">
+                <img src="img/heart.png" style="width: 32px; height: 32px;">
+            </div>
+            <div class="sign">
+                <img src="img/bag.png" style="width: 32px; height: 32px;">
+            </div>
+        </div>
+        <!-- <div id='languages'>
+            <button id="en" onclick="changePlaceholder()" class='language active' data-lang='britain'>en
+            </button>
+            <button class='language' onclick="changePlaceholder()" data-lang='ukraine'>ua</button>
+        </div> -->
+    </nav>
+    <div id="registration" class="modal">
+        <form class="modal-content" action="#">
+            <div class="container">
+                <span onclick="document.getElementById('registration').style.display='none'" class="close">&times;</span>
+                <button class="up-button" onclick="document.getElementById('registration').style.display='none';
+                    document.getElementById('login').style.display='block'">Sign In</button>
+                <button class="up-button active">Sign Up</button>
+                <input class="head-email" type="email" placeholder="Enter Email" name="email" required>
+                <input class="head-password" type="password" placeholder="Enter Password" name="psw" required>
+                <input class="head-password" type="password" placeholder="Repeat Password" name="psw-repeat" required>
+                <div class="clearfix">
+                    <button type="submit" class="signupbtn">Sign Up</button>
+                </div>
+                <p>By creating an account you agree to our <a href="#" style="color:dodgerblue">Terms & Conditions</a>.</p>
+            </div>
+        </form>
+    </div>
+    <div id="login" class="modal">
+        <form class="modal-content" action="#">
+            <div class="container">
+                <span onclick="document.getElementById('login').style.display='none'" class="close">&times;</span>
+                <button class="up-button active">Sign In</button>
+                <button class="up-button" onclick="document.getElementById('registration').style.display='block';
+                    document.getElementById('login').style.display='none'">Sign Up</button>
+                <input class="head-email" type="email" placeholder="Enter Email" name="email" required>
+                <input class="head-password" type="password" placeholder="Enter Password" name="psw" required>
+                <div class="clearfix">
+                    <button type="submit" class="signupbtn">Sign In</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</header>
+<main>
+    <section id="contact">
+        <h1>Get in Touch</h1>
+        <div class="part1">
+            <div class="work-time">
+                <h4>Work time</h4>
+                <p>Mon - Fri: 8am - 8pm</p>
+                <p>Saturday: 9am - 5pm</p>
+                <p>Sunday: 8am - 1pm</p>
+            </div>
+            <div class="form-text">
+                <h4>We're here to help!</h4>
+                <p>Fill out the form with any quarry on your mind and we'll get back to you as soon as possible</p>
+            </div>
+        </div>
+        <div class="part2">
+            <div class="location">
+                <h4>Store Location</h4>
+                <p>500 Terry Francois Street</p>
+                <p>San Francisco, CA 94158</p>
+                <p>info@mysite.com</p>
+                <p>123-456-7890</p>
+            </div>
+            <form action="#">
+                <div class="input-blocks">
+                    <div class="about-input-block">
+                        <p>First Name</p>
+                        <input type="text" class="input">
+                    </div>
+                    <div class="about-input-block">
+                        <p>Last Name</p>
+                        <input type="text" class="input">
+                    </div>
+                </div>
+                <div class="input-blocks">
+                    <div class="about-input-block">
+                        <p>Email *</p>
+                        <input type="email" class="input" required />
+                    </div>
+                    <div class="about-input-block">
+                        <p>Subject</p>
+                        <input type="text" class="input">
+                    </div>
+                </div>
+                <div class="area">
+                    <p>Message</p>
+                    <textarea class="input textarea"></textarea>
+                </div>
+                <input type="submit" value="Submit" class="submit">
+            </form>
+        </div>
+    </section>
+    <section id="letters">
+        <h1>Newsletter</h1>
+        <p>Sign up to receive updates on new arrivals and special offers</p>
+        <form action="#">
+            <input class="email-news" type="email" placeholder="Your email here">
+            <input class="email-submit" type="submit" value="Subscribe">
+        </form>
+    </section>
+</main>
+<footer>
+    <div class="footer-padding">
+        <div class="footer-block">
+            <h2>Store Location</h2>
+            <ul>
+                <li>500 Terry Francois Street</li>
+                <li>San Francisco, CA 94158</li>
+                <li>info@mysite.com</li>
+                <li>123-456-7890</li>
+            </ul>
+            <div class="socials">
+                <a href="#" class="fa fa-facebook"></a>
+                <a href="#" class="fa fa-instagram"></a>
+                <a href="#" class="fa fa-twitter"></a>
+                <a href="#" class="fa fa-youtube-play"></a>
+            </div>
+        </div>
+        <div class="footer-block">
+            <h2>Shop</h2>
+            <ul class="footer-links">
+                <a href="#"><li>Shop all</li></a>
+                <a href="#"><li>Computers</li></a>
+                <a href="#"><li>Phones</li></a>
+                <a href="#"><li>Tablets</li></a>
+                <a href="#"><li>Drones</li></a>
+                <a href="#"><li>Watches</li></a>
+                <a href="#"><li>Discounts</li></a>
+            </ul>
+        </div>
+        <div class="footer-block">
+            <h2>Customer support</h2>
+            <ul class="footer-links">
+                <a href="#"><li>Contact us</li></a>
+                <a href="#"><li>FAQ</li></a>
+                <a href="#"><li>About</li></a>
+            </ul>
+        </div>
+        <div class="footer-block">
+            <h2>Policy</h2>
+            <ul class="footer-links">
+                <a href="#"><li>Shipping & Returns</li></a>
+                <a href="#"><li>Terms & Conditions</li></a>
+                <a href="#"><li>Payment Methods</li></a>
+            </ul>
+        </div>
+    </div>
+    <div class="copyright">
+        <p>2022 © by SmartShop. Proudly created by Alexey Lytovchenko.</p>
+    </div>
+</footer>
+<!-- <script src="contact.js"></script> -->
+</body>
+</html>
