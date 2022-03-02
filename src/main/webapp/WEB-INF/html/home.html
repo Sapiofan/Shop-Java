@@ -45,8 +45,12 @@
             <a data-langkey="Nav-Contact" href="#contact_us">Contact</a>
         </div>
         <div class="signs">
-            <div class="sign">
-                <img src="img/search.png" style="width: 32px; height: 32px;">
+            <div id="search-sign" class="sign">
+                <div id="search-wrapper">
+                    <input type="text" id="search" autocomplete="off" placeholder="Search device..." />
+                    <div id="close-icon"></div>
+                </div>
+                <!-- <img src="img/search.png" style="width: 32px; height: 32px;"> -->
             </div>
             <div class="sign">
                 <button onclick="document.getElementById('registration').style.display='block'"

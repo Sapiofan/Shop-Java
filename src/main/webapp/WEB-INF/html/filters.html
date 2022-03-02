@@ -101,48 +101,291 @@
 </header>
 <main>
     <h1>Tablets</h1>
-    <aside>
-        <div id="list1" class="dropdown-check-list">
-            <span class="anchor">Manufacturers</span>
-            <ul class="items">
-                <label class="container1">Xiaomi
-                    <input type="checkbox" checked="checked">
-                    <span class="checkmark"></span>
-                </label>
-                <label class="container1">Apple
-                    <input type="checkbox">
-                    <span class="checkmark"></span>
-                </label>
-                <label class="container1">Samsung
-                    <input type="checkbox">
-                    <span class="checkmark"></span>
-                </label>
-                <label class="container1">Asus
-                    <input type="checkbox">
-                    <span class="checkmark"></span>
-                </label>
-                <label class="container1">Acer
-                    <input type="checkbox">
-                    <span class="checkmark"></span>
-                </label>
-                <label class="container1">HP
-                    <input type="checkbox">
-                    <span class="checkmark"></span>
-                </label>
-                <label class="container1">Dell
-                    <input type="checkbox">
-                    <span class="checkmark"></span>
-                </label>
-            </ul>
+    <article>
+        <div class="aside">
+            <div id="list1" class="dropdown-check-list">
+                <span class="anchor">Manufacturers</span>
+                <ul class="items">
+                    <label class="container1">Xiaomi
+                        <input type="checkbox" checked="checked">
+                        <span class="checkmark"></span>
+                    </label>
+                    <label class="container1">Apple
+                        <input type="checkbox">
+                        <span class="checkmark"></span>
+                    </label>
+                    <label class="container1">Samsung
+                        <input type="checkbox">
+                        <span class="checkmark"></span>
+                    </label>
+                    <label class="container1">Asus
+                        <input type="checkbox">
+                        <span class="checkmark"></span>
+                    </label>
+                    <label class="container1">Acer
+                        <input type="checkbox">
+                        <span class="checkmark"></span>
+                    </label>
+                    <label class="container1">HP
+                        <input type="checkbox">
+                        <span class="checkmark"></span>
+                    </label>
+                    <label class="container1">Dell
+                        <input type="checkbox">
+                        <span class="checkmark"></span>
+                    </label>
+                </ul>
+            </div>
+            <br>
+            <div id="price" class="dropdown-check-list">
+                <span class="anchor">Price</span>
+                <div class="wrapper">
+                    <div class="price-input">
+                        <div class="field">
+                            <input type="number" class="input-min" value="0">
+                        </div>
+                        <div class="separator">-</div>
+                        <div class="field">
+                            <input type="number" class="input-max" value="10000">
+                        </div>
+                    </div>
+                    <div class="slider">
+                        <div class="progress"></div>
+                    </div>
+                    <div class="range-input">
+                        <input type="range" class="range-min" min="0" max="10000" value="0" step="100">
+                        <input type="range" class="range-max" min="0" max="10000" value="10000" step="100">
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div id="list2" class="dropdown-check-list">
+                <span class="anchor">Display diagonal</span>
+                <ul class="items">
+                    <label class="container1">10-12"
+                        <input type="checkbox">
+                        <span class="checkmark"></span>
+                    </label>
+                    <label class="container1">13-13.9"
+                        <input type="checkbox">
+                        <span class="checkmark"></span>
+                    </label>
+                    <label class="container1">14-14.9
+                        <input type="checkbox">
+                        <span class="checkmark"></span>
+                    </label>
+                    <label class="container1">15-15.9
+                        <input type="checkbox">
+                        <span class="checkmark"></span>
+                    </label>
+                    <label class="container1">16-16.9
+                        <input type="checkbox">
+                        <span class="checkmark"></span>
+                    </label>
+                    <label class="container1">17-17.9
+                        <input type="checkbox">
+                        <span class="checkmark"></span>
+                    </label>
+                </ul>
+            </div>
+            <br>
+            <div id="list3" class="dropdown-check-list">
+                <span class="anchor">RAM</span>
+                <ul class="items">
+                    <label class="container1">4 ГБ
+                        <input type="checkbox">
+                        <span class="checkmark"></span>
+                    </label>
+                    <label class="container1">8 ГБ
+                        <input type="checkbox">
+                        <span class="checkmark"></span>
+                    </label>
+                    <label class="container1">16 ГБ
+                        <input type="checkbox">
+                        <span class="checkmark"></span>
+                    </label>
+                    <label class="container1">32 ГБ
+                        <input type="checkbox">
+                        <span class="checkmark"></span>
+                    </label>
+                </ul>
+            </div>
         </div>
-        <div id="list1" class="dropdown-check-list">
-            <span class="anchor">Price</span>
-
-        </div>
-    </aside>
-    <section id="products">
-
-    </section>
+        <section id="products">
+            <div class="sort-part">
+                <p class="sort-text">Show:</p>
+                <select id="sort" class="sort">
+                    <option class="sort-choose">By popularity</option>
+                    <option class="sort-choose">From cheap to expensive</option>
+                    <option class="sort-choose">From expensive to cheap</option>
+                    <option class="sort-choose">Novelties</option>
+                    <option class="sort-choose">By name</option>
+                </select>
+            </div>
+            <div class="product-list">
+                <div class="product-card">
+                    <div class="card-image">
+                        <img src="https://i.allo.ua/media/catalog/product/cache/1/small_image/212x184/9df78eab33525d08d6e5fb8d27136e95/g/p/gpbhkuvzj61_1.jpg" class="product-img">
+                    </div>
+                    <div class="product-name">
+                        <p>Xiaomi RedmiBookPro 14 i5/16/512/2.5К</p>
+                    </div>
+                    <div class="card-signs">
+                        <div class="Stars" style="--rating: 3.5;"></div>
+                        <img src="img/chat-bubble.png" style="width: 20px; height: 20px; margin-right: 10px;">
+                        <img src="img/heart.png" style="width: 20px; height: 20px; margin-right: 10px;">
+                    </div>
+                    <div class="buy-elements">
+                        <div class="price">
+                            <div class="pre-price">950$</div>
+                            <div class="cur-price">900$</div>
+                        </div>
+                        <button class="add-product">Buy</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="card-image">
+                        <img src="https://i.allo.ua/media/catalog/product/cache/1/small_image/212x184/9df78eab33525d08d6e5fb8d27136e95/g/p/gpbhkuvzj61_1.jpg" class="product-img">
+                    </div>
+                    <div class="product-name">
+                        <p>Xiaomi RedmiBookPro 14 i5/16/512/2.5К</p>
+                    </div>
+                    <div class="card-signs">
+                        <div class="Stars" style="--rating: 3.5;"></div>
+                        <img src="img/chat-bubble.png" style="width: 20px; height: 20px; margin-right: 10px;">
+                        <img src="img/heart.png" style="width: 20px; height: 20px; margin-right: 10px;">
+                    </div>
+                    <div class="buy-elements">
+                        <div class="price">
+                            <div class="pre-price">950$</div>
+                            <div class="cur-price">900$</div>
+                        </div>
+                        <button class="add-product">Buy</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="card-image">
+                        <img src="https://i.allo.ua/media/catalog/product/cache/1/small_image/212x184/9df78eab33525d08d6e5fb8d27136e95/g/p/gpbhkuvzj61_1.jpg" class="product-img">
+                    </div>
+                    <div class="product-name">
+                        <p>Xiaomi RedmiBookPro 14 i5/16/512/2.5К</p>
+                    </div>
+                    <div class="card-signs">
+                        <div class="Stars" style="--rating: 3.5;"></div>
+                        <img src="img/chat-bubble.png" style="width: 20px; height: 20px; margin-right: 10px;">
+                        <img src="img/heart.png" style="width: 20px; height: 20px; margin-right: 10px;">
+                    </div>
+                    <div class="buy-elements">
+                        <div class="price">
+                            <div class="pre-price">950$</div>
+                            <div class="cur-price">900$</div>
+                        </div>
+                        <button class="add-product">Buy</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="card-image">
+                        <img src="https://i.allo.ua/media/catalog/product/cache/1/small_image/212x184/9df78eab33525d08d6e5fb8d27136e95/g/p/gpbhkuvzj61_1.jpg" class="product-img">
+                    </div>
+                    <div class="product-name">
+                        <p>Xiaomi RedmiBookPro 14 i5/16/512/2.5К</p>
+                    </div>
+                    <div class="card-signs">
+                        <div class="Stars" style="--rating: 3.5;"></div>
+                        <img src="img/chat-bubble.png" style="width: 20px; height: 20px; margin-right: 10px;">
+                        <img src="img/heart.png" style="width: 20px; height: 20px; margin-right: 10px;">
+                    </div>
+                    <div class="buy-elements">
+                        <div class="price">
+                            <div class="pre-price">950$</div>
+                            <div class="cur-price">900$</div>
+                        </div>
+                        <button class="add-product">Buy</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="card-image">
+                        <img src="https://i.allo.ua/media/catalog/product/cache/1/small_image/212x184/9df78eab33525d08d6e5fb8d27136e95/g/p/gpbhkuvzj61_1.jpg" class="product-img">
+                    </div>
+                    <div class="product-name">
+                        <p>Xiaomi RedmiBookPro 14 i5/16/512/2.5К</p>
+                    </div>
+                    <div class="card-signs">
+                        <div class="Stars" style="--rating: 3.5;"></div>
+                        <img src="img/chat-bubble.png" style="width: 20px; height: 20px; margin-right: 10px;">
+                        <img src="img/heart.png" style="width: 20px; height: 20px; margin-right: 10px;">
+                    </div>
+                    <div class="buy-elements">
+                        <div class="price">
+                            <div class="pre-price">950$</div>
+                            <div class="cur-price">900$</div>
+                        </div>
+                        <button class="add-product">Buy</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="card-image">
+                        <img src="https://i.allo.ua/media/catalog/product/cache/1/small_image/212x184/9df78eab33525d08d6e5fb8d27136e95/g/p/gpbhkuvzj61_1.jpg" class="product-img">
+                    </div>
+                    <div class="product-name">
+                        <p>Xiaomi RedmiBookPro 14 i5/16/512/2.5К</p>
+                    </div>
+                    <div class="card-signs">
+                        <div class="Stars" style="--rating: 3.5;"></div>
+                        <img src="img/chat-bubble.png" style="width: 20px; height: 20px; margin-right: 10px;">
+                        <img src="img/heart.png" style="width: 20px; height: 20px; margin-right: 10px;">
+                    </div>
+                    <div class="buy-elements">
+                        <div class="price">
+                            <div class="pre-price">950$</div>
+                            <div class="cur-price">900$</div>
+                        </div>
+                        <button class="add-product">Buy</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="card-image">
+                        <img src="https://i.allo.ua/media/catalog/product/cache/1/small_image/212x184/9df78eab33525d08d6e5fb8d27136e95/g/p/gpbhkuvzj61_1.jpg" class="product-img">
+                    </div>
+                    <div class="product-name">
+                        <p>Xiaomi RedmiBookPro 14 i5/16/512/2.5К</p>
+                    </div>
+                    <div class="card-signs">
+                        <div class="Stars" style="--rating: 3.5;"></div>
+                        <img src="img/chat-bubble.png" style="width: 20px; height: 20px; margin-right: 10px;">
+                        <img src="img/heart.png" style="width: 20px; height: 20px; margin-right: 10px;">
+                    </div>
+                    <div class="buy-elements">
+                        <div class="price">
+                            <div class="pre-price">950$</div>
+                            <div class="cur-price">900$</div>
+                        </div>
+                        <button class="add-product">Buy</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="card-image">
+                        <img src="https://i.allo.ua/media/catalog/product/cache/1/small_image/212x184/9df78eab33525d08d6e5fb8d27136e95/g/p/gpbhkuvzj61_1.jpg" class="product-img">
+                    </div>
+                    <div class="product-name">
+                        <p>Xiaomi RedmiBookPro 14 i5/16/512/2.5К</p>
+                    </div>
+                    <div class="card-signs">
+                        <div class="Stars" style="--rating: 3.5;"></div>
+                        <img src="img/chat-bubble.png" style="width: 20px; height: 20px; margin-right: 10px;">
+                        <img src="img/heart.png" style="width: 20px; height: 20px; margin-right: 10px;">
+                    </div>
+                    <div class="buy-elements">
+                        <div class="price">
+                            <div class="pre-price">950$</div>
+                            <div class="cur-price">900$</div>
+                        </div>
+                        <button class="add-product">Buy</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </article>
 </main>
 <footer>
     <div class="footer-padding">

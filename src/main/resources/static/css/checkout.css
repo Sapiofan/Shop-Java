@@ -1,0 +1,71 @@
+* {
+    margin: 0;
+}
+
+body {
+    background-color: rgb(235, 235, 235);
+    font-family: 'Avenir', Helvetica, sans-serif;
+}
+
+header {
+    width: 100%;
+}
+
+nav {
+    padding-right: 20px;
+    z-index: 2;
+    display: flex;
+    /*position: fixed;*/
+    background-color: rgb(224, 224, 224);
+    padding: 20px 0;
+    right: 0;
+}
+
+.logo {
+    font-size: 38px;
+    font-family: 'Imprint MT Shadow', sans-serif;
+    color:black;
+    margin-left: 100px;
+}
+
+#logo {
+    text-decoration: none;
+    -webkit-user-select: none; /*disable copy*/
+    -webkit-touch-callout: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+header > nav > p {
+    font-size: 14px;
+    margin-left: 55%;
+    width: 200px;
+    text-align: right;
+}
+
+.phone {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.submit {
+    width: 200px;
+    height: 30px;
+    background-color: blueviolet;
+    font-size: 16px;
+    color: white;
+    border: none;
+    border-radius: 50px;
+    transition: 0.5s;
+}
+
+.submit:hover {
+    background-color: purple;
+}
+
+.copyright {
+    text-align: center;
+    color: rgb(105, 105, 105);
+    margin-top: 40px;
+}

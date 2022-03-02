@@ -3,7 +3,7 @@
 }
 
 body {
-    background-color: rgb(228, 228, 228);
+    background-color: white;
     font-family: 'Avenir', Helvetica, sans-serif;
 }
 
@@ -16,7 +16,7 @@ nav {
     z-index: 2;
     display: flex;
     /*position: fixed;*/
-    background-color: white;
+    background-color: rgb(224, 224, 224);
     padding: 20px 0;
     right: 0;
 }
@@ -277,14 +277,19 @@ main h1 {
     margin-bottom: 20px;
 }
 
-aside {
+.aside {
     margin-bottom: 100px;
     margin-left: 10%;
-    /* display: block; */
+    width: 350px;
+}
+
+article {
+    display: flex;
 }
 
 .dropdown-check-list {
     display: inline-block;
+    margin-bottom: 10px;
 }
 
 .dropdown-check-list .anchor {
@@ -294,6 +299,7 @@ aside {
     padding: 5px 50px 5px 10px;
     font-size: 16px;
     font-weight: 600;
+    color: blueviolet;
 }
 
 .dropdown-check-list .anchor:after {
@@ -302,13 +308,13 @@ aside {
     border-left: 2px solid black;
     border-top: 2px solid black;
     padding: 5px;
-    right: 10px;
+    right: 20px;
     top: 20%;
-    -moz-transform: rotate(-135deg);
-    -ms-transform: rotate(-135deg);
-    -o-transform: rotate(-135deg);
-    -webkit-transform: rotate(-135deg);
-    transform: rotate(-135deg);
+    -moz-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
     transition: 0.5s ease-in-out;
 }
 
@@ -319,7 +325,7 @@ aside {
 
 .dropdown-check-list ul.items {
     padding: 2px;
-    display: none;
+    display: block;
     margin: 0;
     border-top: none;
     margin-top: 10px;
@@ -330,20 +336,20 @@ aside {
 }
 
 .dropdown-check-list.visible .anchor {
-    color: #0094ff;
+    color: black;
 }
 
 .dropdown-check-list.visible .anchor:after {
     transition: 0.5s ease-in-out;
-    -moz-transform: rotate(45deg);
-    -ms-transform: rotate(45deg);
-    -o-transform: rotate(45deg);
-    -webkit-transform: rotate(45deg);
-    transform: rotate(45deg);
+    -moz-transform: rotate(-135deg);
+    -ms-transform: rotate(-135deg);
+    -o-transform: rotate(-135deg);
+    -webkit-transform: rotate(-135deg);
+    transform: rotate(-135deg);
 }
 
 .dropdown-check-list.visible .items {
-    display: block;
+    display: none;
 }
 
 /* The container */
@@ -353,7 +359,7 @@ aside {
     padding-left: 35px;
     margin-bottom: 12px;
     cursor: pointer;
-    font-size: 18px;
+    font-size: 16px;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
@@ -378,6 +384,7 @@ aside {
     width: 20px;
     background-color: #eee;
     border-radius: 2px;
+    border: 1px solid rgb(209, 209, 209);
 }
 
 /* On mouse-over, add a grey background color */
@@ -415,12 +422,204 @@ aside {
     transform: rotate(45deg);
 }
 
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+/* ::selection{
+  color: #fff;
+  background: #17A2B8;
+} */
+.wrapper{
+    width: 100%;
+    background: rgb(228, 228, 228);
+    border-radius: 10px;
+    padding: 10px 0;
+    box-shadow: 0 12px 35px rgba(0,0,0,0.1);
+    display: block;
+}
+
+.price-input{
+    width: 100%;
+    display: flex;
+    margin: 10px 10px 10px 0;
+}
+.price-input .field{
+    display: flex;
+    width: 100%;
+    height: 45px;
+    align-items: center;
+}
+.field input{
+    width: 50%;
+    height: 50%;
+    outline: none;
+    font-size: 14px;
+    margin:0 15px;
+    border-radius: 5px;
+    text-align: center;
+    border: 1px solid #999;
+    -moz-appearance: textfield;
+}
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+.price-input .separator{
+    width: 50px;
+    margin: 0;
+    display: flex;
+    font-size: 19px;
+    align-items: center;
+    justify-content: center;
+}
+.slider{
+    height: 5px;
+    position: relative;
+    background: #ddd;
+    border-radius: 5px;
+    width: 90%;
+    margin-left: 5%;
+}
+.slider .progress{
+    height: 100%;
+    left: 0%;
+    right: 0%;
+    position: absolute;
+    border-radius: 5px;
+    background: blueviolet;
+}
+.range-input{
+    position: relative;
+}
+.range-input input{
+    position: absolute;
+    width: 100%;
+    height: 5px;
+    top: -5px;
+    background: none;
+    pointer-events: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+input[type="range"]::-webkit-slider-thumb{
+    height: 17px;
+    width: 17px;
+    border-radius: 50%;
+    background: blueviolet;
+    pointer-events: auto;
+    -webkit-appearance: none;
+    box-shadow: 0 0 6px rgba(0,0,0,0.05);
+}
+input[type="range"]::-moz-range-thumb{
+    height: 17px;
+    width: 17px;
+    border: none;
+    border-radius: 50%;
+    background: #17A2B8;
+    pointer-events: auto;
+    -moz-appearance: none;
+    box-shadow: 0 0 6px rgba(0,0,0,0.05);
+}
+
+.dropdown-check-list.visible .wrapper {
+    display: none;
+}
+
+/*///////////////////////////////////////////
+//////////////// products ////////////////////
+////////////////////////////////////////////*/
+:root {
+    --star-size: 16px;
+    --star-color: rgb(170, 170, 170);
+    --star-background: #fc0;
+}
+
+#products {
+    padding: 0 50px;
+    margin-bottom: 100px;
+}
+
+.product-list {
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.product-card {
+    margin: 10px 3px;
+}
+
+.Stars {
+    --percent: calc(var(--rating) / 5 * 100%);
+    display: inline-block;
+    font-size: var(--star-size);
+    font-family: Times;
+    line-height: 1;
+    margin-right: 10px;
+}
+.Stars::before {
+    content: "★★★★★";
+    letter-spacing: 3px;
+    background: linear-gradient(90deg, var(--star-background) var(--percent), var(--star-color) var(--percent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.sort-part {
+    display: flex;
+}
+
+.sort-text {
+    margin-right: 10px;
+    font-size: 20px;
+}
+
+.product-img {
+    width: 250px;
+    height: 250px;
+}
+
+.product-name {
+    margin: 10px 0;
+    width: 200px;
+}
+
+.sort{
+    height: 25px;
+    border-radius: 2px;
+}
+
+.buy-elements {
+    display: flex;
+    margin: 10px 0;
+}
+
+.add-product {
+    background-color: rgb(180, 0, 0);
+    color: white;
+    width: 100px;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    margin-left: 70px;
+}
+
+.pre-price {
+    color: rgb(102, 102, 102);
+    text-decoration: line-through;
+    font-size: 14px;
+}
+
+.cur-price {
+    color: rgb(180, 0, 0);
+    font-size: 20px;
+    font-weight: 600;
+}
+
 /*///////////////////////////////////////////
 //////////////// footer ////////////////////
 ////////////////////////////////////////////*/
 
 footer {
-    background-color: white;
+    background-color: rgb(224, 224, 224);
     font-family: 'Avenir', Helvetica, sans-serif;
 }
 
