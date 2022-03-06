@@ -33,7 +33,7 @@
 
     <script type="text/babel" src="checkout.jsx"></script>
 
-    <!-- <script src="checkout.js"></script> -->
+    <script src="checkout.js"></script>
 
 </head>
 <body>
@@ -44,15 +44,93 @@
     </nav>
 </header>
 <main>
-    <div id="checkout-form"></div>
+    <div class="form">
+        <h2>Ordering</h2>
+        <div id="checkout-form"></div>
+    </div>
     <div class="cart-container">
         <h3>Cart</h3>
         <div class="products">
-
+            <div class="product">
+                <img src="https://i.allo.ua/media/catalog/product/cache/1/thumbnail/48x48/9df78eab33525d08d6e5fb8d27136e95/1/1/11_451_5_1.jpg" width="64px" height="64px">
+                <p class="prod-name">Xiaomi 11T 8/128GB Meteorite Gray</p>
+                <div class="input-group">
+                    <div class="input-group-button">
+                        <button type="button" class="op" data-quantity="minus" data-field="quantity">
+                            <i class="fa fa-minus" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                    <input class="input-group-field quantity" min="1" max="1000" type="number" name="quantity" value="1">
+                    <div class="input-group-button">
+                        <button type="button" class="op" data-quantity="plus" data-field="quantity" >
+                            <i class="fa fa-plus" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                </div>
+                <p class="price">9000$</p>
+                <button id="close">&#10006;</button>
+            </div>
+            <div class="product">
+                <img src="https://i.allo.ua/media/catalog/product/cache/1/thumbnail/48x48/9df78eab33525d08d6e5fb8d27136e95/1/1/11_451_5_1.jpg" width="64px" height="64px">
+                <p class="prod-name">Xiaomi 11T 8/128GB Meteorite Gray</p>
+                <div class="input-group">
+                    <div class="input-group-button">
+                        <button type="button" class="op" data-quantity="minus" data-field="quantity1">
+                            <i class="fa fa-minus" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                    <input class="input-group-field quantity" min="1" max="1000" type="number" name="quantity1" value="1">
+                    <div class="input-group-button">
+                        <button type="button" class="op" data-quantity="plus" data-field="quantity1" >
+                            <i class="fa fa-plus" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                </div>
+                <p class="price">9000$</p>
+                <button id="close">&#10006;</button>
+            </div>
+            <div class="product">
+                <img src="https://i.allo.ua/media/catalog/product/cache/1/thumbnail/48x48/9df78eab33525d08d6e5fb8d27136e95/1/1/11_451_5_1.jpg" width="64px" height="64px">
+                <p class="prod-name">Xiaomi 11T 8/128GB Meteorite Gray</p>
+                <div class="input-group">
+                    <div class="input-group-button">
+                        <button type="button" class="op" data-quantity="minus" data-field="quantity2">
+                            <i class="fa fa-minus" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                    <input class="input-group-field quantity" min="1" max="1000" type="number" name="quantity2" value="1">
+                    <div class="input-group-button">
+                        <button type="button" class="op" data-quantity="plus" data-field="quantity2" >
+                            <i class="fa fa-plus" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                </div>
+                <p class="price">9000$</p>
+                <button id="close">&#10006;</button>
+            </div>
+            <div class="product">
+                <img src="https://i.allo.ua/media/catalog/product/cache/1/thumbnail/48x48/9df78eab33525d08d6e5fb8d27136e95/1/1/11_451_5_1.jpg" width="64px" height="64px">
+                <p class="prod-name">Xiaomi 11T 8/128GB Meteorite Gray</p>
+                <div class="input-group">
+                    <div class="input-group-button">
+                        <button type="button" class="op" data-quantity="minus" data-field="quantity3">
+                            <i class="fa fa-minus" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                    <input class="input-group-field quantity" min="1" max="1000" type="number" name="quantity3" value="1">
+                    <div class="input-group-button">
+                        <button type="button" class="op" data-quantity="plus" data-field="quantity3" >
+                            <i class="fa fa-plus" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                </div>
+                <p class="price">9000$</p>
+                <button id="close">&#10006;</button>
+            </div>
         </div>
         <div class="sum">
             <p>Sum:</p>
-            <p>18 000$</p>
+            <p class="total-price">18 000$</p>
         </div>
     </div>
 </main>

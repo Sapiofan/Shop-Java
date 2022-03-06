@@ -8,24 +8,35 @@ class Checkout extends React.Component {
             cardInput:false,
 
             name:"",
-            phone:"",
             email:"",
             city:"",
 
-            card:"",
-            date:"",
             cvv:"",
 
             areaCode: "",
             prefix: "",
-            suffix: ""
+            suffix: "",
+
+            phone1:"",
+            phone2:"",
+            phone3:"",
+
+            part1:"",
+            part2:"",
+            part3:"",
+            part4:"",
         };
 
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleCard = this.handleCard.bind(this);
         this.handleData = this.handleData.bind(this);
         this.setInputRef = this.setInputRef.bind(this);
+
         this.handleChange = this.handleChange.bind(this);
+
+        this.handleCardChange = this.handleCardChange.bind(this);
+
+        this.handlePhoneChange = this.handlePhoneChange.bind(this);
     }
 
     handleInputChange(event) {
@@ -39,7 +50,12 @@ class Checkout extends React.Component {
     }
 
     handleCard() {
-        this.setState({data:true})
+        if(!this.state.data)
+            this.setState({data:true})
+        else{
+            this.setState({data:false})
+        }
+
     }
 
     handleData() {
@@ -77,110 +93,159 @@ class Checkout extends React.Component {
         }
     }
 
+    handleCardChange({ target: { name, value } }) {
+        let valueChanged = false;
+        this.setState(prevState => {
+            const nextValue = value.replace(/[^\d]/g, '');
+            const changedValue = prevState[name];
+            if (changedValue.length !== nextValue.length) valueChanged = true;
+
+            return { [name]: nextValue }
+        }, () => {
+            if(valueChanged) this.handleFocusCard(name)
+        });
+    }
+
+    handleFocusCard(name){
+        const { part1, part2, part3, part4 } = this.state;
+        const part1Filled = part1.length === 4;
+        const part2Filled = part2.length === 4;
+        const part3Filled = part3.length === 4;
+
+        if(part1Filled && name === "part1") {
+            this.part2.focus();
+            this.part2.selectionEnd = 0;
+        } else if(part2Filled && name === "part2") {
+            this.part3.focus();
+            this.part3.selectionEnd = 0;
+        } else if(part3Filled && name === "part3") {
+            this.part4.focus();
+            this.part4.selectionEnd = 0;
+        }
+    }
+
+    handlePhoneChange({ target: { name, value } }) {
+        let valueChanged = false;
+        this.setState(prevState => {
+            const nextValue = value.replace(/[^\d]/g, '');
+            const changedValue = prevState[name];
+            if (changedValue.length !== nextValue.length) valueChanged = true;
+
+            return { [name]: nextValue }
+        }, () => {
+            if(valueChanged) this.handlePhone(name)
+        });
+    }
+
+    handlePhone(name){
+        const { phone1, phone2, phone3 } = this.state;
+        const phone1Filled = phone1.length === 3;
+        const phone2Filled = phone2.length === 3;
+
+        if(phone1Filled && name === "phone1") {
+            this.phone2.focus();
+            this.phone2.selectionEnd = 0;
+        } else if(phone2Filled && name === "phone2") {
+            this.phone3.focus();
+            this.phone3.selectionEnd = 0;
+        }
+    }
+
     render() {
         if(this.state.cardInput){
-            window.location.href="home.html"
+            window.location.href="success.html"
         }
         else if (this.state.data) {
             return (
                 <form className="data-form" >
-                    <h1>Credit card</h1>
-                    {/* <div className="text-container">
-                <p>Card number</p>
-                <input
-                onChange={this.handleInputChange}
-                name="card" type={"text"}
-                className="text-field"
-                value={this.state.card}
-                placeholder="xxxx-xxxx-xxxx-xxxx"></input>
-            </div> */}
-                    <div className="input-card">
-                        <input
-                            ref={node => this.setInputRef("suffix", node)}
-                            className="input suffix"
-                            type="text"
-                            name="suffix"
-                            placeholder="xxxx"
-                            value={this.state.suffix}
-                            onChange={this.handleChange}
-                            maxLength="4"
-                        />
-                        <div className="dash">-</div>
-                        <input
-                            ref={node => this.setInputRef("suffix", node)}
-                            className="input suffix"
-                            type="text"
-                            name="suffix"
-                            placeholder="xxxx"
-                            value={this.state.suffix}
-                            onChange={this.handleChange}
-                            maxLength="4"
-                        />
-                        <div className="dash">-</div>
-                        <input
-                            ref={node => this.setInputRef("suffix", node)}
-                            className="input suffix"
-                            type="text"
-                            name="suffix"
-                            placeholder="xxxx"
-                            value={this.state.suffix}
-                            onChange={this.handleChange}
-                            maxLength="4"
-                        />
-                        <div className="dash">-</div>
-                        <input
-                            ref={node => this.setInputRef("suffix", node)}
-                            className="input suffix"
-                            type="text"
-                            name="suffix"
-                            placeholder="xxxx"
-                            value={this.state.suffix}
-                            onChange={this.handleChange}
-                            maxLength="4"
-                        />
+                    <h4>2. Credit card</h4>
+                    <div className="text-container">
+                        <p>Card number</p>
+                        <div className="input-card">
+                            <input
+                                ref={node => this.setInputRef("part1", node)}
+                                className="input suffix"
+                                type="text"
+                                name="part1"
+                                placeholder="xxxx"
+                                value={this.state.part1}
+                                onChange={this.handleCardChange}
+                                maxLength="4"
+                            />
+                            <div className="dash">-</div>
+                            <input
+                                ref={node => this.setInputRef("part2", node)}
+                                className="input suffix"
+                                type="text"
+                                name="part2"
+                                placeholder="xxxx"
+                                value={this.state.part2}
+                                onChange={this.handleCardChange}
+                                maxLength="4"
+                            />
+                            <div className="dash">-</div>
+                            <input
+                                ref={node => this.setInputRef("part3", node)}
+                                className="input suffix"
+                                type="text"
+                                name="part3"
+                                placeholder="xxxx"
+                                value={this.state.part3}
+                                onChange={this.handleCardChange}
+                                maxLength="4"
+                            />
+                            <div className="dash">-</div>
+                            <input
+                                ref={node => this.setInputRef("part4", node)}
+                                className="input suffix"
+                                type="text"
+                                name="part4"
+                                placeholder="xxxx"
+                                value={this.state.part4}
+                                onChange={this.handleCardChange}
+                                maxLength="4"
+                            />
+                        </div>
                     </div>
-                    {/* <div className="text-container">
-                <p>Expiry date</p>
-                <input
-                onChange={this.handleInputChange}
-                name="date" type={"text"}
-                className="text-field"
-                value={this.state.date}
-                placeholder="mm/yyyy"></input>
-            </div> */}
-                    <div className="input-phone">
-                        <input
-                            ref={node => this.setInputRef("prefix", node)}
-                            className="input prefix"
-                            type="text"
-                            name="prefix"
-                            placeholder="mm"
-                            value={this.state.prefix}
-                            onChange={this.handleChange}
-                            maxLength="2"
-                        />
-                        <div className="dash">/</div>
-                        <input
-                            ref={node => this.setInputRef("suffix", node)}
-                            className="input suffix"
-                            type="text"
-                            name="suffix"
-                            placeholder="yyyy"
-                            value={this.state.suffix}
-                            onChange={this.handleChange}
-                            maxLength="4"
-                        />
+                    <div className="text-container">
+                        <p>Expiry date</p>
+                        <div className="input-date">
+                            <input
+                                ref={node => this.setInputRef("prefix", node)}
+                                className="input prefix"
+                                type="text"
+                                name="prefix"
+                                placeholder="mm"
+                                value={this.state.prefix}
+                                onChange={this.handleChange}
+                                maxLength="2"
+                            />
+                            <div className="dash">/</div>
+                            <input
+                                ref={node => this.setInputRef("suffix", node)}
+                                className="input suffix"
+                                type="text"
+                                name="suffix"
+                                placeholder="yyyy"
+                                value={this.state.suffix}
+                                onChange={this.handleChange}
+                                maxLength="4"
+                            />
+                        </div>
                     </div>
                     <div className="text-container">
                         <p>Security code</p>
                         <input
                             onChange={this.handleInputChange}
                             name="cvv" type={"text"}
-                            className="text-field"
+                            className="text-field cvv"
                             value={this.state.cvv}
+                            maxLength="3"
                             placeholder="xxx"></input>
                     </div>
-                    <input onClick={this.handleData} disabled={!this.state.card, !this.state.date, !this.state.cvv}
+                    <input onClick={this.handleCard} className="back" value={"Back"} />
+                    <input onClick={this.handleData} disabled={!this.state.part1 || !this.state.part2 || !this.state.part3
+                        || !this.state.part4 || !this.state.prefix || !this.state.suffix || !this.state.cvv}
                            className="submit" value="Pay" />
                 </form>
             )
@@ -188,6 +253,7 @@ class Checkout extends React.Component {
         else{
             return (
                 <form className="data-form">
+                    <h4>1. Contact data</h4>
                     <div className="text-container">
                         <p>Name</p>
                         <input
@@ -199,12 +265,42 @@ class Checkout extends React.Component {
                     </div>
                     <div className="text-container">
                         <p>Phone</p>
-                        <input
-                            onChange={this.handleInputChange}
-                            name="phone" type={"text"}
-                            className="text-field"
-                            value={this.state.phone}
-                            placeholder="Input contact phone"></input>
+                        <div className="input-date input-phone">
+                            <input type="text" id="region" value="+38" disabled/>
+                            <div className="parenthesis" style={{ marginLeft: 10}}>&#40;</div>
+                            <input
+                                className="input area-code"
+                                type="text"
+                                name="phone1"
+                                placeholder="xxx"
+                                value={this.state.phone1}
+                                onChange={this.handlePhoneChange}
+                                maxLength="3"
+                            />
+                            <div className="parenthesis" style={{ marginRight: 2}}>&#41;</div>
+                            <input
+                                ref={node => this.setInputRef("phone2", node)}
+                                className="input prefix"
+                                type="text"
+                                name="phone2"
+                                placeholder="xxx"
+                                value={this.state.phone2}
+                                onChange={this.handlePhoneChange}
+                                maxLength="3"
+                            />
+                            <div className="dash">-</div>
+                            <input
+                                ref={node => this.setInputRef("phone3", node)}
+                                className="input suffix"
+                                type="text"
+                                name="phone3"
+                                placeholder="xxxx"
+                                value={this.state.phone3}
+                                onChange={this.handlePhoneChange}
+                                maxLength="4"
+                            />
+                        </div>
+                        <div class="line"></div>
                     </div>
                     <div className="text-container">
                         <p>Email</p>
@@ -225,7 +321,8 @@ class Checkout extends React.Component {
                             placeholder="Input city"></input>
                     </div>
                     <input onClick={this.handleCard}
-                           type="submit" className="submit" value="Next" />
+                           className="submit" value="Next" disabled={!this.state.city || !this.state.name || !this.state.email ||
+                        !this.state.phone1 || !this.state.phone2 || !this.state.phone3} />
                 </form>
             )
         }
@@ -234,33 +331,3 @@ class Checkout extends React.Component {
 
 const domContainer = document.querySelector('#checkout-form');
 ReactDOM.render(e(Checkout), domContainer);
-
-// disabled={!this.state.name, !this.state.phone, !this.state.email, !this.state.city}
-
-// import "./checkout.css";
-
-// const e = React.createElement;
-
-// class Checkout extends React.Component {
-//   constructor(props) {
-//     super(props);
-//     this.state = { personal: false };
-//   }
-
-//   render() {
-//     if (this.state.personal) {
-//       return 'You liked this.';
-//     }
-
-
-//     let className = 'menu';
-//     if (this.props.isActive) {
-//         className += ' menu-active';
-//     }
-//     return <span className={className}>Menu</span>
-
-//   }
-// }
-
-// const domContainer = document.querySelector('#checkout-form');
-// ReactDOM.render(e(Checkout), domContainer);
