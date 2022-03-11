@@ -1,29 +1,4 @@
 
-
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-
-        document.querySelector(this.getAttribute('href')).scrollIntoView({
-            behavior: 'smooth'
-        });
-    });
-});
-
-// Get the modal
-var reg = document.getElementById('registration');
-var log = document.getElementById('login');
-
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-    if (event.target == reg) {
-        modal.style.display = "none";
-    }
-    if (event.target == log) {
-        modal.style.display = "none";
-    }
-}
-
 const buttonsWrapper = document.querySelector(".map");
 const slides = document.querySelector(".inner");
 
@@ -44,3 +19,4 @@ buttonsWrapper.addEventListener("click", e => {
         }
     }
 });
+

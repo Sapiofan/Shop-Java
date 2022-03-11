@@ -22,13 +22,17 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 
+    <link rel="stylesheet" href="./general.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 </head>
 <body>
 <header>
-    <nav>
+    <nav class="nav">
         <a href="home.html" id="logo"><p class="logo">SmartShop</p></a>
         <div class="navigation">
             <a data-langkey="Nav-Our-Work" href="#home">Home</a>
+            <!-- <a data-langkey="Nav-Our-Work" href="#categories">Categories</a> -->
             <div class="dropdown">
                 <button class="dropbtn">Categories</button>
                 <div class="dropdown-content">
@@ -40,24 +44,37 @@
                     <a href="#">Drones</a>
                 </div>
             </div>
-            <!-- <a data-langkey="Nav-Our-Work" href="#categories">Categories</a> -->
             <a data-langkey="Nav-The-Team" href="#about">About</a>
             <a data-langkey="Nav-The-Process" href="#help">Help</a>
             <a data-langkey="Nav-Contact" href="#contact_us">Contact</a>
         </div>
         <div class="signs">
-            <div class="sign">
-                <img src="img/search.png" style="width: 32px; height: 32px;">
+            <div id="search-sign" class="sign">
+                <div id="search-wrapper">
+                    <input type="text" id="search" autocomplete="off" placeholder="Search device..." />
+                    <div id="close-icon"></div>
+                </div>
+                <!-- <img src="img/search.png" style="width: 32px; height: 32px;"> -->
             </div>
             <div class="sign">
                 <button onclick="document.getElementById('registration').style.display='block'"
-                        class="user"><img src="img/user.png" style="width: 32px; height: 32px;"></button>
+                        class="user"><img src="img/user.png" style="width: 36px; height: 36px;"></button>
             </div>
             <div class="sign">
-                <img src="img/heart.png" style="width: 32px; height: 32px;">
+                <button onclick="document.getElementById('likes').style.display='block'"
+                        class="likes">
+                    <img src="img/heart.png" style="width: 36px; height: 36px;">
+                    <span class="wishlist-count">2</span>
+                </button>
             </div>
             <div class="sign">
-                <img src="img/bag.png" style="width: 32px; height: 32px;">
+                <nav id="main-nav">
+                    <a class="cart-button" href="#">
+                        <span class="bag-count">3</span>
+                        <span class="bag-icon"></span>
+                    </a>
+                </nav>
+                <!-- <img src="img/bag.png" style="width: 32px; height: 32px;"> -->
             </div>
         </div>
         <!-- <div id='languages'>
@@ -69,13 +86,13 @@
     <div id="registration" class="modal">
         <form class="modal-content" action="#">
             <div class="container">
-                <span onclick="document.getElementById('registration').style.display='none'" class="close">&times;</span>
+                <!-- <span onclick="document.getElementById('registration').style.display='none'" class="close">&times;</span> -->
                 <button class="up-button" onclick="document.getElementById('registration').style.display='none';
                     document.getElementById('login').style.display='block'">Sign In</button>
                 <button class="up-button active">Sign Up</button>
-                <input class="head-email" type="email" placeholder="Enter Email" name="email" required>
-                <input class="head-password" type="password" placeholder="Enter Password" name="psw" required>
-                <input class="head-password" type="password" placeholder="Repeat Password" name="psw-repeat" required>
+                <input class="email" type="email" placeholder="Enter Email" name="email" required>
+                <input class="password" type="password" placeholder="Enter Password" name="psw" required>
+                <input class="password" type="password" placeholder="Repeat Password" name="psw-repeat" required>
                 <div class="clearfix">
                     <button type="submit" class="signupbtn">Sign Up</button>
                 </div>
@@ -86,20 +103,145 @@
     <div id="login" class="modal">
         <form class="modal-content" action="#">
             <div class="container">
-                <span onclick="document.getElementById('login').style.display='none'" class="close">&times;</span>
+                <!-- <span onclick="document.getElementById('login').style.display='none'" class="close">&times;</span> -->
                 <button class="up-button active">Sign In</button>
                 <button class="up-button" onclick="document.getElementById('registration').style.display='block';
                     document.getElementById('login').style.display='none'">Sign Up</button>
-                <input class="head-email" type="email" placeholder="Enter Email" name="email" required>
-                <input class="head-password" type="password" placeholder="Enter Password" name="psw" required>
+                <input class="email" type="email" placeholder="Enter Email" name="email" required>
+                <input class="password" type="password" placeholder="Enter Password" name="psw" required>
                 <div class="clearfix">
                     <button type="submit" class="signupbtn">Sign In</button>
                 </div>
             </div>
         </form>
     </div>
+    <div id="likes" class="modal-likes">
+        <form class="likes-content" action="#">
+            <div class="container-likes">
+                <!-- <span onclick="document.getElementById('likes').style.display='none'" class="close">&times;</span> -->
+                <h2>Wishlist</h2>
+                <div class="wishlist">
+                    <div class="wishlist-product">
+                        <a href="#"><img width="150px" height="150px" src="https://static.wixstatic.com/media/c22c23_77a52a8e6f8b4879a6548e11a3df3613~mv2.jpg/v1/fill/w_343,h_343,al_c,q_80,usm_0.66_1.00_0.01/c22c23_77a52a8e6f8b4879a6548e11a3df3613~mv2.webp"></a>
+                        <a href="#">
+                            <div class="product-description">
+                                <p class="wish-product-name">Samsung Galaxy S21 Ultra 12/128GB Phantom Black</p>
+                                <p class="wish-price">14.45$</p>
+                                <div class="Stars" style="--rating: 3.5;"></div>
+                            </div>
+                        </a>
+                        <button class="heart">&#10084;</button>
+                    </div>
+                    <div class="wishlist-product">
+                        <a href="#"><img width="150px" height="150px" src="https://static.wixstatic.com/media/c22c23_77a52a8e6f8b4879a6548e11a3df3613~mv2.jpg/v1/fill/w_343,h_343,al_c,q_80,usm_0.66_1.00_0.01/c22c23_77a52a8e6f8b4879a6548e11a3df3613~mv2.webp"></a>
+                        <a href="#">
+                            <div class="product-description">
+                                <p class="wish-product-name">Samsung Galaxy S21 Ultra 12/128GB Phantom Black</p>
+                                <p class="wish-price">14.45$</p>
+                                <div class="Stars" style="--rating: 3.5;"></div>
+                            </div>
+                        </a>
+                        <button class="heart">&#10084;</button>
+                    </div>
+                    <div class="wishlist-product">
+                        <a href="#"><img width="150px" height="150px" src="https://static.wixstatic.com/media/c22c23_77a52a8e6f8b4879a6548e11a3df3613~mv2.jpg/v1/fill/w_343,h_343,al_c,q_80,usm_0.66_1.00_0.01/c22c23_77a52a8e6f8b4879a6548e11a3df3613~mv2.webp"></a>
+                        <a href="#">
+                            <div class="product-description">
+                                <p class="wish-product-name">Samsung Galaxy S21 Ultra 12/128GB Phantom Black</p>
+                                <p class="wish-price">14.45$</p>
+                                <div class="Stars" style="--rating: 3.5;"></div>
+                            </div>
+                        </a>
+                        <button class="heart">&#10084;</button>
+                    </div>
+                </div>
+                <div class="clearfix">
+                    <button type="submit" class="clean-button">Clear wishlist</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <aside id="sidebar-cart">
+        <main>
+            <a href="#" class="close-button"><span class="close-icon">X</span></a>
+            <h2>Shopping Bag <span class="count">2</span></h2>
+            <ul class="products">
+                <li class="product">
+                    <a href="#" class="product-link">
+                                <span class="product-image">
+                                    <img src="https://via.placeholder.com/75x50/ffffff/cccccc?text=PHOTO" alt="Product Photo">
+                                </span>
+                        <span class="product-details">
+                                    <h3>Very Cool Product One</h3>
+                                    <span class="qty-price">
+                                        <span class="qty">
+                                            <button class="minus-button" id="minus-button-1">-</button>
+                                            <input type="number" id="qty-input-1" class="qty-input" step="1" min="1" max="1000" name="qty-input" value="1" pattern="[0-9]*" title="Quantity" inputmode="numeric">
+                                            <button class="plus-button" id="plus-button-1">+</button>
+                                            <input type="hidden" name="item-price" id="item-price-1" value="12.00">
+                                        </span>
+                                        <span class="price">$16.00</span>
+                                    </span>
+                                </span>
+                    </a>
+                    <a href="#remove" class="remove-button"><span class="remove-icon">X</span></a>
+                </li>
+                <li class="product">
+                    <a href="#" class="product-link">
+                                <span class="product-image">
+                                    <img src="https://via.placeholder.com/75x50/ffffff/cccccc?text=PHOTO" alt="Product Photo">
+                                </span>
+                        <span class="product-details">
+                                    <h3>Very Cool Product Two with Long Title</h3>
+                                    <span class="qty-price">
+                                        <span class="qty">
+                                            <button class="minus-button" id="minus-button-1">-</button>
+                                            <input type="number" id="qty-input-2" class="qty-input" step="1" min="1" max="1000" name="qty-input" value="1" pattern="[0-9]*" title="Quantity" inputmode="numeric">
+                                            <button class="plus-button" id="plus-button-1">+</button>
+                                            <input type="hidden" name="item-price" id="item-price-2" value="12.00">
+                                        </span>
+                                        <span class="price">$28.00</span>
+                                    </span>
+                                </span>
+                    </a>
+                    <a href="#remove" class="remove-button"><span class="remove-icon">X</span></a>
+                </li>
+                <li class="product">
+                    <a href="#" class="product-link">
+                                <span class="product-image">
+                                    <img src="https://via.placeholder.com/75x50/ffffff/cccccc?text=PHOTO" alt="Product Photo">
+                                </span>
+                        <span class="product-details">
+                                    <h3>Very Cool Product Three</h3>
+                                    <span class="qty-price">
+                                        <span class="qty">
+                                            <form action="#" name="qty-form" id="qty-form-1">
+                                                <button class="minus-button" id="minus-button-1">-</button>
+                                                <input type="number" id="qty-input-3" class="qty-input" step="1" min="1" max="1000" name="qty-input" value="1" pattern="[0-9]*" title="Quantity" inputmode="numeric">
+                                                <button class="plus-button" id="plus-button-1">+</button>
+                                                <input type="hidden" name="item-price" id="item-price-3" value="12.00">
+                                            </form>
+                                        </span>
+                                        <span class="price">$12.00</span>
+                                    </span>
+                                </span>
+                    </a>
+                    <a href="#remove" class="remove-button"><span class="remove-icon">X</span></a>
+                </li>
+            </ul>
+            <div class="totals">
+                <div class="subtotal">
+                    <span class="label">Subtotal:</span> <span class="amount">$54.00</span>
+                </div>
+            </div>
+            <div class="action-buttons">
+                <a class="checkout-button" href="#">Checkout</a>
+            </div>
+        </main>
+    </aside>
+    <div id="sidebar-cart-curtain"></div>
 </header>
-<main>
+<main class="main">
     <h1>Tablets</h1>
     <article>
         <div class="aside">
@@ -438,5 +580,6 @@
     </div>
 </footer>
 <script src="filters.js"></script>
+<script src="general.js"></script>
 </body>
 </html>

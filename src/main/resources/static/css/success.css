@@ -51,10 +51,10 @@ header > nav > p {
 
 
 .success-container {
-    margin-left: 32%;
-    margin-top: 5%;
+    margin-left: 33%;
+    margin-top: 3%;
     box-shadow: 4px 4px 8px rgb(0, 0, 0);
-    width: 30%;
+    width: 27%;
     height: 400px;
     border-radius: 6px;
     padding: 50px 40px;
@@ -74,17 +74,26 @@ header > nav > p {
 }
 
 .success-child {
-    display: inline-block;
+    display: block;
     width: 100%;
+    margin-bottom: 15px;
 }
 
 .general-success {
     color: rgb(102, 102, 102);
+    float: left;
 }
 
 .certain-success {
     text-align: right;
     font-weight: 600;
+    float: right;
+}
+
+.bold {
+    margin-top: 20px;
+    font-weight: 600;
+    font-size: 18px;
 }
 
 .home-return {
@@ -97,6 +106,12 @@ header > nav > p {
     margin-left: 33%;
     margin-top: 30px;
     font-size: 16px;
+    transition: .3s;
+}
+
+.home-return:hover {
+    cursor: pointer;
+    background-color: purple;
 }
 
 
