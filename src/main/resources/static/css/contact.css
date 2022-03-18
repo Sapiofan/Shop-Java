@@ -13,13 +13,21 @@
     margin-bottom: 100px;
 }
 
-.part1, .part2 {
+.parts {
     display: flex;
-    margin-bottom: 70px;
+}
+
+.part1, .part2 {
+    display: block;
+}
+
+.part2 {
+    margin-left: 35%;
 }
 
 .work-time, .location {
     width: 200px;
+    margin-bottom: 150px;
 }
 
 #contact h4 {
@@ -30,15 +38,7 @@
 #contact p {
     font-size: 16px;
     margin-bottom: 10px;
-}
-
-.form-text {
-    margin-left: 33%;
-    margin-top: 30px;
-}
-
-#contact form {
-    margin-left: 30%;
+    width: 90%;
 }
 
 .input-blocks {
@@ -48,13 +48,16 @@
 .about-input-block {
     display: block;
     width: 50%;
-    margin-right: 50px;
     margin-bottom: 20px;
 }
 
 .about-input-block p {
     margin: 20px 0;
     font-size: 18px;
+}
+
+.mar {
+    margin-right: 50px;
 }
 
 .input {
@@ -75,7 +78,7 @@
 }
 
 .textarea {
-    width: 91%;
+    width: 100%;
     resize: none;
 }
 
@@ -95,6 +98,37 @@
 .submit:hover {
     cursor: pointer;
     background-color: purple;
+}
+
+@media screen and (max-width: 600px) {
+    #contact {
+        padding: 20px 0;
+    }
+    .form-text p {
+        width: 100%;
+        margin: 15px 20px;
+    }
+    .parts {
+        display: block;
+    }
+    .part1 {
+        display: flex;
+        margin-bottom: 0px;
+        margin: 0 20px;
+    }
+    .part2 {
+        margin-left: 0;
+        text-align: center;
+    }
+    .about-input-block, .area {
+        text-align: left;
+    }
+    .part2 form {
+        margin: 20px;
+    }
+    .submit {
+        margin-left: 0;
+    }
 }
 
 /*///////////////////////////////////////////
@@ -117,19 +151,25 @@
     margin: 30px 0;
 }
 
+#letters form {
+    display: flex;
+    margin-left: 23%;
+}
+
 .email-news{
     width: 400px;
-    height: 40px;
+    height: 34px;
     border: none;
     outline: none;
     border-radius: 20px;
     padding-left: 20px;
+    padding: 3px 0 3px 20px;
     font-size: 16px;
 }
 
 .email-submit {
     width: 200px;
-    height: 45px;
+    height: 40px;
     color: white;
     background-color: black;
     border: none;
@@ -139,4 +179,23 @@
 
 .email-submit:hover {
     cursor: pointer;
+}
+
+@media screen and (max-width: 600px) {
+    #letters {
+        margin: 40px 0;
+        padding: 20px 10px;
+    }
+    #letters form {
+        margin-left: 17%;
+    }
+    .email-news {
+        width: 200px;
+        height: 30px;
+    }
+    .email-submit {
+        height: 36px;
+        width: 100px;
+        margin-left: -20;
+    }
 }

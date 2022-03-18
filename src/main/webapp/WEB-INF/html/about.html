@@ -27,11 +27,13 @@
 </head>
 <body>
 <header>
-    <nav class="nav">
+    <nav class="nav" id="nav">
         <a href="home.html" id="logo"><p class="logo">SmartShop</p></a>
-        <div class="navigation">
+        <button class="mobile-icon" id="mobile-icon">
+            <a href="javascript:void(0);" class="icon">&#9776;</a>
+        </button>
+        <div class="navigation" id="navigation">
             <a data-langkey="Nav-Our-Work" href="#home">Home</a>
-            <!-- <a data-langkey="Nav-Our-Work" href="#categories">Categories</a> -->
             <div class="dropdown">
                 <button class="dropbtn">Categories</button>
                 <div class="dropdown-content">
@@ -53,7 +55,6 @@
                     <input type="text" id="search" autocomplete="off" placeholder="Search device..." />
                     <div id="close-icon"></div>
                 </div>
-                <!-- <img src="img/search.png" style="width: 32px; height: 32px;"> -->
             </div>
             <div class="sign">
                 <button onclick="document.getElementById('registration').style.display='block'"
@@ -62,18 +63,17 @@
             <div class="sign">
                 <button onclick="document.getElementById('likes').style.display='block'"
                         class="likes">
-                    <img src="img/heart.png" style="width: 36px; height: 36px;">
+                    <img src="img/heart (2).png" style="width: 36px; height: 36px;">
                     <span class="wishlist-count">2</span>
                 </button>
             </div>
-            <div class="sign">
+            <div class="sign" id="cart">
                 <nav id="main-nav">
                     <a class="cart-button" href="#">
                         <span class="bag-count">3</span>
                         <span class="bag-icon"></span>
                     </a>
                 </nav>
-                <!-- <img src="img/bag.png" style="width: 32px; height: 32px;"> -->
             </div>
         </div>
         <!-- <div id='languages'>
@@ -89,9 +89,9 @@
                 <button class="up-button" onclick="document.getElementById('registration').style.display='none';
                     document.getElementById('login').style.display='block'">Sign In</button>
                 <button class="up-button active">Sign Up</button>
-                <input class="email" type="email" placeholder="Enter Email" name="email" required>
-                <input class="password" type="password" placeholder="Enter Password" name="psw" required>
-                <input class="password" type="password" placeholder="Repeat Password" name="psw-repeat" required>
+                <input type="email" class="email" placeholder="Enter Email" name="email" required>
+                <input type="password" class="password" placeholder="Enter Password" name="psw" required>
+                <input type="password" class="password" placeholder="Repeat Password" name="psw-repeat" required>
                 <div class="clearfix">
                     <button type="submit" class="signupbtn">Sign Up</button>
                 </div>
@@ -117,7 +117,7 @@
     <div id="likes" class="modal-likes">
         <form class="likes-content" action="#">
             <div class="container-likes">
-                <!-- <span onclick="document.getElementById('likes').style.display='none'" class="close">&times;</span> -->
+                <span onclick="document.getElementById('likes').style.display='none'" class="close">&times;</span>
                 <h2>Wishlist</h2>
                 <div class="wishlist">
                     <div class="wishlist-product">
@@ -160,6 +160,62 @@
             </div>
         </form>
     </div>
+    <aside id="menu">
+        <div class="menu-logo">
+            <p>SmartShop</p>
+        </div>
+        <div class="menu-choice">
+            <a href="#" onclick="document.getElementById('registration').style.display='block'">
+                <div class="menu-item menu-user">
+                    <img src="img/user-2.svg" style="width: 26px; height: 26px; margin-left: 2px;">
+                    <p>Log in profile</p>
+                </div>
+            </a>
+            <a href="#" onclick="document.getElementById('likes').style.display='block'">
+                <div class="menu-item">
+                    <img src="img/heart-1.png" style="width: 30px; height: 30px;">
+                    <p>Favorites</p>
+                </div>
+            </a>
+            <a href="#home">
+                <div class="menu-item">
+                    <img src="img/home.svg" style="width: 30px; height: 30px;">
+                    <p>Home</p>
+                </div>
+            </a>
+            <div id="cat-id">
+                <div class="menu-item">
+                    <div class="menu-container">
+                        <div class="cat-container" id="cat-container">
+                            <img src="img/application.png" style="width: 30px; height: 30px;">
+                            <p class="menu-coll">Categories</p>
+                        </div>
+                        <ul class="menu-category" id="menu-category">
+                            <a href="#">Computers</a>
+                            <a href="#">Phones</a>
+                            <a href="#">Tablets</a>
+                            <a href="#">Watches</a>
+                            <a href="#">Discounts</a>
+                            <a href="#">Drones</a>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <a href="#about">
+                <div class="menu-item">
+                    <img src="img/info.png" style="width: 30px; height: 30px;">
+                    <p>About</p>
+                </div>
+            </a>
+            <a href="#help">
+                <div class="menu-item">
+                    <img src="img/communication.png" style="width: 30px; height: 30px;">
+                    <p>Help</p>
+                </div>
+            </a>
+        </div>
+    </aside>
+    <div id="menu-curtain"></div>
     <aside id="sidebar-cart">
         <main>
             <a href="#" class="close-button"><span class="close-icon">X</span></a>
@@ -245,7 +301,7 @@
         <h1>About SmartShop</h1>
         <div class="about-part">
             <div class="about-img">
-                <img style="width: 600px; height: 700px;" src="https://static.wixstatic.com/media/c837a6_57c256d2c7474590a3f295bad576b0a1~mv2.jpg/v1/fill/w_801,h_843,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/c837a6_57c256d2c7474590a3f295bad576b0a1~mv2.jpg">
+                <img class="img-about" src="https://static.wixstatic.com/media/c837a6_57c256d2c7474590a3f295bad576b0a1~mv2.jpg/v1/fill/w_801,h_843,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/c837a6_57c256d2c7474590a3f295bad576b0a1~mv2.jpg">
             </div>
             <div class="about-text">
                 <p>This is a great space to write a long text about your company and your services.
@@ -315,7 +371,7 @@
     <div class="footer-padding">
         <div class="footer-block">
             <h2>Store Location</h2>
-            <ul>
+            <ul class="footer-info">
                 <li>500 Terry Francois Street</li>
                 <li>San Francisco, CA 94158</li>
                 <li>info@mysite.com</li>
@@ -329,8 +385,8 @@
             </div>
         </div>
         <div class="footer-block">
-            <h2>Shop</h2>
-            <ul class="footer-links">
+            <h2 class="collapsible">Shop</h2>
+            <ul class="footer-links content">
                 <a href="#"><li>Shop all</li></a>
                 <a href="#"><li>Computers</li></a>
                 <a href="#"><li>Phones</li></a>
@@ -341,16 +397,16 @@
             </ul>
         </div>
         <div class="footer-block">
-            <h2>Customer support</h2>
-            <ul class="footer-links">
+            <h2 class="collapsible">Customer support</h2>
+            <ul class="footer-links content">
                 <a href="#"><li>Contact us</li></a>
                 <a href="#"><li>FAQ</li></a>
                 <a href="#"><li>About</li></a>
             </ul>
         </div>
         <div class="footer-block">
-            <h2>Policy</h2>
-            <ul class="footer-links">
+            <h2 class="collapsible">Policy</h2>
+            <ul class="footer-links content">
                 <a href="#"><li>Shipping & Returns</li></a>
                 <a href="#"><li>Terms & Conditions</li></a>
                 <a href="#"><li>Payment Methods</li></a>

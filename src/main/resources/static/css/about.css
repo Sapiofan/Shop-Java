@@ -13,6 +13,14 @@
     margin: 100px;
 }
 
+.about-img {
+    width: 600px;
+}
+
+.img-about {
+    width: inherit;
+}
+
 .about-part {
     display: flex;
     padding: 0 100px 0 100px;
@@ -22,6 +30,25 @@
     font-size: 18px;
     padding: 50px 100px 0 100px;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+@media screen and (max-width: 600px) {
+    #about h1 {
+        width: 100%;
+        margin: 30px 0;
+        font-size: 26px;
+    }
+    .about-part {
+        display: block;
+        padding: 0;
+    }
+    .about-img {
+        width: 100%;
+    }
+    .about-text {
+        padding: 0;
+        margin: 30px 20px;
+    }
 }
 
 /*///////////////////////////////////////////
@@ -94,7 +121,7 @@
     height: 40px;
     border: none;
     border-radius: 20px;
-    margin-left: 290px;
+    margin-left: 33%;
     margin-top: 40px;
     font-size: 18px;
 }
@@ -102,4 +129,28 @@
 .submit:hover {
     cursor: pointer;
     background-color: purple;
+}
+
+@media screen and (max-width: 600px) {
+    .career-form {
+        margin: 0 0 0 3%;
+        width: inherit;
+    }
+    .postings {
+        width: inherit;
+        margin-bottom: 40px;
+    }
+    .submit {
+        margin-left: 15%;
+    }
+    .about-input-block {
+        margin-right: 20px;
+    }
+    .about-input-block p {
+        font-size: 16px;
+    }
+    #positions {
+        font-size: 16px;
+        margin-top: 5px;
+    }
 }

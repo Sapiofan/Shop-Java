@@ -21,15 +21,21 @@
 
     <link rel="stylesheet" href="./home.css">
     <link rel="stylesheet" href="./general.css">
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="air-slider.min.css">
+    <script src="air-slider.min.js"></script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
 <header>
-    <nav class="nav">
+    <nav class="nav" id="nav">
         <a href="home.html" id="logo"><p class="logo">SmartShop</p></a>
-        <div class="navigation">
+        <button class="mobile-icon" id="mobile-icon">
+            <a href="javascript:void(0);" class="icon">&#9776;</a>
+        </button>
+        <div class="navigation" id="navigation">
             <a data-langkey="Nav-Our-Work" href="#home"><span class="active-nav">Home</span></a>
             <!-- <a data-langkey="Nav-Our-Work" href="#categories">Categories</a> -->
             <div class="dropdown">
@@ -53,7 +59,6 @@
                     <input type="text" id="search" autocomplete="off" placeholder="Search device..." />
                     <div id="close-icon"></div>
                 </div>
-                <!-- <img src="img/search.png" style="width: 32px; height: 32px;"> -->
             </div>
             <div class="sign">
                 <button onclick="document.getElementById('registration').style.display='block'"
@@ -62,18 +67,17 @@
             <div class="sign">
                 <button onclick="document.getElementById('likes').style.display='block'"
                         class="likes">
-                    <img src="img/heart.png" style="width: 36px; height: 36px;">
+                    <img src="img/heart (2).png" style="width: 36px; height: 36px;">
                     <span class="wishlist-count">2</span>
                 </button>
             </div>
-            <div class="sign">
+            <div class="sign" id="cart">
                 <nav id="main-nav">
                     <a class="cart-button" href="#">
                         <span class="bag-count">3</span>
                         <span class="bag-icon"></span>
                     </a>
                 </nav>
-                <!-- <img src="img/bag.png" style="width: 32px; height: 32px;"> -->
             </div>
         </div>
         <!-- <div id='languages'>
@@ -117,7 +121,7 @@
     <div id="likes" class="modal-likes">
         <form class="likes-content" action="#">
             <div class="container-likes">
-                <!-- <span onclick="document.getElementById('likes').style.display='none'" class="close">&times;</span> -->
+                <span onclick="document.getElementById('likes').style.display='none'" class="close">&times;</span>
                 <h2>Wishlist</h2>
                 <div class="wishlist">
                     <div class="wishlist-product">
@@ -160,6 +164,62 @@
             </div>
         </form>
     </div>
+    <aside id="menu">
+        <div class="menu-logo">
+            <p>SmartShop</p>
+        </div>
+        <div class="menu-choice">
+            <a href="#" onclick="document.getElementById('registration').style.display='block'">
+                <div class="menu-item menu-user">
+                    <img src="img/user-2.svg" style="width: 26px; height: 26px; margin-left: 2px;">
+                    <p>Log in profile</p>
+                </div>
+            </a>
+            <a href="#" onclick="document.getElementById('likes').style.display='block'">
+                <div class="menu-item">
+                    <img src="img/heart-1.png" style="width: 30px; height: 30px;">
+                    <p>Favorites</p>
+                </div>
+            </a>
+            <a href="#home">
+                <div class="menu-item">
+                    <img src="img/home.svg" style="width: 30px; height: 30px;">
+                    <p>Home</p>
+                </div>
+            </a>
+            <div id="cat-id">
+                <div class="menu-item">
+                    <div class="menu-container">
+                        <div class="cat-container" id="cat-container">
+                            <img src="img/application.png" style="width: 30px; height: 30px;">
+                            <p class="menu-coll">Categories</p>
+                        </div>
+                        <ul class="menu-category" id="menu-category">
+                            <a href="#">Computers</a>
+                            <a href="#">Phones</a>
+                            <a href="#">Tablets</a>
+                            <a href="#">Watches</a>
+                            <a href="#">Discounts</a>
+                            <a href="#">Drones</a>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <a href="#about">
+                <div class="menu-item">
+                    <img src="img/info.png" style="width: 30px; height: 30px;">
+                    <p>About</p>
+                </div>
+            </a>
+            <a href="#help">
+                <div class="menu-item">
+                    <img src="img/communication.png" style="width: 30px; height: 30px;">
+                    <p>Help</p>
+                </div>
+            </a>
+        </div>
+    </aside>
+    <div id="menu-curtain"></div>
     <aside id="sidebar-cart">
         <main>
             <a href="#" class="close-button"><span class="close-icon">X</span></a>
@@ -241,95 +301,89 @@
     <div id="sidebar-cart-curtain"></div>
 </header>
 <main>
-    <section id="carousel">
+    <section>
+        <div class="slideshow-container">
+            <div class="mySlides fade">
+                <div class="numbertext">1 / 3</div>
+                <img src="https://p4.wallpaperbetter.com/wallpaper/937/160/21/apple-devices-blur-close-up-computer-wallpaper-preview.jpg" style="width:100%">
+                <div class="text">London, Ebgland</div>
+            </div>
+            <div class="mySlides fade">
+                <div class="numbertext">2 / 3</div>
+                <img src="https://images.fonearena.com/blog/wp-content/uploads/2020/04/iPhone-SE2.jpg" style="width:100%">
+                <div class="text">Sunset in Romania</div>
+            </div>
+            <div class="mySlides fade">
+                <div class="numbertext">3 / 3</div>
+                <img src="https://p4.wallpaperbetter.com/wallpaper/937/160/21/apple-devices-blur-close-up-computer-wallpaper-preview.jpg" style="width:100%">
+                <div class="text">New York, USA</div>
+            </div>
+            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+            <a class="next" onclick="plusSlides(1)">&#10095;</a>
+        </div>
+        <br>
+        <div style="text-align:center">
+            <span class="dot" onclick="currentSlide(1)"></span>
+            <span class="dot" onclick="currentSlide(2)"></span>
+            <span class="dot" onclick="currentSlide(3)"></span>
+        </div>
+    </section>
+    <!-- <section id="carousel">
         <div class="center">
             <div class="wrapper">
-                <div class="inner">
-                    <div class="card">
-                        <img src="https://i.allo.ua/media/homepage/topbanner/keshbek-2500-na-televizor-300х460.jpg">
-                    </div>
-                    <div class="card">
-                        <img src="https://i.allo.ua/media/homepage/topbanner/S22_W-XXL_300x460.jpg">
-                    </div>
-                    <div class="card">
-                        <img src="https://i.allo.ua/media/homepage/topbanner/11t_W-XL-300x460_1.png">
-                    </div>
-                    <div class="card">
-                        <img src="https://i.allo.ua/media/homepage/topbanner/S22_W-XXL_300x460.jpg">
-                    </div>
-                    <div class="card">
-                        <img src="https://i.allo.ua/media/homepage/topbanner/keshbek-2500-na-televizor-300х460.jpg">
-                    </div>
-                    <div class="card">
-                        <img src="https://i.allo.ua/media/homepage/topbanner/S22_W-XXL_300x460.jpg">
-                    </div>
-                    <div class="card">
-                        <img src="https://i.allo.ua/media/homepage/topbanner/S22_W-XXL_300x460.jpg">
-                    </div>
-                    <div class="card">
-                        <img src="https://i.allo.ua/media/homepage/topbanner/keshbek-2500-na-televizor-300х460.jpg">
-                    </div>
-                    <div class="card">
-                        <img src="https://i.allo.ua/media/homepage/topbanner/S22_W-XXL_300x460.jpg">
-                    </div>
-                    <div class="card">
-                        <img src="https://i.allo.ua/media/homepage/topbanner/keshbek-2500-na-televizor-300х460.jpg">
-                    </div>
-                    <div class="card">
-                        <img src="https://i.allo.ua/media/homepage/topbanner/S22_W-XXL_300x460.jpg">
-                    </div>
-                    <div class="card">
-                        <img src="https://i.allo.ua/media/homepage/topbanner/S22_W-XXL_300x460.jpg">
-                    </div>
-                    <div class="card">
-                        <img src="https://i.allo.ua/media/homepage/topbanner/keshbek-2500-na-televizor-300х460.jpg">
-                        <!-- <div class="content">
-                          <h1>Digital Marketing</h1>
-                          <h3>UI/UX, Design</h3>
-                        </div> -->
-                    </div>
+              <div class="inner">
+                <div class="card">
+                  <img src="https://i.allo.ua/media/homepage/topbanner/keshbek-2500-na-televizor-300х460.jpg">
                 </div>
+                <div class="card">
+                  <img src="https://i.allo.ua/media/homepage/topbanner/S22_W-XXL_300x460.jpg">
+                </div>
+                <div class="card">
+                  <img src="https://i.allo.ua/media/homepage/topbanner/11t_W-XL-300x460_1.png">
+                </div>
+                <div class="card">
+                  <img src="https://i.allo.ua/media/homepage/topbanner/S22_W-XXL_300x460.jpg">
+                </div>
+                <div class="card">
+                  <img src="https://i.allo.ua/media/homepage/topbanner/keshbek-2500-na-televizor-300х460.jpg">
+                </div>
+                <div class="card">
+                  <img src="https://i.allo.ua/media/homepage/topbanner/S22_W-XXL_300x460.jpg">
+                </div>
+                      <div class="card">
+                  <img src="https://i.allo.ua/media/homepage/topbanner/S22_W-XXL_300x460.jpg">
+                </div>
+                <div class="card">
+                  <img src="https://i.allo.ua/media/homepage/topbanner/keshbek-2500-na-televizor-300х460.jpg">
+                </div>
+                <div class="card">
+                  <img src="https://i.allo.ua/media/homepage/topbanner/S22_W-XXL_300x460.jpg">
+                </div>
+                <div class="card">
+                    <img src="https://i.allo.ua/media/homepage/topbanner/keshbek-2500-na-televizor-300х460.jpg">
+                </div>
+                <div class="card">
+                    <img src="https://i.allo.ua/media/homepage/topbanner/S22_W-XXL_300x460.jpg">
+                </div>
+                <div class="card">
+                    <img src="https://i.allo.ua/media/homepage/topbanner/S22_W-XXL_300x460.jpg">
+                </div>
+                <div class="card">
+                    <img src="https://i.allo.ua/media/homepage/topbanner/keshbek-2500-na-televizor-300х460.jpg">
+                </div>
+              </div>
             </div>
 
             <div class="map">
-                <button class="active first"></button>
-                <button class="second"></button>
-                <button class="third"></button>
+              <button class="active first"></button>
+              <button class="second"></button>
+              <button class="third"></button>
             </div>
-        </div>
-    </section>
-    <section id="advantages">
-        <div class="advantages-padding">
-            <div class="advantage">
-                <div class="advantage-icon">
-                    <img src="img/logistics-delivery.png" style="width: 64px; height: 64px;">
-                </div>
-                <p class="advantage-text">Fast delivery anywhere in the country</p>
-            </div>
-            <div class="advantage">
-                <div class="advantage-icon">
-                    <img src="img/delivery.png" style="width: 64px; height: 64px;">
-                </div>
-                <p class="advantage-text">Free shipping on orders over $50</p>
-            </div>
-            <div class="advantage">
-                <div class="advantage-icon">
-                    <img src="img/discount.png" style="width: 64px; height: 64px;">
-                </div>
-                <p class="advantage-text">Low prices guaranteed</p>
-            </div>
-            <div class="advantage">
-                <div class="advantage-icon">
-                    <img src="img/clock.png" style="width: 64px; height: 64px;">
-                </div>
-                <p class="advantage-text">Available to you 24/7</p>
-            </div>
-        </div>
-    </section>
-
+          </div>
+    </section> -->
     <section id="banners">
         <div class="banner" style="margin-right: 50px;">
-            <img style="width: 650px; height: 500px;" src="https://static.wixstatic.com/media/c22c23_e140bfa8cd6f4cb2ac5ee6e204f64073~mv2.jpg/v1/fill/w_851,h_585,al_t,q_85,usm_0.66_1.00_0.01,enc_auto/c22c23_e140bfa8cd6f4cb2ac5ee6e204f64073~mv2.jpg">
+            <img class="banner-img" src="https://static.wixstatic.com/media/c22c23_e140bfa8cd6f4cb2ac5ee6e204f64073~mv2.jpg/v1/fill/w_851,h_585,al_t,q_85,usm_0.66_1.00_0.01,enc_auto/c22c23_e140bfa8cd6f4cb2ac5ee6e204f64073~mv2.jpg">
             <div class="banner-text">
                 <p>Holiday Deals</p>
                 <h1>Up to 30% off</h1>
@@ -338,7 +392,7 @@
             </div>
         </div>
         <div class="banner">
-            <img style="width: 650px; height: 500px;" src="https://static.wixstatic.com/media/c837a6_d84a631864a442a496670bc2d787c6a0~mv2.jpg/v1/fill/w_851,h_585,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/c837a6_d84a631864a442a496670bc2d787c6a0~mv2.jpg">
+            <img class="banner-img" src="https://static.wixstatic.com/media/c837a6_d84a631864a442a496670bc2d787c6a0~mv2.jpg/v1/fill/w_851,h_585,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/c837a6_d84a631864a442a496670bc2d787c6a0~mv2.jpg">
             <div class="banner-text">
                 <p>Just In</p>
                 <h1>Take Your Sound Anywhere</h1>
@@ -414,56 +468,6 @@
             <button class="view-all">View All</button>
         </div>
     </section>
-
-    <!-- <section id="categories">
-        <div class="sellers-padding">
-            <h1>Shop by Category</h1>
-            <div class="categories">
-                <div class="category">
-                    <div class="img-container">
-                        <img class="zoom circle" src="https://static.wixstatic.com/media/c22c23_75059a72af5e4949aecdfbda8746f4ef~mv2.jpg/v1/fill/w_343,h_343,al_c,q_80,usm_0.66_1.00_0.01/c22c23_75059a72af5e4949aecdfbda8746f4ef~mv2.webp">
-                    </div>
-                    <div class="category-text">
-                        <p>Watches</p>
-                    </div>
-                </div>
-                <div class="category">
-                    <div class="img-container">
-                        <img class="zoom circle" src="https://static.wixstatic.com/media/c22c23_3ab3d3acd73843deba1dece7b2254e2f~mv2.jpg/v1/fill/w_343,h_343,al_c,q_80,usm_0.66_1.00_0.01/c22c23_3ab3d3acd73843deba1dece7b2254e2f~mv2.webp">
-                    </div>
-                    <div class="category-text">
-                        <p>Computers</p>
-                    </div>
-                </div>
-                <div class="category">
-                    <div class="img-container">
-                        <img class="zoom circle" src="https://static.wixstatic.com/media/c22c23_77a52a8e6f8b4879a6548e11a3df3613~mv2.jpg/v1/fill/w_343,h_343,al_c,q_80,usm_0.66_1.00_0.01/c22c23_77a52a8e6f8b4879a6548e11a3df3613~mv2.webp">
-                    </div>
-                    <div class="category-text">
-                        <p>Drones & Cameras</p>
-                    </div>
-                </div>
-                <div class="category">
-                    <div class="img-container">
-                        <img class="zoom circle" src="https://static.wixstatic.com/media/c837a6_9c30b13d43264ebf888ab1e70eaf2daa~mv2.jpg/v1/fill/w_208,h_208,q_90/c837a6_9c30b13d43264ebf888ab1e70eaf2daa~mv2.webp 1x, https://static.wixstatic.com/media/c837a6_9c30b13d43264ebf888ab1e70eaf2daa~mv2.jpg/v1/fill/w_416,h_416,q_90/c837a6_9c30b13d43264ebf888ab1e70eaf2daa~mv2.webp 2x, https://static.wixstatic.com/media/c837a6_9c30b13d43264ebf888ab1e70eaf2daa~mv2.jpg/v1/fill/w_624,h_624,q_90/c837a6_9c30b13d43264ebf888ab1e70eaf2daa~mv2.webp 3x, https://static.wixstatic.com/media/c837a6_9c30b13d43264ebf888ab1e70eaf2daa~mv2.jpg/v1/fill/w_832,h_832,q_90/c837a6_9c30b13d43264ebf888ab1e70eaf2daa~mv2.webp 4x, https://static.wixstatic.com/media/c837a6_9c30b13d43264ebf888ab1e70eaf2daa~mv2.jpg/v1/fill/w_1040,h_1040,q_90/c837a6_9c30b13d43264ebf888ab1e70eaf2daa~mv2.webp">
-                    </div>
-                    <div class="category-text">
-                        <p>Mobile</p>
-                    </div>
-                </div>
-                <div class="category">
-                    <div class="img-container">
-                        <img class="zoom circle" src="https://static.wixstatic.com/media/c837a6_6d6b2a5842f449539f528c501e5cc035~mv2.jpg/v1/fill/w_208,h_208,q_90/c837a6_6d6b2a5842f449539f528c501e5cc035~mv2.webp 1x, https://static.wixstatic.com/media/c837a6_6d6b2a5842f449539f528c501e5cc035~mv2.jpg/v1/fill/w_416,h_416,q_90/c837a6_6d6b2a5842f449539f528c501e5cc035~mv2.webp 2x, https://static.wixstatic.com/media/c837a6_6d6b2a5842f449539f528c501e5cc035~mv2.jpg/v1/fill/w_624,h_624,q_90/c837a6_6d6b2a5842f449539f528c501e5cc035~mv2.webp 3x, https://static.wixstatic.com/media/c837a6_6d6b2a5842f449539f528c501e5cc035~mv2.jpg/v1/fill/w_832,h_832,q_90/c837a6_6d6b2a5842f449539f528c501e5cc035~mv2.webp 4x, https://static.wixstatic.com/media/c837a6_6d6b2a5842f449539f528c501e5cc035~mv2.jpg/v1/fill/w_1040,h_1040,q_90/c837a6_6d6b2a5842f449539f528c501e5cc035~mv2.webp">
-                    </div>
-                    <div class="category-text">
-                        <p>Tablets</p>
-                    </div>
-                </div>
-            </div>
-            <button class="view-all">All Categories</button>
-        </div>
-    </section> -->
-
     <section id="special-offer">
         <div class="offer-text">
             <h3>Today's special</h3>
@@ -478,12 +482,40 @@
             <img class="special-img" src="https://static.wixstatic.com/media/c837a6_ecf32c7284d4430582fcc90f60a1b4e6~mv2.png/v1/fill/w_1753,h_750,al_c,q_90,usm_0.66_1.00_0.01/c837a6_ecf32c7284d4430582fcc90f60a1b4e6~mv2.webp">
         </div>
     </section>
+    <section id="advantages">
+        <div class="advantages-padding">
+            <div class="advantage">
+                <div class="advantage-icon">
+                    <img src="img/logistics-delivery.png" style="width: 64px; height: 64px;">
+                </div>
+                <p class="advantage-text">Fast delivery anywhere in the country</p>
+            </div>
+            <div class="advantage">
+                <div class="advantage-icon">
+                    <img src="img/delivery.png" style="width: 64px; height: 64px;">
+                </div>
+                <p class="advantage-text">Free shipping on orders over $50</p>
+            </div>
+            <div class="advantage">
+                <div class="advantage-icon">
+                    <img src="img/discount.png" style="width: 64px; height: 64px;">
+                </div>
+                <p class="advantage-text">Low prices guaranteed</p>
+            </div>
+            <div class="advantage">
+                <div class="advantage-icon">
+                    <img src="img/clock.png" style="width: 64px; height: 64px;">
+                </div>
+                <p class="advantage-text">Available to you 24/7</p>
+            </div>
+        </div>
+    </section>
 </main>
 <footer>
     <div class="footer-padding">
         <div class="footer-block">
             <h2>Store Location</h2>
-            <ul>
+            <ul class="footer-info">
                 <li>500 Terry Francois Street</li>
                 <li>San Francisco, CA 94158</li>
                 <li>info@mysite.com</li>
@@ -497,8 +529,8 @@
             </div>
         </div>
         <div class="footer-block">
-            <h2>Shop</h2>
-            <ul class="footer-links">
+            <h2 class="collapsible">Shop</h2>
+            <ul class="footer-links content">
                 <a href="#"><li>Shop all</li></a>
                 <a href="#"><li>Computers</li></a>
                 <a href="#"><li>Phones</li></a>
@@ -509,16 +541,16 @@
             </ul>
         </div>
         <div class="footer-block">
-            <h2>Customer support</h2>
-            <ul class="footer-links">
+            <h2 class="collapsible">Customer support</h2>
+            <ul class="footer-links content">
                 <a href="#"><li>Contact us</li></a>
                 <a href="#"><li>FAQ</li></a>
                 <a href="#"><li>About</li></a>
             </ul>
         </div>
         <div class="footer-block">
-            <h2>Policy</h2>
-            <ul class="footer-links">
+            <h2 class="collapsible">Policy</h2>
+            <ul class="footer-links content">
                 <a href="#"><li>Shipping & Returns</li></a>
                 <a href="#"><li>Terms & Conditions</li></a>
                 <a href="#"><li>Payment Methods</li></a>

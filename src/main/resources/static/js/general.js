@@ -14,6 +14,10 @@ window.onclick = function(event) {
     if (event.target == likes) {
         likes.style.display = "none";
     }
+//   if (event.target == nav) {
+// 	navigation.className = 'navigation';
+// 	nav.className = 'nav';
+//   }
 }
 
 'use strict';
@@ -21,6 +25,7 @@ window.onclick = function(event) {
 var search = document.getElementById('search'),
     searchWrapper = document.getElementById('search-wrapper'),
     closeIcon = document.getElementById('close-icon');
+searchSign = document.getElementById('search-sign');
 
 // Input focus
 search.onfocus = function() {
@@ -107,3 +112,60 @@ $(document).ready(function($) {
         }
     });
 });
+
+$(document).ready(function($) {
+    // Declare the body variable
+    var $body = $("body");
+
+    // Function that shows and hides the sidebar cart
+    $(".mobile-icon, #menu-curtain").click(function(e) {
+        e.preventDefault();
+
+        // Add the show-sidebar-cart class to the body tag
+        $body.toggleClass("show-menu");
+
+        // Check if the sidebar curtain is visible
+        if ($("#menu-curtain").is(":visible")) {
+            // Hide the curtain
+            $("#menu-curtain").fadeOut(500);
+        } else {
+            // Show the curtain
+            $("#menu-curtain").fadeIn(500);
+        }
+    });
+});
+
+var coll = document.getElementsByClassName("collapsible");
+var i;
+
+function scale(){
+    var w = document.documentElement.clientWidth;
+    if(w <= 600){
+        for (i = 0; i < coll.length; i++) {
+            coll[i].addEventListener("click", function() {
+                this.classList.toggle("active-faq");
+                var content = this.nextElementSibling;
+                if (content.style.display === "block") {
+                    content.style.display = "none";
+                } else {
+                    content.style.display = "block";
+                }
+            });
+        }
+    }
+}
+window.addEventListener("resize", scale);
+
+scale();
+
+
+// function focusCat(){
+// 	var cat = document.getElementById('menu-category');
+// 	cat.style.maxHeight = "250px";
+// 	cat.style.transition = "transition: max-height 0.5s ease-in;";
+// }
+
+// function blurCat(){
+// 	cat.style.maxHeight = "0px";
+// 	cat.style.transition = "transition: max-height 0.5s ease-in;";
+// }

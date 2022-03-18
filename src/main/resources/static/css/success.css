@@ -15,10 +15,8 @@ nav {
     padding-right: 20px;
     z-index: 2;
     display: flex;
-    /*position: fixed;*/
     background-color: rgb(224, 224, 224);
     padding: 20px 0;
-    right: 0;
 }
 
 .logo {
@@ -49,6 +47,19 @@ header > nav > p {
     font-weight: 600;
 }
 
+@media screen and (max-width: 600px) {
+    .nav {
+        width: inherit;
+        padding: 5px 0;
+    }
+    .logo {
+        margin-left: 10px;
+        font-size: 30px;
+    }
+    header > nav > p {
+        margin-left: 7%;
+    }
+}
 
 .success-container {
     margin-left: 33%;
@@ -114,6 +125,13 @@ header > nav > p {
     background-color: purple;
 }
 
+@media screen and (max-width: 600px) {
+    .success-container{
+        margin: 40px 0;
+        padding: 20px 10px;
+        width: inherit;
+    }
+}
 
 footer {
     position: fixed;
