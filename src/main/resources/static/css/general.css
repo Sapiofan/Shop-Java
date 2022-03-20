@@ -313,7 +313,7 @@ aside#menu {
     height: 100vh;
     z-index: 2;
     top: 0;
-    left: -500px;
+    left: -1000px;
     box-shadow: -10px 0 15px rgba(0, 0, 0, 0.1);
     transition: left 0.5s ease-in-out;
 }
