@@ -1,7 +1,9 @@
 package com.example.shopjava.entities;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -14,9 +16,6 @@ public class User {
     private String name;
 
     @Column(nullable = false)
-    private String surname;
-
-    @Column(nullable = false)
     private String password;
 
     @Column(nullable = false, unique = true)
@@ -25,14 +24,37 @@ public class User {
     @Column(nullable = false)
     private Date createdAt;
 
+    @Column(nullable = false)
+    private Boolean isAdmin;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+    private List<Review> reviews = new ArrayList<>();
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+    private List<Favorite> favorites = new ArrayList<>();
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+    private List<Cart> cartProducts = new ArrayList<>();
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+    private List<Transaction> transactions = new ArrayList<>();
+
     public User(){}
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
+    }
+
+    public Boolean getAdmin() {
+        return isAdmin;
+    }
+
+    public void setAdmin(Boolean admin) {
+        isAdmin = admin;
     }
 
     public String getName() {
@@ -41,14 +63,6 @@ public class User {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getSurname() {
-        return surname;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
     }
 
     public String getPassword() {
@@ -73,5 +87,53 @@ public class User {
 
     public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public List<Review> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(List<Review> reviews) {
+        this.reviews = reviews;
+    }
+
+    public List<Favorite> getFavorites() {
+        return favorites;
+    }
+
+    public void setFavorites(List<Favorite> favorites) {
+        this.favorites = favorites;
+    }
+
+    public List<Cart> getCartProducts() {
+        return cartProducts;
+    }
+
+    public void setCartProducts(List<Cart> cartProducts) {
+        this.cartProducts = cartProducts;
+    }
+
+    public List<Transaction> getTransactions() {
+        return transactions;
+    }
+
+    public void setTransactions(List<Transaction> transactions) {
+        this.transactions = transactions;
+    }
+
+    public void addReview(Review review) {
+        this.reviews.add(review);
+    }
+
+    public void addFavorite(Favorite favorite) {
+        this.favorites.add(favorite);
+    }
+
+    public void addInCart(Cart cartProduct) {
+        this.cartProducts.add(cartProduct);
+    }
+
+    public void addTransaction(Transaction transaction){
+        this.transactions.add(transaction);
     }
 }
