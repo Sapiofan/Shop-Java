@@ -1,6 +1,7 @@
 package com.example.shopjava.entities;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "favorites")
@@ -12,8 +13,13 @@ public class Favorite {
     @ManyToOne(fetch = FetchType.LAZY)
     private User user;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Product product;
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "favorite_products",
+            joinColumns = @JoinColumn(name = "favorite_id"),
+            inverseJoinColumns = @JoinColumn(name = "product_id")
+    )
+    private Set<Product> favoriteProducts;
 
     public Favorite(){}
 
@@ -34,12 +40,11 @@ public class Favorite {
         this.user.addFavorite(this);
     }
 
-    public Product getProduct() {
-        return product;
+    public Set<Product> getFavoriteProducts() {
+        return favoriteProducts;
     }
 
-    public void setProduct(Product product) {
-        this.product = product;
-//        this.product.addFavorite(this);
+    public void setFavoriteProducts(Set<Product> favoriteProducts) {
+        this.favoriteProducts = favoriteProducts;
     }
 }

@@ -1,6 +1,7 @@
 package com.example.shopjava.entities;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "cart")
@@ -18,8 +19,13 @@ public class Cart {
     @ManyToOne(fetch = FetchType.LAZY)
     private User user;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Product product;
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "cart_products",
+            joinColumns = @JoinColumn(name = "card_id"),
+            inverseJoinColumns = @JoinColumn(name = "product_id")
+    )
+    private Set<Product> cartProducts;
 
     public Cart(){}
 
@@ -56,12 +62,24 @@ public class Cart {
         this.user.addInCart(this);
     }
 
-    public Product getProduct() {
-        return product;
+    public Set<Product> getProducts() {
+        return cartProducts;
     }
 
-    public void setProduct(Product product) {
-        this.product = product;
-//        this.product.addFavorite(this);
+    public void setProducts(Set<Product> products) {
+        this.cartProducts = products;
     }
+
+    public Set<Product> getCartProducts() {
+        return cartProducts;
+    }
+
+    //    public Product getProduct() {
+//        return product;
+//    }
+//
+//    public void setProduct(Product product) {
+//        this.product = product;
+////        this.product.addFavorite(this);
+//    }
 }

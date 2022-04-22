@@ -3,19 +3,26 @@ package com.example.shopjava.entities;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "products")
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    // add images of products
 
     @Column(nullable = false)
     private String name;
 
     @Column(nullable = false)
     private Float price;
+
+    @Column(nullable = false)
+    private String brand;
 
     @Column(nullable = false)
     private String payment;
@@ -40,6 +47,12 @@ public class Product {
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "product")
     private List<Review> reviews = new ArrayList<>();
+
+    @ManyToMany(mappedBy = "cartProducts")
+    private Set<Cart> carts;
+
+    @ManyToMany(mappedBy = "favoriteProducts")
+    private Set<Favorite> favorites;
 
 //    @OneToMany(fetch = FetchType.LAZY, mappedBy = "product")
 //    private List<Favorite> favorites = new ArrayList<>();
@@ -70,6 +83,14 @@ public class Product {
 
     public void setPrice(Float price) {
         this.price = price;
+    }
+
+    public String getBrand() {
+        return brand;
+    }
+
+    public void setBrand(String brand) {
+        this.brand = brand;
     }
 
     public String getPayment() {
@@ -127,6 +148,22 @@ public class Product {
     public void setCategory(Category category) {
         this.category = category;
         this.category.addProduct(this);
+    }
+
+    public Set<Cart> getCarts() {
+        return carts;
+    }
+
+    public void setCarts(Set<Cart> carts) {
+        this.carts = carts;
+    }
+
+    public Set<Favorite> getFavorites() {
+        return favorites;
+    }
+
+    public void setFavorites(Set<Favorite> favorites) {
+        this.favorites = favorites;
     }
 
     public List<Review> getReviews() {

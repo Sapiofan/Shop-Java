@@ -1,9 +1,9 @@
 @import url(//db.onlinewebfonts.com/c/b27d4ad5fd7f7c5044c7cbbf2dad758d?family=Imprint+MT+Shadow);
 
-@font-face {
-    font-family: 'Avenir';
-    src: url('../fonts/Avenir.eot?#iefix') format('embedded-opentype'),  url('../fonts/Avenir.woff') format('woff'), url('../fonts/Avenir.ttf')  format('truetype'), url('../fonts/Avenir.svg#Avenir') format('svg');
-}
+/*@font-face {*/
+/*    font-family: 'Avenir';*/
+/*    src: url('../fonts/Avenir.eot?#iefix') format('embedded-opentype'),  url('../fonts/Avenir.woff') format('woff'), url('../fonts/Avenir.ttf')  format('truetype'), url('../fonts/Avenir.svg#Avenir') format('svg');*/
+/*}*/
 
 /*///////////////////////////////////////////
 /////////////// Carousel ////////////////////
@@ -236,6 +236,26 @@ img {
     border-radius: 100%;
     height: 0.5em;
     width: 0.5em;
+}
+
+@media only screen and (max-width: 600px) {
+    .text {
+        width: 50vw;
+    }
+    .red-benefit {
+        font-size: 14px;
+        width: 70px;
+    }
+    .text h1 {
+        font-size: 26px;
+    }
+    .desc-benefit {
+        font-size: 14px;
+    }
+    .slider-button {
+        width: 26vw;
+        height: 10vw;
+    }
 }
 
 /*///////////////////////////////////////////
@@ -585,7 +605,7 @@ img {
         margin: 20px 0;
     }
     .special-img {
-        content: url("img/dron.PNG");
+        content: url("https://static.wixstatic.com/media/c837a6_ecf32c7284d4430582fcc90f60a1b4e6~mv2.png/v1/fill/w_1753,h_750,al_c,q_90,usm_0.66_1.00_0.01/c837a6_ecf32c7284d4430582fcc90f60a1b4e6~mv2.webp");
     }
     .offer-text{
         padding: 20px 0 20px 20px;
