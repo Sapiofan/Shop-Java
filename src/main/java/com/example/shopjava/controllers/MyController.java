@@ -1,5 +1,6 @@
 package com.example.shopjava.controllers;
 
+import com.example.shopjava.entities.Phone;
 import com.example.shopjava.entities.Product;
 import com.example.shopjava.services.FilterProducts;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 @Controller
 public class MyController {
@@ -27,6 +30,11 @@ public class MyController {
         List<? extends Product> products = filterProducts.searchProducts(searchKey);
         model.addAttribute("products", products);
         model.addAttribute("searchKey", searchKey);
+
+        Map<String, List<String>> phoneFilters = filterProducts.getPhoneCharacteristics();
+        Set<String> keys = phoneFilters.keySet();
+        model.addAttribute("filters", phoneFilters);
+        model.addAttribute("filtersKeys", keys);
         return "filters";
     }
 

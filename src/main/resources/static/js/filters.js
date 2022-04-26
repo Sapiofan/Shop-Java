@@ -1,4 +1,4 @@
-var checkList1 = document.getElementById('list1');
+var checkList1 = document.getElementById('Brand');
 var priceRange = document.getElementById('price');
 checkList1.getElementsByClassName('anchor')[0].onclick = function(evt) {
     if (checkList1.classList.contains('visible'))
@@ -14,7 +14,7 @@ priceRange.getElementsByClassName('anchor')[0].onclick = function(evt) {
         priceRange.classList.add('visible');
 }
 
-var checkList2 = document.getElementById('list2');
+var checkList2 = document.getElementById('Built-in memory');
 checkList2.getElementsByClassName('anchor')[0].onclick = function(evt) {
     if (checkList2.classList.contains('visible'))
         checkList2.classList.remove('visible');
@@ -22,13 +22,13 @@ checkList2.getElementsByClassName('anchor')[0].onclick = function(evt) {
         checkList2.classList.add('visible');
 }
 
-var checkList3 = document.getElementById('list3');
-checkList3.getElementsByClassName('anchor')[0].onclick = function(evt) {
-    if (checkList3.classList.contains('visible'))
-        checkList3.classList.remove('visible');
-    else
-        checkList3.classList.add('visible');
-}
+// var checkList3 = document.getElementById('list3');
+// checkList3.getElementsByClassName('anchor')[0].onclick = function(evt) {
+//     if (checkList3.classList.contains('visible'))
+//         checkList3.classList.remove('visible');
+//     else
+//         checkList3.classList.add('visible');
+// }
 
 const rangeInput = document.querySelectorAll(".range-input input"),
     priceInput = document.querySelectorAll(".price-input input"),

@@ -1,3 +1,4 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -308,40 +309,6 @@
                 <hr>
             </div>
             <form action="/filters" method="post" class="filters-blocks">
-                <div id="list1" class="dropdown-check-list">
-                    <span class="anchor">Manufacturers</span>
-                    <ul class="items">
-                        <label class="container1">Xiaomi
-                            <input type="checkbox" checked="checked">
-                            <span class="checkmark"></span>
-                        </label>
-                        <label class="container1">Apple
-                            <input type="checkbox">
-                            <span class="checkmark"></span>
-                        </label>
-                        <label class="container1">Samsung
-                            <input type="checkbox">
-                            <span class="checkmark"></span>
-                        </label>
-                        <label class="container1">Asus
-                            <input type="checkbox">
-                            <span class="checkmark"></span>
-                        </label>
-                        <label class="container1">Acer
-                            <input type="checkbox">
-                            <span class="checkmark"></span>
-                        </label>
-                        <label class="container1">HP
-                            <input type="checkbox">
-                            <span class="checkmark"></span>
-                        </label>
-                        <label class="container1">Dell
-                            <input type="checkbox">
-                            <span class="checkmark"></span>
-                        </label>
-                    </ul>
-                </div>
-                <br>
                 <div id="price" class="dropdown-check-list">
                     <span class="anchor">Price</span>
                     <div class="wrapper">
@@ -363,58 +330,125 @@
                         </div>
                     </div>
                 </div>
-                <br>
-                <div id="list2" class="dropdown-check-list">
-                    <span class="anchor">Display diagonal</span>
-                    <ul class="items">
-                        <label class="container1">10-12"
-                            <input type="checkbox">
-                            <span class="checkmark"></span>
-                        </label>
-                        <label class="container1">13-13.9"
-                            <input type="checkbox">
-                            <span class="checkmark"></span>
-                        </label>
-                        <label class="container1">14-14.9
-                            <input type="checkbox">
-                            <span class="checkmark"></span>
-                        </label>
-                        <label class="container1">15-15.9
-                            <input type="checkbox">
-                            <span class="checkmark"></span>
-                        </label>
-                        <label class="container1">16-16.9
-                            <input type="checkbox">
-                            <span class="checkmark"></span>
-                        </label>
-                        <label class="container1">17-17.9
-                            <input type="checkbox">
-                            <span class="checkmark"></span>
-                        </label>
-                    </ul>
-                </div>
-                <br>
-                <div id="list3" class="dropdown-check-list">
-                    <span class="anchor">RAM</span>
-                    <ul class="items">
-                        <label class="container1">4 GB
-                            <input type="checkbox">
-                            <span class="checkmark"></span>
-                        </label>
-                        <label class="container1">8 GB
-                            <input type="checkbox">
-                            <span class="checkmark"></span>
-                        </label>
-                        <label class="container1">16 GB
-                            <input type="checkbox">
-                            <span class="checkmark"></span>
-                        </label>
-                        <label class="container1">32 GB
-                            <input type="checkbox">
-                            <span class="checkmark"></span>
-                        </label>
-                    </ul>
-                </div>
+                <c:forEach var="filter" items="${filtersKeys}">
+                    <div id="${filter}" class="dropdown-check-list">
+                        <span class="anchor"><c:out value="${filter}"/></span>
+                        <ul class="items">
+                            <c:forEach items="${filters[filter]}" var="item">
+                                <li>
+                                    <label class="container1">${item}
+                                        <input type="checkbox">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </li>
+                            </c:forEach>
+                        </ul>
+                    </div>
+                    <br>
+                </c:forEach>
+
+<%--                <c:forEach var="value" items="${filters.values()}">--%>
+<%--                    Map value: ${value}<br/>--%>
+<%--                </c:forEach>--%>
+
+<%--                        <label class="container1">Apple--%>
+<%--                            <input type="checkbox">--%>
+<%--                            <span class="checkmark"></span>--%>
+<%--                        </label>--%>
+<%--                        <label class="container1">Samsung--%>
+<%--                            <input type="checkbox">--%>
+<%--                            <span class="checkmark"></span>--%>
+<%--                        </label>--%>
+<%--                        <label class="container1">Asus--%>
+<%--                            <input type="checkbox">--%>
+<%--                            <span class="checkmark"></span>--%>
+<%--                        </label>--%>
+<%--                        <label class="container1">Acer--%>
+<%--                            <input type="checkbox">--%>
+<%--                            <span class="checkmark"></span>--%>
+<%--                        </label>--%>
+<%--                        <label class="container1">HP--%>
+<%--                            <input type="checkbox">--%>
+<%--                            <span class="checkmark"></span>--%>
+<%--                        </label>--%>
+<%--                        <label class="container1">Dell--%>
+<%--                            <input type="checkbox">--%>
+<%--                            <span class="checkmark"></span>--%>
+<%--                        </label>--%>
+<%--                <br>--%>
+<%--                <div id="price" class="dropdown-check-list">--%>
+<%--                    <span class="anchor">Price</span>--%>
+<%--                    <div class="wrapper">--%>
+<%--                        <div class="price-input">--%>
+<%--                            <div class="field">--%>
+<%--                                <input type="number" class="input-min" value="0">--%>
+<%--                            </div>--%>
+<%--                            <div class="separator">-</div>--%>
+<%--                            <div class="field">--%>
+<%--                                <input type="number" class="input-max" value="10000">--%>
+<%--                            </div>--%>
+<%--                        </div>--%>
+<%--                        <div class="slider">--%>
+<%--                            <div class="progress"></div>--%>
+<%--                        </div>--%>
+<%--                        <div class="range-input">--%>
+<%--                            <input type="range" class="range-min" min="0" max="10000" value="0" step="100">--%>
+<%--                            <input type="range" class="range-max" min="0" max="10000" value="10000" step="100">--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--                <br>--%>
+<%--                <div id="list2" class="dropdown-check-list">--%>
+<%--                    <span class="anchor">Display diagonal</span>--%>
+<%--                    <ul class="items">--%>
+<%--                        <label class="container1">10-12"--%>
+<%--                            <input type="checkbox">--%>
+<%--                            <span class="checkmark"></span>--%>
+<%--                        </label>--%>
+<%--                        <label class="container1">13-13.9"--%>
+<%--                            <input type="checkbox">--%>
+<%--                            <span class="checkmark"></span>--%>
+<%--                        </label>--%>
+<%--                        <label class="container1">14-14.9--%>
+<%--                            <input type="checkbox">--%>
+<%--                            <span class="checkmark"></span>--%>
+<%--                        </label>--%>
+<%--                        <label class="container1">15-15.9--%>
+<%--                            <input type="checkbox">--%>
+<%--                            <span class="checkmark"></span>--%>
+<%--                        </label>--%>
+<%--                        <label class="container1">16-16.9--%>
+<%--                            <input type="checkbox">--%>
+<%--                            <span class="checkmark"></span>--%>
+<%--                        </label>--%>
+<%--                        <label class="container1">17-17.9--%>
+<%--                            <input type="checkbox">--%>
+<%--                            <span class="checkmark"></span>--%>
+<%--                        </label>--%>
+<%--                    </ul>--%>
+<%--                </div>--%>
+<%--                <br>--%>
+<%--                <div id="list3" class="dropdown-check-list">--%>
+<%--                    <span class="anchor">RAM</span>--%>
+<%--                    <ul class="items">--%>
+<%--                        <label class="container1">4 GB--%>
+<%--                            <input type="checkbox">--%>
+<%--                            <span class="checkmark"></span>--%>
+<%--                        </label>--%>
+<%--                        <label class="container1">8 GB--%>
+<%--                            <input type="checkbox">--%>
+<%--                            <span class="checkmark"></span>--%>
+<%--                        </label>--%>
+<%--                        <label class="container1">16 GB--%>
+<%--                            <input type="checkbox">--%>
+<%--                            <span class="checkmark"></span>--%>
+<%--                        </label>--%>
+<%--                        <label class="container1">32 GB--%>
+<%--                            <input type="checkbox">--%>
+<%--                            <span class="checkmark"></span>--%>
+<%--                        </label>--%>
+<%--                    </ul>--%>
+<%--                </div>--%>
                 <input type="submit" class="filters-button" value="Show">
             </form>
         </div>

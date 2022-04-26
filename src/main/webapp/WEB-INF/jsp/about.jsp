@@ -330,11 +330,11 @@
             <div class="input-blocks">
                 <div class="about-input-block">
                     <p>First Name</p>
-                    <input type="text" class="input">
+                    <input type="text" class="input" required>
                 </div>
                 <div class="about-input-block">
                     <p>Last Name</p>
-                    <input type="text" class="input">
+                    <input type="text" class="input" required>
                 </div>
             </div>
             <div class="input-blocks">
@@ -344,7 +344,7 @@
                 </div>
                 <div class="about-input-block">
                     <p>Phone</p>
-                    <input type="text" class="input">
+                    <input type="text" class="input" required>
                 </div>
             </div>
             <div class="input-blocks">
@@ -360,7 +360,7 @@
                 </div>
                 <div class="about-input-block">
                     <p>Link to Resume</p>
-                    <input type="text" class="input">
+                    <input type="text" class="input" required>
                 </div>
             </div>
             <input type="submit" value="Submit" class="submit">
