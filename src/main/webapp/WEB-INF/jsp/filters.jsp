@@ -1,4 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -54,7 +55,7 @@
         <div class="signs">
             <div id="search-sign" class="sign">
                 <div id="search-wrapper">
-                    <input type="text" id="search" autocomplete="off" placeholder="Search device..." />
+                    <input type="text" value="${searchKey}" id="search" autocomplete="off" placeholder="Search device..." />
                     <div id="close-icon"></div>
                 </div>
             </div>
@@ -337,8 +338,18 @@
                             <c:forEach items="${filters[filter]}" var="item">
                                 <li>
                                     <label class="container1">${item}
-                                        <input type="checkbox">
-                                        <span class="checkmark"></span>
+<%--                                        <c:forEach items="${filterName}" var="name">--%>
+<%--                                            <c:choose>--%>
+<%--                                                <c:when test="${name == item}">--%>
+<%--                                                    <input name="filter-name" type="checkbox" checked>--%>
+<%--                                                    <span class="checkmark"></span>--%>
+<%--                                                </c:when>--%>
+<%--                                                <c:when test="${loop.last && name != item}">--%>
+                                                    <input name="filter-name" type="checkbox">
+                                                    <span class="checkmark"></span>
+<%--                                                </c:when>--%>
+<%--                                            </c:choose>--%>
+<%--                                        </c:forEach>--%>
                                     </label>
                                 </li>
                             </c:forEach>

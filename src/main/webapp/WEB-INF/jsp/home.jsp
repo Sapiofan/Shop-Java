@@ -49,7 +49,7 @@
                 <button class="dropbtn">Categories</button>
                 <div class="dropdown-content">
                     <a href="#">Computers</a>
-                    <a href="#">Phones</a>
+                    <a href="/filters/phones">Phones</a>
                     <a href="#">Tablets</a>
                     <a href="#">Watches</a>
                     <a href="#">Discounts</a>

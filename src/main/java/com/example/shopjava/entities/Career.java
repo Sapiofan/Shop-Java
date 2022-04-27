@@ -1,6 +1,7 @@
 package com.example.shopjava.entities;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name = "career")
@@ -13,15 +14,29 @@ public class Career {
 
     private String last_name;
 
+    @Column(unique = true)
     private String email;
 
+    @Column(unique = true)
     private String phone;
 
     private String position;
 
     private String link;
 
+    private Date sent;
+
     public Career(){}
+
+    public Career(String first_name, String last_name, String email,
+                  String phone, String position, String link){
+        this.first_name = first_name;
+        this.last_name = last_name;
+        this.email = email;
+        this.phone = phone;
+        this.position = position;
+        this.link = link;
+    }
 
     public Long getId() {
         return id;
@@ -77,5 +92,13 @@ public class Career {
 
     public void setLink(String link) {
         this.link = link;
+    }
+
+    public Date getSent() {
+        return sent;
+    }
+
+    public void setSent(Date sent) {
+        this.sent = sent;
     }
 }

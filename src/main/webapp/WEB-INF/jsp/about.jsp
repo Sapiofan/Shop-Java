@@ -24,6 +24,7 @@
     <link rel="stylesheet" href="/css/about.css">
     <link rel="stylesheet" href="/css/general.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.js"></script>
 </head>
 <body>
 <header>
@@ -326,31 +327,31 @@
     <section id="career">
         <h2>Careers</h2>
         <p class="postings">Check out our job postings & opportunities waiting for you</p>
-        <form action="#" class="career-form">
+        <form action="/about" method="post" class="career-form">
             <div class="input-blocks">
                 <div class="about-input-block">
                     <p>First Name</p>
-                    <input type="text" class="input" required>
+                    <input name="fname" type="text" class="input" required>
                 </div>
                 <div class="about-input-block">
                     <p>Last Name</p>
-                    <input type="text" class="input" required>
+                    <input name="lname" type="text" class="input" required>
                 </div>
             </div>
             <div class="input-blocks">
                 <div class="about-input-block">
                     <p>Email *</p>
-                    <input type="email" class="input" required />
+                    <input name="email" type="email" class="input" required />
                 </div>
                 <div class="about-input-block">
                     <p>Phone</p>
-                    <input type="text" class="input" required>
+                    <input name="phone" type="text" class="input" required>
                 </div>
             </div>
             <div class="input-blocks">
                 <div class="about-input-block">
                     <p>Position You Apply For</p>
-                    <select class="input" id="positions">
+                    <select name="pos" class="input" id="positions">
                         <option value="in-store-sales">In-store Sales</option>
                         <option value="store-leadership">Store Leadership</option>
                         <option value="in-store-operations">In-store Operations</option>
@@ -360,7 +361,7 @@
                 </div>
                 <div class="about-input-block">
                     <p>Link to Resume</p>
-                    <input type="text" class="input" required>
+                    <input name="link" type="text" class="input" required>
                 </div>
             </div>
             <input type="submit" value="Submit" class="submit">
@@ -417,7 +418,14 @@
         <p>2022 © by SmartShop. Proudly created by Alexey Lytovchenko.</p>
     </div>
 </footer>
-
 <script src="/js/general.js"></script>
 </body>
+<script type="text/javascript">
+    window.onload = function() {
+        var al = "${result}";
+        if(al !== ""){
+            alert(al);
+        }
+    }
+</script>
 </html>

@@ -321,32 +321,32 @@
                     <h4>We're here to help!</h4>
                     <p>Fill out the form with any quarry on your mind and we'll get back to you as soon as possible</p>
                 </div>
-                <form action="#">
+                <form action="/contact" method="post">
                     <div class="input-blocks">
                         <div class="about-input-block mar">
                             <p>First Name</p>
-                            <input type="text" class="input">
+                            <input name="fname" type="text" class="input">
                         </div>
                         <div class="about-input-block">
                             <p>Last Name</p>
-                            <input type="text" class="input">
+                            <input name="lname" type="text" class="input">
                         </div>
                     </div>
                     <div class="input-blocks">
                         <div class="about-input-block mar">
                             <p>Email *</p>
-                            <input type="email" class="input" required />
+                            <input name="email" type="email" class="input" required />
                         </div>
                         <div class="about-input-block">
                             <p>Subject</p>
-                            <input type="text" class="input">
+                            <input name="subject" type="text" class="input">
                         </div>
                     </div>
                     <div class="area">
                         <p>Message</p>
-                        <textarea class="input textarea"></textarea>
+                        <textarea name="message" class="input textarea"></textarea>
                     </div>
-                    <input type="submit" value="Submit" class="submit">
+                    <input type="submit" name="form" value="Submit" class="submit">
                 </form>
             </div>
         </div>
@@ -354,9 +354,9 @@
     <section id="letters">
         <h1>Newsletter</h1>
         <p>Sign up to receive updates on new arrivals and special offers</p>
-        <form action="#">
-            <input class="email-news" type="email" placeholder="Your email here">
-            <input class="email-submit" type="submit" value="Subscribe">
+        <form action="/contact" method="post">
+            <input class="email-news" name="email" type="email" placeholder="Your email here">
+            <input class="email-submit" name="subs" type="submit" value="Subscribe">
         </form>
     </section>
 </main>
@@ -412,4 +412,12 @@
 </footer>
 <script src="/js/general.js"></script>
 </body>
+<script type="text/javascript">
+    window.onload = function() {
+        var al = "${result}";
+        if(al !== ""){
+            alert(al);
+        }
+    }
+</script>
 </html>
