@@ -1,10 +1,12 @@
 package com.example.shopjava.controllers;
 
 import com.example.shopjava.entities.Career;
+import com.example.shopjava.entities.FAQ;
 import com.example.shopjava.entities.contacts.Contact;
 import com.example.shopjava.entities.Product;
 import com.example.shopjava.services.CareerService;
 import com.example.shopjava.services.ContactService;
+import com.example.shopjava.services.FaqService;
 import com.example.shopjava.services.FilterProducts;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,6 +30,9 @@ public class MyController {
 
     @Autowired
     private ContactService contactService;
+
+    @Autowired
+    private FaqService faqService;
 
     private static final Logger log = LoggerFactory.getLogger("log");
 
@@ -124,6 +129,8 @@ public class MyController {
 
     @GetMapping("/help")
     public String getHelpPage(Model model){
+        List<FAQ> faqs = faqService.getFaqs();
+        model.addAttribute("faqs", faqs);
         return "help";
     }
 

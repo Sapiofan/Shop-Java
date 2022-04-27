@@ -1,3 +1,4 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -357,12 +358,14 @@
     <section id="faq">
         <h1>Frequently Asked Questions</h1>
         <div class="questions">
-            <div class="question">
-                <button type="button" class="collapsible1">Lorem ipsum dolor sit amet?</button>
-                <div class="content1">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            <c:forEach items="${faqs}" var="faq">
+                <div class="question">
+                    <button type="button" class="collapsible1">${faq.question}</button>
+                    <div class="content1">
+                        <p>${faq.answer}</p>
+                    </div>
                 </div>
-            </div>
+            </c:forEach>
             <div class="question">
                 <button type="button" class="collapsible1">Lorem ipsum dolor sit amet?</button>
                 <div class="content1">
