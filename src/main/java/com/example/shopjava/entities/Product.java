@@ -6,9 +6,9 @@ import java.util.List;
 import java.util.Set;
 
 @Entity
-@Table(name = "products")
+//@Table(name = "products")
 @Inheritance(strategy = InheritanceType.JOINED)
-public class Product {
+public abstract class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -60,6 +60,22 @@ public class Product {
     // Like favorites the same with cart
 
     public Product(){}
+
+    public Product(String name, Float price, String brand, String payment, Float rating, Integer discount, String gifts, Boolean isAvailable, Integer warranty, Category category, List<Review> reviews, Set<Cart> carts, Set<Favorite> favorites) {
+        this.name = name;
+        this.price = price;
+        this.brand = brand;
+        this.payment = payment;
+        this.rating = rating;
+        this.discount = discount;
+        this.gifts = gifts;
+        this.isAvailable = isAvailable;
+        this.warranty = warranty;
+        this.category = category;
+        this.reviews = reviews;
+        this.carts = carts;
+        this.favorites = favorites;
+    }
 
     public Long getId() {
         return id;

@@ -335,23 +335,23 @@
                     <div id="${filter}" class="dropdown-check-list">
                         <span class="anchor"><c:out value="${filter}"/></span>
                         <ul class="items">
+                            <%boolean flag = false;%>
                             <c:forEach items="${filters[filter]}" var="item">
-                                <li>
                                     <label class="container1">${item}
-<%--                                        <c:forEach items="${filterName}" var="name">--%>
-<%--                                            <c:choose>--%>
-<%--                                                <c:when test="${name == item}">--%>
-<%--                                                    <input name="filter-name" type="checkbox" checked>--%>
-<%--                                                    <span class="checkmark"></span>--%>
-<%--                                                </c:when>--%>
-<%--                                                <c:when test="${loop.last && name != item}">--%>
-                                                    <input name="filter-name" type="checkbox">
+                                        <c:forEach items="${filterName}" var="name">
+                                            <c:choose>
+                                                <c:when test="${name == item}">
+                                                    <input name="filter-name" type="checkbox" value="${item}" checked>
                                                     <span class="checkmark"></span>
-<%--                                                </c:when>--%>
-<%--                                            </c:choose>--%>
-<%--                                        </c:forEach>--%>
+                                                    <%flag = true;%>
+                                                </c:when>
+                                            </c:choose>
+                                        </c:forEach>
+                                        <%if(!flag){%>
+                                        <input name="filter-name" type="checkbox" value="${item}">
+                                        <span class="checkmark"></span>
+                                        <%}%>
                                     </label>
-                                </li>
                             </c:forEach>
                         </ul>
                     </div>
@@ -481,6 +481,41 @@
                 </div>
             </div>
             <div class="product-list">
+<%--                <c:forEach items="products" var="product">--%>
+<%--                    <div class="product-card">--%>
+<%--                        <a href="/${product.category.name}/${product.name}">--%>
+<%--                            <div class="card-image">--%>
+<%--                                <img src="${product.image}" class="product-img">--%>
+<%--                            </div>--%>
+<%--                        </a>--%>
+<%--                        <div class="right-desc">--%>
+<%--                            <a href="/${product.category.name}/${product.name}">--%>
+<%--                                <div class="product-name">--%>
+<%--                                    <p>${product.name}</p>--%>
+<%--                                </div>--%>
+<%--                            </a>--%>
+<%--                            <div class="card-signs">--%>
+<%--                                <div class="Stars" style="--rating: ${product.rating};"></div>--%>
+<%--                                <img src="img/chat-bubble.png" style="width: 20px; height: 20px; margin-right: 10px;">--%>
+<%--                                <img src="img/heart.png" style="width: 20px; height: 20px; margin-right: 10px;">--%>
+<%--                            </div>--%>
+<%--                            <div class="buy-elements">--%>
+<%--                                <div class="price">--%>
+<%--                                    <c:choose>--%>
+<%--                                        <c:when test="${product.discount != 0}">--%>
+<%--                                            <div class="pre-price">${product.price}</div>--%>
+<%--                                            <div class="cur-price">${product.price(product.price*product.discount/100)}</div>--%>
+<%--                                        </c:when>--%>
+<%--                                        <c:otherwise>--%>
+<%--                                            <div class="cur-price">900$</div>--%>
+<%--                                        </c:otherwise>--%>
+<%--                                    </c:choose>--%>
+<%--                                </div>--%>
+<%--                                <button class="add-product">Buy</button>--%>
+<%--                            </div>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                </c:forEach>--%>
                 <div class="product-card">
                     <div class="card-image">
                         <img src="https://i.allo.ua/media/catalog/product/cache/1/small_image/212x184/9df78eab33525d08d6e5fb8d27136e95/g/p/gpbhkuvzj61_1.jpg" class="product-img">
@@ -531,29 +566,7 @@
                     </div>
                     <div class="right-desc">
                         <div class="product-name">
-                            <p>Xiaomi RedmiBookPro 14 i5/16/512/2.5К</p>
-                        </div>
-                        <div class="card-signs">
-                            <div class="Stars" style="--rating: 3.5;"></div>
-                            <img src="img/chat-bubble.png" style="width: 20px; height: 20px; margin-right: 10px;">
-                            <img src="img/heart.png" style="width: 20px; height: 20px; margin-right: 10px;">
-                        </div>
-                        <div class="buy-elements">
-                            <div class="price">
-                                <div class="pre-price">950$</div>
-                                <div class="cur-price">900$</div>
-                            </div>
-                            <button class="add-product">Buy</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="product-card">
-                    <div class="card-image">
-                        <img src="https://i.allo.ua/media/catalog/product/cache/1/small_image/212x184/9df78eab33525d08d6e5fb8d27136e95/g/p/gpbhkuvzj61_1.jpg" class="product-img">
-                    </div>
-                    <div class="right-desc">
-                        <div class="product-name">
-                            <p>Xiaomi RedmiBookPro 14 i5/16/512/2.5К</p>
+                            <p>Xiaomi RedmiBookPro 14 i5/16/512/2.5K</p>
                         </div>
                         <div class="card-signs">
                             <div class="Stars" style="--rating: 3.5;"></div>

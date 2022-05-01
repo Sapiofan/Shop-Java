@@ -39,27 +39,27 @@
         <div class="success-text">
             <div class="success-child">
                 <p class="general-success">Bank</p>
-                <p class="certain-success">Privat24</p>
+                <p class="certain-success">${transaction.bank}</p>
                 <div style="clear: both;"></div>
             </div>
             <div class="success-child">
                 <p class="general-success">Mobile</p>
-                <p class="certain-success">050 111 1111</p>
+                <p class="certain-success">${transaction.mobile}</p>
                 <div style="clear: both;"></div>
             </div>
             <div class="success-child">
                 <p class="general-success">Email</p>
-                <p class="certain-success">somemail@gmail.com</p>
+                <p class="certain-success">${transaction.email}</p>
                 <div style="clear: both;"></div>
             </div>
             <div class="success-child">
                 <p class="general-success">Transaction Id</p>
-                <p class="certain-success">3827148329</p>
+                <p class="certain-success">${transaction.id}</p>
                 <div style="clear: both;"></div>
             </div>
             <div class="success-child">
                 <p class="general-success bold">Amount paid</p>
-                <p class="certain-success bold">18 000.00</p>
+                <p class="certain-success bold">${transaction.amount}</p>
                 <div style="clear: both;"></div>
             </div>
         </div>

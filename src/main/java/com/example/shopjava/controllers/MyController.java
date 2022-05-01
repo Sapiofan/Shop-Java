@@ -2,6 +2,7 @@ package com.example.shopjava.controllers;
 
 import com.example.shopjava.entities.Career;
 import com.example.shopjava.entities.FAQ;
+import com.example.shopjava.entities.Phone;
 import com.example.shopjava.entities.contacts.Contact;
 import com.example.shopjava.entities.Product;
 import com.example.shopjava.services.CareerService;
@@ -52,6 +53,7 @@ public class MyController {
         LinkedHashSet<String> filters = new LinkedHashSet<>();
         filters.add("");
 
+
         model.addAttribute("filters", phoneFilters);
         model.addAttribute("filtersKeys", keys);
         model.addAttribute("filterName",filters);
@@ -62,9 +64,11 @@ public class MyController {
     public String getFilters(Model model, @RequestParam("filter-name") LinkedHashSet<String> filters){
         Map<String, List<String>> phoneFilters = filterProducts.getPhoneCharacteristics();
         Set<String> keys = phoneFilters.keySet();
-        Iterator<String> itr = filters.iterator(); // traversing over HashSet System.out.println("Traversing over Set using Iterator"); while(itr.hasNext()){ System.out.println(itr.next()); }
-        while(itr.hasNext()){ log.info(itr.next()); }
-
+        List<? extends Product> products = filterProducts.phones(filters, phoneFilters);
+        for (Product phone : products) {
+            log.info(phone.getName());
+        }
+        model.addAttribute("products", products);
         model.addAttribute("filterName",filters);
         model.addAttribute("filters", phoneFilters);
         model.addAttribute("filtersKeys", keys);

@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -382,40 +383,51 @@
         <div class="about-product">
             <div class="general-info">
                 <div class="general-info-text">
-                    <p>Are available</p>
-                    <div class="discount-price">
-                        <p class="old-price">37 000</p>
-                        <p class="profit">-8000</p>
-                    </div>
-                    <div class="price-now">
-                        29 000$
-                    </div>
+                    <c:if test="${product.is_available}">
+                        <p>Are available</p>
+                    </c:if>
+                    <c:if test="${!product.is_available}">
+                        <p>Not available</p>
+                    </c:if>
+                    <c:if test="${product.discount != 0}">
+                        <div class="discount-price">
+                            <p class="old-price">${product.price}</p>
+                            <p class="profit">-${product.price*product.discount/100}</p>
+                        </div>
+                        <div class="price-now">
+                            ${product.price-(product.price*product.discount/100)}
+                        </div>
+                    </c:if>
                 </div>
                 <button class="add-to-cart">Buy</button>
                 <div class="like-container">
                     <img src="img/heart.png" style="width: 32px; height: 32px;">
                 </div>
             </div>
-            <div class="discounts">
-                <h6>Discounts and Stocks</h6>
-                <div class="discount-type">
-                    <img src="/img/badge.png" width="30px" height="30px">
-                    <p><span class="bold-text">Discount</span> Benefit up to 8000 UAH</p>
+            <c:if test="${product.discount != 0 || product.gifts != ''}">
+                <div class="discounts">
+                    <h6>Discounts and Stocks</h6>
+                    <c:if test="${product.discount != 0}">
+                        <div class="discount-type">
+                            <img src="/img/badge.png" width="30px" height="30px">
+                            <p><span class="bold-text">Discount</span> Benefit up to ${product.price*product.discount/100} UAH</p>
+                        </div>
+                    </c:if>
+                    <div class="discount-type">
+                        <img src="img/shipping.png" width="30px" height="30px">
+                        <p><span class="bold-text">Gifts</span> ${product.gifts}</p>
+                    </div>
                 </div>
-                <div class="discount-type">
-                    <img src="img/shipping.png" width="30px" height="30px">
-                    <p><span class="bold-text">Gifts</span> Earphones as a gift</p>
-                </div>
-            </div>
+            </c:if>
             <div class="payment">
                 <h6>Payment</h6>
-                <p>Cash, Non-cash, VISA/Mastercard</p>
+                <p>${product.payment}</p>
             </div>
             <div class="exchange">
                 <h6>Exchange/Return</h6>
                 <p>Exchange and return of goods is carried out within 14 days after the purchase,
                     in accordance with the law of Ukraine "On the Protection of Consumer Rights of Ukraine"</p>
-                <p>Warranty: 12 months</p>
+                <p>Warranty: ${product.warranty} months</p>
             </div>
         </div>
     </section>

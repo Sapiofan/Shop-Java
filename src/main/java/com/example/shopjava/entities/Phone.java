@@ -1,6 +1,8 @@
 package com.example.shopjava.entities;
 
 import javax.persistence.*;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "phones")
@@ -46,6 +48,24 @@ public class Phone extends Product{
     private Integer screen_refresh;
 
     public Phone(){}
+
+    public Phone(String name, Float price, String brand, String payment, Float rating, Integer discount, String gifts, Boolean isAvailable, Integer warranty, Category category, List<Review> reviews, Set<Cart> carts, Set<Favorite> favorites, String series, String built_in_memory, Boolean RAM_slot, Integer CPU, String os, Boolean NFC, String sc_diagonal, Boolean biometric_security, String main_camera, String front_camera, String battery, Boolean wireless_charger, Integer cores, Integer screen_refresh) {
+        super(name, price, brand, payment, rating, discount, gifts, isAvailable, warranty, category, reviews, carts, favorites);
+        this.series = series;
+        this.built_in_memory = built_in_memory;
+        this.RAM_slot = RAM_slot;
+        this.CPU = CPU;
+        this.os = os;
+        this.NFC = NFC;
+        this.sc_diagonal = sc_diagonal;
+        this.biometric_security = biometric_security;
+        this.main_camera = main_camera;
+        this.front_camera = front_camera;
+        this.battery = battery;
+        this.wireless_charger = wireless_charger;
+        this.cores = cores;
+        this.screen_refresh = screen_refresh;
+    }
 
     public String getSeries() {
         return series;
