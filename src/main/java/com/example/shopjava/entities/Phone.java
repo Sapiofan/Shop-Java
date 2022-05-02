@@ -49,8 +49,13 @@ public class Phone extends Product{
 
     public Phone(){}
 
-    public Phone(String name, Float price, String brand, String payment, Float rating, Integer discount, String gifts, Boolean isAvailable, Integer warranty, Category category, List<Review> reviews, Set<Cart> carts, Set<Favorite> favorites, String series, String built_in_memory, Boolean RAM_slot, Integer CPU, String os, Boolean NFC, String sc_diagonal, Boolean biometric_security, String main_camera, String front_camera, String battery, Boolean wireless_charger, Integer cores, Integer screen_refresh) {
-        super(name, price, brand, payment, rating, discount, gifts, isAvailable, warranty, category, reviews, carts, favorites);
+    public Phone(String image, String name, Float price, String brand, String payment, Float rating,
+                 Integer discount, String gifts, Boolean isAvailable, Integer warranty, Category category,
+                 List<Review> reviews, Set<Cart> carts, Set<Favorite> favorites, String series, String built_in_memory,
+                 Boolean RAM_slot, Integer CPU, String os, Boolean NFC, String sc_diagonal, Boolean biometric_security,
+                 String main_camera, String front_camera, String battery, Boolean wireless_charger, Integer cores,
+                 Integer screen_refresh) {
+        super(image, name, price, brand, payment, rating, discount, gifts, isAvailable, warranty, category, reviews, carts, favorites);
         this.series = series;
         this.built_in_memory = built_in_memory;
         this.RAM_slot = RAM_slot;

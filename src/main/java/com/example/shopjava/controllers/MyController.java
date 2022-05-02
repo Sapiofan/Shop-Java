@@ -5,6 +5,7 @@ import com.example.shopjava.entities.FAQ;
 import com.example.shopjava.entities.Phone;
 import com.example.shopjava.entities.contacts.Contact;
 import com.example.shopjava.entities.Product;
+import com.example.shopjava.repos.Utils;
 import com.example.shopjava.services.CareerService;
 import com.example.shopjava.services.ContactService;
 import com.example.shopjava.services.FaqService;
@@ -35,6 +36,9 @@ public class MyController {
     @Autowired
     private FaqService faqService;
 
+    @Autowired
+    private Utils utils;
+
     private static final Logger log = LoggerFactory.getLogger("log");
 
     @GetMapping("/")
@@ -42,7 +46,7 @@ public class MyController {
         return "home";
     }
 
-    @GetMapping("/filters")
+    @GetMapping("/searching")
     public String filtersPage(Model model, @RequestParam("search") String searchKey){
         List<? extends Product> products = filterProducts.searchProducts(searchKey);
         model.addAttribute("products", products);
@@ -51,7 +55,6 @@ public class MyController {
         Map<String, List<String>> phoneFilters = filterProducts.getPhoneCharacteristics();
         Set<String> keys = phoneFilters.keySet();
         LinkedHashSet<String> filters = new LinkedHashSet<>();
-        filters.add("");
 
 
         model.addAttribute("filters", phoneFilters);
@@ -60,18 +63,51 @@ public class MyController {
         return "filters";
     }
 
-    @PostMapping("/filters")
+    @PostMapping("/searching")
     public String getFilters(Model model, @RequestParam("filter-name") LinkedHashSet<String> filters){
         Map<String, List<String>> phoneFilters = filterProducts.getPhoneCharacteristics();
         Set<String> keys = phoneFilters.keySet();
         List<? extends Product> products = filterProducts.phones(filters, phoneFilters);
-        for (Product phone : products) {
-            log.info(phone.getName());
-        }
+
         model.addAttribute("products", products);
         model.addAttribute("filterName",filters);
         model.addAttribute("filters", phoneFilters);
         model.addAttribute("filtersKeys", keys);
+        return "filters";
+    }
+
+    @GetMapping("/phones")
+    public String phoneFilters(Model model){
+        List<Phone> phones = filterProducts.getAllPhones();
+        Map<String, List<String>> phoneFilters = filterProducts.getPhoneCharacteristics();
+        Set<String> keys = phoneFilters.keySet();
+        LinkedHashSet<String> filters = new LinkedHashSet<>();
+
+
+        model.addAttribute("category", "Phones");
+        model.addAttribute("filters", phoneFilters);
+        model.addAttribute("filtersKeys", keys);
+        model.addAttribute("filterName",filters);
+        model.addAttribute("products", phones);
+        model.addAttribute("min", (int) Math.floor(utils.min(phones).getPrice()));
+        model.addAttribute("max", (int) Math.floor(utils.max(phones).getPrice()));
+        return "filters";
+    }
+
+    @PostMapping("/phones")
+    public String phoneFiltersPost(Model model, @RequestParam("filter-name") LinkedHashSet<String> filters,
+                                   @RequestParam("input-min") Integer min, @RequestParam("input-max") Integer max){
+        Map<String, List<String>> phoneFilters = filterProducts.getPhoneCharacteristics();
+        Set<String> keys = phoneFilters.keySet();
+        List<Phone> phones = filterProducts.phones(filters, phoneFilters);
+
+        model.addAttribute("category", "Phones");
+        model.addAttribute("filters", phoneFilters);
+        model.addAttribute("filtersKeys", keys);
+        model.addAttribute("filterName",filters);
+        model.addAttribute("products", phones);
+        model.addAttribute("min", (int) Math.floor(utils.min(phones).getPrice()));
+        model.addAttribute("max", (int) Math.floor(utils.max(phones).getPrice()));
         return "filters";
     }
 

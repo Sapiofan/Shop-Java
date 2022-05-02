@@ -3,17 +3,19 @@ package com.example.shopjava.entities;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
-//@Table(name = "products")
+@Table(name = "products")
 @Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // add images of products
+    @Column(nullable = false)
+    private String image;
 
     @Column(nullable = false)
     private String name;
@@ -42,7 +44,7 @@ public abstract class Product {
     @Column(nullable = false)
     private Integer warranty;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     private Category category;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "product")
@@ -61,7 +63,10 @@ public abstract class Product {
 
     public Product(){}
 
-    public Product(String name, Float price, String brand, String payment, Float rating, Integer discount, String gifts, Boolean isAvailable, Integer warranty, Category category, List<Review> reviews, Set<Cart> carts, Set<Favorite> favorites) {
+    public Product(String image, String name, Float price, String brand, String payment, Float rating,
+                   Integer discount, String gifts, Boolean isAvailable, Integer warranty, Category category,
+                   List<Review> reviews, Set<Cart> carts, Set<Favorite> favorites) {
+        this.image = image;
         this.name = name;
         this.price = price;
         this.brand = brand;
@@ -91,6 +96,14 @@ public abstract class Product {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public Float getPrice() {
@@ -197,4 +210,18 @@ public abstract class Product {
 //    public void addFavorite(Favorite favorite){
 //        this.favorites.add(favorite);
 //    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Product product = (Product) o;
+        return Objects.equals(id, product.id) && Objects.equals(name, product.name) && Objects.equals(price, product.price) && Objects.equals(brand, product.brand) && Objects.equals(payment, product.payment) && Objects.equals(rating, product.rating) && Objects.equals(discount, product.discount) && Objects.equals(gifts, product.gifts) && Objects.equals(isAvailable, product.isAvailable) && Objects.equals(warranty, product.warranty) && Objects.equals(category, product.category) && Objects.equals(reviews, product.reviews) && Objects.equals(carts, product.carts) && Objects.equals(favorites, product.favorites);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, price, brand, payment, rating, discount, gifts, isAvailable, warranty, category, reviews, carts, favorites);
+    }
 }

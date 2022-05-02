@@ -13,4 +13,6 @@ public interface FilterProducts {
     Map<String, List<String>> getPhoneCharacteristics();
 
     List<Phone> phones(Set<String> filters, Map<String, List<String>> fullFilters);
+
+    List<Phone> getAllPhones();
 }

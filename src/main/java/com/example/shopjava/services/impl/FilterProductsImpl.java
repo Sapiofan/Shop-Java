@@ -43,7 +43,14 @@ public class FilterProductsImpl implements FilterProducts {
     }
 
     @Override
+    @Transactional
     public List<Phone> phones(Set<String> filters, Map<String, List<String>> fullFilters) {
         return filterProductsRepo.filterPhones(filters, fullFilters);
+    }
+
+    @Override
+    @Transactional
+    public List<Phone> getAllPhones(){
+        return phoneRepository.findAll();
     }
 }

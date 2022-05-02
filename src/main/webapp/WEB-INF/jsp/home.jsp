@@ -49,7 +49,7 @@
                 <button class="dropbtn">Categories</button>
                 <div class="dropdown-content">
                     <a href="#">Computers</a>
-                    <a href="/filters/phones">Phones</a>
+                    <a href="/phones">Phones</a>
                     <a href="#">Tablets</a>
                     <a href="#">Watches</a>
                     <a href="#">Discounts</a>
@@ -62,7 +62,7 @@
         </div>
         <div class="signs">
             <div id="search-sign" class="sign">
-                <form action="/filters" method="get">
+                <form action="/searching" method="get">
                     <div id="search-wrapper">
                         <input type="text" name="search" id="search" autocomplete="off" placeholder="Search device..." />
                         <div id="close-icon"></div>

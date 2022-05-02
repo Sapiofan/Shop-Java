@@ -1,8 +1,8 @@
 package com.example.shopjava.entities;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "laptops")
@@ -61,6 +61,35 @@ public class Laptop extends Product {
     private Boolean touch_screen;
 
     public Laptop(){}
+
+    public Laptop(String image, String name, Float price, String brand, String payment, Float rating,
+                  Integer discount, String gifts, Boolean isAvailable, Integer warranty, Category category,
+                  List<Review> reviews, Set<Cart> carts, Set<Favorite> favorites, String device_type, String sc_diagonal,
+                  String processor_manufacturer, Integer cores, String processor_series, Integer RAM, String drive_type,
+                  String discrete_graphics, String series, String inst_os, Integer storage, Integer screen_refresh,
+                  String matrix_type, String color, Integer video_size, String optical_drive, String sc_resolution,
+                  Float weight, Boolean touch_screen) {
+        super(image, name, price, brand, payment, rating, discount, gifts, isAvailable, warranty, category, reviews, carts, favorites);
+        this.device_type = device_type;
+        this.sc_diagonal = sc_diagonal;
+        this.processor_manufacturer = processor_manufacturer;
+        this.cores = cores;
+        this.processor_series = processor_series;
+        this.RAM = RAM;
+        this.drive_type = drive_type;
+        this.discrete_graphics = discrete_graphics;
+        this.series = series;
+        this.inst_os = inst_os;
+        this.storage = storage;
+        this.screen_refresh = screen_refresh;
+        this.matrix_type = matrix_type;
+        this.color = color;
+        this.video_size = video_size;
+        this.optical_drive = optical_drive;
+        this.sc_resolution = sc_resolution;
+        this.weight = weight;
+        this.touch_screen = touch_screen;
+    }
 
     public String getDevice_type() {
         return device_type;

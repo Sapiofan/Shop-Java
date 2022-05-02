@@ -40,8 +40,13 @@ public class Filters {
         built_in_memory.add("128 GB");
         built_in_memory.add("256 GB and more");
 
+        List<String> os = new ArrayList<>();
+        os.add("Android");
+        os.add("iOS");
+
         phoneCharacteristics.put("Brand", brands);
         phoneCharacteristics.put("Built-in memory", built_in_memory);
+        phoneCharacteristics.put("OS", os);
     }
 
 }

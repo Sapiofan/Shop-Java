@@ -22,33 +22,6 @@ public class FilterProductsRepoImpl implements FilterProductsRepo {
 
     @Override
     public List<Phone> filterPhones(Set<String> filters, Map<String, List<String>> fullFilters) {
-//        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
-//        CriteriaQuery<Phone> query = cb.createQuery(Phone.class);
-//        Root<Phone> phone = query.from(Phone.class);
-//
-//        Path<String> seriesPath = phone.get("series");
-//        Path<String> builtMemoryPath = phone.get("built_in_memory");
-//
-//        List<Predicate> predicatesSeries = new ArrayList<>();
-//        for (String s : filters) {
-//            predicatesSeries.add(cb.like(seriesPath, s));
-//        }
-//
-//        List<Predicate> predicatesBuiltMemory = new ArrayList<>();
-//        for (String m : filters) {
-//            predicatesBuiltMemory.add(cb.like(builtMemoryPath, m));
-//        }
-//
-//        Predicate seriesP = cb.or(predicatesSeries.toArray(new Predicate[predicatesSeries.size()]));
-//
-//        Predicate BuiltMemoryP = cb.or(predicatesBuiltMemory.toArray(new Predicate[predicatesSeries.size()]));
-//
-//        Predicate finalPredicate = cb.and(seriesP, BuiltMemoryP);
-//
-//        query.select(phone)
-//                .where(finalPredicate);
-
-
 
         String init, query = init = "select p from Phone p where";
         for(Map.Entry<String, List<String>> entry : fullFilters.entrySet()){
@@ -63,17 +36,21 @@ public class FilterProductsRepoImpl implements FilterProductsRepo {
                 }
             }
             if(!init.equals(query)) {
-                query = query.substring(0, query.length() - 2) + " and";
+                String[] arr1 = query.split(" ");
+                String[] arr2 = Arrays.copyOfRange(arr1, 0, arr1.length - 1);
+                query = String.join(" ", arr2) + " and";
             }
         }
         if(init.equals(query)){
             query = "select p from Phone p";
         }
         else {
-            query = query.substring(0, query.length() - 5);
+            String[] arr1 = query.split(" ");
+            String[] arr2 = Arrays.copyOfRange(arr1, 0, arr1.length - 1);
+            query = String.join(" ", arr2);
         }
         log.info(query);
 
-        return (List<Phone>) entityManager.createQuery(query).getResultList();
+        return entityManager.createQuery(query).getResultList();
     }
 }

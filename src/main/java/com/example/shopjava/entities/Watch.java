@@ -1,8 +1,8 @@
 package com.example.shopjava.entities;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "watches")
@@ -48,6 +48,28 @@ public class Watch extends Product{
     private String display_diagonal;
 
     public Watch(){}
+
+    public Watch(String image, String name, Float price, String brand, String payment, Float rating, Integer discount,
+                 String gifts, Boolean isAvailable, Integer warranty, Category category, List<Review> reviews,
+                 Set<Cart> carts, Set<Favorite> favorites, String series, String purpose, String display_shape,
+                 Boolean touch_screen, Boolean waterproof, Boolean call_support, Boolean music_control,
+                 Boolean pulse_measurement, Boolean step_counting, Boolean sleep_monitoring, String color,
+                 Boolean working_hours, String display_diagonal) {
+        super(image, name, price, brand, payment, rating, discount, gifts, isAvailable, warranty, category, reviews, carts, favorites);
+        this.series = series;
+        this.purpose = purpose;
+        this.display_shape = display_shape;
+        this.touch_screen = touch_screen;
+        this.waterproof = waterproof;
+        this.call_support = call_support;
+        this.music_control = music_control;
+        this.pulse_measurement = pulse_measurement;
+        this.step_counting = step_counting;
+        this.sleep_monitoring = sleep_monitoring;
+        this.color = color;
+        this.working_hours = working_hours;
+        this.display_diagonal = display_diagonal;
+    }
 
     public String getSeries() {
         return series;

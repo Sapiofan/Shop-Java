@@ -300,7 +300,7 @@
     <div id="sidebar-cart-curtain"></div>
 </header>
 <main class="main">
-    <h1>Tablets</h1>
+    <h1>${category}</h1>
     <article>
         <div class="aside" id="filters">
             <div class="head-filters">
@@ -315,19 +315,19 @@
                     <div class="wrapper">
                         <div class="price-input">
                             <div class="field">
-                                <input type="number" class="input-min" value="0">
+                                <input type="number" class="input-min" value="${min}">
                             </div>
                             <div class="separator">-</div>
                             <div class="field">
-                                <input type="number" class="input-max" value="10000">
+                                <input type="number" class="input-max" value="${max}">
                             </div>
                         </div>
                         <div class="slider">
                             <div class="progress"></div>
                         </div>
                         <div class="range-input">
-                            <input type="range" class="range-min" min="0" max="10000" value="0" step="100">
-                            <input type="range" class="range-max" min="0" max="10000" value="10000" step="100">
+                            <input type="range" class="range-min" min="${min}" max="${max}" value="${min}" step="100">
+                            <input type="range" class="range-max" min="${min}" max="${max}" value="${max}" step="100">
                         </div>
                     </div>
                 </div>
@@ -481,195 +481,195 @@
                 </div>
             </div>
             <div class="product-list">
-<%--                <c:forEach items="products" var="product">--%>
-<%--                    <div class="product-card">--%>
-<%--                        <a href="/${product.category.name}/${product.name}">--%>
-<%--                            <div class="card-image">--%>
-<%--                                <img src="${product.image}" class="product-img">--%>
+                <c:forEach items="${products}" var="product">
+                    <div class="product-card">
+                        <a href="/${product.category.name}/${product.name}">
+                            <div class="card-image">
+                                <img src="${product.image}" class="product-img">
+                            </div>
+                        </a>
+                        <div class="right-desc">
+                            <a href="/${product.category.name}/${product.name}" class="product-link">
+                                <div class="product-name">
+                                    <p>${product.name}</p>
+                                </div>
+                            </a>
+                            <div class="card-signs">
+                                <div class="Stars" style="--rating: ${product.rating};"></div>
+                                <img src="img/chat-bubble.png" style="width: 20px; height: 20px; margin-right: 10px;">
+                                <img src="img/heart.png" style="width: 20px; height: 20px; margin-right: 10px;">
+                            </div>
+                            <div class="buy-elements">
+                                <div class="price">
+                                    <c:choose>
+                                        <c:when test="${product.discount != 0}">
+                                            <div class="pre-price">${product.price}</div>
+                                            <div class="cur-price">${product.price-(product.price*product.discount/100)}</div>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <div class="cur-price">${product.price}</div>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </div>
+                                <button class="add-product">Buy</button>
+                            </div>
+                        </div>
+                    </div>
+                </c:forEach>
+<%--                <div class="product-card">--%>
+<%--                    <div class="card-image">--%>
+<%--                        <img src="https://i.allo.ua/media/catalog/product/cache/1/small_image/212x184/9df78eab33525d08d6e5fb8d27136e95/g/p/gpbhkuvzj61_1.jpg" class="product-img">--%>
+<%--                    </div>--%>
+<%--                    <div class="right-desc">--%>
+<%--                        <div class="product-name">--%>
+<%--                            <p>Xiaomi RedmiBookPro 14 i5/16/512/2.5К</p>--%>
+<%--                        </div>--%>
+<%--                        <div class="card-signs">--%>
+<%--                            <div class="Stars" style="--rating: 3.5;"></div>--%>
+<%--                            <img src="img/chat-bubble.png" style="width: 20px; height: 20px; margin-right: 10px;">--%>
+<%--                            <img src="img/heart.png" style="width: 20px; height: 20px; margin-right: 10px;">--%>
+<%--                        </div>--%>
+<%--                        <div class="buy-elements">--%>
+<%--                            <div class="price">--%>
+<%--                                <div class="pre-price">950$</div>--%>
+<%--                                <div class="cur-price">900$</div>--%>
 <%--                            </div>--%>
-<%--                        </a>--%>
-<%--                        <div class="right-desc">--%>
-<%--                            <a href="/${product.category.name}/${product.name}">--%>
-<%--                                <div class="product-name">--%>
-<%--                                    <p>${product.name}</p>--%>
-<%--                                </div>--%>
-<%--                            </a>--%>
-<%--                            <div class="card-signs">--%>
-<%--                                <div class="Stars" style="--rating: ${product.rating};"></div>--%>
-<%--                                <img src="img/chat-bubble.png" style="width: 20px; height: 20px; margin-right: 10px;">--%>
-<%--                                <img src="img/heart.png" style="width: 20px; height: 20px; margin-right: 10px;">--%>
-<%--                            </div>--%>
-<%--                            <div class="buy-elements">--%>
-<%--                                <div class="price">--%>
-<%--                                    <c:choose>--%>
-<%--                                        <c:when test="${product.discount != 0}">--%>
-<%--                                            <div class="pre-price">${product.price}</div>--%>
-<%--                                            <div class="cur-price">${product.price(product.price*product.discount/100)}</div>--%>
-<%--                                        </c:when>--%>
-<%--                                        <c:otherwise>--%>
-<%--                                            <div class="cur-price">900$</div>--%>
-<%--                                        </c:otherwise>--%>
-<%--                                    </c:choose>--%>
-<%--                                </div>--%>
-<%--                                <button class="add-product">Buy</button>--%>
-<%--                            </div>--%>
+<%--                            <button class="add-product">Buy</button>--%>
 <%--                        </div>--%>
 <%--                    </div>--%>
-<%--                </c:forEach>--%>
-                <div class="product-card">
-                    <div class="card-image">
-                        <img src="https://i.allo.ua/media/catalog/product/cache/1/small_image/212x184/9df78eab33525d08d6e5fb8d27136e95/g/p/gpbhkuvzj61_1.jpg" class="product-img">
-                    </div>
-                    <div class="right-desc">
-                        <div class="product-name">
-                            <p>Xiaomi RedmiBookPro 14 i5/16/512/2.5К</p>
-                        </div>
-                        <div class="card-signs">
-                            <div class="Stars" style="--rating: 3.5;"></div>
-                            <img src="img/chat-bubble.png" style="width: 20px; height: 20px; margin-right: 10px;">
-                            <img src="img/heart.png" style="width: 20px; height: 20px; margin-right: 10px;">
-                        </div>
-                        <div class="buy-elements">
-                            <div class="price">
-                                <div class="pre-price">950$</div>
-                                <div class="cur-price">900$</div>
-                            </div>
-                            <button class="add-product">Buy</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="product-card">
-                    <div class="card-image">
-                        <img src="https://i.allo.ua/media/catalog/product/cache/1/small_image/212x184/9df78eab33525d08d6e5fb8d27136e95/g/p/gpbhkuvzj61_1.jpg" class="product-img">
-                    </div>
-                    <div class="right-desc">
-                        <div class="product-name">
-                            <p>Xiaomi RedmiBookPro 14 i5/16/512/2.5К</p>
-                        </div>
-                        <div class="card-signs">
-                            <div class="Stars" style="--rating: 3.5;"></div>
-                            <img src="img/chat-bubble.png" style="width: 20px; height: 20px; margin-right: 10px;">
-                            <img src="img/heart.png" style="width: 20px; height: 20px; margin-right: 10px;">
-                        </div>
-                        <div class="buy-elements">
-                            <div class="price">
-                                <div class="pre-price">950$</div>
-                                <div class="cur-price">900$</div>
-                            </div>
-                            <button class="add-product">Buy</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="product-card">
-                    <div class="card-image">
-                        <img src="https://i.allo.ua/media/catalog/product/cache/1/small_image/212x184/9df78eab33525d08d6e5fb8d27136e95/g/p/gpbhkuvzj61_1.jpg" class="product-img">
-                    </div>
-                    <div class="right-desc">
-                        <div class="product-name">
-                            <p>Xiaomi RedmiBookPro 14 i5/16/512/2.5K</p>
-                        </div>
-                        <div class="card-signs">
-                            <div class="Stars" style="--rating: 3.5;"></div>
-                            <img src="img/chat-bubble.png" style="width: 20px; height: 20px; margin-right: 10px;">
-                            <img src="img/heart.png" style="width: 20px; height: 20px; margin-right: 10px;">
-                        </div>
-                        <div class="buy-elements">
-                            <div class="price">
-                                <div class="pre-price">950$</div>
-                                <div class="cur-price">900$</div>
-                            </div>
-                            <button class="add-product">Buy</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="product-card">
-                    <div class="card-image">
-                        <img src="https://i.allo.ua/media/catalog/product/cache/1/small_image/212x184/9df78eab33525d08d6e5fb8d27136e95/g/p/gpbhkuvzj61_1.jpg" class="product-img">
-                    </div>
-                    <div class="right-desc">
-                        <div class="product-name">
-                            <p>Xiaomi RedmiBookPro 14 i5/16/512/2.5К</p>
-                        </div>
-                        <div class="card-signs">
-                            <div class="Stars" style="--rating: 3.5;"></div>
-                            <img src="img/chat-bubble.png" style="width: 20px; height: 20px; margin-right: 10px;">
-                            <img src="img/heart.png" style="width: 20px; height: 20px; margin-right: 10px;">
-                        </div>
-                        <div class="buy-elements">
-                            <div class="price">
-                                <div class="pre-price">950$</div>
-                                <div class="cur-price">900$</div>
-                            </div>
-                            <button class="add-product">Buy</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="product-card">
-                    <div class="card-image">
-                        <img src="https://i.allo.ua/media/catalog/product/cache/1/small_image/212x184/9df78eab33525d08d6e5fb8d27136e95/g/p/gpbhkuvzj61_1.jpg" class="product-img">
-                    </div>
-                    <div class="right-desc">
-                        <div class="product-name">
-                            <p>Xiaomi RedmiBookPro 14 i5/16/512/2.5К</p>
-                        </div>
-                        <div class="card-signs">
-                            <div class="Stars" style="--rating: 3.5;"></div>
-                            <img src="img/chat-bubble.png" style="width: 20px; height: 20px; margin-right: 10px;">
-                            <img src="img/heart.png" style="width: 20px; height: 20px; margin-right: 10px;">
-                        </div>
-                        <div class="buy-elements">
-                            <div class="price">
-                                <div class="pre-price">950$</div>
-                                <div class="cur-price">900$</div>
-                            </div>
-                            <button class="add-product">Buy</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="product-card">
-                    <div class="card-image">
-                        <img src="https://i.allo.ua/media/catalog/product/cache/1/small_image/212x184/9df78eab33525d08d6e5fb8d27136e95/g/p/gpbhkuvzj61_1.jpg" class="product-img">
-                    </div>
-                    <div class="right-desc">
-                        <div class="product-name">
-                            <p>Xiaomi RedmiBookPro 14 i5/16/512/2.5К</p>
-                        </div>
-                        <div class="card-signs">
-                            <div class="Stars" style="--rating: 3.5;"></div>
-                            <img src="img/chat-bubble.png" style="width: 20px; height: 20px; margin-right: 10px;">
-                            <img src="img/heart.png" style="width: 20px; height: 20px; margin-right: 10px;">
-                        </div>
-                        <div class="buy-elements">
-                            <div class="price">
-                                <div class="pre-price">950$</div>
-                                <div class="cur-price">900$</div>
-                            </div>
-                            <button class="add-product">Buy</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="product-card">
-                    <div class="card-image">
-                        <img src="https://i.allo.ua/media/catalog/product/cache/1/small_image/212x184/9df78eab33525d08d6e5fb8d27136e95/g/p/gpbhkuvzj61_1.jpg" class="product-img">
-                    </div>
-                    <div class="right-desc">
-                        <div class="product-name">
-                            <p>Xiaomi RedmiBookPro 14 i5/16/512/2.5К</p>
-                        </div>
-                        <div class="card-signs">
-                            <div class="Stars" style="--rating: 3.5;"></div>
-                            <img src="img/chat-bubble.png" style="width: 20px; height: 20px; margin-right: 10px;">
-                            <img src="img/heart.png" style="width: 20px; height: 20px; margin-right: 10px;">
-                        </div>
-                        <div class="buy-elements">
-                            <div class="price">
-                                <div class="pre-price">950$</div>
-                                <div class="cur-price">900$</div>
-                            </div>
-                            <button class="add-product">Buy</button>
-                        </div>
-                    </div>
-                </div>
+<%--                </div>--%>
+<%--                <div class="product-card">--%>
+<%--                    <div class="card-image">--%>
+<%--                        <img src="https://i.allo.ua/media/catalog/product/cache/1/small_image/212x184/9df78eab33525d08d6e5fb8d27136e95/g/p/gpbhkuvzj61_1.jpg" class="product-img">--%>
+<%--                    </div>--%>
+<%--                    <div class="right-desc">--%>
+<%--                        <div class="product-name">--%>
+<%--                            <p>Xiaomi RedmiBookPro 14 i5/16/512/2.5К</p>--%>
+<%--                        </div>--%>
+<%--                        <div class="card-signs">--%>
+<%--                            <div class="Stars" style="--rating: 3.5;"></div>--%>
+<%--                            <img src="img/chat-bubble.png" style="width: 20px; height: 20px; margin-right: 10px;">--%>
+<%--                            <img src="img/heart.png" style="width: 20px; height: 20px; margin-right: 10px;">--%>
+<%--                        </div>--%>
+<%--                        <div class="buy-elements">--%>
+<%--                            <div class="price">--%>
+<%--                                <div class="pre-price">950$</div>--%>
+<%--                                <div class="cur-price">900$</div>--%>
+<%--                            </div>--%>
+<%--                            <button class="add-product">Buy</button>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--                <div class="product-card">--%>
+<%--                    <div class="card-image">--%>
+<%--                        <img src="https://i.allo.ua/media/catalog/product/cache/1/small_image/212x184/9df78eab33525d08d6e5fb8d27136e95/g/p/gpbhkuvzj61_1.jpg" class="product-img">--%>
+<%--                    </div>--%>
+<%--                    <div class="right-desc">--%>
+<%--                        <div class="product-name">--%>
+<%--                            <p>Xiaomi RedmiBookPro 14 i5/16/512/2.5K</p>--%>
+<%--                        </div>--%>
+<%--                        <div class="card-signs">--%>
+<%--                            <div class="Stars" style="--rating: 3.5;"></div>--%>
+<%--                            <img src="img/chat-bubble.png" style="width: 20px; height: 20px; margin-right: 10px;">--%>
+<%--                            <img src="img/heart.png" style="width: 20px; height: 20px; margin-right: 10px;">--%>
+<%--                        </div>--%>
+<%--                        <div class="buy-elements">--%>
+<%--                            <div class="price">--%>
+<%--                                <div class="pre-price">950$</div>--%>
+<%--                                <div class="cur-price">900$</div>--%>
+<%--                            </div>--%>
+<%--                            <button class="add-product">Buy</button>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--                <div class="product-card">--%>
+<%--                    <div class="card-image">--%>
+<%--                        <img src="https://i.allo.ua/media/catalog/product/cache/1/small_image/212x184/9df78eab33525d08d6e5fb8d27136e95/g/p/gpbhkuvzj61_1.jpg" class="product-img">--%>
+<%--                    </div>--%>
+<%--                    <div class="right-desc">--%>
+<%--                        <div class="product-name">--%>
+<%--                            <p>Xiaomi RedmiBookPro 14 i5/16/512/2.5К</p>--%>
+<%--                        </div>--%>
+<%--                        <div class="card-signs">--%>
+<%--                            <div class="Stars" style="--rating: 3.5;"></div>--%>
+<%--                            <img src="img/chat-bubble.png" style="width: 20px; height: 20px; margin-right: 10px;">--%>
+<%--                            <img src="img/heart.png" style="width: 20px; height: 20px; margin-right: 10px;">--%>
+<%--                        </div>--%>
+<%--                        <div class="buy-elements">--%>
+<%--                            <div class="price">--%>
+<%--                                <div class="pre-price">950$</div>--%>
+<%--                                <div class="cur-price">900$</div>--%>
+<%--                            </div>--%>
+<%--                            <button class="add-product">Buy</button>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--                <div class="product-card">--%>
+<%--                    <div class="card-image">--%>
+<%--                        <img src="https://i.allo.ua/media/catalog/product/cache/1/small_image/212x184/9df78eab33525d08d6e5fb8d27136e95/g/p/gpbhkuvzj61_1.jpg" class="product-img">--%>
+<%--                    </div>--%>
+<%--                    <div class="right-desc">--%>
+<%--                        <div class="product-name">--%>
+<%--                            <p>Xiaomi RedmiBookPro 14 i5/16/512/2.5К</p>--%>
+<%--                        </div>--%>
+<%--                        <div class="card-signs">--%>
+<%--                            <div class="Stars" style="--rating: 3.5;"></div>--%>
+<%--                            <img src="img/chat-bubble.png" style="width: 20px; height: 20px; margin-right: 10px;">--%>
+<%--                            <img src="img/heart.png" style="width: 20px; height: 20px; margin-right: 10px;">--%>
+<%--                        </div>--%>
+<%--                        <div class="buy-elements">--%>
+<%--                            <div class="price">--%>
+<%--                                <div class="pre-price">950$</div>--%>
+<%--                                <div class="cur-price">900$</div>--%>
+<%--                            </div>--%>
+<%--                            <button class="add-product">Buy</button>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--                <div class="product-card">--%>
+<%--                    <div class="card-image">--%>
+<%--                        <img src="https://i.allo.ua/media/catalog/product/cache/1/small_image/212x184/9df78eab33525d08d6e5fb8d27136e95/g/p/gpbhkuvzj61_1.jpg" class="product-img">--%>
+<%--                    </div>--%>
+<%--                    <div class="right-desc">--%>
+<%--                        <div class="product-name">--%>
+<%--                            <p>Xiaomi RedmiBookPro 14 i5/16/512/2.5К</p>--%>
+<%--                        </div>--%>
+<%--                        <div class="card-signs">--%>
+<%--                            <div class="Stars" style="--rating: 3.5;"></div>--%>
+<%--                            <img src="img/chat-bubble.png" style="width: 20px; height: 20px; margin-right: 10px;">--%>
+<%--                            <img src="img/heart.png" style="width: 20px; height: 20px; margin-right: 10px;">--%>
+<%--                        </div>--%>
+<%--                        <div class="buy-elements">--%>
+<%--                            <div class="price">--%>
+<%--                                <div class="pre-price">950$</div>--%>
+<%--                                <div class="cur-price">900$</div>--%>
+<%--                            </div>--%>
+<%--                            <button class="add-product">Buy</button>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--                <div class="product-card">--%>
+<%--                    <div class="card-image">--%>
+<%--                        <img src="https://i.allo.ua/media/catalog/product/cache/1/small_image/212x184/9df78eab33525d08d6e5fb8d27136e95/g/p/gpbhkuvzj61_1.jpg" class="product-img">--%>
+<%--                    </div>--%>
+<%--                    <div class="right-desc">--%>
+<%--                        <div class="product-name">--%>
+<%--                            <p>Xiaomi RedmiBookPro 14 i5/16/512/2.5К</p>--%>
+<%--                        </div>--%>
+<%--                        <div class="card-signs">--%>
+<%--                            <div class="Stars" style="--rating: 3.5;"></div>--%>
+<%--                            <img src="img/chat-bubble.png" style="width: 20px; height: 20px; margin-right: 10px;">--%>
+<%--                            <img src="img/heart.png" style="width: 20px; height: 20px; margin-right: 10px;">--%>
+<%--                        </div>--%>
+<%--                        <div class="buy-elements">--%>
+<%--                            <div class="price">--%>
+<%--                                <div class="pre-price">950$</div>--%>
+<%--                                <div class="cur-price">900$</div>--%>
+<%--                            </div>--%>
+<%--                            <button class="add-product">Buy</button>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
             </div>
         </section>
     </article>
