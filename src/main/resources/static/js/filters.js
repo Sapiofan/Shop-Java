@@ -1,39 +1,22 @@
-var checkList1 = document.getElementById('Brand');
-var priceRange = document.getElementById('price');
-checkList1.getElementsByClassName('anchor')[0].onclick = function(evt) {
-    if (checkList1.classList.contains('visible'))
-        checkList1.classList.remove('visible');
-    else
-        checkList1.classList.add('visible');
-}
+var coll = document.getElementsByClassName("dropdown-check-list");
+var i;
 
-priceRange.getElementsByClassName('anchor')[0].onclick = function(evt) {
-    if (priceRange.classList.contains('visible'))
-        priceRange.classList.remove('visible');
-    else
-        priceRange.classList.add('visible');
+for (i = 0; i < coll.length; i++) {
+    coll[i].addEventListener("click", function() {
+        this.classList.toggle("visible");
+        var content = this.nextElementSibling;
+        if (content.style.display === "block") {
+            content.style.display = "none";
+        } else {
+            content.style.display = "block";
+        }
+    });
 }
-
-var checkList2 = document.getElementById('Built-in memory');
-checkList2.getElementsByClassName('anchor')[0].onclick = function(evt) {
-    if (checkList2.classList.contains('visible'))
-        checkList2.classList.remove('visible');
-    else
-        checkList2.classList.add('visible');
-}
-
-// var checkList3 = document.getElementById('list3');
-// checkList3.getElementsByClassName('anchor')[0].onclick = function(evt) {
-//     if (checkList3.classList.contains('visible'))
-//         checkList3.classList.remove('visible');
-//     else
-//         checkList3.classList.add('visible');
-// }
 
 const rangeInput = document.querySelectorAll(".range-input input"),
     priceInput = document.querySelectorAll(".price-input input"),
     range = document.querySelector(".slider .progress");
-let priceGap = 2000;
+let priceGap = 3000;
 priceInput.forEach(input =>{
     input.addEventListener("input", e =>{
         let minPrice = parseInt(priceInput[0].value),
@@ -68,3 +51,10 @@ rangeInput.forEach(input =>{
         }
     });
 });
+
+window.onload = ev => {
+    let minPrice = parseInt(priceInput[0].value),
+        maxPrice = parseInt(priceInput[1].value);
+    range.style.left = ((minPrice / rangeInput[0].max) * 100) + "%";
+    range.style.right = 100 - (maxPrice / rangeInput[1].max) * 100 + "%";
+}

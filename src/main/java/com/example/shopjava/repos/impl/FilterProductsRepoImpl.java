@@ -1,7 +1,7 @@
 package com.example.shopjava.repos.impl;
 
+import com.example.shopjava.entities.Laptop;
 import com.example.shopjava.entities.Phone;
-import com.example.shopjava.entities.Product;
 import com.example.shopjava.repos.FilterProductsRepo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,7 +9,6 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.criteria.*;
 import java.util.*;
 
 @Repository
@@ -21,36 +20,81 @@ public class FilterProductsRepoImpl implements FilterProductsRepo {
     private static final Logger log = LoggerFactory.getLogger("log");
 
     @Override
-    public List<Phone> filterPhones(Set<String> filters, Map<String, List<String>> fullFilters) {
+    public List<Phone> filterPhones(Set<String> filters, Map<String, List<String>> fullFilters, Integer min, Integer max) {
 
-        String init, query = init = "select p from Phone p where";
-        for(Map.Entry<String, List<String>> entry : fullFilters.entrySet()){
-            List<String> list = entry.getValue();
-            String key = entry.getKey().toLowerCase().replace('-','_');
-            key = key.replace(' ','_');
-            for (String filter : filters) {
-                for (String s : list) {
-                    if(filter.equals(s)){
-                        query += " p." + key + "='" + filter + "' or";
+
+//        String init, query = init = "select p from Phone p where p.price between " + min + " and " + max + " and";
+        String query = generateQuery("Phone", filters, fullFilters, min, max);
+//        if(filters != null){
+//            for(Map.Entry<String, List<String>> entry : fullFilters.entrySet()){
+//                List<String> list = entry.getValue();
+//                String key = entry.getKey().toLowerCase().replace('-','_');
+//                key = key.replace(' ','_');
+//                for (String filter : filters) {
+//                    for (String s : list) {
+//                        if(filter.equals(s)){
+//                            query += " p." + key + "='" + filter + "' or";
+//                        }
+//                    }
+//                }
+//                if(!init.equals(query)) {
+//                    String[] arr1 = query.split(" ");
+//                    String[] arr2 = Arrays.copyOfRange(arr1, 0, arr1.length - 1);
+//                    query = String.join(" ", arr2) + " and";
+//                }
+//            }
+//        }
+//        if(init.equals(query)){
+//            query = "select p from Phone p where p.price between " + min + " and " + max;
+//        }
+//        else {
+//            String[] arr1 = query.split(" ");
+//            String[] arr2 = Arrays.copyOfRange(arr1, 0, arr1.length - 1);
+//            query = String.join(" ", arr2);
+//        }
+        log.info(query);
+
+        return entityManager.createQuery(query).getResultList();
+    }
+
+    @Override
+    public List<Laptop> filterLaptops(Set<String> filters, Map<String, List<String>> fullFilters, Integer min, Integer max) {
+        String query = generateQuery("Laptop", filters, fullFilters, min, max);
+        log.info(query);
+
+        return entityManager.createQuery(query).getResultList();
+    }
+
+    private String generateQuery(String table, Set<String> filters, Map<String, List<String>> fullFilters,
+                                 Integer min, Integer max) {
+        String init, query = init = "select p from " + table + " p where p.price between " + min + " and " + max + " and";
+        if(filters != null){
+            for(Map.Entry<String, List<String>> entry : fullFilters.entrySet()){
+                List<String> list = entry.getValue();
+                String key = entry.getKey().toLowerCase().replace('-','_');
+                key = key.replace(' ','_');
+                for (String filter : filters) {
+                    for (String s : list) {
+                        if(filter.equals(s)){
+                            query += " p." + key + "='" + filter + "' or";
+                        }
                     }
                 }
-            }
-            if(!init.equals(query)) {
-                String[] arr1 = query.split(" ");
-                String[] arr2 = Arrays.copyOfRange(arr1, 0, arr1.length - 1);
-                query = String.join(" ", arr2) + " and";
+                if(!init.equals(query)) {
+                    String[] arr1 = query.split(" ");
+                    String[] arr2 = Arrays.copyOfRange(arr1, 0, arr1.length - 1);
+                    query = String.join(" ", arr2) + " and";
+                }
             }
         }
         if(init.equals(query)){
-            query = "select p from Phone p";
+            query = "select p from " + table + " p where p.price between " + min + " and " + max;
         }
         else {
             String[] arr1 = query.split(" ");
             String[] arr2 = Arrays.copyOfRange(arr1, 0, arr1.length - 1);
             query = String.join(" ", arr2);
         }
-        log.info(query);
-
-        return entityManager.createQuery(query).getResultList();
+        return query;
     }
 }

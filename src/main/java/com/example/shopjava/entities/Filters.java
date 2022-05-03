@@ -49,4 +49,31 @@ public class Filters {
         phoneCharacteristics.put("OS", os);
     }
 
+    public void initLaptopChars() {
+        List<String> brands = new ArrayList<>();
+        brands.add("Apple");
+        brands.add("Acer");
+        brands.add("Lenovo");
+        brands.add("Asus");
+        brands.add("HP");
+        brands.add("Dell");
+        brands.add("Huawei");
+        brands.add("MSI");
+
+        List<String> deviceTypes = new ArrayList<>();
+        deviceTypes.add("Gaming");
+        deviceTypes.add("Ultra-thin");
+        deviceTypes.add("Thin");
+        deviceTypes.add("Transformer");
+
+        List<String> processorManufacturers = new ArrayList<>();
+        processorManufacturers.add("Intel");
+        processorManufacturers.add("AMD");
+        processorManufacturers.add("Apple");
+
+        laptopCharacteristics.put("Brand", brands);
+        laptopCharacteristics.put("Device type", deviceTypes);
+        laptopCharacteristics.put("Processor manufacturer", processorManufacturers);
+    }
+
 }

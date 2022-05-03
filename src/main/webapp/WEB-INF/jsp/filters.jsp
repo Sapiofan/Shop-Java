@@ -1,5 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -300,6 +300,7 @@
     <div id="sidebar-cart-curtain"></div>
 </header>
 <main class="main">
+    <form action="/${fn:toLowerCase(category)}" method="post" class="filters-blocks">
     <h1>${category}</h1>
     <article>
         <div class="aside" id="filters">
@@ -309,25 +310,24 @@
                         document.body.style.overflowY = 'auto';" class="close close-f">&times;</span>
                 <hr>
             </div>
-            <form action="/filters" method="post" class="filters-blocks">
-                <div id="price" class="dropdown-check-list">
-                    <span class="anchor">Price</span>
+                <div id="price">
+                    <span class="price-header">Price</span>
                     <div class="wrapper">
                         <div class="price-input">
                             <div class="field">
-                                <input type="number" class="input-min" value="${min}">
+                                <input type="number" name="input-min" class="input-min" value="${minValue}">
                             </div>
                             <div class="separator">-</div>
                             <div class="field">
-                                <input type="number" class="input-max" value="${max}">
+                                <input type="number" name="input-max" class="input-max" value="${maxValue}">
                             </div>
                         </div>
                         <div class="slider">
                             <div class="progress"></div>
                         </div>
                         <div class="range-input">
-                            <input type="range" class="range-min" min="${min}" max="${max}" value="${min}" step="100">
-                            <input type="range" class="range-max" min="${min}" max="${max}" value="${max}" step="100">
+                            <input type="range" class="range-min" min="0" max="${max}" value="${minValue}" step="500">
+                            <input type="range" class="range-max" min="0" max="${max}" value="${maxValue}" step="500">
                         </div>
                     </div>
                 </div>
@@ -350,129 +350,26 @@
                                         <%if(!flag){%>
                                         <input name="filter-name" type="checkbox" value="${item}">
                                         <span class="checkmark"></span>
-                                        <%}%>
+                                        <%} flag = false;%>
                                     </label>
                             </c:forEach>
                         </ul>
                     </div>
                     <br>
                 </c:forEach>
-
-<%--                <c:forEach var="value" items="${filters.values()}">--%>
-<%--                    Map value: ${value}<br/>--%>
-<%--                </c:forEach>--%>
-
-<%--                        <label class="container1">Apple--%>
-<%--                            <input type="checkbox">--%>
-<%--                            <span class="checkmark"></span>--%>
-<%--                        </label>--%>
-<%--                        <label class="container1">Samsung--%>
-<%--                            <input type="checkbox">--%>
-<%--                            <span class="checkmark"></span>--%>
-<%--                        </label>--%>
-<%--                        <label class="container1">Asus--%>
-<%--                            <input type="checkbox">--%>
-<%--                            <span class="checkmark"></span>--%>
-<%--                        </label>--%>
-<%--                        <label class="container1">Acer--%>
-<%--                            <input type="checkbox">--%>
-<%--                            <span class="checkmark"></span>--%>
-<%--                        </label>--%>
-<%--                        <label class="container1">HP--%>
-<%--                            <input type="checkbox">--%>
-<%--                            <span class="checkmark"></span>--%>
-<%--                        </label>--%>
-<%--                        <label class="container1">Dell--%>
-<%--                            <input type="checkbox">--%>
-<%--                            <span class="checkmark"></span>--%>
-<%--                        </label>--%>
-<%--                <br>--%>
-<%--                <div id="price" class="dropdown-check-list">--%>
-<%--                    <span class="anchor">Price</span>--%>
-<%--                    <div class="wrapper">--%>
-<%--                        <div class="price-input">--%>
-<%--                            <div class="field">--%>
-<%--                                <input type="number" class="input-min" value="0">--%>
-<%--                            </div>--%>
-<%--                            <div class="separator">-</div>--%>
-<%--                            <div class="field">--%>
-<%--                                <input type="number" class="input-max" value="10000">--%>
-<%--                            </div>--%>
-<%--                        </div>--%>
-<%--                        <div class="slider">--%>
-<%--                            <div class="progress"></div>--%>
-<%--                        </div>--%>
-<%--                        <div class="range-input">--%>
-<%--                            <input type="range" class="range-min" min="0" max="10000" value="0" step="100">--%>
-<%--                            <input type="range" class="range-max" min="0" max="10000" value="10000" step="100">--%>
-<%--                        </div>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
-<%--                <br>--%>
-<%--                <div id="list2" class="dropdown-check-list">--%>
-<%--                    <span class="anchor">Display diagonal</span>--%>
-<%--                    <ul class="items">--%>
-<%--                        <label class="container1">10-12"--%>
-<%--                            <input type="checkbox">--%>
-<%--                            <span class="checkmark"></span>--%>
-<%--                        </label>--%>
-<%--                        <label class="container1">13-13.9"--%>
-<%--                            <input type="checkbox">--%>
-<%--                            <span class="checkmark"></span>--%>
-<%--                        </label>--%>
-<%--                        <label class="container1">14-14.9--%>
-<%--                            <input type="checkbox">--%>
-<%--                            <span class="checkmark"></span>--%>
-<%--                        </label>--%>
-<%--                        <label class="container1">15-15.9--%>
-<%--                            <input type="checkbox">--%>
-<%--                            <span class="checkmark"></span>--%>
-<%--                        </label>--%>
-<%--                        <label class="container1">16-16.9--%>
-<%--                            <input type="checkbox">--%>
-<%--                            <span class="checkmark"></span>--%>
-<%--                        </label>--%>
-<%--                        <label class="container1">17-17.9--%>
-<%--                            <input type="checkbox">--%>
-<%--                            <span class="checkmark"></span>--%>
-<%--                        </label>--%>
-<%--                    </ul>--%>
-<%--                </div>--%>
-<%--                <br>--%>
-<%--                <div id="list3" class="dropdown-check-list">--%>
-<%--                    <span class="anchor">RAM</span>--%>
-<%--                    <ul class="items">--%>
-<%--                        <label class="container1">4 GB--%>
-<%--                            <input type="checkbox">--%>
-<%--                            <span class="checkmark"></span>--%>
-<%--                        </label>--%>
-<%--                        <label class="container1">8 GB--%>
-<%--                            <input type="checkbox">--%>
-<%--                            <span class="checkmark"></span>--%>
-<%--                        </label>--%>
-<%--                        <label class="container1">16 GB--%>
-<%--                            <input type="checkbox">--%>
-<%--                            <span class="checkmark"></span>--%>
-<%--                        </label>--%>
-<%--                        <label class="container1">32 GB--%>
-<%--                            <input type="checkbox">--%>
-<%--                            <span class="checkmark"></span>--%>
-<%--                        </label>--%>
-<%--                    </ul>--%>
-<%--                </div>--%>
                 <input type="submit" class="filters-button" value="Show">
-            </form>
+
         </div>
         <section id="products">
             <div class="sort-part">
                 <p class="sort-text">Show:</p>
-                <select id="sort" class="sort">
-                    <option class="sort-choose">By popularity</option>
-                    <option class="sort-choose">From cheap to expensive</option>
-                    <option class="sort-choose">From expensive to cheap</option>
-                    <option class="sort-choose">Novelties</option>
-                    <option class="sort-choose">By name</option>
-                </select>
+                    <select name="sort" onchange="submit()" id="sort" class="sort">
+                        <option id="popularity" class="sort-choose">By popularity</option>
+                        <option id="fcte" class="sort-choose">From cheap to expensive</option>
+                        <option id="fetc" class="sort-choose">From expensive to cheap</option>
+                        <option id="novelties" class="sort-choose">Novelties</option>
+                        <option id="bn" class="sort-choose">By name</option>
+                    </select>
                 <div class="filters-icon">
                     <button onclick="document.getElementById('filters').style.display='block';
                             document.body.style.overflowY = 'hidden';">
@@ -503,11 +400,11 @@
                                 <div class="price">
                                     <c:choose>
                                         <c:when test="${product.discount != 0}">
-                                            <div class="pre-price">${product.price}</div>
-                                            <div class="cur-price">${product.price-(product.price*product.discount/100)}</div>
+                                            <div class="pre-price">${product.price} &#8372;</div>
+                                            <div class="cur-price">${product.price-(product.price*product.discount/100)} &#8372;</div>
                                         </c:when>
                                         <c:otherwise>
-                                            <div class="cur-price">${product.price}</div>
+                                            <div class="cur-price">${product.price} &#8372;</div>
                                         </c:otherwise>
                                     </c:choose>
                                 </div>
@@ -516,163 +413,10 @@
                         </div>
                     </div>
                 </c:forEach>
-<%--                <div class="product-card">--%>
-<%--                    <div class="card-image">--%>
-<%--                        <img src="https://i.allo.ua/media/catalog/product/cache/1/small_image/212x184/9df78eab33525d08d6e5fb8d27136e95/g/p/gpbhkuvzj61_1.jpg" class="product-img">--%>
-<%--                    </div>--%>
-<%--                    <div class="right-desc">--%>
-<%--                        <div class="product-name">--%>
-<%--                            <p>Xiaomi RedmiBookPro 14 i5/16/512/2.5К</p>--%>
-<%--                        </div>--%>
-<%--                        <div class="card-signs">--%>
-<%--                            <div class="Stars" style="--rating: 3.5;"></div>--%>
-<%--                            <img src="img/chat-bubble.png" style="width: 20px; height: 20px; margin-right: 10px;">--%>
-<%--                            <img src="img/heart.png" style="width: 20px; height: 20px; margin-right: 10px;">--%>
-<%--                        </div>--%>
-<%--                        <div class="buy-elements">--%>
-<%--                            <div class="price">--%>
-<%--                                <div class="pre-price">950$</div>--%>
-<%--                                <div class="cur-price">900$</div>--%>
-<%--                            </div>--%>
-<%--                            <button class="add-product">Buy</button>--%>
-<%--                        </div>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
-<%--                <div class="product-card">--%>
-<%--                    <div class="card-image">--%>
-<%--                        <img src="https://i.allo.ua/media/catalog/product/cache/1/small_image/212x184/9df78eab33525d08d6e5fb8d27136e95/g/p/gpbhkuvzj61_1.jpg" class="product-img">--%>
-<%--                    </div>--%>
-<%--                    <div class="right-desc">--%>
-<%--                        <div class="product-name">--%>
-<%--                            <p>Xiaomi RedmiBookPro 14 i5/16/512/2.5К</p>--%>
-<%--                        </div>--%>
-<%--                        <div class="card-signs">--%>
-<%--                            <div class="Stars" style="--rating: 3.5;"></div>--%>
-<%--                            <img src="img/chat-bubble.png" style="width: 20px; height: 20px; margin-right: 10px;">--%>
-<%--                            <img src="img/heart.png" style="width: 20px; height: 20px; margin-right: 10px;">--%>
-<%--                        </div>--%>
-<%--                        <div class="buy-elements">--%>
-<%--                            <div class="price">--%>
-<%--                                <div class="pre-price">950$</div>--%>
-<%--                                <div class="cur-price">900$</div>--%>
-<%--                            </div>--%>
-<%--                            <button class="add-product">Buy</button>--%>
-<%--                        </div>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
-<%--                <div class="product-card">--%>
-<%--                    <div class="card-image">--%>
-<%--                        <img src="https://i.allo.ua/media/catalog/product/cache/1/small_image/212x184/9df78eab33525d08d6e5fb8d27136e95/g/p/gpbhkuvzj61_1.jpg" class="product-img">--%>
-<%--                    </div>--%>
-<%--                    <div class="right-desc">--%>
-<%--                        <div class="product-name">--%>
-<%--                            <p>Xiaomi RedmiBookPro 14 i5/16/512/2.5K</p>--%>
-<%--                        </div>--%>
-<%--                        <div class="card-signs">--%>
-<%--                            <div class="Stars" style="--rating: 3.5;"></div>--%>
-<%--                            <img src="img/chat-bubble.png" style="width: 20px; height: 20px; margin-right: 10px;">--%>
-<%--                            <img src="img/heart.png" style="width: 20px; height: 20px; margin-right: 10px;">--%>
-<%--                        </div>--%>
-<%--                        <div class="buy-elements">--%>
-<%--                            <div class="price">--%>
-<%--                                <div class="pre-price">950$</div>--%>
-<%--                                <div class="cur-price">900$</div>--%>
-<%--                            </div>--%>
-<%--                            <button class="add-product">Buy</button>--%>
-<%--                        </div>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
-<%--                <div class="product-card">--%>
-<%--                    <div class="card-image">--%>
-<%--                        <img src="https://i.allo.ua/media/catalog/product/cache/1/small_image/212x184/9df78eab33525d08d6e5fb8d27136e95/g/p/gpbhkuvzj61_1.jpg" class="product-img">--%>
-<%--                    </div>--%>
-<%--                    <div class="right-desc">--%>
-<%--                        <div class="product-name">--%>
-<%--                            <p>Xiaomi RedmiBookPro 14 i5/16/512/2.5К</p>--%>
-<%--                        </div>--%>
-<%--                        <div class="card-signs">--%>
-<%--                            <div class="Stars" style="--rating: 3.5;"></div>--%>
-<%--                            <img src="img/chat-bubble.png" style="width: 20px; height: 20px; margin-right: 10px;">--%>
-<%--                            <img src="img/heart.png" style="width: 20px; height: 20px; margin-right: 10px;">--%>
-<%--                        </div>--%>
-<%--                        <div class="buy-elements">--%>
-<%--                            <div class="price">--%>
-<%--                                <div class="pre-price">950$</div>--%>
-<%--                                <div class="cur-price">900$</div>--%>
-<%--                            </div>--%>
-<%--                            <button class="add-product">Buy</button>--%>
-<%--                        </div>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
-<%--                <div class="product-card">--%>
-<%--                    <div class="card-image">--%>
-<%--                        <img src="https://i.allo.ua/media/catalog/product/cache/1/small_image/212x184/9df78eab33525d08d6e5fb8d27136e95/g/p/gpbhkuvzj61_1.jpg" class="product-img">--%>
-<%--                    </div>--%>
-<%--                    <div class="right-desc">--%>
-<%--                        <div class="product-name">--%>
-<%--                            <p>Xiaomi RedmiBookPro 14 i5/16/512/2.5К</p>--%>
-<%--                        </div>--%>
-<%--                        <div class="card-signs">--%>
-<%--                            <div class="Stars" style="--rating: 3.5;"></div>--%>
-<%--                            <img src="img/chat-bubble.png" style="width: 20px; height: 20px; margin-right: 10px;">--%>
-<%--                            <img src="img/heart.png" style="width: 20px; height: 20px; margin-right: 10px;">--%>
-<%--                        </div>--%>
-<%--                        <div class="buy-elements">--%>
-<%--                            <div class="price">--%>
-<%--                                <div class="pre-price">950$</div>--%>
-<%--                                <div class="cur-price">900$</div>--%>
-<%--                            </div>--%>
-<%--                            <button class="add-product">Buy</button>--%>
-<%--                        </div>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
-<%--                <div class="product-card">--%>
-<%--                    <div class="card-image">--%>
-<%--                        <img src="https://i.allo.ua/media/catalog/product/cache/1/small_image/212x184/9df78eab33525d08d6e5fb8d27136e95/g/p/gpbhkuvzj61_1.jpg" class="product-img">--%>
-<%--                    </div>--%>
-<%--                    <div class="right-desc">--%>
-<%--                        <div class="product-name">--%>
-<%--                            <p>Xiaomi RedmiBookPro 14 i5/16/512/2.5К</p>--%>
-<%--                        </div>--%>
-<%--                        <div class="card-signs">--%>
-<%--                            <div class="Stars" style="--rating: 3.5;"></div>--%>
-<%--                            <img src="img/chat-bubble.png" style="width: 20px; height: 20px; margin-right: 10px;">--%>
-<%--                            <img src="img/heart.png" style="width: 20px; height: 20px; margin-right: 10px;">--%>
-<%--                        </div>--%>
-<%--                        <div class="buy-elements">--%>
-<%--                            <div class="price">--%>
-<%--                                <div class="pre-price">950$</div>--%>
-<%--                                <div class="cur-price">900$</div>--%>
-<%--                            </div>--%>
-<%--                            <button class="add-product">Buy</button>--%>
-<%--                        </div>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
-<%--                <div class="product-card">--%>
-<%--                    <div class="card-image">--%>
-<%--                        <img src="https://i.allo.ua/media/catalog/product/cache/1/small_image/212x184/9df78eab33525d08d6e5fb8d27136e95/g/p/gpbhkuvzj61_1.jpg" class="product-img">--%>
-<%--                    </div>--%>
-<%--                    <div class="right-desc">--%>
-<%--                        <div class="product-name">--%>
-<%--                            <p>Xiaomi RedmiBookPro 14 i5/16/512/2.5К</p>--%>
-<%--                        </div>--%>
-<%--                        <div class="card-signs">--%>
-<%--                            <div class="Stars" style="--rating: 3.5;"></div>--%>
-<%--                            <img src="img/chat-bubble.png" style="width: 20px; height: 20px; margin-right: 10px;">--%>
-<%--                            <img src="img/heart.png" style="width: 20px; height: 20px; margin-right: 10px;">--%>
-<%--                        </div>--%>
-<%--                        <div class="buy-elements">--%>
-<%--                            <div class="price">--%>
-<%--                                <div class="pre-price">950$</div>--%>
-<%--                                <div class="cur-price">900$</div>--%>
-<%--                            </div>--%>
-<%--                            <button class="add-product">Buy</button>--%>
-<%--                        </div>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
             </div>
         </section>
     </article>
+    </form>
 </main>
 <footer>
     <div class="footer-padding">
@@ -727,4 +471,35 @@
 <script src="/js/general.js"></script>
 <script src="/js/filters.js"></script>
 </body>
+
+<script>
+    function submit(){
+        $('form#sort-form').submit();
+    }
+
+    window.onload = ev => {
+        let str = '${sortType}';
+        let pop = document.getElementById("popularity");
+        let fetc = document.getElementById("fetc");
+        let fcte = document.getElementById("fcte");
+        let nov = document.getElementById("novelties");
+        let bn = document.getElementById("bn");
+        if(str == pop.textContent){
+            pop.selected = "true";
+        }
+        else if(str == fetc.textContent){
+            fetc.selected = "true";
+        }
+        else if(str == fcte.textContent){
+            fcte.selected = "true";
+        }
+        else if(str == nov.textContent){
+            nov.selected = "true";
+        }
+        else {
+            bn.selected = "true";
+        }
+    }
+</script>
+
 </html>

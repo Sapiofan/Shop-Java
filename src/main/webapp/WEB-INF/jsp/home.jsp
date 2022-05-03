@@ -44,14 +44,13 @@
         </button>
         <div class="navigation" id="navigation">
             <a data-langkey="Nav-Our-Work" href="#home"><span class="active-nav">Home</span></a>
-            <!-- <a data-langkey="Nav-Our-Work" href="#categories">Categories</a> -->
             <div class="dropdown">
                 <button class="dropbtn">Categories</button>
                 <div class="dropdown-content">
                     <a href="#">Computers</a>
                     <a href="/phones">Phones</a>
-                    <a href="#">Tablets</a>
-                    <a href="#">Watches</a>
+                    <a href="/laptops">Laptops</a>
+                    <a href="/watches">Watches</a>
                     <a href="#">Discounts</a>
                     <a href="#">Drones</a>
                 </div>
@@ -90,11 +89,6 @@
                 </nav>
             </div>
         </div>
-        <!-- <div id='languages'>
-            <button id="en" onclick="changePlaceholder()" class='language active' data-lang='britain'>en
-            </button>
-            <button class='language' onclick="changePlaceholder()" data-lang='ukraine'>ua</button>
-        </div> -->
     </nav>
     <div id="registration" class="modal">
         <form class="modal-content" action="#">
@@ -207,7 +201,7 @@
                         <ul class="menu-category" id="menu-category">
                             <a href="#">Computers</a>
                             <a href="#">Phones</a>
-                            <a href="#">Tablets</a>
+                            <a href="#">Laptops</a>
                             <a href="#">Watches</a>
                             <a href="#">Discounts</a>
                             <a href="#">Drones</a>
@@ -334,65 +328,7 @@
             </div>
         </div>
         <br>
-        <!-- <div style="text-align:center">
-          <span class="dot" onclick="currentSlide(1)"></span>
-          <span class="dot" onclick="currentSlide(2)"></span>
-          <span class="dot" onclick="currentSlide(3)"></span>
-        </div> -->
     </section>
-    <!-- <section id="carousel">
-        <div class="center">
-            <div class="wrapper">
-              <div class="inner">
-                <div class="card">
-                  <img src="https://i.allo.ua/media/homepage/topbanner/keshbek-2500-na-televizor-300х460.jpg">
-                </div>
-                <div class="card">
-                  <img src="https://i.allo.ua/media/homepage/topbanner/S22_W-XXL_300x460.jpg">
-                </div>
-                <div class="card">
-                  <img src="https://i.allo.ua/media/homepage/topbanner/11t_W-XL-300x460_1.png">
-                </div>
-                <div class="card">
-                  <img src="https://i.allo.ua/media/homepage/topbanner/S22_W-XXL_300x460.jpg">
-                </div>
-                <div class="card">
-                  <img src="https://i.allo.ua/media/homepage/topbanner/keshbek-2500-na-televizor-300х460.jpg">
-                </div>
-                <div class="card">
-                  <img src="https://i.allo.ua/media/homepage/topbanner/S22_W-XXL_300x460.jpg">
-                </div>
-                      <div class="card">
-                  <img src="https://i.allo.ua/media/homepage/topbanner/S22_W-XXL_300x460.jpg">
-                </div>
-                <div class="card">
-                  <img src="https://i.allo.ua/media/homepage/topbanner/keshbek-2500-na-televizor-300х460.jpg">
-                </div>
-                <div class="card">
-                  <img src="https://i.allo.ua/media/homepage/topbanner/S22_W-XXL_300x460.jpg">
-                </div>
-                <div class="card">
-                    <img src="https://i.allo.ua/media/homepage/topbanner/keshbek-2500-na-televizor-300х460.jpg">
-                </div>
-                <div class="card">
-                    <img src="https://i.allo.ua/media/homepage/topbanner/S22_W-XXL_300x460.jpg">
-                </div>
-                <div class="card">
-                    <img src="https://i.allo.ua/media/homepage/topbanner/S22_W-XXL_300x460.jpg">
-                </div>
-                <div class="card">
-                    <img src="https://i.allo.ua/media/homepage/topbanner/keshbek-2500-na-televizor-300х460.jpg">
-                </div>
-              </div>
-            </div>
-
-            <div class="map">
-              <button class="active first"></button>
-              <button class="second"></button>
-              <button class="third"></button>
-            </div>
-          </div>
-    </section> -->
     <section id="banners">
         <div class="banner" style="margin-right: 50px;">
             <img class="banner-img" src="https://static.wixstatic.com/media/c22c23_e140bfa8cd6f4cb2ac5ee6e204f64073~mv2.jpg/v1/fill/w_851,h_585,al_t,q_85,usm_0.66_1.00_0.01,enc_auto/c22c23_e140bfa8cd6f4cb2ac5ee6e204f64073~mv2.jpg">
@@ -546,7 +482,7 @@
                 <a href="#"><li>Shop all</li></a>
                 <a href="#"><li>Computers</li></a>
                 <a href="#"><li>Phones</li></a>
-                <a href="#"><li>Tablets</li></a>
+                <a href="#"><li>Laptops</li></a>
                 <a href="#"><li>Phones</li></a>
                 <a href="#"><li>Watches</li></a>
                 <a href="#"><li>Discounts</li></a>

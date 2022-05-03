@@ -1,5 +1,6 @@
 package com.example.shopjava.repos.impl;
 
+import com.example.shopjava.entities.Laptop;
 import com.example.shopjava.entities.Phone;
 import com.example.shopjava.repos.Utils;
 import org.springframework.stereotype.Service;
@@ -11,11 +12,22 @@ import java.util.List;
 public class UtilsImpl implements Utils {
     @Override
     public Phone min(List<Phone> phoneList) {
-        return phoneList.stream().min(Comparator.comparingDouble(Phone::getPrice)).get();
+        if(!phoneList.isEmpty())
+            return phoneList.stream().min(Comparator.comparingDouble(Phone::getPrice)).get();
+        return null;
     }
 
     @Override
     public Phone max(List<Phone> phones) {
-        return phones.stream().max(Comparator.comparingDouble(Phone::getPrice)).get();
+        if(!phones.isEmpty())
+            return phones.stream().max(Comparator.comparingDouble(Phone::getPrice)).get();
+        return null;
+    }
+
+    @Override
+    public Laptop maxLaptop(List<Laptop> laptops) {
+        if(!laptops.isEmpty())
+            return laptops.stream().max(Comparator.comparingDouble(Laptop::getPrice)).get();
+        return null;
     }
 }

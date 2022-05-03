@@ -1,5 +1,6 @@
 package com.example.shopjava.services;
 
+import com.example.shopjava.entities.Laptop;
 import com.example.shopjava.entities.Phone;
 import com.example.shopjava.entities.Product;
 
@@ -12,7 +13,16 @@ public interface FilterProducts {
 
     Map<String, List<String>> getPhoneCharacteristics();
 
-    List<Phone> phones(Set<String> filters, Map<String, List<String>> fullFilters);
+    Map<String, List<String>> getLaptopCharacteristics();
+
+    List<Phone> phones(Set<String> filters, Map<String, List<String>> fullFilters, Integer min, Integer max);
 
     List<Phone> getAllPhones();
+
+    List<Phone> sort(List<Phone> phones, String sortType);
+
+    List<Laptop> getAllLaptops();
+
+    List<Laptop> laptops(Set<String> filters, Map<String, List<String>> fullFilters, Integer min, Integer max);
+
 }
