@@ -42,7 +42,7 @@ public class Watch extends Product{
     private String color;
 
     @Column(nullable = false)
-    private Boolean working_hours;
+    private Integer working_hours;
 
     @Column(nullable = false)
     private String display_diagonal;
@@ -54,7 +54,7 @@ public class Watch extends Product{
                  Set<Cart> carts, Set<Favorite> favorites, String series, String purpose, String display_shape,
                  Boolean touch_screen, Boolean waterproof, Boolean call_support, Boolean music_control,
                  Boolean pulse_measurement, Boolean step_counting, Boolean sleep_monitoring, String color,
-                 Boolean working_hours, String display_diagonal) {
+                 Integer working_hours, String display_diagonal) {
         super(image, name, price, brand, payment, rating, discount, gifts, isAvailable, warranty, category, reviews, carts, favorites);
         this.series = series;
         this.purpose = purpose;
@@ -159,11 +159,11 @@ public class Watch extends Product{
         this.color = color;
     }
 
-    public Boolean getWorking_hours() {
+    public Integer getWorking_hours() {
         return working_hours;
     }
 
-    public void setWorking_hours(Boolean working_hours) {
+    public void setWorking_hours(Integer working_hours) {
         this.working_hours = working_hours;
     }
 

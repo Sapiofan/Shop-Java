@@ -335,6 +335,27 @@ input[type="range"]::-moz-range-thumb{
     display: flex;
 }
 
+.search-header {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.aside-category {
+    color: rebeccapurple;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 10px 0;
+}
+
+.aside-links a {
+    text-decoration: none;
+}
+
+.aside-links a:active {
+    color: purple;
+    text-decoration: none;
+}
+
 .sort-text {
     margin-right: 10px;
     font-size: 20px;
@@ -344,6 +365,7 @@ input[type="range"]::-moz-range-thumb{
     margin: 10px 0;
     width: 200px;
     height: 50px;
+    font-size: 15px;
 }
 
 .product-link {

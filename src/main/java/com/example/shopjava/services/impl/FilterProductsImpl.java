@@ -1,13 +1,7 @@
 package com.example.shopjava.services.impl;
 
-import com.example.shopjava.entities.Filters;
-import com.example.shopjava.entities.Laptop;
-import com.example.shopjava.entities.Phone;
-import com.example.shopjava.entities.Product;
-import com.example.shopjava.repos.FilterProductsRepo;
-import com.example.shopjava.repos.LaptopRepository;
-import com.example.shopjava.repos.PhoneRepository;
-import com.example.shopjava.repos.ProductRepository;
+import com.example.shopjava.entities.*;
+import com.example.shopjava.repos.*;
 import com.example.shopjava.services.FilterProducts;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,6 +25,9 @@ public class FilterProductsImpl implements FilterProducts {
 
     @Autowired
     private LaptopRepository laptopRepository;
+
+    @Autowired
+    private WatchRepository watchRepository;
 
     @Transactional
     @Override
@@ -56,6 +53,13 @@ public class FilterProductsImpl implements FilterProducts {
     }
 
     @Override
+    public Map<String, List<String>> getWatchCharacteristics() {
+        Filters filters = new Filters();
+        filters.initWatchChars();
+        return filters.watchCharacteristics;
+    }
+
+    @Override
     @Transactional
     public List<Phone> phones(Set<String> filters, Map<String, List<String>> fullFilters, Integer min, Integer max) {
         return filterProductsRepo.filterPhones(filters, fullFilters, min, max);
@@ -65,6 +69,16 @@ public class FilterProductsImpl implements FilterProducts {
     @Transactional
     public List<Phone> getAllPhones(){
         return phoneRepository.findAll();
+    }
+
+    @Override
+    public Phone getPhoneByName(String name) {
+        return phoneRepository.getPhoneByName(name);
+    }
+
+    @Override
+    public Phone getPhoneById(Long id) {
+        return phoneRepository.getPhoneById(id);
     }
 
     @Override
@@ -94,6 +108,16 @@ public class FilterProductsImpl implements FilterProducts {
     @Transactional
     public List<Laptop> laptops(Set<String> filters, Map<String, List<String>> fullFilters, Integer min, Integer max) {
         return filterProductsRepo.filterLaptops(filters, fullFilters, min, max);
+    }
+
+    @Override
+    public List<Watch> getAllWatches() {
+        return watchRepository.findAllWatches();
+    }
+
+    @Override
+    public List<Watch> watches(Set<String> filters, Map<String, List<String>> fullFilters, Integer min, Integer max) {
+        return filterProductsRepo.filterWatches(filters, fullFilters, min, max);
     }
 
     public List<Phone> sortFromCheapToExp(List<Phone> phones) {

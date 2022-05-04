@@ -2,6 +2,7 @@ package com.example.shopjava.repos.impl;
 
 import com.example.shopjava.entities.Laptop;
 import com.example.shopjava.entities.Phone;
+import com.example.shopjava.entities.Watch;
 import com.example.shopjava.repos.Utils;
 import org.springframework.stereotype.Service;
 
@@ -28,6 +29,13 @@ public class UtilsImpl implements Utils {
     public Laptop maxLaptop(List<Laptop> laptops) {
         if(!laptops.isEmpty())
             return laptops.stream().max(Comparator.comparingDouble(Laptop::getPrice)).get();
+        return null;
+    }
+
+    @Override
+    public Watch maxWatch(List<Watch> watches) {
+        if(!watches.isEmpty())
+            return watches.stream().max(Comparator.comparingDouble(Watch::getPrice)).get();
         return null;
     }
 }

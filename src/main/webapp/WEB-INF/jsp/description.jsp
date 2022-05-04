@@ -59,12 +59,12 @@
             </div>
             <div class="sign">
                 <button onclick="document.getElementById('registration').style.display='block'"
-                        class="user"><img src="img/user.png" style="width: 36px; height: 36px;"></button>
+                        class="user"><img src="/img/user.png" style="width: 36px; height: 36px;"></button>
             </div>
             <div class="sign">
                 <button onclick="document.getElementById('likes').style.display='block'"
                         class="likes">
-                    <img src="img/heart (2).png" style="width: 36px; height: 36px;">
+                    <img src="/img/heart (2).png" style="width: 36px; height: 36px;">
                     <span class="wishlist-count">2</span>
                 </button>
             </div>
@@ -168,19 +168,19 @@
         <div class="menu-choice">
             <a href="#" onclick="document.getElementById('registration').style.display='block'">
                 <div class="menu-item menu-user">
-                    <img src="img/user-2.svg" style="width: 26px; height: 26px; margin-left: 2px;">
+                    <img src="/img/user-2.svg" style="width: 26px; height: 26px; margin-left: 2px;">
                     <p>Log in profile</p>
                 </div>
             </a>
             <a href="#" onclick="document.getElementById('likes').style.display='block'">
                 <div class="menu-item">
-                    <img src="img/heart-1.png" style="width: 30px; height: 30px;">
+                    <img src="/img/heart-1.png" style="width: 30px; height: 30px;">
                     <p>Favorites</p>
                 </div>
             </a>
             <a href="#home">
                 <div class="menu-item">
-                    <img src="img/home.svg" style="width: 30px; height: 30px;">
+                    <img src="/img/home.svg" style="width: 30px; height: 30px;">
                     <p>Home</p>
                 </div>
             </a>
@@ -188,7 +188,7 @@
                 <div class="menu-item">
                     <div class="menu-container">
                         <div class="cat-container" id="cat-container">
-                            <img src="img/application.png" style="width: 30px; height: 30px;">
+                            <img src="/img/application.png" style="width: 30px; height: 30px;">
                             <p class="menu-coll">Categories</p>
                         </div>
                         <ul class="menu-category" id="menu-category">
@@ -204,13 +204,13 @@
             </div>
             <a href="#about">
                 <div class="menu-item">
-                    <img src="img/info.png" style="width: 30px; height: 30px;">
+                    <img src="/img/info.png" style="width: 30px; height: 30px;">
                     <p>About</p>
                 </div>
             </a>
             <a href="#help">
                 <div class="menu-item">
-                    <img src="img/communication.png" style="width: 30px; height: 30px;">
+                    <img src="/img/communication.png" style="width: 30px; height: 30px;">
                     <p>Help</p>
                 </div>
             </a>
@@ -304,7 +304,7 @@
                 <img src="https://unsplash.it/800?random">
             </div>
             <div class="full-product">
-                <p>Samsung Galaxy S21 Ultra 12/128GB Phantom Black</p>
+                <p>${product.name}</p>
                 <nav class="chars-nav sticky">
                     <a href="#carousel">About</a>
                     <a href="#chars">Characteristics</a>
@@ -314,17 +314,17 @@
             <div class="user-rating">
                 <p class="u-rating">User rating: </p>
                 <div class="one-line">
-                    <div class="Stars" style="--rating: 4.4;"></div>
-                    <p class="rating">4.4</p>
+                    <div class="Stars" style="--rating: ${product.rating};"></div>
+                    <p class="rating">${product.rating}</p>
                     <a href="#" class="reviews-link">
-                        <img src="img/chat-bubble.png" width="16px" height="16px">
+                        <img src="/img/chat-bubble.png" width="16px" height="16px">
                         <p>45 review(s)</p>
                     </a>
                 </div>
             </div>
             <div class="signs-desc">
                 <div class="header-price">
-                    29 000$
+                    ${product.price-(product.price*product.discount/100)}$
                 </div>
                 <button class="header-buy" id="header-buy">Buy</button>
                 <div class="header-like">
@@ -383,28 +383,33 @@
         <div class="about-product">
             <div class="general-info">
                 <div class="general-info-text">
-                    <c:if test="${product.is_available}">
+                    <c:if test="${product.available}">
                         <p>Are available</p>
                     </c:if>
-                    <c:if test="${!product.is_available}">
+                    <c:if test="${!product.available}">
                         <p>Not available</p>
                     </c:if>
                     <c:if test="${product.discount != 0}">
                         <div class="discount-price">
-                            <p class="old-price">${product.price}</p>
+                            <p class="old-price">${product.price} $</p>
                             <p class="profit">-${product.price*product.discount/100}</p>
                         </div>
                         <div class="price-now">
-                            ${product.price-(product.price*product.discount/100)}
+                            ${product.price-(product.price*product.discount/100)} $
+                        </div>
+                    </c:if>
+                    <c:if test="${product.discount == 0}">
+                        <div class="price-now">
+                                ${product.price}$
                         </div>
                     </c:if>
                 </div>
                 <button class="add-to-cart">Buy</button>
                 <div class="like-container">
-                    <img src="img/heart.png" style="width: 32px; height: 32px;">
+                    <img src="/img/heart.png" style="width: 32px; height: 32px;">
                 </div>
             </div>
-            <c:if test="${product.discount != 0 || product.gifts != ''}">
+            <c:if test="${product.discount != 0 || product.gifts != 'none'}">
                 <div class="discounts">
                     <h6>Discounts and Stocks</h6>
                     <c:if test="${product.discount != 0}">
@@ -413,10 +418,12 @@
                             <p><span class="bold-text">Discount</span> Benefit up to ${product.price*product.discount/100} UAH</p>
                         </div>
                     </c:if>
-                    <div class="discount-type">
-                        <img src="img/shipping.png" width="30px" height="30px">
-                        <p><span class="bold-text">Gifts</span> ${product.gifts}</p>
-                    </div>
+                    <c:if test="${product.gifts != 'none'}">
+                        <div class="discount-type">
+                            <img src="/img/shipping.png" width="30px" height="30px">
+                            <p><span class="bold-text">Gifts</span> ${product.gifts}</p>
+                        </div>
+                    </c:if>
                 </div>
             </c:if>
             <div class="payment">
@@ -433,26 +440,49 @@
     </section>
     <section id="chars" class="">
         <h3>Characteristics</h3>
-        <h5>Screen</h5>
-        <table class="screen-table">
-            <col style="width: 50%;" />
-            <tr>
-                <td>Screen size</td>
-                <td>6.8'</td>
-            </tr>
-            <tr>
-                <td>Screen resolution</td>
-                <td>3200x1440</td>
-            </tr>
-            <tr>
-                <td>Screen refresh rate</td>
-                <td>120 Hz</td>
-            </tr>
-            <tr>
-                <td>Number of colors</td>
-                <td>16 millions</td>
-            </tr>
-        </table>
+<%--        <c:forEach items="${filters}" var="filter">--%>
+<%--            <h5>Screen</h5>--%>
+<%--            <table class="screen-table">--%>
+<%--                <col style="width: 50%;" />--%>
+<%--                <tr>--%>
+<%--                    <td>Screen size</td>--%>
+<%--                    <td>6.8'</td>--%>
+<%--                </tr>--%>
+<%--                <tr>--%>
+<%--                    <td>Screen resolution</td>--%>
+<%--                    <td>3200x1440</td>--%>
+<%--                </tr>--%>
+<%--                <tr>--%>
+<%--                    <td>Screen refresh rate</td>--%>
+<%--                    <td>120 Hz</td>--%>
+<%--                </tr>--%>
+<%--                <tr>--%>
+<%--                    <td>Number of colors</td>--%>
+<%--                    <td>16 millions</td>--%>
+<%--                </tr>--%>
+<%--            </table>--%>
+<%--        </c:forEach>--%>
+
+<%--        <h5>Screen</h5>--%>
+<%--        <table class="screen-table">--%>
+<%--            <col style="width: 50%;" />--%>
+<%--            <tr>--%>
+<%--                <td>Screen size</td>--%>
+<%--                <td>6.8'</td>--%>
+<%--            </tr>--%>
+<%--            <tr>--%>
+<%--                <td>Screen resolution</td>--%>
+<%--                <td>3200x1440</td>--%>
+<%--            </tr>--%>
+<%--            <tr>--%>
+<%--                <td>Screen refresh rate</td>--%>
+<%--                <td>120 Hz</td>--%>
+<%--            </tr>--%>
+<%--            <tr>--%>
+<%--                <td>Number of colors</td>--%>
+<%--                <td>16 millions</td>--%>
+<%--            </tr>--%>
+<%--        </table>--%>
         <h5>Memory</h5>
         <table class="memory-table">
             <col style="width: 50%;" />

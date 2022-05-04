@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -49,29 +50,18 @@ public class MyController {
         model.addAttribute("products", products);
         model.addAttribute("searchKey", searchKey);
 
-        Map<String, List<String>> phoneFilters = filterProducts.getPhoneCharacteristics();
-        Set<String> keys = phoneFilters.keySet();
-        LinkedHashSet<String> filters = new LinkedHashSet<>();
-
-
-        model.addAttribute("filters", phoneFilters);
-        model.addAttribute("filtersKeys", keys);
-        model.addAttribute("filterName",filters);
+        model.addAttribute("seacrhBool", true);
         return "filters";
     }
 
-    @PostMapping("/searching")
-    public String getFilters(Model model, @RequestParam("filter-name") LinkedHashSet<String> filters){
-        Map<String, List<String>> phoneFilters = filterProducts.getPhoneCharacteristics();
-        Set<String> keys = phoneFilters.keySet();
-//        List<? extends Product> products = filterProducts.phones(filters, phoneFilters);
-
+//    @PostMapping("/searching")
+//    public String getFilters(Model model, @RequestParam("search") String searchKey){
+//        List<? extends Product> products = filterProducts.searchProducts(searchKey);
+//
 //        model.addAttribute("products", products);
-        model.addAttribute("filterName",filters);
-        model.addAttribute("filters", phoneFilters);
-        model.addAttribute("filtersKeys", keys);
-        return "filters";
-    }
+//        model.addAttribute("seacrhBool", true);
+//        return "filters";
+//    }
 
     @GetMapping("/phones")
     public String phoneFilters(Model model){
@@ -153,6 +143,58 @@ public class MyController {
         model.addAttribute("minValue", minValue);
         model.addAttribute("maxValue", maxValue);
         model.addAttribute("max", (int) Math.floor(utils.maxLaptop(filterProducts.getAllLaptops()).getPrice()));
+        model.addAttribute("sortType", sortType);
+        return "filters";
+    }
+
+    @GetMapping("/product/{id}")
+    public String getDescription(Model model,
+                                 @PathVariable("id") Long id){
+//        Phone phone = filterProducts.getPhoneByName(name);
+        Phone phone = filterProducts.getPhoneById(id);
+        log.info(phone.getName());
+        model.addAttribute("product", phone);
+        return "description";
+    }
+
+    @GetMapping("/watches")
+    public String watchesFilters(Model model){
+        List<Watch> watches = filterProducts.getAllWatches();
+        Map<String, List<String>> watchFilters = filterProducts.getWatchCharacteristics();
+        Set<String> keys = watchFilters.keySet();
+        LinkedHashSet<String> filters = new LinkedHashSet<>();
+        int max = (int) Math.floor(utils.maxWatch(watches).getPrice());
+
+
+        model.addAttribute("category", "Watches");
+        model.addAttribute("filters", watchFilters);
+        model.addAttribute("filtersKeys", keys);
+        model.addAttribute("filterName",filters);
+        model.addAttribute("products", watches);
+        model.addAttribute("minValue", 0);
+        model.addAttribute("maxValue", max);
+        model.addAttribute("max", max);
+        return "filters";
+    }
+
+    @PostMapping("/watches")
+    public String watchesFiltersPost(Model model,
+                                    @RequestParam(value = "filter-name", required = false) LinkedHashSet<String> filters,
+                                    @RequestParam("input-min") Integer minValue, @RequestParam("input-max") Integer maxValue,
+                                    @RequestParam("sort") String sortType){
+        Map<String, List<String>> watchFilters = filterProducts.getWatchCharacteristics();
+        Set<String> keys = watchFilters.keySet();
+        List<Watch> watches = filterProducts.watches(filters, watchFilters, minValue, maxValue);
+//        laptops = filterProducts.sort(phones, sortType);
+
+        model.addAttribute("category", "Watches");
+        model.addAttribute("filters", watchFilters);
+        model.addAttribute("filtersKeys", keys);
+        model.addAttribute("filterName",filters);
+        model.addAttribute("products", watches);
+        model.addAttribute("minValue", minValue);
+        model.addAttribute("maxValue", maxValue);
+        model.addAttribute("max", (int) Math.floor(utils.maxWatch(filterProducts.getAllWatches()).getPrice()));
         model.addAttribute("sortType", sortType);
         return "filters";
     }

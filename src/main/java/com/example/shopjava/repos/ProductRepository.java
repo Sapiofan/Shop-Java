@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface ProductRepository extends JpaRepository<Product, Long> {
 
-    @Query("SELECT p from Product p where p.name LIKE %?1%" +
-            " or p.brand LIKE %?1%")
+    @Query("SELECT p from Product p where lower(p.name) LIKE lower(concat('%', ?1,'%'))" +
+            " or lower(p.brand) LIKE lower(concat('%', ?1,'%'))")
     List<Product> searchProducts(String keyword);
 }

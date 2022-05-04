@@ -303,13 +303,51 @@
     <form action="/${fn:toLowerCase(category)}" method="post" class="filters-blocks">
     <h1>${category}</h1>
     <article>
-        <div class="aside" id="filters">
-            <div class="head-filters">
-                <p>Filters</p>
-                <span onclick="document.getElementById('filters').style.display='none';
-                        document.body.style.overflowY = 'auto';" class="close close-f">&times;</span>
-                <hr>
+        <c:if test="${seacrhBool}">
+            <div class="aside" id="filters">
+                <h2 class="search-header">See also products by categories</h2>
+                <div class="aside-links">
+                    <a href="/phones">
+                        <div class="aside-category">
+                            Phones
+                        </div>
+                    </a>
+                    <a href="/laptops">
+                        <div class="aside-category">
+                            Laptops
+                        </div>
+                    </a>
+                    <a href="/watches">
+                        <div class="aside-category">
+                            Watches
+                        </div>
+                    </a>
+                    <a href="/discounts">
+                        <div class="aside-category">
+                            Discounts
+                        </div>
+                    </a>
+                    <a href="#">
+                        <div class="aside-category">
+                            Drones
+                        </div>
+                    </a>
+                    <a href="#">
+                        <div class="aside-category">
+                            Computers
+                        </div>
+                    </a>
+                </div>
             </div>
+        </c:if>
+        <c:if test="${!seacrhBool}">
+            <div class="aside" id="filters">
+                <div class="head-filters">
+                    <p>Filters</p>
+                    <span onclick="document.getElementById('filters').style.display='none';
+                        document.body.style.overflowY = 'auto';" class="close close-f">&times;</span>
+                    <hr>
+                </div>
                 <div id="price">
                     <span class="price-header">Price</span>
                     <div class="wrapper">
@@ -337,21 +375,21 @@
                         <ul class="items">
                             <%boolean flag = false;%>
                             <c:forEach items="${filters[filter]}" var="item">
-                                    <label class="container1">${item}
-                                        <c:forEach items="${filterName}" var="name">
-                                            <c:choose>
-                                                <c:when test="${name == item}">
-                                                    <input name="filter-name" type="checkbox" value="${item}" checked>
-                                                    <span class="checkmark"></span>
-                                                    <%flag = true;%>
-                                                </c:when>
-                                            </c:choose>
-                                        </c:forEach>
-                                        <%if(!flag){%>
-                                        <input name="filter-name" type="checkbox" value="${item}">
-                                        <span class="checkmark"></span>
-                                        <%} flag = false;%>
-                                    </label>
+                                <label class="container1">${item}
+                                    <c:forEach items="${filterName}" var="name">
+                                        <c:choose>
+                                            <c:when test="${name == item}">
+                                                <input name="filter-name" type="checkbox" value="${item}" checked>
+                                                <span class="checkmark"></span>
+                                                <%flag = true;%>
+                                            </c:when>
+                                        </c:choose>
+                                    </c:forEach>
+                                    <%if(!flag){%>
+                                    <input name="filter-name" type="checkbox" value="${item}">
+                                    <span class="checkmark"></span>
+                                    <%} flag = false;%>
+                                </label>
                             </c:forEach>
                         </ul>
                     </div>
@@ -359,7 +397,8 @@
                 </c:forEach>
                 <input type="submit" class="filters-button" value="Show">
 
-        </div>
+            </div>
+        </c:if>
         <section id="products">
             <div class="sort-part">
                 <p class="sort-text">Show:</p>
@@ -380,13 +419,13 @@
             <div class="product-list">
                 <c:forEach items="${products}" var="product">
                     <div class="product-card">
-                        <a href="/${product.category.name}/${product.name}">
+                        <a href="/product/${product.id}">
                             <div class="card-image">
                                 <img src="${product.image}" class="product-img">
                             </div>
                         </a>
                         <div class="right-desc">
-                            <a href="/${product.category.name}/${product.name}" class="product-link">
+                            <a href="/product/${product.id}" class="product-link">
                                 <div class="product-name">
                                     <p>${product.name}</p>
                                 </div>
@@ -496,7 +535,7 @@
         else if(str == nov.textContent){
             nov.selected = "true";
         }
-        else {
+        else if(str == bn.textContent){
             bn.selected = "true";
         }
     }

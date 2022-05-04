@@ -69,11 +69,34 @@ public class Filters {
         List<String> processorManufacturers = new ArrayList<>();
         processorManufacturers.add("Intel");
         processorManufacturers.add("AMD");
-        processorManufacturers.add("Apple");
+        processorManufacturers.add("Apple processor");
 
         laptopCharacteristics.put("Brand", brands);
         laptopCharacteristics.put("Device type", deviceTypes);
         laptopCharacteristics.put("Processor manufacturer", processorManufacturers);
     }
 
+    public void initWatchChars(){
+        List<String> brands = new ArrayList<>();
+        brands.add("Apple");
+        brands.add("Samsung");
+        brands.add("Amazfit");
+        brands.add("Elari");
+        brands.add("AgiGo");
+        brands.add("Garmin");
+        brands.add("2E");
+        brands.add("Amico");
+
+        List<String> displayForm = new ArrayList<>();
+        displayForm.add("Square");
+        displayForm.add("Circle");
+        displayForm.add("Rectangular");
+
+        List<String> touch_sc = new ArrayList<>();
+        touch_sc.add("Yes");
+
+        watchCharacteristics.put("Brand", brands);
+        watchCharacteristics.put("Display form", displayForm);
+        watchCharacteristics.put("Touch screen", touch_sc);
+    }
 }
