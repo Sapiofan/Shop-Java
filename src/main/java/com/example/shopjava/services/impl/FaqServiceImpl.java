@@ -31,4 +31,14 @@ public class FaqServiceImpl implements FaqService {
     public List<FAQ> getFaqs() {
         return faqRepository.findAll();
     }
+
+    @Override
+    public void deleteById(Long id) {
+        faqRepository.deleteById(id);
+    }
+
+    @Override
+    public void deleteByQuestion(String question) {
+        faqRepository.deleteByQuestion(question);
+    }
 }

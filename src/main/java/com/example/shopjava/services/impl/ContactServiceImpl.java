@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Service
 public class ContactServiceImpl implements ContactService {
@@ -54,5 +55,23 @@ public class ContactServiceImpl implements ContactService {
         }
         contactRepository.save(contact);
         return "From now you will get emails about special and beneficial offers.";
+    }
+
+    @Override
+    @Transactional
+    public List<Contact> contacts() {
+        return contactRepository.findAll();
+    }
+
+    @Override
+    @Transactional
+    public void deleteById(Long id) {
+        contactRepository.deleteById(id);
+    }
+
+    @Override
+    @Transactional
+    public void deleteByEmail(String email) {
+        contactRepository.deleteByEmail(email);
     }
 }

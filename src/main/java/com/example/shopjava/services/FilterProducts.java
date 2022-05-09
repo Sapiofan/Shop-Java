@@ -36,4 +36,8 @@ public interface FilterProducts {
 
     List<Watch> watches(Set<String> filters, Map<String, List<String>> fullFilters, Integer min, Integer max);
 
+    List<Product> getAllProducts();
+
+    void deleteById(Long id);
+
 }

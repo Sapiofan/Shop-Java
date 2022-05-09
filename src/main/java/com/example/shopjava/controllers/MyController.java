@@ -1,5 +1,6 @@
 package com.example.shopjava.controllers;
 
+import com.example.shopjava.configs.security.CustomUserDetailsService;
 import com.example.shopjava.entities.*;
 import com.example.shopjava.entities.contacts.Contact;
 import com.example.shopjava.repos.Utils;
@@ -10,6 +11,7 @@ import com.example.shopjava.services.FilterProducts;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,12 +37,42 @@ public class MyController {
     private FaqService faqService;
 
     @Autowired
+    private CustomUserDetailsService userDetailsService;
+
+    @Autowired
     private Utils utils;
 
     private static final Logger log = LoggerFactory.getLogger("log");
 
     @GetMapping("/")
     public String getHomePage(Model model){
+        return "home";
+    }
+
+    @PostMapping(value = "/", params = "registration")
+    public String registration(@RequestParam("email") String email,
+                               @RequestParam("psw") String psw,
+                               @RequestParam("psw-repeat") String pswRepeat,
+                               Model model
+                               ){
+        String result = userDetailsService.signUp(email, psw, pswRepeat);
+        if(!result.isEmpty()){
+            model.addAttribute("userExist", result);
+            return "home";
+        }
+        return "home";
+    }
+
+    @PostMapping(value = "/", params = "login")
+    public String login(@RequestParam("email") String email,
+                        @RequestParam("psw") String psw,
+                        Model model
+    ){
+        log.info(email);
+        log.info(psw);
+        UserDetails details = userDetailsService.loadUserByUsername(email);
+        log.info(details.getAuthorities().toString());
+//        model.addAttribute("",);
         return "home";
     }
 

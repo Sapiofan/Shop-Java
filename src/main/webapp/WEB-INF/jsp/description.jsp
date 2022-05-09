@@ -527,8 +527,8 @@
                 <div class="user-rating-block">
                     <p class="user-rating-r">User rating:</p>
                     <div class="star-rating-cont">
-                        <p>4.4</p>
-                        <div class="Stars star-r" style="--rating: 4.4;"></div>
+                        <p>${product.rating}</p>
+                        <div class="Stars star-r" style="--rating: ${product.rating};"></div>
                     </div>
                 </div>
                 <div class="recommended-circle">

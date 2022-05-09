@@ -2,7 +2,9 @@ package com.example.shopjava.repos;
 
 
 import com.example.shopjava.entities.Product;
+import com.example.shopjava.entities.contacts.Contact;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
@@ -12,4 +14,8 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     @Query("SELECT p from Product p where lower(p.name) LIKE lower(concat('%', ?1,'%'))" +
             " or lower(p.brand) LIKE lower(concat('%', ?1,'%'))")
     List<Product> searchProducts(String keyword);
+
+    @Query("delete from Product p where p.id=:id")
+    @Modifying
+    void deleteById(Long id);
 }

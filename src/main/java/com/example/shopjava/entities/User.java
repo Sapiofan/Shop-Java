@@ -4,6 +4,7 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "users")
@@ -12,7 +13,6 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
     private String name;
 
     @Column(nullable = false)
@@ -25,7 +25,8 @@ public class User {
     private Date createdAt;
 
     @Column(nullable = false)
-    private Boolean isAdmin;
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
     private List<Review> reviews = new ArrayList<>();
@@ -49,12 +50,12 @@ public class User {
         this.id = id;
     }
 
-    public Boolean getAdmin() {
-        return isAdmin;
+    public Role getRole() {
+        return role;
     }
 
-    public void setAdmin(Boolean admin) {
-        isAdmin = admin;
+    public void setRole(Role role) {
+        this.role = role;
     }
 
     public String getName() {
@@ -135,5 +136,18 @@ public class User {
 
     public void addTransaction(Transaction transaction){
         this.transactions.add(transaction);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return Objects.equals(id, user.id) && Objects.equals(name, user.name) && Objects.equals(password, user.password) && Objects.equals(email, user.email) && Objects.equals(createdAt, user.createdAt) && role == user.role && Objects.equals(reviews, user.reviews) && Objects.equals(favorites, user.favorites) && Objects.equals(cartProducts, user.cartProducts) && Objects.equals(transactions, user.transactions);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, password, email, createdAt, role, reviews, favorites, cartProducts, transactions);
     }
 }

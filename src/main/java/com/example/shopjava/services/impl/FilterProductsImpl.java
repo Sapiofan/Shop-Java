@@ -72,11 +72,13 @@ public class FilterProductsImpl implements FilterProducts {
     }
 
     @Override
+    @Transactional
     public Phone getPhoneByName(String name) {
         return phoneRepository.getPhoneByName(name);
     }
 
     @Override
+    @Transactional
     public Phone getPhoneById(Long id) {
         return phoneRepository.getPhoneById(id);
     }
@@ -111,13 +113,27 @@ public class FilterProductsImpl implements FilterProducts {
     }
 
     @Override
+    @Transactional
     public List<Watch> getAllWatches() {
         return watchRepository.findAllWatches();
     }
 
     @Override
+    @Transactional
     public List<Watch> watches(Set<String> filters, Map<String, List<String>> fullFilters, Integer min, Integer max) {
         return filterProductsRepo.filterWatches(filters, fullFilters, min, max);
+    }
+
+    @Override
+    @Transactional
+    public List<Product> getAllProducts() {
+        return productRepository.findAll();
+    }
+
+    @Override
+    @Transactional
+    public void deleteById(Long id) {
+        productRepository.deleteById(id);
     }
 
     public List<Phone> sortFromCheapToExp(List<Phone> phones) {
