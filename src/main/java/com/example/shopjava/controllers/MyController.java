@@ -11,6 +11,9 @@ import com.example.shopjava.services.FilterProducts;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +22,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.*;
 
 @Controller
@@ -45,7 +49,9 @@ public class MyController {
     private static final Logger log = LoggerFactory.getLogger("log");
 
     @GetMapping("/")
-    public String getHomePage(Model model){
+    public String getHomePage(Model model, Authentication authentication){
+        if(utils.checkAuth(authentication))
+            model.addAttribute("isAuthenticated", true);
         return "home";
     }
 
@@ -53,9 +59,10 @@ public class MyController {
     public String registration(@RequestParam("email") String email,
                                @RequestParam("psw") String psw,
                                @RequestParam("psw-repeat") String pswRepeat,
+                               HttpServletRequest request,
                                Model model
                                ){
-        String result = userDetailsService.signUp(email, psw, pswRepeat);
+        String result = userDetailsService.signUp(email, psw, pswRepeat, request);
         if(!result.isEmpty()){
             model.addAttribute("userExist", result);
             return "home";
@@ -66,18 +73,30 @@ public class MyController {
     @PostMapping(value = "/", params = "login")
     public String login(@RequestParam("email") String email,
                         @RequestParam("psw") String psw,
+                        HttpServletRequest request,
                         Model model
     ){
         log.info(email);
         log.info(psw);
-        UserDetails details = userDetailsService.loadUserByUsername(email);
-        log.info(details.getAuthorities().toString());
-//        model.addAttribute("",);
+        String res = userDetailsService.signIn(email, psw, request);
+        SecurityContext securityContext = SecurityContextHolder.getContext();
+        log.info(""+securityContext.getAuthentication().getName());
+        log.info(res);
+
+        model.addAttribute("isAuthenticated", securityContext.getAuthentication().isAuthenticated());
+        return "home";
+    }
+
+    @PostMapping(value = "/", params = "logout")
+    public String logout(){
+        SecurityContextHolder.getContext().setAuthentication(null);
         return "home";
     }
 
     @GetMapping("/searching")
-    public String filtersPage(Model model, @RequestParam("search") String searchKey){
+    public String filtersPage(Model model, @RequestParam("search") String searchKey, Authentication authentication){
+        if(utils.checkAuth(authentication))
+            model.addAttribute("isAuthenticated", true);
         List<? extends Product> products = filterProducts.searchProducts(searchKey);
         model.addAttribute("products", products);
         model.addAttribute("searchKey", searchKey);
@@ -96,7 +115,9 @@ public class MyController {
 //    }
 
     @GetMapping("/phones")
-    public String phoneFilters(Model model){
+    public String phoneFilters(Model model, Authentication authentication){
+        if(utils.checkAuth(authentication))
+            model.addAttribute("isAuthenticated", true);
         List<Phone> phones = filterProducts.getAllPhones();
         Map<String, List<String>> phoneFilters = filterProducts.getPhoneCharacteristics();
         Set<String> keys = phoneFilters.keySet();
@@ -116,10 +137,12 @@ public class MyController {
     }
 
     @PostMapping("/phones")
-    public String phoneFiltersPost(Model model,
+    public String phoneFiltersPost(Model model, Authentication authentication,
                                    @RequestParam(value = "filter-name", required = false) LinkedHashSet<String> filters,
                                    @RequestParam("input-min") Integer minValue, @RequestParam("input-max") Integer maxValue,
                                    @RequestParam("sort") String sortType){
+        if(utils.checkAuth(authentication))
+            model.addAttribute("isAuthenticated", true);
         Map<String, List<String>> phoneFilters = filterProducts.getPhoneCharacteristics();
         Set<String> keys = phoneFilters.keySet();
         List<Phone> phones = filterProducts.phones(filters, phoneFilters, minValue, maxValue);
@@ -138,7 +161,9 @@ public class MyController {
     }
 
     @GetMapping("/laptops")
-    public String laptopFilters(Model model){
+    public String laptopFilters(Model model, Authentication authentication){
+        if(utils.checkAuth(authentication))
+            model.addAttribute("isAuthenticated", true);
         List<Laptop> laptops = filterProducts.getAllLaptops();
         Map<String, List<String>> laptopFilters = filterProducts.getLaptopCharacteristics();
         Set<String> keys = laptopFilters.keySet();
@@ -158,10 +183,12 @@ public class MyController {
     }
 
     @PostMapping("/laptops")
-    public String laptopFiltersPost(Model model,
+    public String laptopFiltersPost(Model model, Authentication authentication,
                                    @RequestParam(value = "filter-name", required = false) LinkedHashSet<String> filters,
                                    @RequestParam("input-min") Integer minValue, @RequestParam("input-max") Integer maxValue,
                                    @RequestParam("sort") String sortType){
+        if(utils.checkAuth(authentication))
+            model.addAttribute("isAuthenticated", true);
         Map<String, List<String>> laptopFilters = filterProducts.getLaptopCharacteristics();
         Set<String> keys = laptopFilters.keySet();
         List<Laptop> laptops = filterProducts.laptops(filters, laptopFilters, minValue, maxValue);
@@ -180,8 +207,10 @@ public class MyController {
     }
 
     @GetMapping("/product/{id}")
-    public String getDescription(Model model,
+    public String getDescription(Model model, Authentication authentication,
                                  @PathVariable("id") Long id){
+        if(utils.checkAuth(authentication))
+            model.addAttribute("isAuthenticated", true);
 //        Phone phone = filterProducts.getPhoneByName(name);
         Phone phone = filterProducts.getPhoneById(id);
         log.info(phone.getName());
@@ -190,7 +219,9 @@ public class MyController {
     }
 
     @GetMapping("/watches")
-    public String watchesFilters(Model model){
+    public String watchesFilters(Model model, Authentication authentication){
+        if(utils.checkAuth(authentication))
+            model.addAttribute("isAuthenticated", true);
         List<Watch> watches = filterProducts.getAllWatches();
         Map<String, List<String>> watchFilters = filterProducts.getWatchCharacteristics();
         Set<String> keys = watchFilters.keySet();
@@ -210,10 +241,12 @@ public class MyController {
     }
 
     @PostMapping("/watches")
-    public String watchesFiltersPost(Model model,
+    public String watchesFiltersPost(Model model, Authentication authentication,
                                     @RequestParam(value = "filter-name", required = false) LinkedHashSet<String> filters,
                                     @RequestParam("input-min") Integer minValue, @RequestParam("input-max") Integer maxValue,
                                     @RequestParam("sort") String sortType){
+        if(utils.checkAuth(authentication))
+            model.addAttribute("isAuthenticated", true);
         Map<String, List<String>> watchFilters = filterProducts.getWatchCharacteristics();
         Set<String> keys = watchFilters.keySet();
         List<Watch> watches = filterProducts.watches(filters, watchFilters, minValue, maxValue);
@@ -232,18 +265,22 @@ public class MyController {
     }
 
     @GetMapping("/about")
-    public String getAboutPage(Model model){
+    public String getAboutPage(Model model, Authentication authentication){
+        if(utils.checkAuth(authentication))
+            model.addAttribute("isAuthenticated", true);
         return "about";
     }
 
     @PostMapping("/about")
-    public String filledCareer(Model model,
+    public String filledCareer(Model model, Authentication authentication,
                                @RequestParam("fname") String fname,
                                @RequestParam("lname") String lname,
                                @RequestParam("email") String email,
                                @RequestParam("phone") String phone,
                                @RequestParam("pos") String pos,
                                @RequestParam("link") String link) {
+        if(utils.checkAuth(authentication))
+            model.addAttribute("isAuthenticated", true);
         Career career = new Career(fname, lname, email, phone, pos, link);
         String result = careerService.addCareerUser(career);
         model.addAttribute("result", result);
@@ -251,23 +288,29 @@ public class MyController {
     }
 
     @GetMapping("/checkout")
-    public String getCheckoutPage(Model model){
+    public String getCheckoutPage(Model model, Authentication authentication){
+        if(utils.checkAuth(authentication))
+            model.addAttribute("isAuthenticated", true);
         return "checkout";
     }
 
     @GetMapping("/contact")
-    public String getContactPage(Model model){
+    public String getContactPage(Model model, Authentication authentication){
+        if(utils.checkAuth(authentication))
+            model.addAttribute("isAuthenticated", true);
         return "contact";
     }
 
     @PostMapping(value = "/contact", params = "form")
-    public String filledContactForm(Model model,
+    public String filledContactForm(Model model, Authentication authentication,
                                     @RequestParam("fname") String fname,
                                     @RequestParam("lname") String lname,
                                     @RequestParam("email") String email,
                                     @RequestParam("subject") String subject,
                                     @RequestParam("message") String message
                                     ){
+        if(utils.checkAuth(authentication))
+            model.addAttribute("isAuthenticated", true);
         Contact contact = new Contact(fname, lname, email);
         String result = contactService.addContactMessage(contact, subject, message);
         model.addAttribute("result", result);
@@ -275,27 +318,35 @@ public class MyController {
     }
 
     @PostMapping(value = "/contact", params = "subs")
-    public String filledEmail(Model model,
+    public String filledEmail(Model model, Authentication authentication,
                               @RequestParam("email") String email){
+        if(utils.checkAuth(authentication))
+            model.addAttribute("isAuthenticated", true);
         String result = contactService.subs(email);
         model.addAttribute("result", result);
         return "contact";
     }
 
     @GetMapping("/description")
-    public String getDescriptionPage(Model model){
+    public String getDescriptionPage(Model model, Authentication authentication){
+        if(utils.checkAuth(authentication))
+            model.addAttribute("isAuthenticated", true);
         return "description";
     }
 
     @GetMapping("/help")
-    public String getHelpPage(Model model){
+    public String getHelpPage(Model model, Authentication authentication){
+        if(utils.checkAuth(authentication))
+            model.addAttribute("isAuthenticated", true);
         List<FAQ> faqs = faqService.getFaqs();
         model.addAttribute("faqs", faqs);
         return "help";
     }
 
     @GetMapping("/success")
-    public String getSuccessPage(Model model){
+    public String getSuccessPage(Model model, Authentication authentication){
+        if(utils.checkAuth(authentication))
+            model.addAttribute("isAuthenticated", true);
         return "success";
     }
 }

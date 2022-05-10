@@ -4,6 +4,7 @@ import com.example.shopjava.entities.Laptop;
 import com.example.shopjava.entities.Phone;
 import com.example.shopjava.entities.Watch;
 import com.example.shopjava.repos.Utils;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 import java.util.Comparator;
@@ -38,4 +39,10 @@ public class UtilsImpl implements Utils {
             return watches.stream().max(Comparator.comparingDouble(Watch::getPrice)).get();
         return null;
     }
+
+    @Override
+    public boolean checkAuth(Authentication authentication) {
+        return authentication != null && !authentication.getName().equals("anonymousUser");
+    }
+
 }

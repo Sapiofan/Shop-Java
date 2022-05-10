@@ -25,7 +25,6 @@ window.onclick = function(event) {
 var search = document.getElementById('search'),
     searchWrapper = document.getElementById('search-wrapper'),
     closeIcon = document.getElementById('close-icon');
-searchSign = document.getElementById('search-sign');
 
 // Input focus
 search.onfocus = function() {
