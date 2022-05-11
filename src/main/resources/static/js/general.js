@@ -156,15 +156,3 @@ function scale(){
 window.addEventListener("resize", scale);
 
 scale();
-
-
-// function focusCat(){
-// 	var cat = document.getElementById('menu-category');
-// 	cat.style.maxHeight = "250px";
-// 	cat.style.transition = "transition: max-height 0.5s ease-in;";
-// }
-
-// function blurCat(){
-// 	cat.style.maxHeight = "0px";
-// 	cat.style.transition = "transition: max-height 0.5s ease-in;";
-// }

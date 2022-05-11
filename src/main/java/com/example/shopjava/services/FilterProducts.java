@@ -38,6 +38,8 @@ public interface FilterProducts {
 
     List<Product> getAllProducts();
 
+    List<Product> getProductsWithDiscount();
+
     void deleteById(Long id);
 
 }

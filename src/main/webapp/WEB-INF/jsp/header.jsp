@@ -10,11 +10,11 @@
             <div class="dropdown">
                 <button class="dropbtn">Categories</button>
                 <div class="dropdown-content">
-                    <a href="#">Computers</a>
                     <a href="/phones">Phones</a>
                     <a href="/laptops">Laptops</a>
                     <a href="/watches">Watches</a>
-                    <a href="#">Discounts</a>
+                    <a href="/discounts">Discounts</a>
+                    <a href="#">Computers</a>
                     <a href="#">Drones</a>
                 </div>
             </div>
@@ -55,14 +55,13 @@
                     <button onclick="document.getElementById('likes').style.display='block'"
                             class="likes">
                         <img src="/img/heart (2).png" style="width: 36px; height: 36px;">
-                        <span class="wishlist-count">2</span>
+                        <span class="wishlist-count">${favoriteProducts.size()}</span>
                     </button>
                 </c:if>
                 <c:if test="${!isAuthenticated}">
                     <button onclick="document.getElementById('registration').style.display='block'"
                             class="likes">
                         <img src="/img/heart (2).png" style="width: 36px; height: 36px;">
-                        <span class="wishlist-count">2</span>
                     </button>
                 </c:if>
             </div>
@@ -71,7 +70,6 @@
                     <nav id="main-nav">
                         <a class="cart-button" href="#" onclick="document.getElementById('body').style = '--visibility: auto';
                     document.getElementById('registration').style.display='block';">
-                            <span class="bag-count">3</span>
                             <span class="bag-icon"></span>
                         </a>
                     </nav>
@@ -79,7 +77,7 @@
                 <c:if test="${isAuthenticated}">
                     <nav id="main-nav">
                         <a class="cart-button" href="#" onclick="document.getElementById('body').style = '--visibility: hidden';">
-                            <span class="bag-count">3</span>
+                            <span class="bag-count">${cartProducts.size()}</span>
                             <span class="bag-icon"></span>
                         </a>
                     </nav>

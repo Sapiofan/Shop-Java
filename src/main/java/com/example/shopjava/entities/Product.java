@@ -9,7 +9,7 @@ import java.util.Set;
 @Entity
 @Table(name = "products")
 @Inheritance(strategy = InheritanceType.JOINED)
-public abstract class Product {
+public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -47,7 +47,7 @@ public abstract class Product {
     @ManyToOne(fetch = FetchType.EAGER)
     private Category category;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "product")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "product")
     private List<Review> reviews = new ArrayList<>();
 
     @ManyToMany(mappedBy = "cartProducts")

@@ -28,14 +28,14 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
     private List<Review> reviews = new ArrayList<>();
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
-    private List<Favorite> favorites = new ArrayList<>();
+    @OneToOne(mappedBy = "user")
+    private Favorite favorite;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
-    private List<Cart> cartProducts = new ArrayList<>();
+    @OneToOne(mappedBy = "user")
+    private Cart cart;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
     private List<Transaction> transactions = new ArrayList<>();
@@ -98,20 +98,20 @@ public class User {
         this.reviews = reviews;
     }
 
-    public List<Favorite> getFavorites() {
-        return favorites;
+    public Favorite getFavorite() {
+        return favorite;
     }
 
-    public void setFavorites(List<Favorite> favorites) {
-        this.favorites = favorites;
+    public void setFavorite(Favorite favorite) {
+        this.favorite = favorite;
     }
 
-    public List<Cart> getCartProducts() {
-        return cartProducts;
+    public Cart getCart() {
+        return cart;
     }
 
-    public void setCartProducts(List<Cart> cartProducts) {
-        this.cartProducts = cartProducts;
+    public void setCart(Cart cart) {
+        this.cart = cart;
     }
 
     public List<Transaction> getTransactions() {
@@ -126,14 +126,6 @@ public class User {
         this.reviews.add(review);
     }
 
-    public void addFavorite(Favorite favorite) {
-        this.favorites.add(favorite);
-    }
-
-    public void addInCart(Cart cartProduct) {
-        this.cartProducts.add(cartProduct);
-    }
-
     public void addTransaction(Transaction transaction){
         this.transactions.add(transaction);
     }
@@ -143,11 +135,15 @@ public class User {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return Objects.equals(id, user.id) && Objects.equals(name, user.name) && Objects.equals(password, user.password) && Objects.equals(email, user.email) && Objects.equals(createdAt, user.createdAt) && role == user.role && Objects.equals(reviews, user.reviews) && Objects.equals(favorites, user.favorites) && Objects.equals(cartProducts, user.cartProducts) && Objects.equals(transactions, user.transactions);
+        return Objects.equals(id, user.id) && Objects.equals(name, user.name)
+                && Objects.equals(password, user.password) && Objects.equals(email, user.email)
+                && Objects.equals(createdAt, user.createdAt) && role == user.role && Objects.equals(reviews, user.reviews)
+                && Objects.equals(favorite, user.favorite) && Objects.equals(cart, user.cart)
+                && Objects.equals(transactions, user.transactions);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, password, email, createdAt, role, reviews, favorites, cartProducts, transactions);
+        return Objects.hash(id, name, password, email, createdAt, role, reviews, favorite, cart, transactions);
     }
 }

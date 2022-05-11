@@ -4,10 +4,7 @@ import com.example.shopjava.configs.security.CustomUserDetailsService;
 import com.example.shopjava.entities.*;
 import com.example.shopjava.entities.contacts.Contact;
 import com.example.shopjava.repos.Utils;
-import com.example.shopjava.services.CareerService;
-import com.example.shopjava.services.ContactService;
-import com.example.shopjava.services.FaqService;
-import com.example.shopjava.services.FilterProducts;
+import com.example.shopjava.services.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,6 +41,12 @@ public class MyController {
     private CustomUserDetailsService userDetailsService;
 
     @Autowired
+    private FavoriteService favoriteService;
+
+    @Autowired
+    private ReviewService reviewService;
+
+    @Autowired
     private Utils utils;
 
     private static final Logger log = LoggerFactory.getLogger("log");
@@ -67,6 +70,10 @@ public class MyController {
             model.addAttribute("userExist", result);
             return "home";
         }
+        String name = SecurityContextHolder.getContext().getAuthentication().getName();
+        Favorite favorite = favoriteService.getUserProducts(userDetailsService.getUserByEmail(name).getId());
+        model.addAttribute("favoriteProducts", favorite.getFavoriteProducts());
+        model.addAttribute("favoriteSize", favorite.getFavoriteProducts().size());
         return "home";
     }
 
@@ -83,6 +90,10 @@ public class MyController {
         log.info(""+securityContext.getAuthentication().getName());
         log.info(res);
 
+        String name = SecurityContextHolder.getContext().getAuthentication().getName();
+        Favorite favorite = favoriteService.getUserProducts(userDetailsService.getUserByEmail(name).getId());
+        model.addAttribute("favoriteProducts", favorite.getFavoriteProducts());
+        model.addAttribute("favoriteSize", favorite.getFavoriteProducts().size());
         model.addAttribute("isAuthenticated", securityContext.getAuthentication().isAuthenticated());
         return "home";
     }
@@ -213,8 +224,28 @@ public class MyController {
             model.addAttribute("isAuthenticated", true);
 //        Phone phone = filterProducts.getPhoneByName(name);
         Phone phone = filterProducts.getPhoneById(id);
+        List<Review> reviews = reviewService.findReviewsByProduct(id);
+
         log.info(phone.getName());
         model.addAttribute("product", phone);
+        model.addAttribute("reviews", reviews);
+        model.addAttribute("recommended", reviewService.calculateRecommended(reviews));
+        return "description";
+    }
+
+    @PostMapping(value = "/product/{id}", params = "reviewSend")
+    public String sendReview(Model model, Authentication authentication,
+                             @PathVariable("id") Long id,
+                             @RequestParam("rate") Integer rate, @RequestParam("review") String review,
+                             @RequestParam("recommend") Boolean recommend){
+        Phone phone = filterProducts.getPhoneById(id);
+        boolean flag = reviewService.addReview(rate, review, recommend, authentication, id);
+        List<Review> reviews = reviewService.findReviewsByProduct(id);
+
+        model.addAttribute("product", phone);
+        model.addAttribute("reviewExists", flag);
+        model.addAttribute("reviews", reviews);
+        model.addAttribute("recommended", reviewService.calculateRecommended(reviews));
         return "description";
     }
 
@@ -261,6 +292,27 @@ public class MyController {
         model.addAttribute("maxValue", maxValue);
         model.addAttribute("max", (int) Math.floor(utils.maxWatch(filterProducts.getAllWatches()).getPrice()));
         model.addAttribute("sortType", sortType);
+        return "filters";
+    }
+
+    @GetMapping("/discounts")
+    public String discounts(Model model, Authentication authentication){
+        if(utils.checkAuth(authentication))
+            model.addAttribute("isAuthenticated", true);
+        List<Product> products = filterProducts.getProductsWithDiscount();
+        model.addAttribute("products", products);
+        model.addAttribute("seacrhBool", true);
+        return "filters";
+    }
+
+    @PostMapping("/discounts")
+    public String sortedDiscounts(Model model, Authentication authentication, @RequestParam("sort") String sortType){
+        if(utils.checkAuth(authentication))
+            model.addAttribute("isAuthenticated", true);
+        List<Product> products = filterProducts.getProductsWithDiscount();
+//        products = filterProducts.sort(products, sortType);
+        model.addAttribute("products", products);
+        model.addAttribute("seacrhBool", true);
         return "filters";
     }
 
@@ -327,12 +379,12 @@ public class MyController {
         return "contact";
     }
 
-    @GetMapping("/description")
-    public String getDescriptionPage(Model model, Authentication authentication){
-        if(utils.checkAuth(authentication))
-            model.addAttribute("isAuthenticated", true);
-        return "description";
-    }
+//    @GetMapping("/description")
+//    public String getDescriptionPage(Model model, Authentication authentication){
+//        if(utils.checkAuth(authentication))
+//            model.addAttribute("isAuthenticated", true);
+//        return "description";
+//    }
 
     @GetMapping("/help")
     public String getHelpPage(Model model, Authentication authentication){
@@ -348,5 +400,14 @@ public class MyController {
         if(utils.checkAuth(authentication))
             model.addAttribute("isAuthenticated", true);
         return "success";
+    }
+
+    @PostMapping(value = "updateFavorites", params = "heart")
+    public String updateFavorites(Model model, Authentication authentication,
+                                  @RequestParam("productId") Long productId){
+        Favorite favorite = favoriteService.getUserProducts(userDetailsService.getUserByEmail(authentication.getName()).getId());
+        favorite = favoriteService.deleteProduct(favorite, productId);
+        model.addAttribute("favoriteProducts", favorite.getFavoriteProducts());
+        return "";
     }
 }

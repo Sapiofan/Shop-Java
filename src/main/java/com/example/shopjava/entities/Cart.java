@@ -1,6 +1,7 @@
 package com.example.shopjava.entities;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -16,16 +17,16 @@ public class Cart {
     @Column
     private Integer totalPrice;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @OneToOne
     private User user;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "cart_products",
             joinColumns = @JoinColumn(name = "card_id"),
             inverseJoinColumns = @JoinColumn(name = "product_id")
     )
-    private Set<Product> cartProducts;
+    private Set<Product> cartProducts = new HashSet<>();
 
     public Cart(){}
 
@@ -59,7 +60,6 @@ public class Cart {
 
     public void setUser(User user) {
         this.user = user;
-        this.user.addInCart(this);
     }
 
     public Set<Product> getProducts() {
@@ -70,16 +70,4 @@ public class Cart {
         this.cartProducts = products;
     }
 
-    public Set<Product> getCartProducts() {
-        return cartProducts;
-    }
-
-    //    public Product getProduct() {
-//        return product;
-//    }
-//
-//    public void setProduct(Product product) {
-//        this.product = product;
-////        this.product.addFavorite(this);
-//    }
 }

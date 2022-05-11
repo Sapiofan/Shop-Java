@@ -46,9 +46,9 @@
                 <div class="one-line">
                     <div class="Stars" style="--rating: ${product.rating};"></div>
                     <p class="rating">${product.rating}</p>
-                    <a href="#" class="reviews-link">
+                    <a href="#reviews" class="reviews-link">
                         <img src="/img/chat-bubble.png" width="16px" height="16px">
-                        <p>45 review(s)</p>
+                        <p>${reviews.size()} review(s)</p>
                     </a>
                 </div>
             </div>
@@ -251,7 +251,7 @@
         </table>
     </section>
     <section id="reviews" class="">
-        <h3>Reviews: <span class="reviews-num">45</span></h3>
+        <h3>Reviews: <span class="reviews-num">${reviews.size()}</span></h3>
         <div class="general-rev-info">
             <div class="statistics-block">
                 <div class="user-rating-block">
@@ -270,12 +270,12 @@
                                       a 15.9155 15.9155 0 0 1 0 -31.831"
                             />
                             <path class="circle"
-                                  stroke-dasharray="90, 100"
+                                  stroke-dasharray="${recommended}, 100"
                                   d="M18 2.0845
                                       a 15.9155 15.9155 0 0 1 0 31.831
                                       a 15.9155 15.9155 0 0 1 0 -31.831"
                             />
-                            <text x="18" y="20.35" class="percentage">90%</text>
+                            <text x="18" y="20.35" class="percentage">${recommended}%</text>
                         </svg>
                     </div>
                     <p>Recommended</p>
@@ -287,53 +287,53 @@
             </div>
         </div>
         <div class="rewiews-container">
-            <div class="review-container">
-                <div class="name">
-                    <p>Alexey</p>
-                    <div class="Stars" style="--rating: 3;"></div>
-                </div>
-                <div class="comment-container">
-                    <div class="date-check">
-                        <p class="date">March 4, 2022</p>
-                        <div class="recommend">
-                            <img src="/img/check.png" width="16px" height="16px">
-                            <p>Recommended</p>
-                        </div>
-                        <div style="clear: both;"></div>
+            <c:forEach items="${reviews}" var="review">
+                <div class="review-container">
+                    <div class="name">
+                        <p>${review.user.name}</p>
+                        <div class="Stars" style="--rating: ${review.rating};"></div>
                     </div>
-                    <p class="rev-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Maecenas porttitor nec est sed auctor. Cras ultrices blandit sapien et tempor. Praesent ipsum lectus,
-                        tempus at bibendum nec, sollicitudin id arcu. Nam bibendum eget lacus at imperdiet.
-                        Quisque ac blandit felis. Suspendisse aliquam lacus et arcu sagittis,
-                        vel vehicula odio imperdiet. Nunc a lorem vehicula, convallis libero ut, vestibulum tellus. </p>
-                </div>
-            </div>
-            <div class="review-container">
-                <div class="name">
-                    <p>Alexey</p>
-                    <div class="Stars" style="--rating: 3;"></div>
-                </div>
-                <div class="comment-container">
-                    <div class="date-check">
-                        <p class="date">March 4, 2022</p>
-                        <div class="recommend">
-                            <img src="/img/check.png" width="16px" height="16px">
-                            <p>Recommended</p>
+                    <div class="comment-container">
+                        <div class="date-check">
+                            <p class="date">${review.date}</p>
+                            <c:if test="${review.recommended}">
+                                <div class="recommend">
+                                    <img src="/img/check.png" width="16px" height="16px">
+                                    <p>Recommended</p>
+                                </div>
+                                <div style="clear: both;"></div>
+                            </c:if>
                         </div>
-                        <div style="clear: both;"></div>
+                        <p class="rev-text">${review.review}</p>
                     </div>
-                    <p class="rev-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Maecenas porttitor nec est sed auctor. Cras ultrices blandit sapien et tempor. Praesent ipsum lectus,
-                        tempus at bibendum nec, sollicitudin id arcu. Nam bibendum eget lacus at imperdiet.
-                        Quisque ac blandit felis. Suspendisse aliquam lacus et arcu sagittis,
-                        vel vehicula odio imperdiet. Nunc a lorem vehicula, convallis libero ut, vestibulum tellus.
-                        Cras ultrices blandit sapien et tempor. Praesent ipsum lectus,
-                        tempus at bibendum nec, sollicitudin id arcu. Nam bibendum eget lacus at imperdiet.  </p>
                 </div>
-            </div>
-        </div>
+            </c:forEach>
+<%--            <div class="review-container">--%>
+<%--                <div class="name">--%>
+<%--                    <p>Alexey</p>--%>
+<%--                    <div class="Stars" style="--rating: 3;"></div>--%>
+<%--                </div>--%>
+<%--                <div class="comment-container">--%>
+<%--                    <div class="date-check">--%>
+<%--                        <p class="date">March 4, 2022</p>--%>
+<%--                        <div class="recommend">--%>
+<%--                            <img src="/img/check.png" width="16px" height="16px">--%>
+<%--                            <p>Recommended</p>--%>
+<%--                        </div>--%>
+<%--                        <div style="clear: both;"></div>--%>
+<%--                    </div>--%>
+<%--                    <p class="rev-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.--%>
+<%--                        Maecenas porttitor nec est sed auctor. Cras ultrices blandit sapien et tempor. Praesent ipsum lectus,--%>
+<%--                        tempus at bibendum nec, sollicitudin id arcu. Nam bibendum eget lacus at imperdiet.--%>
+<%--                        Quisque ac blandit felis. Suspendisse aliquam lacus et arcu sagittis,--%>
+<%--                        vel vehicula odio imperdiet. Nunc a lorem vehicula, convallis libero ut, vestibulum tellus.--%>
+<%--                        Cras ultrices blandit sapien et tempor. Praesent ipsum lectus,--%>
+<%--                        tempus at bibendum nec, sollicitudin id arcu. Nam bibendum eget lacus at imperdiet.  </p>--%>
+<%--                </div>--%>
+<%--            </div>--%>
+<%--        </div>--%>
         <div id="feedback" class="modal-feed">
-            <form class="modal-feed-content" action="#">
+            <form class="modal-feed-content" action="/product/${product.id}" method="post">
                 <div class="container">
                     <span onclick="document.getElementById('feedback').style.display='none'" class="close">&times;</span>
                     <div class="rate-product">
@@ -351,14 +351,14 @@
                             <label for="star1" title="text">1 star</label>
                         </div>
                     </div>
-                    <textarea class="rev-input" type="text" placeholder="Your review" required></textarea>
+                    <textarea class="rev-input" type="text" name="review" placeholder="Your review" required></textarea>
                     <label class="container1">I recommend this product
-                        <input type="checkbox" checked>
+                        <input name="recommend" type="checkbox" checked>
                         <span class="checkmark"></span>
                     </label>
 
                     <div class="clearfix">
-                        <button type="submit" class="send-rev">Send</button>
+                        <button type="submit" class="send-rev" name="reviewSend">Send</button>
                     </div>
                 </div>
             </form>
@@ -368,5 +368,12 @@
 <jsp:include page="footer.jsp"/>
 <script src="/js/description.js"></script>
 <script src="/js/general.js"></script>
+<script>
+    window.onload = ev => {
+        if(${existReview}){
+            alert("Sorry, but you have already sent a review for this product")
+        }
+    }
+</script>
 </body>
 </html>

@@ -22,10 +22,10 @@ public class Review {
     @Column(nullable = false)
     private Boolean isRecommended;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     private User user;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     private Product product;
 
     public Review(){}

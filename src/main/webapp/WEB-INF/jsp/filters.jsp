@@ -162,7 +162,9 @@
                             </a>
                             <div class="card-signs">
                                 <div class="Stars" style="--rating: ${product.rating};"></div>
-                                <img src="img/chat-bubble.png" style="width: 20px; height: 20px; margin-right: 10px;">
+                                <a href="/product/${product.id}#reviews">
+                                    <img src="img/chat-bubble.png" style="width: 20px; height: 20px; margin-right: 10px;">
+                                </a>
                                 <img src="img/heart.png" style="width: 20px; height: 20px; margin-right: 10px;">
                             </div>
                             <div class="buy-elements">

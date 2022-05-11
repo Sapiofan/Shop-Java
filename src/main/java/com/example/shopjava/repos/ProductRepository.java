@@ -15,6 +15,12 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
             " or lower(p.brand) LIKE lower(concat('%', ?1,'%'))")
     List<Product> searchProducts(String keyword);
 
+    @Query("select p from Product p where p.id=:id")
+    Product findProductById(Long id);
+
+    @Query("SELECT p from Product p where p.discount > 0")
+    List<Product> discounts();
+
     @Query("delete from Product p where p.id=:id")
     @Modifying
     void deleteById(Long id);

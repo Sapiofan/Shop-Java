@@ -9,5 +9,6 @@ import java.util.List;
 
 public interface FavoriteRepository extends JpaRepository<Favorite, Long> {
     @Query("SELECT f FROM Favorite f WHERE f.user.id = :userId")
-    Cart findCartByUser(Long userId);
+    Favorite findFavoriteByUser(Long userId);
+
 }

@@ -82,4 +82,8 @@ public class CustomUserDetailsService implements UserDetailsService {
         session.setAttribute(SPRING_SECURITY_CONTEXT_KEY, sc);
         return "";
     }
+
+    public User getUserByEmail(String email){
+        return userRepository.findByEmail(email);
+    }
 }

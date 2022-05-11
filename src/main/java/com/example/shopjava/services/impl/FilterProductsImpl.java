@@ -131,6 +131,11 @@ public class FilterProductsImpl implements FilterProducts {
     }
 
     @Override
+    public List<Product> getProductsWithDiscount() {
+        return productRepository.discounts();
+    }
+
+    @Override
     @Transactional
     public void deleteById(Long id) {
         productRepository.deleteById(id);
