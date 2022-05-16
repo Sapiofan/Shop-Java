@@ -22,39 +22,8 @@ public class FilterProductsRepoImpl implements FilterProductsRepo {
 
     @Override
     public List<Phone> filterPhones(Set<String> filters, Map<String, List<String>> fullFilters, Integer min, Integer max) {
-
-
-//        String init, query = init = "select p from Phone p where p.price between " + min + " and " + max + " and";
         String query = generateQuery("Phone", filters, fullFilters, min, max);
-//        if(filters != null){
-//            for(Map.Entry<String, List<String>> entry : fullFilters.entrySet()){
-//                List<String> list = entry.getValue();
-//                String key = entry.getKey().toLowerCase().replace('-','_');
-//                key = key.replace(' ','_');
-//                for (String filter : filters) {
-//                    for (String s : list) {
-//                        if(filter.equals(s)){
-//                            query += " p." + key + "='" + filter + "' or";
-//                        }
-//                    }
-//                }
-//                if(!init.equals(query)) {
-//                    String[] arr1 = query.split(" ");
-//                    String[] arr2 = Arrays.copyOfRange(arr1, 0, arr1.length - 1);
-//                    query = String.join(" ", arr2) + " and";
-//                }
-//            }
-//        }
-//        if(init.equals(query)){
-//            query = "select p from Phone p where p.price between " + min + " and " + max;
-//        }
-//        else {
-//            String[] arr1 = query.split(" ");
-//            String[] arr2 = Arrays.copyOfRange(arr1, 0, arr1.length - 1);
-//            query = String.join(" ", arr2);
-//        }
         log.info(query);
-
         return entityManager.createQuery(query).getResultList();
     }
 
@@ -77,20 +46,20 @@ public class FilterProductsRepoImpl implements FilterProductsRepo {
     private String generateQuery(String table, Set<String> filters, Map<String, List<String>> fullFilters,
                                  Integer min, Integer max) {
         String temp, init, query = init = temp = "select p from " + table + " p where (p.price between " + min + " and " + max + ") and (";
-        if(filters != null){
-            for(Map.Entry<String, List<String>> entry : fullFilters.entrySet()){
+        if (filters != null) {
+            for (Map.Entry<String, List<String>> entry : fullFilters.entrySet()) {
                 List<String> list = entry.getValue();
                 Collections.replaceAll(list, "Yes", "true");
-                String key = entry.getKey().toLowerCase().replace('-','_');
-                key = key.replace(' ','_');
+                String key = entry.getKey().toLowerCase().replace('-', '_');
+                key = key.replace(' ', '_');
                 for (String filter : filters) {
                     for (String s : list) {
-                        if(filter.equals(s)){
+                        if (filter.equals(s)) {
                             query += " p." + key + "='" + filter + "' or";
                         }
                     }
                 }
-                if(!init.equals(query) && !temp.equals(query)) {
+                if (!init.equals(query) && !temp.equals(query)) {
                     String[] arr1 = query.split(" ");
                     String[] arr2 = Arrays.copyOfRange(arr1, 0, arr1.length - 1);
                     query = String.join(" ", arr2) + ") and (";
@@ -99,10 +68,9 @@ public class FilterProductsRepoImpl implements FilterProductsRepo {
                 Collections.replaceAll(list, "true", "Yes");
             }
         }
-        if(init.equals(query)){
+        if (init.equals(query)) {
             query = "select p from " + table + " p where p.price between " + min + " and " + max;
-        }
-        else {
+        } else {
             String[] arr1 = query.split(" ");
             String[] arr2 = Arrays.copyOfRange(arr1, 0, arr1.length - 2);
             query = String.join(" ", arr2);

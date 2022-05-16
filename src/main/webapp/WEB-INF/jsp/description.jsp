@@ -11,18 +11,18 @@
             content="A project to train with Spring and React frameworks"
     />
 
-    <meta property="og:title" content="Smart shop"/>
+    <meta property="og:title" content="Smartshop"/>
     <meta property="og:type" content="website"/>
     <meta
             property="og:description"
-            content="A joint project to create qualitative site."
+            content="A project to try to create qualitative site."
     />
     <link rel="icon"
           href="https://ru.seaicons.com/wp-content/uploads/2015/10/Flat-TV-icon.png">
     <link rel="stylesheet" href="/css/general.css">
     <link rel="stylesheet" href="/css/description.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body id="body">
@@ -102,7 +102,8 @@
                 <li class="carousel__slide"></li>
                 <li class="carousel__slide"></li>
                 <div class="carousel__indicators">
-                    <label class="carousel__indicator" style="background-image: url('https://unsplash.it/800?random');" for="K"></label>
+                    <label class="carousel__indicator" style="background-image: url('https://unsplash.it/800?random');"
+                           for="K"></label>
                     <label class="carousel__indicator" for="L"></label>
                     <label class="carousel__indicator" for="M"></label>
                     <label class="carousel__indicator" for="N"></label>
@@ -125,7 +126,7 @@
                             <p class="profit">-${product.price*product.discount/100}</p>
                         </div>
                         <div class="price-now">
-                            ${product.price-(product.price*product.discount/100)} $
+                                ${product.price-(product.price*product.discount/100)} $
                         </div>
                     </c:if>
                     <c:if test="${product.discount == 0}">
@@ -145,7 +146,8 @@
                     <c:if test="${product.discount != 0}">
                         <div class="discount-type">
                             <img src="/img/badge.png" width="30px" height="30px">
-                            <p><span class="bold-text">Discount</span> Benefit up to ${product.price*product.discount/100} UAH</p>
+                            <p><span class="bold-text">Discount</span> Benefit up
+                                to ${product.price*product.discount/100} UAH</p>
                         </div>
                     </c:if>
                     <c:if test="${product.gifts != 'none'}">
@@ -170,52 +172,52 @@
     </section>
     <section id="chars" class="">
         <h3>Characteristics</h3>
-<%--        <c:forEach items="${filters}" var="filter">--%>
-<%--            <h5>Screen</h5>--%>
-<%--            <table class="screen-table">--%>
-<%--                <col style="width: 50%;" />--%>
-<%--                <tr>--%>
-<%--                    <td>Screen size</td>--%>
-<%--                    <td>6.8'</td>--%>
-<%--                </tr>--%>
-<%--                <tr>--%>
-<%--                    <td>Screen resolution</td>--%>
-<%--                    <td>3200x1440</td>--%>
-<%--                </tr>--%>
-<%--                <tr>--%>
-<%--                    <td>Screen refresh rate</td>--%>
-<%--                    <td>120 Hz</td>--%>
-<%--                </tr>--%>
-<%--                <tr>--%>
-<%--                    <td>Number of colors</td>--%>
-<%--                    <td>16 millions</td>--%>
-<%--                </tr>--%>
-<%--            </table>--%>
-<%--        </c:forEach>--%>
+        <%--        <c:forEach items="${filters}" var="filter">--%>
+        <%--            <h5>Screen</h5>--%>
+        <%--            <table class="screen-table">--%>
+        <%--                <col style="width: 50%;" />--%>
+        <%--                <tr>--%>
+        <%--                    <td>Screen size</td>--%>
+        <%--                    <td>6.8'</td>--%>
+        <%--                </tr>--%>
+        <%--                <tr>--%>
+        <%--                    <td>Screen resolution</td>--%>
+        <%--                    <td>3200x1440</td>--%>
+        <%--                </tr>--%>
+        <%--                <tr>--%>
+        <%--                    <td>Screen refresh rate</td>--%>
+        <%--                    <td>120 Hz</td>--%>
+        <%--                </tr>--%>
+        <%--                <tr>--%>
+        <%--                    <td>Number of colors</td>--%>
+        <%--                    <td>16 millions</td>--%>
+        <%--                </tr>--%>
+        <%--            </table>--%>
+        <%--        </c:forEach>--%>
 
-<%--        <h5>Screen</h5>--%>
-<%--        <table class="screen-table">--%>
-<%--            <col style="width: 50%;" />--%>
-<%--            <tr>--%>
-<%--                <td>Screen size</td>--%>
-<%--                <td>6.8'</td>--%>
-<%--            </tr>--%>
-<%--            <tr>--%>
-<%--                <td>Screen resolution</td>--%>
-<%--                <td>3200x1440</td>--%>
-<%--            </tr>--%>
-<%--            <tr>--%>
-<%--                <td>Screen refresh rate</td>--%>
-<%--                <td>120 Hz</td>--%>
-<%--            </tr>--%>
-<%--            <tr>--%>
-<%--                <td>Number of colors</td>--%>
-<%--                <td>16 millions</td>--%>
-<%--            </tr>--%>
-<%--        </table>--%>
+        <%--        <h5>Screen</h5>--%>
+        <%--        <table class="screen-table">--%>
+        <%--            <col style="width: 50%;" />--%>
+        <%--            <tr>--%>
+        <%--                <td>Screen size</td>--%>
+        <%--                <td>6.8'</td>--%>
+        <%--            </tr>--%>
+        <%--            <tr>--%>
+        <%--                <td>Screen resolution</td>--%>
+        <%--                <td>3200x1440</td>--%>
+        <%--            </tr>--%>
+        <%--            <tr>--%>
+        <%--                <td>Screen refresh rate</td>--%>
+        <%--                <td>120 Hz</td>--%>
+        <%--            </tr>--%>
+        <%--            <tr>--%>
+        <%--                <td>Number of colors</td>--%>
+        <%--                <td>16 millions</td>--%>
+        <%--            </tr>--%>
+        <%--        </table>--%>
         <h5>Memory</h5>
         <table class="memory-table">
-            <col style="width: 50%;" />
+            <col style="width: 50%;"/>
             <tr>
                 <td>Internal memory</td>
                 <td>128 GB</td>
@@ -231,7 +233,7 @@
         </table>
         <h5>Processor</h5>
         <table class="processor-table">
-            <col style="width: 50%;" />
+            <col style="width: 50%;"/>
             <tr>
                 <td>Processor</td>
                 <td>Exynos 2100</td>
@@ -283,86 +285,89 @@
             </div>
             <div class="feedback-but-cont">
                 <button class="feedback-but" onclick="document.getElementById('feedback').style.display='block'">
-                    Leave feedback</button>
+                    Leave feedback
+                </button>
             </div>
         </div>
         <div class="rewiews-container">
             <c:forEach items="${reviews}" var="review">
-                <div class="review-container">
-                    <div class="name">
-                        <p>${review.user.name}</p>
-                        <div class="Stars" style="--rating: ${review.rating};"></div>
-                    </div>
-                    <div class="comment-container">
-                        <div class="date-check">
-                            <p class="date">${review.date}</p>
-                            <c:if test="${review.recommended}">
-                                <div class="recommend">
-                                    <img src="/img/check.png" width="16px" height="16px">
-                                    <p>Recommended</p>
-                                </div>
-                                <div style="clear: both;"></div>
-                            </c:if>
-                        </div>
-                        <p class="rev-text">${review.review}</p>
-                    </div>
+            <div class="review-container">
+                <div class="name">
+                    <p>${review.user.name}</p>
+                    <div class="Stars" style="--rating: ${review.rating};"></div>
                 </div>
+                <div class="comment-container">
+                    <div class="date-check">
+                        <p class="date">${review.date}</p>
+                        <c:if test="${review.recommended}">
+                            <div class="recommend">
+                                <img src="/img/check.png" width="16px" height="16px">
+                                <p>Recommended</p>
+                            </div>
+                            <div style="clear: both;"></div>
+                        </c:if>
+                    </div>
+                    <p class="rev-text">${review.review}</p>
+                </div>
+            </div>
             </c:forEach>
-<%--            <div class="review-container">--%>
-<%--                <div class="name">--%>
-<%--                    <p>Alexey</p>--%>
-<%--                    <div class="Stars" style="--rating: 3;"></div>--%>
-<%--                </div>--%>
-<%--                <div class="comment-container">--%>
-<%--                    <div class="date-check">--%>
-<%--                        <p class="date">March 4, 2022</p>--%>
-<%--                        <div class="recommend">--%>
-<%--                            <img src="/img/check.png" width="16px" height="16px">--%>
-<%--                            <p>Recommended</p>--%>
-<%--                        </div>--%>
-<%--                        <div style="clear: both;"></div>--%>
-<%--                    </div>--%>
-<%--                    <p class="rev-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.--%>
-<%--                        Maecenas porttitor nec est sed auctor. Cras ultrices blandit sapien et tempor. Praesent ipsum lectus,--%>
-<%--                        tempus at bibendum nec, sollicitudin id arcu. Nam bibendum eget lacus at imperdiet.--%>
-<%--                        Quisque ac blandit felis. Suspendisse aliquam lacus et arcu sagittis,--%>
-<%--                        vel vehicula odio imperdiet. Nunc a lorem vehicula, convallis libero ut, vestibulum tellus.--%>
-<%--                        Cras ultrices blandit sapien et tempor. Praesent ipsum lectus,--%>
-<%--                        tempus at bibendum nec, sollicitudin id arcu. Nam bibendum eget lacus at imperdiet.  </p>--%>
-<%--                </div>--%>
-<%--            </div>--%>
-<%--        </div>--%>
-        <div id="feedback" class="modal-feed">
-            <form class="modal-feed-content" action="/product/${product.id}" method="post">
-                <div class="container">
-                    <span onclick="document.getElementById('feedback').style.display='none'" class="close">&times;</span>
-                    <div class="rate-product">
-                        <p>Rate this product:</p>
-                        <div class="rate">
-                            <input type="radio" id="star5" name="rate" value="5" />
-                            <label for="star5" title="text">5 stars</label>
-                            <input type="radio" id="star4" name="rate" value="4" />
-                            <label for="star4" title="text">4 stars</label>
-                            <input type="radio" id="star3" name="rate" value="3" />
-                            <label for="star3" title="text">3 stars</label>
-                            <input type="radio" id="star2" name="rate" value="2" />
-                            <label for="star2" title="text">2 stars</label>
-                            <input type="radio" id="star1" name="rate" value="1" />
-                            <label for="star1" title="text">1 star</label>
+            <%--            <div class="review-container">--%>
+            <%--                <div class="name">--%>
+            <%--                    <p>Alexey</p>--%>
+            <%--                    <div class="Stars" style="--rating: 3;"></div>--%>
+            <%--                </div>--%>
+            <%--                <div class="comment-container">--%>
+            <%--                    <div class="date-check">--%>
+            <%--                        <p class="date">March 4, 2022</p>--%>
+            <%--                        <div class="recommend">--%>
+            <%--                            <img src="/img/check.png" width="16px" height="16px">--%>
+            <%--                            <p>Recommended</p>--%>
+            <%--                        </div>--%>
+            <%--                        <div style="clear: both;"></div>--%>
+            <%--                    </div>--%>
+            <%--                    <p class="rev-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.--%>
+            <%--                        Maecenas porttitor nec est sed auctor. Cras ultrices blandit sapien et tempor. Praesent ipsum lectus,--%>
+            <%--                        tempus at bibendum nec, sollicitudin id arcu. Nam bibendum eget lacus at imperdiet.--%>
+            <%--                        Quisque ac blandit felis. Suspendisse aliquam lacus et arcu sagittis,--%>
+            <%--                        vel vehicula odio imperdiet. Nunc a lorem vehicula, convallis libero ut, vestibulum tellus.--%>
+            <%--                        Cras ultrices blandit sapien et tempor. Praesent ipsum lectus,--%>
+            <%--                        tempus at bibendum nec, sollicitudin id arcu. Nam bibendum eget lacus at imperdiet.  </p>--%>
+            <%--                </div>--%>
+            <%--            </div>--%>
+            <%--        </div>--%>
+            <div id="feedback" class="modal-feed">
+                <form class="modal-feed-content" action="/product/${product.id}" method="post">
+                    <div class="container">
+                        <span onclick="document.getElementById('feedback').style.display='none'"
+                              class="close">&times;</span>
+                        <div class="rate-product">
+                            <p>Rate this product:</p>
+                            <div class="rate">
+                                <input type="radio" id="star5" name="rate" value="5"/>
+                                <label for="star5" title="text">5 stars</label>
+                                <input type="radio" id="star4" name="rate" value="4"/>
+                                <label for="star4" title="text">4 stars</label>
+                                <input type="radio" id="star3" name="rate" value="3"/>
+                                <label for="star3" title="text">3 stars</label>
+                                <input type="radio" id="star2" name="rate" value="2"/>
+                                <label for="star2" title="text">2 stars</label>
+                                <input type="radio" id="star1" name="rate" value="1"/>
+                                <label for="star1" title="text">1 star</label>
+                            </div>
+                        </div>
+                        <textarea class="rev-input" type="text" name="review" placeholder="Your review"
+                                  required></textarea>
+                        <label class="container1">I recommend this product
+                            <input name="recommend" type="checkbox" checked>
+                            <span class="checkmark"></span>
+                        </label>
+
+                        <div class="clearfix">
+                            <button type="submit" class="send-rev" name="reviewSend">Send</button>
                         </div>
                     </div>
-                    <textarea class="rev-input" type="text" name="review" placeholder="Your review" required></textarea>
-                    <label class="container1">I recommend this product
-                        <input name="recommend" type="checkbox" checked>
-                        <span class="checkmark"></span>
-                    </label>
-
-                    <div class="clearfix">
-                        <button type="submit" class="send-rev" name="reviewSend">Send</button>
-                    </div>
-                </div>
-            </form>
-        </div>
+                </form>
+            </div>
     </section>
 </main>
 <jsp:include page="footer.jsp"/>
@@ -370,7 +375,7 @@
 <script src="/js/general.js"></script>
 <script>
     window.onload = ev => {
-        if(${existReview}){
+        if (${existReview}) {
             alert("Sorry, but you have already sent a review for this product")
         }
     }

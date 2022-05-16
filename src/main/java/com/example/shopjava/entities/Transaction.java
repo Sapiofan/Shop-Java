@@ -21,7 +21,8 @@ public class Transaction {
     @ManyToOne(fetch = FetchType.EAGER)
     private Product product;
 
-    public Transaction(){}
+    public Transaction() {
+    }
 
     public Long getId() {
         return id;

@@ -17,7 +17,8 @@ public class Category {
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "category")
     private List<Product> products = new ArrayList<>();
 
-    public Category(){}
+    public Category() {
+    }
 
     public long getId() {
         return id;
@@ -43,7 +44,7 @@ public class Category {
         this.products = products;
     }
 
-    public void addProduct(Product product){
+    public void addProduct(Product product) {
         this.products.add(product);
     }
 }

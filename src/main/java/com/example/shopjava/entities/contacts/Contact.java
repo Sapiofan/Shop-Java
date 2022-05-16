@@ -28,9 +28,10 @@ public class Contact {
     @Column(name = "send_mails")
     private Boolean sendMails;
 
-    public Contact(){}
+    public Contact() {
+    }
 
-    public Contact(String first_name, String last_name, String email){
+    public Contact(String first_name, String last_name, String email) {
         this.first_name = first_name;
         this.last_name = last_name;
         this.email = email;
@@ -84,7 +85,7 @@ public class Contact {
         this.messages = messages;
     }
 
-    public void addMessage(Message message){
+    public void addMessage(Message message) {
         this.messages.add(message);
     }
 

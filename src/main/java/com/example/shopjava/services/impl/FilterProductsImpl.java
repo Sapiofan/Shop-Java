@@ -32,7 +32,7 @@ public class FilterProductsImpl implements FilterProducts {
     @Transactional
     @Override
     public List<? extends Product> searchProducts(String keyword) {
-        if(keyword != null){
+        if (keyword != null) {
             return productRepository.searchProducts(keyword);
         }
         return phoneRepository.findAll();
@@ -67,7 +67,7 @@ public class FilterProductsImpl implements FilterProducts {
 
     @Override
     @Transactional
-    public List<Phone> getAllPhones(){
+    public List<Phone> getAllPhones() {
         return phoneRepository.findAll();
     }
 
@@ -85,7 +85,7 @@ public class FilterProductsImpl implements FilterProducts {
 
     @Override
     public List<Phone> sort(List<Phone> phones, String sortType) {
-        switch (sortType){
+        switch (sortType) {
             case "From cheap to expensive":
                 return sortFromCheapToExp(phones);
             case "From expensive to cheap":

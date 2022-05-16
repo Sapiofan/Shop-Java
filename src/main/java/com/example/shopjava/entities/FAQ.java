@@ -15,9 +15,10 @@ public class FAQ {
     @Column(nullable = false)
     private String answer;
 
-    public FAQ(){}
+    public FAQ() {
+    }
 
-    public FAQ(String question, String answer){
+    public FAQ(String question, String answer) {
         this.question = question;
         this.answer = answer;
     }

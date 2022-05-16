@@ -4,27 +4,27 @@ class Checkout extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            data:false,
-            cardInput:false,
+            data: false,
+            cardInput: false,
 
-            name:"",
-            email:"",
-            city:"",
+            name: "",
+            email: "",
+            city: "",
 
-            cvv:"",
+            cvv: "",
 
             areaCode: "",
             prefix: "",
             suffix: "",
 
-            phone1:"",
-            phone2:"",
-            phone3:"",
+            phone1: "",
+            phone2: "",
+            phone3: "",
 
-            part1:"",
-            part2:"",
-            part3:"",
-            part4:"",
+            part1: "",
+            part2: "",
+            part3: "",
+            part4: "",
         };
 
         this.handleInputChange = this.handleInputChange.bind(this);
@@ -41,7 +41,7 @@ class Checkout extends React.Component {
 
     handleInputChange(event) {
         const target = event.target;
-        const value =  target.value;
+        const value = target.value;
         const name = target.name;
 
         this.setState({
@@ -50,114 +50,113 @@ class Checkout extends React.Component {
     }
 
     handleCard() {
-        if(!this.state.data)
-            this.setState({data:true})
-        else{
-            this.setState({data:false})
+        if (!this.state.data)
+            this.setState({data: true})
+        else {
+            this.setState({data: false})
         }
 
     }
 
     handleData() {
-        this.setState({cardInput:true})
+        this.setState({cardInput: true})
     }
 
     setInputRef(name, element) {
         this[name] = element;
     }
 
-    handleChange({ target: { name, value } }) {
+    handleChange({target: {name, value}}) {
         let valueChanged = false;
         this.setState(prevState => {
             const nextValue = value.replace(/[^\d]/g, '');
             const changedValue = prevState[name];
             if (changedValue.length !== nextValue.length) valueChanged = true;
 
-            return { [name]: nextValue }
+            return {[name]: nextValue}
         }, () => {
-            if(valueChanged) this.handleFocus(name)
+            if (valueChanged) this.handleFocus(name)
         });
     };
 
-    handleFocus(name){
-        const { areaCode, prefix, suffix } = this.state;
+    handleFocus(name) {
+        const {areaCode, prefix, suffix} = this.state;
         const areaCodeFilled = areaCode.length === 3;
         const prefixFilled = prefix.length === 2;
 
-        if(areaCodeFilled && name === "areaCode") {
+        if (areaCodeFilled && name === "areaCode") {
             this.prefix.focus();
             this.prefix.selectionEnd = 0;
-        } else if(prefixFilled && name === "prefix") {
+        } else if (prefixFilled && name === "prefix") {
             this.suffix.focus();
             this.suffix.selectionEnd = 0;
         }
     }
 
-    handleCardChange({ target: { name, value } }) {
+    handleCardChange({target: {name, value}}) {
         let valueChanged = false;
         this.setState(prevState => {
             const nextValue = value.replace(/[^\d]/g, '');
             const changedValue = prevState[name];
             if (changedValue.length !== nextValue.length) valueChanged = true;
 
-            return { [name]: nextValue }
+            return {[name]: nextValue}
         }, () => {
-            if(valueChanged) this.handleFocusCard(name)
+            if (valueChanged) this.handleFocusCard(name)
         });
     }
 
-    handleFocusCard(name){
-        const { part1, part2, part3, part4 } = this.state;
+    handleFocusCard(name) {
+        const {part1, part2, part3, part4} = this.state;
         const part1Filled = part1.length === 4;
         const part2Filled = part2.length === 4;
         const part3Filled = part3.length === 4;
 
-        if(part1Filled && name === "part1") {
+        if (part1Filled && name === "part1") {
             this.part2.focus();
             this.part2.selectionEnd = 0;
-        } else if(part2Filled && name === "part2") {
+        } else if (part2Filled && name === "part2") {
             this.part3.focus();
             this.part3.selectionEnd = 0;
-        } else if(part3Filled && name === "part3") {
+        } else if (part3Filled && name === "part3") {
             this.part4.focus();
             this.part4.selectionEnd = 0;
         }
     }
 
-    handlePhoneChange({ target: { name, value } }) {
+    handlePhoneChange({target: {name, value}}) {
         let valueChanged = false;
         this.setState(prevState => {
             const nextValue = value.replace(/[^\d]/g, '');
             const changedValue = prevState[name];
             if (changedValue.length !== nextValue.length) valueChanged = true;
 
-            return { [name]: nextValue }
+            return {[name]: nextValue}
         }, () => {
-            if(valueChanged) this.handlePhone(name)
+            if (valueChanged) this.handlePhone(name)
         });
     }
 
-    handlePhone(name){
-        const { phone1, phone2, phone3 } = this.state;
+    handlePhone(name) {
+        const {phone1, phone2, phone3} = this.state;
         const phone1Filled = phone1.length === 3;
         const phone2Filled = phone2.length === 3;
 
-        if(phone1Filled && name === "phone1") {
+        if (phone1Filled && name === "phone1") {
             this.phone2.focus();
             this.phone2.selectionEnd = 0;
-        } else if(phone2Filled && name === "phone2") {
+        } else if (phone2Filled && name === "phone2") {
             this.phone3.focus();
             this.phone3.selectionEnd = 0;
         }
     }
 
     render() {
-        if(this.state.cardInput){
-            window.location.href="success.html"
-        }
-        else if (this.state.data) {
+        if (this.state.cardInput) {
+            window.location.href = "success.html"
+        } else if (this.state.data) {
             return (
-                <form className="data-form" >
+                <form className="data-form">
                     <h4>2. Credit card</h4>
                     <div className="text-container">
                         <p>Card number</p>
@@ -243,14 +242,14 @@ class Checkout extends React.Component {
                             maxLength="3"
                             placeholder="xxx"></input>
                     </div>
-                    <input onClick={this.handleCard} className="back" value={"Back"} />
-                    <input onClick={this.handleData} disabled={!this.state.part1 || !this.state.part2 || !this.state.part3
-                        || !this.state.part4 || !this.state.prefix || !this.state.suffix || !this.state.cvv}
-                           className="submit" value="Pay" />
+                    <input onClick={this.handleCard} className="back" value={"Back"}/>
+                    <input onClick={this.handleData}
+                           disabled={!this.state.part1 || !this.state.part2 || !this.state.part3
+                               || !this.state.part4 || !this.state.prefix || !this.state.suffix || !this.state.cvv}
+                           className="submit" value="Pay"/>
                 </form>
             )
-        }
-        else{
+        } else {
             return (
                 <form className="data-form">
                     <h4>1. Contact data</h4>
@@ -267,7 +266,7 @@ class Checkout extends React.Component {
                         <p>Phone</p>
                         <div className="input-date input-phone">
                             <input type="text" id="region" value="+38" disabled/>
-                            <div className="parenthesis" style={{ marginLeft: 10}}>&#40;</div>
+                            <div className="parenthesis" style={{marginLeft: 10}}>&#40;</div>
                             <input
                                 className="input area-code"
                                 type="text"
@@ -277,7 +276,7 @@ class Checkout extends React.Component {
                                 onChange={this.handlePhoneChange}
                                 maxLength="3"
                             />
-                            <div className="parenthesis" style={{ marginRight: 2}}>&#41;</div>
+                            <div className="parenthesis" style={{marginRight: 2}}>&#41;</div>
                             <input
                                 ref={node => this.setInputRef("phone2", node)}
                                 className="input prefix"
@@ -321,8 +320,9 @@ class Checkout extends React.Component {
                             placeholder="Input city"></input>
                     </div>
                     <input onClick={this.handleCard}
-                           className="submit" value="Next" disabled={!this.state.city || !this.state.name || !this.state.email ||
-                        !this.state.phone1 || !this.state.phone2 || !this.state.phone3} />
+                           className="submit" value="Next"
+                           disabled={!this.state.city || !this.state.name || !this.state.email ||
+                               !this.state.phone1 || !this.state.phone2 || !this.state.phone3}/>
                 </form>
             )
         }

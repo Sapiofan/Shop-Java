@@ -14,28 +14,28 @@ import java.util.List;
 public class UtilsImpl implements Utils {
     @Override
     public Phone min(List<Phone> phoneList) {
-        if(!phoneList.isEmpty())
+        if (!phoneList.isEmpty())
             return phoneList.stream().min(Comparator.comparingDouble(Phone::getPrice)).get();
         return null;
     }
 
     @Override
     public Phone max(List<Phone> phones) {
-        if(!phones.isEmpty())
+        if (!phones.isEmpty())
             return phones.stream().max(Comparator.comparingDouble(Phone::getPrice)).get();
         return null;
     }
 
     @Override
     public Laptop maxLaptop(List<Laptop> laptops) {
-        if(!laptops.isEmpty())
+        if (!laptops.isEmpty())
             return laptops.stream().max(Comparator.comparingDouble(Laptop::getPrice)).get();
         return null;
     }
 
     @Override
     public Watch maxWatch(List<Watch> watches) {
-        if(!watches.isEmpty())
+        if (!watches.isEmpty())
             return watches.stream().max(Comparator.comparingDouble(Watch::getPrice)).get();
         return null;
     }

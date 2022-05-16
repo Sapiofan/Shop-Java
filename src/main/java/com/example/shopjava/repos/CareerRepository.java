@@ -14,6 +14,7 @@ public interface CareerRepository extends JpaRepository<Career, Long> {
     @Query("delete from Career c where c.id=:id")
     @Modifying
     void deleteById(Long id);
+
     @Query("delete from Career c where c.email=:email")
     @Modifying
     void deleteByEmail(String email);

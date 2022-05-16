@@ -3,7 +3,8 @@
         <div class="container">
             <!-- <span onclick="document.getElementById('registration').style.display='none'" class="close">&times;</span> -->
             <button class="up-button" onclick="document.getElementById('registration').style.display='none';
-                document.getElementById('login').style.display='block'">Sign In</button>
+                document.getElementById('login').style.display='block'">Sign In
+            </button>
             <button class="up-button active">Sign Up</button>
             <input type="email" class="email" placeholder="Enter Email" name="email" required>
             <input type="password" class="password" placeholder="Enter Password" name="psw" required>

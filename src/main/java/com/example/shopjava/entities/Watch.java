@@ -1,12 +1,13 @@
 package com.example.shopjava.entities;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
 @Entity
 @Table(name = "watches")
-public class Watch extends Product{
+public class Watch extends Product {
 
     @Column(nullable = false)
     private String series;
@@ -47,15 +48,16 @@ public class Watch extends Product{
     @Column(nullable = false)
     private String display_diagonal;
 
-    public Watch(){}
+    public Watch() {
+    }
 
-    public Watch(String image, String name, Float price, String brand, String payment, Float rating, Integer discount,
-                 String gifts, Boolean isAvailable, Integer warranty, Category category, List<Review> reviews,
-                 Set<Cart> carts, Set<Favorite> favorites, String series, String purpose, String display_shape,
-                 Boolean touch_screen, Boolean waterproof, Boolean call_support, Boolean music_control,
-                 Boolean pulse_measurement, Boolean step_counting, Boolean sleep_monitoring, String color,
-                 Integer working_hours, String display_diagonal) {
-        super(image, name, price, brand, payment, rating, discount, gifts, isAvailable, warranty, category, reviews, carts, favorites);
+    public Watch(Long id, String image, String name, Float price, String brand, String payment, Float rating, Integer discount,
+                 String gifts, Boolean isAvailable, Integer warranty, Date addedAt, Integer sold, Category category,
+                 List<Review> reviews, Set<Cart> carts, Set<Favorite> favorites, String series, String purpose,
+                 String display_shape, Boolean touch_screen, Boolean waterproof, Boolean call_support, Boolean music_control,
+                 Boolean pulse_measurement, Boolean step_counting, Boolean sleep_monitoring, String color, Integer working_hours,
+                 String display_diagonal) {
+        super(id, image, name, price, brand, payment, rating, discount, gifts, isAvailable, warranty, addedAt, sold, category, reviews, carts, favorites);
         this.series = series;
         this.purpose = purpose;
         this.display_shape = display_shape;

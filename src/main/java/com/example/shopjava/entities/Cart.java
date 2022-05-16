@@ -28,7 +28,8 @@ public class Cart {
     )
     private Set<Product> cartProducts = new HashSet<>();
 
-    public Cart(){}
+    public Cart() {
+    }
 
     public Long getId() {
         return id;

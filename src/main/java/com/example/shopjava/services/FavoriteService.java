@@ -7,7 +7,10 @@ import java.util.Set;
 
 public interface FavoriteService {
     Favorite addProduct(Favorite favorite, Long productId);
+
     Favorite getUserProducts(Long id);
+
     Favorite deleteProduct(Favorite favorite, Long productId);
+
     Favorite cleanFavorites(Favorite favorite);
 }

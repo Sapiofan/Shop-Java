@@ -11,5 +11,6 @@ public interface CareerService {
     List<Career> getCareers();
 
     void deleteCareerUserById(Long id);
+
     void deleteCareerUserByEmail(String email);
 }

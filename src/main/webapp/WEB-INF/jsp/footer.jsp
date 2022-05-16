@@ -19,27 +19,49 @@
         <div class="footer-block">
             <h2 class="collapsible">Shop</h2>
             <ul class="footer-links content">
-                <a href="/phones"><li>Phones</li></a>
-                <a href="/laptops"><li>Laptops</li></a>
-                <a href="/watches"><li>Watches</li></a>
-                <a href="/discounts"><li>Discounts</li></a>
-                <a href="#"><li>Computers</li></a>
+                <a href="/phones">
+                    <li>Phones</li>
+                </a>
+                <a href="/laptops">
+                    <li>Laptops</li>
+                </a>
+                <a href="/watches">
+                    <li>Watches</li>
+                </a>
+                <a href="/discounts">
+                    <li>Discounts</li>
+                </a>
+                <a href="#">
+                    <li>Computers</li>
+                </a>
             </ul>
         </div>
         <div class="footer-block">
             <h2 class="collapsible">Customer support</h2>
             <ul class="footer-links content">
-                <a href="/contact"><li>Contact us</li></a>
-                <a href="/help#faq"><li>FAQ</li></a>
-                <a href="/about"><li>About</li></a>
+                <a href="/contact">
+                    <li>Contact us</li>
+                </a>
+                <a href="/help#faq">
+                    <li>FAQ</li>
+                </a>
+                <a href="/about">
+                    <li>About</li>
+                </a>
             </ul>
         </div>
         <div class="footer-block">
             <h2 class="collapsible">Policy</h2>
             <ul class="footer-links content">
-                <a href="/help#shipping"><li>Shipping & Returns</li></a>
-                <a href="/help#terms"><li>Terms & Conditions</li></a>
-                <a href="#"><li>Payment Methods</li></a>
+                <a href="/help#shipping">
+                    <li>Shipping & Returns</li>
+                </a>
+                <a href="/help#terms">
+                    <li>Terms & Conditions</li>
+                </a>
+                <a href="#">
+                    <li>Payment Methods</li>
+                </a>
             </ul>
         </div>
     </div>

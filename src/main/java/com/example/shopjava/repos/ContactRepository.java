@@ -15,6 +15,7 @@ public interface ContactRepository extends JpaRepository<Contact, Long> {
     @Query("delete from Contact c where c.id=:id")
     @Modifying
     void deleteById(Long id);
+
     @Query("delete from Contact c where c.email=:email")
     @Modifying
     void deleteByEmail(String email);

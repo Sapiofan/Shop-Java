@@ -28,12 +28,11 @@ public class ContactServiceImpl implements ContactService {
     public String addContactMessage(Contact contact, String subject, String message) {
         Contact ContactInDb = contactRepository.findByEmail(contact.getEmail());
         Message message1 = new Message(subject, message);
-        if(ContactInDb != null){
+        if (ContactInDb != null) {
             message1.setContact(ContactInDb);
             messageRepository.save(message1);
             contactRepository.save(ContactInDb);
-        }
-        else {
+        } else {
             message1.setContact(contact);
             messageRepository.save(message1);
             contactRepository.save(contact);
@@ -45,10 +44,9 @@ public class ContactServiceImpl implements ContactService {
     @Transactional
     public String subs(String email) {
         Contact contact = contactRepository.findByEmail(email);
-        if(contact != null){
+        if (contact != null) {
             contact.setSendMails(true);
-        }
-        else {
+        } else {
             contact = new Contact();
             contact.setEmail(email);
             contact.setSendMails(true);

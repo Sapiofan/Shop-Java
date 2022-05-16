@@ -13,7 +13,7 @@
     padding: 0 350px;
 }
 
-section h1{
+section h1 {
     font-size: 44px;
     margin-bottom: 150px;
 }
@@ -36,18 +36,22 @@ section h1{
         padding: 0;
         width: inherit;
     }
+
     section h1 {
         font-size: 30px;
         margin-bottom: 40px;
         width: inherit;
     }
+
     .text-block {
         margin-bottom: 40px;
     }
+
     .text-block h3 {
         font-size: 22px;
     }
-    .text-block p{
+
+    .text-block p {
         width: inherit;
         padding: 0 20px;
     }
@@ -62,7 +66,7 @@ section h1{
     background-color: rgb(235, 235, 235);
 }
 
-#faq h1{
+#faq h1 {
     margin: 0;
     margin-bottom: 50px;
     font-size: 32px;
@@ -109,9 +113,11 @@ section h1{
     #faq h1 {
         font-size: 30px;
     }
+
     .questions {
         padding: 0;
     }
+
     .collapsible1 {
         padding: 0 30% 0 20px;
     }

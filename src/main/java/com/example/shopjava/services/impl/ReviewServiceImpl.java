@@ -35,7 +35,7 @@ public class ReviewServiceImpl implements ReviewService {
         User user = userRepository.findByEmail(authentication.getName());
         List<Review> reviews = reviewRepository.findByUser(user.getId());
         for (Review review : reviews) {
-            if(review.getProduct().getId().equals(productId)){
+            if (review.getProduct().getId().equals(productId)) {
                 return true;
             }
         }
@@ -68,10 +68,10 @@ public class ReviewServiceImpl implements ReviewService {
     public Integer calculateRecommended(List<Review> reviews) {
         int count = 0;
         for (Review review : reviews) {
-            if(review.getRecommended())
+            if (review.getRecommended())
                 count++;
         }
-        if(count == 0)
+        if (count == 0)
             return 0;
         return count * 100 / reviews.size();
     }

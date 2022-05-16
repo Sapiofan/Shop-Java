@@ -15,6 +15,7 @@ public interface FaqRepository extends JpaRepository<FAQ, Long> {
     @Query("delete from FAQ f where f.id=:id")
     @Modifying
     void deleteById(Long id);
+
     @Query("delete from FAQ f where f.question=:question")
     @Modifying
     void deleteByQuestion(String question);

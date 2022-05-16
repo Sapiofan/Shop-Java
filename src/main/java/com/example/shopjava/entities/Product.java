@@ -1,10 +1,7 @@
 package com.example.shopjava.entities;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(name = "products")
@@ -44,6 +41,12 @@ public class Product {
     @Column(nullable = false)
     private Integer warranty;
 
+    @Column(nullable = false)
+    private Date addedAt;
+
+    @Column
+    private Integer sold;
+
     @ManyToOne(fetch = FetchType.EAGER)
     private Category category;
 
@@ -61,11 +64,13 @@ public class Product {
 
     // Like favorites the same with cart
 
-    public Product(){}
+    public Product() {
+    }
 
-    public Product(String image, String name, Float price, String brand, String payment, Float rating,
-                   Integer discount, String gifts, Boolean isAvailable, Integer warranty, Category category,
-                   List<Review> reviews, Set<Cart> carts, Set<Favorite> favorites) {
+    public Product(Long id, String image, String name, Float price, String brand, String payment, Float rating,
+                   Integer discount, String gifts, Boolean isAvailable, Integer warranty, Date addedAt,
+                   Integer sold, Category category, List<Review> reviews, Set<Cart> carts, Set<Favorite> favorites) {
+        this.id = id;
         this.image = image;
         this.name = name;
         this.price = price;
@@ -76,6 +81,8 @@ public class Product {
         this.gifts = gifts;
         this.isAvailable = isAvailable;
         this.warranty = warranty;
+        this.addedAt = addedAt;
+        this.sold = sold;
         this.category = category;
         this.reviews = reviews;
         this.carts = carts;
@@ -201,6 +208,22 @@ public class Product {
 
     public void setReviews(List<Review> reviews) {
         this.reviews = reviews;
+    }
+
+    public Date getAddedAt() {
+        return addedAt;
+    }
+
+    public void setAddedAt(Date addedAt) {
+        this.addedAt = addedAt;
+    }
+
+    public Integer getSold() {
+        return sold;
+    }
+
+    public void setSold(Integer sold) {
+        this.sold = sold;
     }
 
     public void addReview(Review review) {

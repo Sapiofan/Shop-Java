@@ -9,6 +9,7 @@ import java.util.List;
 public interface PhoneRepository extends JpaRepository<Phone, Long> {
     @Query("select p from Phone p")
     List<Phone> findAll();
+
     @Query("select p from Phone p where p.name = :name")
     Phone getPhoneByName(String name);
 

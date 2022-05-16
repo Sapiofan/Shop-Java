@@ -26,7 +26,7 @@
             <div id="search-sign" class="sign">
                 <form action="/searching" method="get">
                     <div id="search-wrapper">
-                        <input type="text" name="search" id="search" autocomplete="off" placeholder="Search device..." />
+                        <input type="text" name="search" id="search" autocomplete="off" placeholder="Search device..."/>
                         <div id="close-icon"></div>
                         <input type="submit" style="display:none"/>
                     </div>
@@ -36,11 +36,14 @@
                 <c:if test="${isAuthenticated}">
                     <form action="/" method="post">
                         <div class="dropdown-user">
-                            <button class="dropbtn-user user"><img src="/img/user.png" style="width: 36px; height: 36px;"></button>
+                            <button class="dropbtn-user user"><img src="/img/user.png"
+                                                                   style="width: 36px; height: 36px;"></button>
                             <div class="dropdown-content-user">
                                 <a href="#">SmartShop money</a>
                                 <a href="#">My orders</a>
-                                <a href="/"><button type="submit" class="logout" name="logout">Logout</button></a>
+                                <a href="/">
+                                    <button type="submit" class="logout" name="logout">Logout</button>
+                                </a>
                             </div>
                         </div>
                     </form>
@@ -76,7 +79,8 @@
                 </c:if>
                 <c:if test="${isAuthenticated}">
                     <nav id="main-nav">
-                        <a class="cart-button" href="#" onclick="document.getElementById('body').style = '--visibility: hidden';">
+                        <a class="cart-button" href="#"
+                           onclick="document.getElementById('body').style = '--visibility: hidden';">
                             <span class="bag-count">${cartProducts.size()}</span>
                             <span class="bag-icon"></span>
                         </a>

@@ -40,7 +40,8 @@ public class User {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
     private List<Transaction> transactions = new ArrayList<>();
 
-    public User(){}
+    public User() {
+    }
 
     public Long getId() {
         return id;
@@ -126,7 +127,7 @@ public class User {
         this.reviews.add(review);
     }
 
-    public void addTransaction(Transaction transaction){
+    public void addTransaction(Transaction transaction) {
         this.transactions.add(transaction);
     }
 

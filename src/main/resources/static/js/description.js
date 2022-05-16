@@ -1,4 +1,3 @@
-
 // Get all sections that have an ID defined
 // const sections = document.querySelectorAll("section[id]");
 
@@ -50,7 +49,9 @@
 const sections = document.querySelectorAll("section");
 const navLi = document.querySelectorAll(".chars-nav a");
 
-window.onscroll = function() {fixHeader()};
+window.onscroll = function () {
+    fixHeader()
+};
 
 var navbar = document.getElementById("chars-header");
 var sticky = navbar.offsetTop;
@@ -73,8 +74,9 @@ function fixHeader() {
 
     sections.forEach((section) => {
         const sectionTop = section.offsetTop;
-        if (window.pageYOffset >= sectionTop ) {
-            current = section.getAttribute("id"); }
+        if (window.pageYOffset >= sectionTop) {
+            current = section.getAttribute("id");
+        }
     });
 
     navLi.forEach((a) => {

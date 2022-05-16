@@ -10,16 +10,16 @@
             content="A project to train with Spring and React frameworks"
     />
 
-    <meta property="og:title" content="Robot Genius"/>
+    <meta property="og:title" content="Smartshop"/>
     <meta property="og:type" content="website"/>
     <meta
             property="og:description"
-            content="A joint project to create qualitative site."
+            content="A project to try to create qualitative site."
     />
     <link rel="icon"
           href="https://ru.seaicons.com/wp-content/uploads/2015/10/Flat-TV-icon.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
 
     <link rel="stylesheet" href="/css/about.css">
     <link rel="stylesheet" href="/css/general.css">
@@ -33,7 +33,8 @@
         <h1>About SmartShop</h1>
         <div class="about-part">
             <div class="about-img">
-                <img class="img-about" src="https://static.wixstatic.com/media/c837a6_57c256d2c7474590a3f295bad576b0a1~mv2.jpg/v1/fill/w_801,h_843,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/c837a6_57c256d2c7474590a3f295bad576b0a1~mv2.jpg">
+                <img class="img-about"
+                     src="https://static.wixstatic.com/media/c837a6_57c256d2c7474590a3f295bad576b0a1~mv2.jpg/v1/fill/w_801,h_843,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/c837a6_57c256d2c7474590a3f295bad576b0a1~mv2.jpg">
             </div>
             <div class="about-text">
                 <p>This is a great space to write a long text about your company and your services.
@@ -46,7 +47,8 @@
                     Suspendisse a bibendum turpis.
                     Donec vestibulum suscipit hendrerit.
                     Aenean quis lacus eros. Donec faucibus ante pulvinar sem feugiat luctus.
-                    Fusce convallis, justo et venenatis placerat, lacus enim varius sapien, at consequat purus mi in est. Integer et lorem ex.
+                    Fusce convallis, justo et venenatis placerat, lacus enim varius sapien, at consequat purus mi in
+                    est. Integer et lorem ex.
                     In congue urna in vehicula viverra. Quisque vitae dolor quis nibh suscipit ullamcorper id nec arcu.
                     Nullam a neque hendrerit, malesuada neque vel,
                     sodales risus. Suspendisse pellentesque nisi vel lorem facilisis egestas.
@@ -72,7 +74,7 @@
             <div class="input-blocks">
                 <div class="about-input-block">
                     <p>Email *</p>
-                    <input name="email" type="email" class="input" required />
+                    <input name="email" type="email" class="input" required/>
                 </div>
                 <div class="about-input-block">
                     <p>Phone</p>
@@ -103,9 +105,9 @@
 <script src="/js/general.js"></script>
 </body>
 <script type="text/javascript">
-    window.onload = function() {
+    window.onload = function () {
         var al = "${result}";
-        if(al !== ""){
+        if (al !== "") {
             alert(al);
         }
     }

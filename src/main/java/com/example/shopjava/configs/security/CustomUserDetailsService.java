@@ -49,7 +49,7 @@ public class CustomUserDetailsService implements UserDetailsService {
         }
         user = new User();
         user.setEmail(email);
-        if(!password.equals(repeatPSW)){
+        if (!password.equals(repeatPSW)) {
             return "You haven't repeated password correctly";
         }
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
@@ -63,13 +63,13 @@ public class CustomUserDetailsService implements UserDetailsService {
         return "";
     }
 
-    public String signIn(String email, String password, HttpServletRequest request){
+    public String signIn(String email, String password, HttpServletRequest request) {
         User user = userRepository.findByEmail(email);
         if (user == null) {
             return "Email was wrong";
         }
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        if(!passwordEncoder.matches(password, user.getPassword())){
+        if (!passwordEncoder.matches(password, user.getPassword())) {
             return "Password was wrong";
         }
 
@@ -83,7 +83,7 @@ public class CustomUserDetailsService implements UserDetailsService {
         return "";
     }
 
-    public User getUserByEmail(String email){
+    public User getUserByEmail(String email) {
         return userRepository.findByEmail(email);
     }
 }

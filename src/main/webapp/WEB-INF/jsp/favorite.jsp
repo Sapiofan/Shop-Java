@@ -1,6 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div id="likes" class="modal-likes">
     <form id='favform' class="likes-content" action="updateFavorites" method="post">
+        <input type="hidden" value="${pageContext.servletContext.contextPath}" name="path">
         <div class="container-likes">
             <span onclick="document.getElementById('likes').style.display='none'" class="close">&times;</span>
             <h2>Wishlist</h2>

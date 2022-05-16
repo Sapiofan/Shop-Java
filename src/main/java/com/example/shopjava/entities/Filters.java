@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Map;
 
 
-
 public class Filters {
 
     public Map<String, List<String>> phoneCharacteristics;
@@ -15,13 +14,13 @@ public class Filters {
 
     public Map<String, List<String>> watchCharacteristics;
 
-    public Filters(){
+    public Filters() {
         phoneCharacteristics = new LinkedHashMap<>();
         laptopCharacteristics = new LinkedHashMap<>();
         watchCharacteristics = new LinkedHashMap<>();
     }
 
-    public void initPhoneChars(){
+    public void initPhoneChars() {
         List<String> brands = new ArrayList<>();
         brands.add("Apple");
         brands.add("Samsung");
@@ -76,7 +75,7 @@ public class Filters {
         laptopCharacteristics.put("Processor manufacturer", processorManufacturers);
     }
 
-    public void initWatchChars(){
+    public void initWatchChars() {
         List<String> brands = new ArrayList<>();
         brands.add("Apple");
         brands.add("Samsung");

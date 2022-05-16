@@ -22,7 +22,7 @@ nav {
 .logo {
     font-size: 38px;
     font-family: 'Imprint MT Shadow', sans-serif;
-    color:black;
+    color: black;
     margin-left: 100px;
 }
 
@@ -52,10 +52,12 @@ header > nav > p {
         width: inherit;
         padding: 5px 0;
     }
+
     .logo {
         margin-left: 10px;
         font-size: 30px;
     }
+
     header > nav > p {
         margin-left: 7%;
     }
@@ -126,7 +128,7 @@ header > nav > p {
 }
 
 @media screen and (max-width: 600px) {
-    .success-container{
+    .success-container {
         margin: 40px 0;
         padding: 20px 10px;
         width: inherit;

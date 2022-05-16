@@ -4,7 +4,7 @@ var log = document.getElementById('login');
 var likes = document.getElementById('likes');
 
 // When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
+window.onclick = function (event) {
     if (event.target == reg) {
         reg.style.display = "none";
     }
@@ -27,21 +27,21 @@ var search = document.getElementById('search'),
     closeIcon = document.getElementById('close-icon');
 
 // Input focus
-search.onfocus = function() {
+search.onfocus = function () {
     searchWrapper.classList.add('search-expanded');
-    this.addEventListener('transitionend', function() {
+    this.addEventListener('transitionend', function () {
         closeIcon.style.display = 'block';
         search.style.paddingRight = '35px'
     });
 }
 
 // Input blur
-search.onblur = function() {
+search.onblur = function () {
 
     searchWrapper.classList.remove('search-expanded');
     closeIcon.classList.add('closing');
 
-    this.addEventListener('transitionend', function() {
+    this.addEventListener('transitionend', function () {
         search.style.paddingRight = '14px'
         closeIcon.classList.remove('closing');
         closeIcon.style.display = 'none';
@@ -50,25 +50,25 @@ search.onblur = function() {
 }
 
 // Close
-closeIcon.onclick = function() {
+closeIcon.onclick = function () {
 
     this.classList.add('closing');
 
     document.activeElement.blur();
 
-    setTimeout(function() {
+    setTimeout(function () {
         closeIcon.classList.remove('closing');
     }, 1000);
 
 }
 
 
-$(document).ready(function($) {
+$(document).ready(function ($) {
     // Declare the body variable
     var $body = $("body");
 
     // Function that shows and hides the sidebar cart
-    $(".cart-button, .close-button, #sidebar-cart-curtain").click(function(e) {
+    $(".cart-button, .close-button, #sidebar-cart-curtain").click(function (e) {
         e.preventDefault();
 
         // Add the show-sidebar-cart class to the body tag
@@ -112,12 +112,12 @@ $(document).ready(function($) {
     });
 });
 
-$(document).ready(function($) {
+$(document).ready(function ($) {
     // Declare the body variable
     var $body = $("body");
 
     // Function that shows and hides the sidebar cart
-    $(".mobile-icon, #menu-curtain").click(function(e) {
+    $(".mobile-icon, #menu-curtain").click(function (e) {
         e.preventDefault();
 
         // Add the show-sidebar-cart class to the body tag
@@ -137,11 +137,11 @@ $(document).ready(function($) {
 var coll = document.getElementsByClassName("collapsible");
 var i;
 
-function scale(){
+function scale() {
     var w = document.documentElement.clientWidth;
-    if(w <= 600){
+    if (w <= 600) {
         for (i = 0; i < coll.length; i++) {
-            coll[i].addEventListener("click", function() {
+            coll[i].addEventListener("click", function () {
                 this.classList.toggle("active-faq");
                 var content = this.nextElementSibling;
                 if (content.style.display === "block") {
@@ -153,6 +153,7 @@ function scale(){
         }
     }
 }
+
 window.addEventListener("resize", scale);
 
 scale();

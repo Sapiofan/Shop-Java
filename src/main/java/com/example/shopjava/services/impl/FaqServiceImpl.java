@@ -19,7 +19,7 @@ public class FaqServiceImpl implements FaqService {
     @Transactional
     public String addFaq(FAQ faq) {
         FAQ dbFaq = faqRepository.findByQuestion(faq.getQuestion());
-        if(dbFaq != null){
+        if (dbFaq != null) {
             return "Such question has already added";
         }
         faqRepository.save(faq);

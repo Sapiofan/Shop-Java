@@ -22,7 +22,8 @@ public class Favorite {
     )
     private Set<Product> favoriteProducts = new HashSet<>();
 
-    public Favorite(){}
+    public Favorite() {
+    }
 
     public Long getId() {
         return id;

@@ -11,11 +11,11 @@
             content="A project to train with Spring and React frameworks"
     />
 
-    <meta property="og:title" content="Robot Genius"/>
+    <meta property="og:title" content="Smartshop"/>
     <meta property="og:type" content="website"/>
     <meta
             property="og:description"
-            content="A joint project to create qualitative site."
+            content="A project to try to create qualitative site."
     />
     <link rel="icon"
           href="https://ru.seaicons.com/wp-content/uploads/2015/10/Flat-TV-icon.png">

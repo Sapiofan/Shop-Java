@@ -23,9 +23,10 @@ public class Message {
     @ManyToOne(fetch = FetchType.LAZY)
     private Contact contact;
 
-    public Message(){}
+    public Message() {
+    }
 
-    public Message(String subject, String message){
+    public Message(String subject, String message) {
         this.subject = subject;
         this.message = message;
     }

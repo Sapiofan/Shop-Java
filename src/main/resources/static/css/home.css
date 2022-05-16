@@ -11,18 +11,22 @@
 .mySlides {
     display: none;
 }
+
 .mySlides img {
     height: 85vh;
     width: 100%;
 }
+
 img {
     vertical-align: middle;
 }
+
 .slideshow-container {
     max-width: 100%;
     position: relative;
     margin: auto;
 }
+
 /* Next & previous buttons */
 .prev,
 .next {
@@ -39,16 +43,19 @@ img {
     border-radius: 0 3px 3px 0;
     user-select: none;
 }
+
 /* Position the "next button" to the right */
 .next {
     right: 0;
     border-radius: 3px 0 0 3px;
 }
+
 /* On hover, add a black background color with a little bit see-through */
 .prev:hover,
 .next:hover {
     background-color: rgba(0, 0, 0, 0.8);
 }
+
 /* Caption text */
 .text {
     color: black;
@@ -101,6 +108,7 @@ img {
     animation-name: fade;
     animation-duration: 1.5s;
 }
+
 @-webkit-keyframes fade {
     from {
         opacity: .4
@@ -109,6 +117,7 @@ img {
         opacity: 1
     }
 }
+
 @keyframes fade {
     from {
         opacity: .4
@@ -117,6 +126,7 @@ img {
         opacity: 1
     }
 }
+
 /* On smaller screens, decrease text size */
 @media only screen and (max-width: 300px) {
     .text {
@@ -242,16 +252,20 @@ img {
     .text {
         width: 50vw;
     }
+
     .red-benefit {
         font-size: 14px;
         width: 70px;
     }
+
     .text h1 {
         font-size: 26px;
     }
+
     .desc-benefit {
         font-size: 14px;
     }
+
     .slider-button {
         width: 26vw;
         height: 10vw;
@@ -272,7 +286,7 @@ img {
     user-select: none;
 }
 
-.advantages-padding{
+.advantages-padding {
     display: flex;
     padding: 50px;
 }
@@ -296,10 +310,12 @@ img {
         display: block;
         padding: 0;
     }
+
     .advantage {
         margin-bottom: 30px;
         width: 100%;
     }
+
     .advantage p {
         width: inherit;
         font-size: 16px;
@@ -359,23 +375,28 @@ img {
 }
 
 @media screen and (max-width: 600px) {
-    #banners{
+    #banners {
         display: block;
         padding: 0;
     }
-    .banner{
+
+    .banner {
         width: 100%;
     }
+
     .banner-img {
         width: inherit;
         height: 100%;
     }
+
     .banner-text p {
         font-size: 14px;
     }
+
     .banner-text h1 {
         font-size: 28px;
     }
+
     .b-button {
         width: 120px;
     }
@@ -386,9 +407,11 @@ img {
         font-size: 12px;
         margin: 5px 0;
     }
+
     .banner-text h1 {
         font-size: 22px;
     }
+
     .b-button {
         width: 100px;
         height: 35px;
@@ -475,34 +498,42 @@ img {
     #best-sellers {
         margin: 20px 0;
     }
+
     .sellers-padding {
         padding: 0;
     }
+
     .sellers-padding h1 {
         font-size: 22px;
     }
-    .products{
+
+    .products {
         overflow-x: auto;
     }
-    .product{
+
+    .product {
         width: 100px;
     }
-    .view-all{
+
+    .view-all {
         width: 150px;
         height: 35px;
         margin-left: 29%;
         margin-top: 20px;
         margin-bottom: 10px;
     }
+
     .img-container {
         width: inherit;
         /* height: 100px; */
     }
+
     .zoom {
         width: inherit;
         height: 100px;
     }
 }
+
 /*///////////////////////////////////////////
 //////////////// categories /////////////////
 ////////////////////////////////////////////*/
@@ -557,7 +588,7 @@ img {
 .special-img {
     width: 100%;
     height: 100%;
-    -webkit-clip-path:polygon(0 0, 100% 0, 100% 100%, 20% 100%);
+    -webkit-clip-path: polygon(0 0, 100% 0, 100% 100%, 20% 100%);
     clip-path: polygon(0% 0, 100% 0, 100% 100%, 10% 100%);
 }
 
@@ -601,30 +632,37 @@ img {
 }
 
 @media screen and (max-width: 600px) {
-    #special-offer{
+    #special-offer {
         margin: 20px 0;
     }
+
     .special-img {
         content: url("https://static.wixstatic.com/media/c837a6_ecf32c7284d4430582fcc90f60a1b4e6~mv2.png/v1/fill/w_1753,h_750,al_c,q_90,usm_0.66_1.00_0.01/c837a6_ecf32c7284d4430582fcc90f60a1b4e6~mv2.webp");
     }
-    .offer-text{
+
+    .offer-text {
         padding: 20px 0 20px 20px;
     }
+
     .offer-text h3 {
         font-size: 12px;
         width: 60%;
         margin-bottom: 10px;
     }
+
     .offer-text h2 {
         font-size: 13px;
     }
+
     .offer-text h1 {
         margin: 10px 0;
         font-size: 28px;
     }
+
     .offer-text p {
         display: none;
     }
+
     .shop {
         width: 100px;
         height: 30px;

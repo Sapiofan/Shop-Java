@@ -26,10 +26,11 @@ public class Career {
 
     private Date sent;
 
-    public Career(){}
+    public Career() {
+    }
 
     public Career(String first_name, String last_name, String email,
-                  String phone, String position, String link){
+                  String phone, String position, String link) {
         this.first_name = first_name;
         this.last_name = last_name;
         this.email = email;

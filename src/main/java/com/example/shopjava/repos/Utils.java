@@ -9,8 +9,12 @@ import java.util.List;
 
 public interface Utils {
     Phone min(List<Phone> phoneList);
+
     Phone max(List<Phone> phones);
+
     Laptop maxLaptop(List<Laptop> laptops);
+
     Watch maxWatch(List<Watch> watches);
+
     boolean checkAuth(Authentication authentication);
 }

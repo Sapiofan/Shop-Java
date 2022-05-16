@@ -22,7 +22,7 @@ nav {
 .logo {
     font-size: 38px;
     font-family: 'Imprint MT Shadow', sans-serif;
-    color:black;
+    color: black;
     margin-left: 100px;
 }
 
@@ -52,16 +52,18 @@ header > nav > p {
         width: inherit;
         padding: 5px 0;
     }
+
     .logo {
         margin-left: 10px;
         font-size: 30px;
     }
+
     header > nav > p {
         margin-left: 7%;
     }
 }
 
-.form{
+.form {
     margin: 100px 200px;
 }
 
@@ -148,12 +150,10 @@ main {
     margin-right: 20px;
 }
 
-.back:hover{
+.back:hover {
     background-color: black;
     cursor: pointer;
 }
-
-
 
 
 .input {
@@ -188,7 +188,7 @@ main {
     margin-left: 2px;
 }
 
-.dash,.parenthesis {
+.dash, .parenthesis {
     display: flex;
 }
 
@@ -211,7 +211,7 @@ main {
     align-items: center;
     border: none;
     transition: .2s ease-in-out;
-    transition-property: color,background-color,border;
+    transition-property: color, background-color, border;
 }
 
 .input-phone {
@@ -220,7 +220,7 @@ main {
     margin-left: 0;
 }
 
-.line{
+.line {
     width: 220px;
     height: 2px;
     border-bottom: 1px solid rgb(180, 180, 180);
@@ -242,7 +242,7 @@ main {
 
     border: 1px solid #e5e5e5;
     transition: .2s ease-in-out;
-    transition-property: color,background-color,border;
+    transition-property: color, background-color, border;
 }
 
 
@@ -336,6 +336,7 @@ input[type=number] {
         display: block;
         width: inherit;
     }
+
     .form {
         margin: 30px 20px;
         width: inherit;
@@ -346,15 +347,19 @@ input[type=number] {
         margin: 0;
         padding: 20px;
     }
+
     .prod-name {
         width: 100px;
     }
+
     .price {
         margin: 10px 5px;
     }
+
     .products {
         width: inherit;
     }
+
     .sum {
         margin-top: 30px;
     }

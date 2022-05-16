@@ -3,6 +3,7 @@ package com.example.shopjava.controllers;
 import com.example.shopjava.configs.security.CustomUserDetailsService;
 import com.example.shopjava.entities.*;
 import com.example.shopjava.entities.contacts.Contact;
+import com.example.shopjava.repos.UserRepository;
 import com.example.shopjava.repos.Utils;
 import com.example.shopjava.services.*;
 import org.slf4j.Logger;
@@ -158,16 +159,16 @@ public class MyController {
         Set<String> keys = phoneFilters.keySet();
         List<Phone> phones = filterProducts.phones(filters, phoneFilters, minValue, maxValue);
         phones = filterProducts.sort(phones, sortType);
-
-        model.addAttribute("category", "Phones");
-        model.addAttribute("filters", phoneFilters);
-        model.addAttribute("filtersKeys", keys);
-        model.addAttribute("filterName",filters);
+        model = filterPostModel(model, "Phones", phoneFilters, keys, filters, minValue, maxValue, sortType, authentication);
+//        model.addAttribute("category", "Phones");
+//        model.addAttribute("filters", phoneFilters);
+//        model.addAttribute("filtersKeys", keys);
+//        model.addAttribute("filterName",filters);
         model.addAttribute("products", phones);
-        model.addAttribute("minValue", minValue);
+//        model.addAttribute("minValue", minValue);
         model.addAttribute("maxValue", maxValue);
         model.addAttribute("max", (int) Math.floor(utils.max(filterProducts.getAllPhones()).getPrice()));
-        model.addAttribute("sortType", sortType);
+//        model.addAttribute("sortType", sortType);
         return "filters";
     }
 
@@ -203,17 +204,18 @@ public class MyController {
         Map<String, List<String>> laptopFilters = filterProducts.getLaptopCharacteristics();
         Set<String> keys = laptopFilters.keySet();
         List<Laptop> laptops = filterProducts.laptops(filters, laptopFilters, minValue, maxValue);
+        model = filterPostModel(model, "Laptops", laptopFilters, keys, filters, minValue, maxValue, sortType, authentication);
 //        laptops = filterProducts.sort(phones, sortType);
 
-        model.addAttribute("category", "Laptops");
-        model.addAttribute("filters", laptopFilters);
-        model.addAttribute("filtersKeys", keys);
-        model.addAttribute("filterName",filters);
+//        model.addAttribute("category", "Laptops");
+//        model.addAttribute("filters", laptopFilters);
+//        model.addAttribute("filtersKeys", keys);
+//        model.addAttribute("filterName",filters);
         model.addAttribute("products", laptops);
-        model.addAttribute("minValue", minValue);
-        model.addAttribute("maxValue", maxValue);
+//        model.addAttribute("minValue", minValue);
+//        model.addAttribute("maxValue", maxValue);
         model.addAttribute("max", (int) Math.floor(utils.maxLaptop(filterProducts.getAllLaptops()).getPrice()));
-        model.addAttribute("sortType", sortType);
+//        model.addAttribute("sortType", sortType);
         return "filters";
     }
 
@@ -283,15 +285,16 @@ public class MyController {
         List<Watch> watches = filterProducts.watches(filters, watchFilters, minValue, maxValue);
 //        laptops = filterProducts.sort(phones, sortType);
 
-        model.addAttribute("category", "Watches");
-        model.addAttribute("filters", watchFilters);
-        model.addAttribute("filtersKeys", keys);
-        model.addAttribute("filterName",filters);
+        model = filterPostModel(model, "Watches", watchFilters, keys, filters, minValue, maxValue, sortType, authentication);
+//        model.addAttribute("category", "Watches");
+//        model.addAttribute("filters", watchFilters);
+//        model.addAttribute("filtersKeys", keys);
+//        model.addAttribute("filterName",filters);
         model.addAttribute("products", watches);
-        model.addAttribute("minValue", minValue);
-        model.addAttribute("maxValue", maxValue);
+//        model.addAttribute("minValue", minValue);
+//        model.addAttribute("maxValue", maxValue);
         model.addAttribute("max", (int) Math.floor(utils.maxWatch(filterProducts.getAllWatches()).getPrice()));
-        model.addAttribute("sortType", sortType);
+//        model.addAttribute("sortType", sortType);
         return "filters";
     }
 
@@ -404,10 +407,51 @@ public class MyController {
 
     @PostMapping(value = "updateFavorites", params = "heart")
     public String updateFavorites(Model model, Authentication authentication,
-                                  @RequestParam("productId") Long productId){
+                                  @RequestParam("productId") Long productId,
+                                  @RequestParam("path") String path
+                                  ){
         Favorite favorite = favoriteService.getUserProducts(userDetailsService.getUserByEmail(authentication.getName()).getId());
         favorite = favoriteService.deleteProduct(favorite, productId);
         model.addAttribute("favoriteProducts", favorite.getFavoriteProducts());
-        return "";
+        log.info(path);
+        String redirect = "redirect:" + path;
+        return redirect;
+    }
+
+    @PostMapping(value = "/phone", params = "addFavorite")
+    public String addFavoritePhone(Model model, Authentication authentication,
+                                   @RequestParam(value = "filter-name", required = false) LinkedHashSet<String> filters,
+                                   @RequestParam("input-min") Integer minValue, @RequestParam("input-max") Integer maxValue,
+                                   @RequestParam("sort") String sortType, @RequestParam("productId") Long productId){
+        if(utils.checkAuth(authentication))
+            model.addAttribute("isAuthenticated", true);
+        Favorite favorite = favoriteService.getUserProducts(userDetailsService.getUserByEmail(authentication.getName()).getId());
+        favoriteService.addProduct(favorite, productId);
+
+        Map<String, List<String>> phoneFilters = filterProducts.getPhoneCharacteristics();
+        Set<String> keys = phoneFilters.keySet();
+        List<Phone> phones = filterProducts.phones(filters, phoneFilters, minValue, maxValue);
+        phones = filterProducts.sort(phones, sortType);
+        model = filterPostModel(model, "Phones", phoneFilters, keys, filters, minValue, maxValue, sortType, authentication);
+        model.addAttribute("products", phones);
+        model.addAttribute("maxValue", maxValue);
+        model.addAttribute("max", (int) Math.floor(utils.max(filterProducts.getAllPhones()).getPrice()));
+        return "filters";
+    }
+
+    private Model filterPostModel(Model model, String category, Map<String, List<String>> mapFilters,
+                                  Set<String> keys, Set<String> filters,
+                                  Integer minValue, Integer maxValue, String sortType,
+                                  Authentication authentication){
+        model.addAttribute("userFavorites", userDetailsService.getUserByEmail(authentication.getName()).getFavorite());
+        model.addAttribute("category", category);
+        model.addAttribute("filters", mapFilters);
+        model.addAttribute("filtersKeys", keys);
+        model.addAttribute("filterName",filters);
+        model.addAttribute("minValue", minValue);
+        model.addAttribute("maxValue", maxValue);
+        model.addAttribute("max", (int) Math.floor(utils.maxLaptop(filterProducts.getAllLaptops()).getPrice()));
+        model.addAttribute("sortType", sortType);
+        return model;
     }
 }

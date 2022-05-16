@@ -11,6 +11,8 @@ import java.util.Set;
 
 public interface FilterProductsRepo {
     List<Phone> filterPhones(Set<String> filters, Map<String, List<String>> fullFilters, Integer min, Integer max);
+
     List<Laptop> filterLaptops(Set<String> filters, Map<String, List<String>> fullFilters, Integer min, Integer max);
+
     List<Watch> filterWatches(Set<String> filters, Map<String, List<String>> fullFilters, Integer min, Integer max);
 }

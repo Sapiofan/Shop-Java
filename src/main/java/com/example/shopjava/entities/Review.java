@@ -28,7 +28,8 @@ public class Review {
     @ManyToOne(fetch = FetchType.EAGER)
     private Product product;
 
-    public Review(){}
+    public Review() {
+    }
 
     public Long getId() {
         return id;

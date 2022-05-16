@@ -22,7 +22,7 @@ public class CareerServiceImpl implements CareerService {
     @Override
     @Transactional
     public String addCareerUser(Career career) {
-        if(careerRepository.findByEmail(career.getEmail()) != null){
+        if (careerRepository.findByEmail(career.getEmail()) != null) {
             log.warn("Such career user exist: " + career.getEmail());
             return "Sorry, but user with such email has already send request for job";
         }
