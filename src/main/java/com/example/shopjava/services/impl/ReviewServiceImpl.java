@@ -31,6 +31,14 @@ public class ReviewServiceImpl implements ReviewService {
 
     @Override
     @Transactional
+    public List<Review> getAll() {
+        List<Review> reviews = reviewRepository.findAll();
+        reviews.sort(Comparator.comparingLong(o -> o.getDate().getTime()));
+        return reviews;
+    }
+
+    @Override
+    @Transactional
     public boolean addReview(Integer rating, String text, Boolean isRecommended, Authentication authentication, Long productId) {
         User user = userRepository.findByEmail(authentication.getName());
         List<Review> reviews = reviewRepository.findByUser(user.getId());
@@ -54,14 +62,20 @@ public class ReviewServiceImpl implements ReviewService {
     @Transactional
     public List<Review> findReviewsByProduct(Long productId) {
         List<Review> reviews = reviewRepository.findReviewsByProduct(productId);
-        Collections.sort(reviews, Comparator.comparingLong(o -> o.getDate().getTime()));
+        reviews.sort(Comparator.comparingLong(o -> o.getDate().getTime()));
         return reviews;
     }
 
     @Override
     @Transactional
-    public List<Review> findReviewsByUser(Long userId) {
-        return reviewRepository.findByUser(userId);
+    public List<Review> findReviewsByUser(String email) {
+        return reviewRepository.findByUserEmail(email);
+    }
+
+    @Override
+    @Transactional
+    public void deleteById(Long id) {
+        reviewRepository.deleteById(id);
     }
 
     @Override

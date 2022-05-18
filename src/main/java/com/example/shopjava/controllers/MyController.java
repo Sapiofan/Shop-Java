@@ -50,7 +50,7 @@ public class MyController {
     @Autowired
     private Utils utils;
 
-    private static final Logger log = LoggerFactory.getLogger("log");
+    private static final Logger log = LoggerFactory.getLogger(MyController.class);
 
     @GetMapping("/")
     public String getHomePage(Model model, Authentication authentication){

@@ -28,16 +28,31 @@ public class FaqServiceImpl implements FaqService {
 
     @Override
     @Transactional
+    public String editFaq(Long id, String question, String answer) {
+        FAQ dbFaq = faqRepository.findFaqById(id);
+        if(dbFaq != null){
+            dbFaq.setQuestion(question);
+            dbFaq.setAnswer(answer);
+            faqRepository.save(dbFaq);
+            return "Was successfully edited";
+        }
+        return "Something went wrong. Such faq doesn't exist.";
+    }
+
+    @Override
+    @Transactional
     public List<FAQ> getFaqs() {
         return faqRepository.findAll();
     }
 
     @Override
+    @Transactional
     public void deleteById(Long id) {
         faqRepository.deleteById(id);
     }
 
     @Override
+    @Transactional
     public void deleteByQuestion(String question) {
         faqRepository.deleteByQuestion(question);
     }

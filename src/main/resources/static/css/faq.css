@@ -3,10 +3,10 @@
 }
 
 table {
-    margin: 50px auto auto;
     font-family: arial, sans-serif;
     border-collapse: collapse;
     width: 60%;
+    margin: 50px auto;
 }
 
 td, th {
@@ -59,6 +59,12 @@ td textarea {
     position: fixed;
     right: 0;
     margin-right: 20px;
+}
+
+.editing {
+    left: 0;
+    margin-left: 20px;
+    margin-right: 0;
 }
 
 .question-adding textarea {

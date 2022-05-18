@@ -41,8 +41,8 @@ public class Product {
     @Column(nullable = false)
     private Integer warranty;
 
-    @Column(nullable = false)
-    private Date addedAt;
+//    @Column
+//    private Date addedAt;
 
     @Column
     private Integer sold;
@@ -81,7 +81,7 @@ public class Product {
         this.gifts = gifts;
         this.isAvailable = isAvailable;
         this.warranty = warranty;
-        this.addedAt = addedAt;
+//        this.addedAt = addedAt;
         this.sold = sold;
         this.category = category;
         this.reviews = reviews;
@@ -210,13 +210,13 @@ public class Product {
         this.reviews = reviews;
     }
 
-    public Date getAddedAt() {
-        return addedAt;
-    }
-
-    public void setAddedAt(Date addedAt) {
-        this.addedAt = addedAt;
-    }
+//    public Date getAddedAt() {
+//        return addedAt;
+//    }
+//
+//    public void setAddedAt(Date addedAt) {
+//        this.addedAt = addedAt;
+//    }
 
     public Integer getSold() {
         return sold;

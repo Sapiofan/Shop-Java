@@ -1,6 +1,7 @@
 package com.example.shopjava.entities;
 
 import javax.persistence.*;
+import java.time.Instant;
 import java.util.Date;
 
 @Entity
@@ -24,7 +25,7 @@ public class Career {
 
     private String link;
 
-    private Date sent;
+    private Date sent = Date.from(Instant.now());
 
     public Career() {
     }

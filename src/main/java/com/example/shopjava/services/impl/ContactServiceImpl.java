@@ -64,7 +64,13 @@ public class ContactServiceImpl implements ContactService {
     @Override
     @Transactional
     public void deleteById(Long id) {
-        contactRepository.deleteById(id);
+        Message message = messageRepository.findMessageById(id);
+        Contact contact = message.getContact();
+        contact.getMessages().remove(message);
+        messageRepository.deleteById(id);
+        if(contact.getMessages().isEmpty())
+            contactRepository.deleteById(contact.getId());
+        contactRepository.save(contact);
     }
 
     @Override

@@ -12,6 +12,9 @@ public interface FaqRepository extends JpaRepository<FAQ, Long> {
     @Query("select f from FAQ f where f.question = :question")
     FAQ findByQuestion(String question);
 
+    @Query("select f from FAQ f where f.id = :id")
+    FAQ findFaqById(Long id);
+
     @Query("delete from FAQ f where f.id=:id")
     @Modifying
     void deleteById(Long id);

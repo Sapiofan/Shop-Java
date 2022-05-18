@@ -1,6 +1,7 @@
 package com.example.shopjava.entities.contacts;
 
 import javax.persistence.*;
+import java.time.Instant;
 import java.util.Date;
 import java.util.Objects;
 
@@ -18,9 +19,9 @@ public class Message {
     private String message;
 
     @Column(name = "sent_at")
-    private Date sent;
+    private Date sent = Date.from(Instant.now());
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     private Contact contact;
 
     public Message() {

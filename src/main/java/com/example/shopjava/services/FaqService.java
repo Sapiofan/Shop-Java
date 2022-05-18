@@ -7,6 +7,8 @@ import java.util.List;
 public interface FaqService {
     String addFaq(FAQ faq);
 
+    String editFaq(Long id, String question, String answer);
+
     List<FAQ> getFaqs();
 
     void deleteById(Long id);

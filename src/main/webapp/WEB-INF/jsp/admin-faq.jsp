@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,6 +20,8 @@
     <link rel="icon"
           href="https://ru.seaicons.com/wp-content/uploads/2015/10/Flat-TV-icon.png">
 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
     <link rel="stylesheet" href="/css/general.css">
     <link rel="stylesheet" href="/css/admin.css">
     <link rel="stylesheet" href="/css/faq.css">
@@ -26,34 +29,43 @@
 <body>
 <jsp:include page="admin-header.jsp"/>
 <main class="main">
-    <form action="#" method="post" class="faq-section">
-        <button type="submit" class="save-button">Save changes</button>
+    <form action="/admin/faq" method="post" class="faq-section">
+        <c:if test="${editMode}">
+            <div class="question-adding editing">
+                <input type="hidden" name="id" value="${id}">
+                <textarea rows="4" name="editQuestion">${question}</textarea><br>
+                <textarea rows="6" name="editAnswer">${answer}</textarea><br>
+                <button type="submit" name="edit" class="save-button add-button">Edit answer</button>
+            </div>
+        </c:if>
         <table class="faqs">
             <tr>
                 <th style="width: 20%;">Question</th>
                 <th>Answer</th>
+                <th style="width: 10%;">Save changes</th>
                 <th style="width: 10%;">Delete</th>
             </tr>
-            <tr>
-                <td><textarea rows="6">Some question that doesn't have matter and something else bla bla?</textarea>
-                </td>
-                <td><textarea rows="6">Some answer that doesn't have matter and something else bla bla but it a bit longer than question because question is always smaller</textarea>
-                </td>
-                <td>Delete</td>
-            </tr>
-            <tr>
-                <td><textarea rows="6">Some question that doesn't have matter and something else bla bla?</textarea>
-                </td>
-                <td><textarea rows="6">Some answer that doesn't have matter and something else bla bla but it a bit longer than question because question is always smaller and something else bla bla but it a bit longer and something</textarea>
-                </td>
-                <td>Delete</td>
-            </tr>
+            <c:forEach items="${faqs}" var="faq">
+                <tr>
+                    <td>${faq.question}
+                    </td>
+                    <td>${faq.answer}
+                    </td>
+                    <td><a href="/admin/faq/${faq.id}?ex-question=${faq.question}&ex-answer=${faq.answer}" class="btn btn-primary">Edit</a></td>
+                    <td>
+                        <a href="/admin/faq/delete/${faq.id}" class="btn btn-danger"
+                           onclick="if (!confirm('Are you sure you want to delete the answer?')) return false;">Delete</a>
+                    </td>
+                </tr>
+            </c:forEach>
         </table>
+        <c:if test="${!editMode}">
         <div class="question-adding">
-            <textarea rows="4" placeholder="Your new question..."></textarea><br>
-            <textarea rows="6" placeholder="Your answer..."></textarea><br>
-            <button type="submit" class="save-button add-button">Add question</button>
+            <textarea rows="4" name="question" placeholder="Your new question..."></textarea><br>
+            <textarea rows="6" name="answer" placeholder="Your answer..."></textarea><br>
+            <button type="submit" name="addFaq" class="save-button add-button">Add answer</button>
         </div>
+        </c:if>
     </form>
 </main>
 </body>

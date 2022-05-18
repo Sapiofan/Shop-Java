@@ -1,6 +1,7 @@
 package com.example.shopjava.entities;
 
 import javax.persistence.*;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -22,7 +23,7 @@ public class User {
     private String email;
 
     @Column(nullable = false)
-    private Date createdAt;
+    private Date createdAt = Date.from(Instant.now());
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)

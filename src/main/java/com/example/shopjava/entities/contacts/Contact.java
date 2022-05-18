@@ -22,7 +22,7 @@ public class Contact {
     @Column(unique = true, nullable = false, name = "email")
     private String email;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "contact")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "contact")
     List<Message> messages = new ArrayList<>();
 
     @Column(name = "send_mails")

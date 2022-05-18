@@ -1,6 +1,7 @@
 package com.example.shopjava.entities;
 
 import javax.persistence.*;
+import java.time.Instant;
 import java.util.Date;
 
 @Entity
@@ -14,7 +15,7 @@ public class Review {
     private Integer rating;
 
     @Column(nullable = false)
-    private Date date;
+    private Date date = Date.from(Instant.now());
 
     @Column(nullable = false)
     private String review;

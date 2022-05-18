@@ -14,6 +14,9 @@ public interface ReviewRepository extends JpaRepository<Review, Long> {
     @Query("SELECT r FROM Review r WHERE r.user.id = :userId")
     List<Review> findByUser(Long userId);
 
+    @Query("SELECT r FROM Review r WHERE r.user.email = :email")
+    List<Review> findByUserEmail(String email);
+
     @Query("delete from Review r where r.id=:id")
     @Modifying
     void deleteById(Long id);
