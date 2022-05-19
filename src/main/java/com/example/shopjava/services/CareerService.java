@@ -2,13 +2,14 @@ package com.example.shopjava.services;
 
 
 import com.example.shopjava.entities.Career;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 
 public interface CareerService {
     String addCareerUser(Career career);
 
-    List<Career> getCareers();
+    Page<Career> getCareers(int pageNum);
 
     void deleteCareerUserById(Long id);
 

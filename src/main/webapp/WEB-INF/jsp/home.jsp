@@ -65,20 +65,20 @@
     </section>
     <section id="banners">
         <div class="banner" style="margin-right: 50px;">
-            <img class="banner-img" src="https://static.wixstatic.com/media/c22c23_e140bfa8cd6f4cb2ac5ee6e204f64073~mv2.jpg/v1/fill/w_851,h_585,al_t,q_85,usm_0.66_1.00_0.01,enc_auto/c22c23_e140bfa8cd6f4cb2ac5ee6e204f64073~mv2.jpg">
+            <img class="banner-img" src="${link1}">
             <div class="banner-text">
-                <p>Holiday Deals</p>
-                <h1>Up to 30% off</h1>
-                <p>Selected Smartphone Brands</p>
+                <p>${banner11}</p>
+                <h1>${banner12}</h1>
+                <p>${banner13}</p>
                 <button class="b-button">Shop</button>
             </div>
         </div>
         <div class="banner">
-            <img class="banner-img" src="https://static.wixstatic.com/media/c837a6_d84a631864a442a496670bc2d787c6a0~mv2.jpg/v1/fill/w_851,h_585,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/c837a6_d84a631864a442a496670bc2d787c6a0~mv2.jpg">
+            <img class="banner-img" src="${link2}">
             <div class="banner-text">
-                <p>Just In</p>
-                <h1>Take Your Sound Anywhere</h1>
-                <p>Top Headphone Brands</p>
+                <p>${banner21}</p>
+                <h1>${banner22}</h1>
+                <p>${banner23}</p>
                 <button class="b-button">Shop</button>
             </div>
         </div>

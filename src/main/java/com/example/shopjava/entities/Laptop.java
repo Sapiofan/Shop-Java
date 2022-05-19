@@ -64,15 +64,13 @@ public class Laptop extends Product {
     public Laptop() {
     }
 
-    public Laptop(Long id, String image, String name, Float price, String brand,
-                  String payment, Float rating, Integer discount, String gifts, Boolean isAvailable,
-                  Integer warranty, Date addedAt, Integer sold, Category category, List<Review> reviews,
-                  Set<Cart> carts, Set<Favorite> favorites, String device_type, String sc_diagonal,
-                  String processor_manufacturer, Integer cores, String processor_series, Integer RAM,
-                  String drive_type, String discrete_graphics, String series, String inst_os, Integer storage,
+    public Laptop(String image, String name, Float price, String brand, String payment, Float rating, Integer discount,
+                  String gifts, Boolean isAvailable, Integer warranty, Date addedAt, Integer sold, Category category,
+                  String device_type, String sc_diagonal, String processor_manufacturer, Integer cores, String processor_series,
+                  Integer RAM, String drive_type, String discrete_graphics, String series, String inst_os, Integer storage,
                   Integer screen_refresh, String matrix_type, String color, Integer video_size, String optical_drive,
                   String sc_resolution, Float weight, Boolean touch_screen) {
-        super(id, image, name, price, brand, payment, rating, discount, gifts, isAvailable, warranty, addedAt, sold, category, reviews, carts, favorites);
+        super(image, name, price, brand, payment, rating, discount, gifts, isAvailable, warranty, addedAt, sold, category);
         this.device_type = device_type;
         this.sc_diagonal = sc_diagonal;
         this.processor_manufacturer = processor_manufacturer;

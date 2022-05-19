@@ -49,27 +49,53 @@
                     <td>${review.date}</td>
                     <td>${review.recommended}</td>
                     <td>${review.review}</td>
-                    <td><a href="/admin/reviews/delete/${review.id}" class="btn btn-danger"
+                    <td><a href="/admin/reviews/${currentPage}/delete/${review.id}" class="btn btn-danger"
                            onclick="if (!confirm('Are you sure you want to delete the review?')) return false;">Delete</a></td>
                 </tr>
             </c:forEach>
-            <tr>
-                <td>Name</td>
-                <td>4</td>
-                <td>04.10.2022 17:22:15</td>
-                <td>true</td>
-                <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas porttitor
-                    nec est sed auctor. Cras ultrices blandit sapien et tempor. Praesent ipsum lectus, tempus at
-                    bibendum
-                    nec, sollicitudin id arcu. Nam bibendum eget lacus at imperdiet. Quisque ac blandit felis.
-                    Suspendisse
-                    aliquam lacus et arcu sagittis,
-                    vel vehicula odio imperdiet. Nunc a lorem vehicula, convallis libero ut, vestibulum tellus.
-                </td>
-                <td>Delete</td>
-            </tr>
         </table>
     </form>
+    <div class="pages">
+        <c:if test="${totalPages > 1}">
+            <p style="margin-right: 20px">Total Items: ${totalItems}</p>
+            <c:if test="${currentPage > 1}">
+                <a href="/admin/reviews/1" class="page-margin-words">First</a>
+            </c:if>
+            <c:if test="${currentPage <= 1}">
+                <span class="page-margin-words">First</span>
+            </c:if>
+
+            <c:if test="${currentPage > 1}">
+                <a href="/admin/reviews/${currentPage - 1}" class="page-margin">Previous</a>
+            </c:if>
+            <c:if test="${currentPage <= 1}">
+                <span class="page-margin">Previous</span>
+            </c:if>
+
+            <c:forEach var = "i" begin = "1" end = "${totalPages}">
+                <c:if test="${currentPage != i}">
+                    <a href="/admin/reviews/${i}" class="page-margin">${i}</a>
+                </c:if>
+                <c:if test="${currentPage == i}">
+                    <span class="page-margin">${i}</span>
+                </c:if>
+            </c:forEach>
+
+            <c:if test="${currentPage < totalPages}">
+                <a href="/admin/reviews/${currentPage + 1}" class="page-margin-words">Next</a>
+            </c:if>
+            <c:if test="${currentPage >= totalPages}">
+                <span class="page-margin-words">Next</span>
+            </c:if>
+
+            <c:if test="${currentPage < totalPages}">
+                <a href="/admin/reviews/${totalPages}">Last</a>
+            </c:if>
+            <c:if test="${currentPage >= totalPages}">
+                <span>Last</span>
+            </c:if>
+        </c:if>
+    </div>
 </main>
 </body>
 </html>

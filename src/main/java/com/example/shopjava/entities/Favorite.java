@@ -11,7 +11,7 @@ public class Favorite {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne
+    @OneToOne(mappedBy = "favorite")
     private User user;
 
     @ManyToMany(fetch = FetchType.EAGER)

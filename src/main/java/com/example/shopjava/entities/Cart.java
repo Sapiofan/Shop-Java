@@ -17,7 +17,7 @@ public class Cart {
     @Column
     private Integer totalPrice;
 
-    @OneToOne
+    @OneToOne(mappedBy = "cart")
     private User user;
 
     @ManyToMany(fetch = FetchType.EAGER)
@@ -29,6 +29,11 @@ public class Cart {
     private Set<Product> cartProducts = new HashSet<>();
 
     public Cart() {
+    }
+
+    public Cart(Integer quantity, Integer totalPrice) {
+        this.quantity = quantity;
+        this.totalPrice = totalPrice;
     }
 
     public Long getId() {

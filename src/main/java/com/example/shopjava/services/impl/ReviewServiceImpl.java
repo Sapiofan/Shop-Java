@@ -7,6 +7,10 @@ import com.example.shopjava.repos.ReviewRepository;
 import com.example.shopjava.repos.UserRepository;
 import com.example.shopjava.services.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
@@ -31,9 +35,9 @@ public class ReviewServiceImpl implements ReviewService {
 
     @Override
     @Transactional
-    public List<Review> getAll() {
-        List<Review> reviews = reviewRepository.findAll();
-        reviews.sort(Comparator.comparingLong(o -> o.getDate().getTime()));
+    public Page<Review> getAll(int pageNum) {
+        Pageable pageable = PageRequest.of(pageNum - 1, 5, Sort.by("date").descending());
+        Page<Review> reviews = reviewRepository.findAll(pageable);
         return reviews;
     }
 

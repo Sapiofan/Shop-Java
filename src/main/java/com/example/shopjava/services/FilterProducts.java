@@ -1,9 +1,7 @@
 package com.example.shopjava.services;
 
-import com.example.shopjava.entities.Laptop;
-import com.example.shopjava.entities.Phone;
-import com.example.shopjava.entities.Product;
-import com.example.shopjava.entities.Watch;
+import com.example.shopjava.entities.*;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 import java.util.Map;
@@ -11,6 +9,10 @@ import java.util.Set;
 
 public interface FilterProducts {
     List<? extends Product> searchProducts(String keyword);
+
+    List<Product> searchUncertainProducts(String keyword);
+
+    Product getProductById(Long id);
 
     Map<String, List<String>> getPhoneCharacteristics();
 
@@ -36,9 +38,11 @@ public interface FilterProducts {
 
     List<Watch> watches(Set<String> filters, Map<String, List<String>> fullFilters, Integer min, Integer max);
 
-    List<Product> getAllProducts();
+    Page<Product> getAllProducts(int pageNum);
 
     List<Product> getProductsWithDiscount();
+
+    Category getCategory(String category);
 
     void deleteById(Long id);
 

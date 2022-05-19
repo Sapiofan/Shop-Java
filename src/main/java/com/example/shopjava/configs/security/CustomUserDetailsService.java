@@ -1,5 +1,7 @@
 package com.example.shopjava.configs.security;
 
+import com.example.shopjava.entities.Cart;
+import com.example.shopjava.entities.Favorite;
 import com.example.shopjava.entities.Role;
 import com.example.shopjava.entities.User;
 import com.example.shopjava.repos.UserRepository;
@@ -55,8 +57,9 @@ public class CustomUserDetailsService implements UserDetailsService {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         String encodedPassword = passwordEncoder.encode(password);
         user.setPassword(encodedPassword);
-        user.setCreatedAt(new Date());
         user.setRole(Role.USER);
+        user.setFavorite(new Favorite());
+        user.setCart(new Cart(0, 0));
         userRepository.save(user);
         //Automatically sign in after registration
         signIn(email, password, request);

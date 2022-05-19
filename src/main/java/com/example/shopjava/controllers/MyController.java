@@ -2,6 +2,7 @@ package com.example.shopjava.controllers;
 
 import com.example.shopjava.configs.security.CustomUserDetailsService;
 import com.example.shopjava.entities.*;
+import com.example.shopjava.entities.admin.AdminHome;
 import com.example.shopjava.entities.contacts.Contact;
 import com.example.shopjava.repos.UserRepository;
 import com.example.shopjava.repos.Utils;
@@ -48,6 +49,9 @@ public class MyController {
     private ReviewService reviewService;
 
     @Autowired
+    private AdminService adminService;
+
+    @Autowired
     private Utils utils;
 
     private static final Logger log = LoggerFactory.getLogger(MyController.class);
@@ -56,6 +60,21 @@ public class MyController {
     public String getHomePage(Model model, Authentication authentication){
         if(utils.checkAuth(authentication))
             model.addAttribute("isAuthenticated", true);
+
+        List<AdminHome> banners = adminService.getBannerData();
+
+        model.addAttribute("link1", banners.get(0).getLink());
+        String[] banner1Text = banners.get(0).getText().split("#");
+        model.addAttribute("banner11", banner1Text[0]);
+        model.addAttribute("banner12", banner1Text[1]);
+        model.addAttribute("banner13", banner1Text[2]);
+
+        model.addAttribute("link2", banners.get(1).getLink());
+        String[] banner2Text = banners.get(1).getText().split("#");
+        model.addAttribute("banner21", banner2Text[0]);
+        model.addAttribute("banner22", banner2Text[1]);
+        model.addAttribute("banner23", banner2Text[2]);
+
         return "home";
     }
 
@@ -116,15 +135,6 @@ public class MyController {
         model.addAttribute("seacrhBool", true);
         return "filters";
     }
-
-//    @PostMapping("/searching")
-//    public String getFilters(Model model, @RequestParam("search") String searchKey){
-//        List<? extends Product> products = filterProducts.searchProducts(searchKey);
-//
-//        model.addAttribute("products", products);
-//        model.addAttribute("seacrhBool", true);
-//        return "filters";
-//    }
 
     @GetMapping("/phones")
     public String phoneFilters(Model model, Authentication authentication){

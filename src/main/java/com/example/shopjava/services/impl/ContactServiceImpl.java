@@ -8,6 +8,9 @@ import com.example.shopjava.services.ContactService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -57,8 +60,10 @@ public class ContactServiceImpl implements ContactService {
 
     @Override
     @Transactional
-    public List<Contact> contacts() {
-        return contactRepository.findAll();
+    public Page<Message> contacts(int pageNum) {
+        int pageSize = 5;
+        Pageable pageable = PageRequest.of(pageNum - 1, pageSize);
+        return messageRepository.findAll(pageable);
     }
 
     @Override

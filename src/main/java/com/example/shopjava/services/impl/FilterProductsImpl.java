@@ -4,10 +4,13 @@ import com.example.shopjava.entities.*;
 import com.example.shopjava.repos.*;
 import com.example.shopjava.services.FilterProducts;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.lang.reflect.Field;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -29,6 +32,9 @@ public class FilterProductsImpl implements FilterProducts {
     @Autowired
     private WatchRepository watchRepository;
 
+    @Autowired
+    private CategoryRepository categoryRepository;
+
     @Transactional
     @Override
     public List<? extends Product> searchProducts(String keyword) {
@@ -36,6 +42,16 @@ public class FilterProductsImpl implements FilterProducts {
             return productRepository.searchProducts(keyword);
         }
         return phoneRepository.findAll();
+    }
+
+    @Override
+    public List<Product> searchUncertainProducts(String keyword) {
+        return productRepository.searchProducts(keyword);
+    }
+
+    @Override
+    public Product getProductById(Long id) {
+        return productRepository.findProductById(id);
     }
 
     @Override
@@ -126,13 +142,19 @@ public class FilterProductsImpl implements FilterProducts {
 
     @Override
     @Transactional
-    public List<Product> getAllProducts() {
-        return productRepository.findAll();
+    public Page<Product> getAllProducts(int pageNum) {
+        Pageable pageable = PageRequest.of(pageNum - 1, 10, Sort.by("name").ascending());
+        return productRepository.findAll(pageable);
     }
 
     @Override
     public List<Product> getProductsWithDiscount() {
         return productRepository.discounts();
+    }
+
+    @Override
+    public Category getCategory(String category) {
+        return categoryRepository.getCategoryByName(category);
     }
 
     @Override

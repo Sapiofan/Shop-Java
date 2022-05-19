@@ -26,43 +26,43 @@
 <body>
 <jsp:include page="admin-header.jsp"/>
 <main class="main">
-    <form action="#" method="post">
+    <form action="/admin/addProduct" method="post">
         <div class="big-group">
             <div class="input-group">
                 <p>Name</p>
-                <input type="text" required>
+                <input name="name" type="text" required>
             </div>
             <div class="input-group">
                 <p>Category</p>
-                <select class="categories" id="categories">
-                    <option value="in-store-sales" selected>Phones</option>
-                    <option value="store-leadership">Laptops</option>
-                    <option value="in-store-operations">Watches</option>
+                <select name="category" class="categories" id="categories">
+                    <option value="phones" selected>Phones</option>
+                    <option value="laptops">Laptops</option>
+                    <option value="watches">Watches</option>
                 </select>
             </div>
             <div class="input-group">
                 <p>Brand</p>
-                <input type="text" required>
+                <input name="brand" type="text" required>
             </div>
         </div>
         <div class="big-group">
             <div class="input-group">
                 <p>Price</p>
-                <input type="text" required>
+                <input name="price" type="text" required>
             </div>
             <div class="input-group">
                 <p>Payment</p>
-                <input type="text" required>
+                <input name="payment" type="text" required>
             </div>
             <div class="input-group">
                 <p>Warranty</p>
-                <input type="number" required>
+                <input name="warranty" type="number" required>
             </div>
         </div>
         <div class="big-group">
             <div class="input-group">
                 <label class="container1">
-                    <input type="checkbox">
+                    <input name="available" type="checkbox">
                     <span class="checkmark"></span>
                     Is available?
                 </label>
@@ -71,11 +71,17 @@
         <div class="big-group">
             <div class="input-group">
                 <p>Gifts</p>
-                <input type="text">
+                <input name="gifts" type="text">
             </div>
             <div class="input-group">
-                <p>Discounts (%)</p>
-                <input type="number">
+                <p>Discount (%)</p>
+                <input name="discount" value="0" type="number">
+            </div>
+        </div>
+        <div class="big-group">
+            <div class="input-group">
+                <p>Image link</p>
+                <input name="link" type="text" style="width: 34vw" required>
             </div>
         </div>
         <button onclick="history.back()" class="history-back">Back</button>

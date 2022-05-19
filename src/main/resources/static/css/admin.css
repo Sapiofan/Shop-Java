@@ -154,3 +154,16 @@ tr {
 .footnote-link {
     width: 30vw;
 }
+
+.pages {
+    margin: 40px auto;
+    display: table;
+}
+
+.page-margin {
+    margin-right: 5px;
+}
+
+.page-margin-words {
+    margin-right: 10px;
+}

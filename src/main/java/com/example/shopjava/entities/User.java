@@ -32,10 +32,10 @@ public class User {
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
     private List<Review> reviews = new ArrayList<>();
 
-    @OneToOne(mappedBy = "user")
+    @OneToOne(cascade = CascadeType.ALL)
     private Favorite favorite;
 
-    @OneToOne(mappedBy = "user")
+    @OneToOne(cascade = CascadeType.ALL)
     private Cart cart;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")

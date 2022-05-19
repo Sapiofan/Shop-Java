@@ -49,12 +49,53 @@
                     <td>${career.position}</td>
                     <td>${career.link}</td>
                     <td>${career.sent}</td>
-                    <td><a href="/admin/career/delete/${career.id}" class="btn btn-danger"
+                    <td><a href="/admin/career/${currentPage}/delete/${career.id}" class="btn btn-danger"
                            onclick="if (!confirm('Are you sure you want to delete the record?')) return false;">Delete</a></td>
                 </tr>
             </c:forEach>
         </table>
     </form>
+    <div class="pages">
+        <c:if test="${totalPages > 1}">
+            <p style="margin-right: 20px">Total Items: ${totalItems}</p>
+            <c:if test="${currentPage > 1}">
+                <a href="/admin/career/1" class="page-margin-words">First</a>
+            </c:if>
+            <c:if test="${currentPage <= 1}">
+                <span class="page-margin-words">First</span>
+            </c:if>
+
+            <c:if test="${currentPage > 1}">
+                <a href="/admin/career/${currentPage - 1}" class="page-margin">Previous</a>
+            </c:if>
+            <c:if test="${currentPage <= 1}">
+                <span class="page-margin">Previous</span>
+            </c:if>
+
+            <c:forEach var = "i" begin = "1" end = "${totalPages}">
+                <c:if test="${currentPage != i}">
+                    <a href="/admin/career/${i}" class="page-margin">${i}</a>
+                </c:if>
+                <c:if test="${currentPage == i}">
+                    <span class="page-margin">${i}</span>
+                </c:if>
+            </c:forEach>
+
+            <c:if test="${currentPage < totalPages}">
+                <a href="/admin/career/${currentPage + 1}" class="page-margin-words">Next</a>
+            </c:if>
+            <c:if test="${currentPage >= totalPages}">
+                <span class="page-margin-words">Next</span>
+            </c:if>
+
+            <c:if test="${currentPage < totalPages}">
+                <a href="/admin/career/${totalPages}">Last</a>
+            </c:if>
+            <c:if test="${currentPage >= totalPages}">
+                <span>Last</span>
+            </c:if>
+        </c:if>
+    </div>
 </main>
 </body>
 </html>

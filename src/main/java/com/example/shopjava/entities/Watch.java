@@ -51,13 +51,12 @@ public class Watch extends Product {
     public Watch() {
     }
 
-    public Watch(Long id, String image, String name, Float price, String brand, String payment, Float rating, Integer discount,
+    public Watch(String image, String name, Float price, String brand, String payment, Float rating, Integer discount,
                  String gifts, Boolean isAvailable, Integer warranty, Date addedAt, Integer sold, Category category,
-                 List<Review> reviews, Set<Cart> carts, Set<Favorite> favorites, String series, String purpose,
-                 String display_shape, Boolean touch_screen, Boolean waterproof, Boolean call_support, Boolean music_control,
-                 Boolean pulse_measurement, Boolean step_counting, Boolean sleep_monitoring, String color, Integer working_hours,
-                 String display_diagonal) {
-        super(id, image, name, price, brand, payment, rating, discount, gifts, isAvailable, warranty, addedAt, sold, category, reviews, carts, favorites);
+                 String series, String purpose, String display_shape, Boolean touch_screen, Boolean waterproof,
+                 Boolean call_support, Boolean music_control, Boolean pulse_measurement, Boolean step_counting,
+                 Boolean sleep_monitoring, String color, Integer working_hours, String display_diagonal) {
+        super(image, name, price, brand, payment, rating, discount, gifts, isAvailable, warranty, addedAt, sold, category);
         this.series = series;
         this.purpose = purpose;
         this.display_shape = display_shape;

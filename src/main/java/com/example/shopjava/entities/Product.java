@@ -54,10 +54,10 @@ public class Product {
     private List<Review> reviews = new ArrayList<>();
 
     @ManyToMany(mappedBy = "cartProducts")
-    private Set<Cart> carts;
+    private Set<Cart> carts = new HashSet<>();
 
     @ManyToMany(mappedBy = "favoriteProducts")
-    private Set<Favorite> favorites;
+    private Set<Favorite> favorites = new HashSet<>();
 
 //    @OneToMany(fetch = FetchType.LAZY, mappedBy = "product")
 //    private List<Favorite> favorites = new ArrayList<>();
@@ -67,10 +67,9 @@ public class Product {
     public Product() {
     }
 
-    public Product(Long id, String image, String name, Float price, String brand, String payment, Float rating,
+    public Product(String image, String name, Float price, String brand, String payment, Float rating,
                    Integer discount, String gifts, Boolean isAvailable, Integer warranty, Date addedAt,
-                   Integer sold, Category category, List<Review> reviews, Set<Cart> carts, Set<Favorite> favorites) {
-        this.id = id;
+                   Integer sold, Category category) {
         this.image = image;
         this.name = name;
         this.price = price;
@@ -84,9 +83,6 @@ public class Product {
 //        this.addedAt = addedAt;
         this.sold = sold;
         this.category = category;
-        this.reviews = reviews;
-        this.carts = carts;
-        this.favorites = favorites;
     }
 
     public Long getId() {
