@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,66 +27,82 @@
 <body>
 <jsp:include page="admin-header.jsp"/>
 <main class="main">
-    <form action="#" method="post">
-        <div class="big-group">
-            <div class="input-group">
-                <p>Ram</p>
-                <input type="text" required>
+    <form action="/admin/products" method="post">
+        <c:if test="${category == 'Phones'}">
+            <c:forEach items="${keys}" var="key">
+                <div class="input-group">
+                    <p>${key}</p>
+                    <select name="${key}" class="categories">
+                        <c:forEach items="${phoneFilters[key]}" var="item">
+                            <option value="${item}">${item}</option>
+                        </c:forEach>
+                    </select>
+                </div>
+            </c:forEach>
+            <div class="big-group">
+                <div class="input-group">
+                    <p>Main Camera</p>
+                    <input name="mainC" type="text" placeholder="48 eg" required>
+                </div>
+                <div class="input-group">
+                    <p>Front Camera</p>
+                    <input name="frontC" type="text" placeholder="48 eg" required>
+                </div>
+                <div class="input-group">
+                    <p>Battery</p>
+                    <input name="battery" type="text" placeholder="3000 eg" required>
+                </div>
             </div>
-            <div class="input-group">
-                <p>Color</p>
-                <input type="text" required>
+        </c:if>
+
+        <c:if test="${category == 'Laptops'}">
+            <c:forEach items="${keys}" var="key">
+                <div class="input-group">
+                    <p>${key}</p>
+                    <select name="${key}" class="categories">
+                        <c:forEach items="${laptopFilters[key]}" var="item">
+                            <option value="${item}">${item}</option>
+                        </c:forEach>
+                    </select>
+                </div>
+            </c:forEach>
+            <div class="big-group">
+                <div class="input-group">
+                    <p>Weight</p>
+                    <input name="weight" type="text" placeholder="1.7 kg e.g" required>
+                </div>
             </div>
-            <div class="input-group">
-                <p>Cores</p>
-                <input type="text" required>
+        </c:if>
+
+        <c:if test="${category == 'Watches'}">
+            <c:forEach items="${keys}" var="key">
+                <div class="input-group">
+                    <p>${key}</p>
+                    <select name="${key}" class="categories">
+                        <c:forEach items="${watchFilters[key]}" var="item">
+                            <option value="${item}">${item}</option>
+                        </c:forEach>
+                    </select>
+                </div>
+            </c:forEach>
+            <div class="big-group">
+                <div class="input-group">
+                    <p>Purpose</p>
+                    <input name="purpose" type="text" placeholder="For business, for swimming eg" required>
+                </div>
             </div>
-            <div class="input-group">
-                <p>Device type</p>
-                <input type="text" required>
-            </div>
-        </div>
-        <div class="big-group">
-            <div class="input-group">
-                <p>Ram</p>
-                <input type="text" required>
-            </div>
-            <div class="input-group">
-                <p>Color</p>
-                <input type="text" required>
-            </div>
-            <div class="input-group">
-                <p>Cores</p>
-                <input type="text" required>
-            </div>
-            <div class="input-group">
-                <p>Device type</p>
-                <input type="text" required>
-            </div>
-        </div>
-        <div class="big-group">
-            <div class="input-group">
-                <p>Ram</p>
-                <input type="text" required>
-            </div>
-            <div class="input-group">
-                <p>Color</p>
-                <input type="text" required>
-            </div>
-            <div class="check-group">
-                <label class="container1">
-                    <input type="checkbox">
-                    <span class="checkmark"></span>
-                    Is available?
-                </label>
-            </div>
-            <div class="input-group">
-                <p>Device type</p>
-                <input type="text" required>
-            </div>
-        </div>
+        </c:if>
+
         <button onclick="history.back()" class="history-back">Back</button>
-        <button type="submit" class="add-product-button">Save</button>
+        <c:if test="${category == 'Phones'}">
+            <button type="submit" name="phone" class="add-product-button">Save</button>
+        </c:if>
+        <c:if test="${category == 'Laptops'}">
+            <button type="submit" name="laptop" class="add-product-button">Save</button>
+        </c:if>
+        <c:if test="${category == 'Watches'}">
+            <button type="submit" name="watch" class="add-product-button">Save</button>
+        </c:if>
     </form>
 </main>
 </body>

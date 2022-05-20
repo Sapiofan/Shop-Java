@@ -25,7 +25,7 @@ public class Laptop extends Product {
     private String processor_series;
 
     @Column(nullable = false)
-    private Integer RAM;
+    private String RAM;
 
     @Column(nullable = false)
     private String drive_type;
@@ -39,7 +39,7 @@ public class Laptop extends Product {
     private String inst_os;
 
     @Column(nullable = false)
-    private Integer storage;
+    private String storage;
 
     @Column(nullable = false)
     private Integer screen_refresh;
@@ -50,7 +50,7 @@ public class Laptop extends Product {
     private String color;
 
     @Column(nullable = false)
-    private Integer video_size;
+    private String video_size;
 
     private String optical_drive;
 
@@ -67,8 +67,8 @@ public class Laptop extends Product {
     public Laptop(String image, String name, Float price, String brand, String payment, Float rating, Integer discount,
                   String gifts, Boolean isAvailable, Integer warranty, Date addedAt, Integer sold, Category category,
                   String device_type, String sc_diagonal, String processor_manufacturer, Integer cores, String processor_series,
-                  Integer RAM, String drive_type, String discrete_graphics, String series, String inst_os, Integer storage,
-                  Integer screen_refresh, String matrix_type, String color, Integer video_size, String optical_drive,
+                  String RAM, String drive_type, String discrete_graphics, String series, String inst_os, String storage,
+                  Integer screen_refresh, String matrix_type, String color, String video_size, String optical_drive,
                   String sc_resolution, Float weight, Boolean touch_screen) {
         super(image, name, price, brand, payment, rating, discount, gifts, isAvailable, warranty, addedAt, sold, category);
         this.device_type = device_type;
@@ -132,11 +132,11 @@ public class Laptop extends Product {
         this.processor_series = processor_series;
     }
 
-    public Integer getRAM() {
+    public String getRAM() {
         return RAM;
     }
 
-    public void setRAM(Integer RAM) {
+    public void setRAM(String RAM) {
         this.RAM = RAM;
     }
 
@@ -172,11 +172,11 @@ public class Laptop extends Product {
         this.inst_os = inst_os;
     }
 
-    public Integer getStorage() {
+    public String getStorage() {
         return storage;
     }
 
-    public void setStorage(Integer storage) {
+    public void setStorage(String storage) {
         this.storage = storage;
     }
 
@@ -204,11 +204,11 @@ public class Laptop extends Product {
         this.color = color;
     }
 
-    public Integer getVideo_size() {
+    public String getVideo_size() {
         return video_size;
     }
 
-    public void setVideo_size(Integer video_size) {
+    public void setVideo_size(String video_size) {
         this.video_size = video_size;
     }
 

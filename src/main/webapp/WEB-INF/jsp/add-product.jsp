@@ -35,9 +35,9 @@
             <div class="input-group">
                 <p>Category</p>
                 <select name="category" class="categories" id="categories">
-                    <option value="phones" selected>Phones</option>
-                    <option value="laptops">Laptops</option>
-                    <option value="watches">Watches</option>
+                    <option value="Phones" selected>Phones</option>
+                    <option value="Laptops">Laptops</option>
+                    <option value="Watches">Watches</option>
                 </select>
             </div>
             <div class="input-group">
@@ -71,7 +71,7 @@
         <div class="big-group">
             <div class="input-group">
                 <p>Gifts</p>
-                <input name="gifts" type="text">
+                <input name="gifts" value="none" type="text">
             </div>
             <div class="input-group">
                 <p>Discount (%)</p>

@@ -19,7 +19,7 @@ public class Phone extends Product {
     private Boolean RAM_slot;
 
     @Column(nullable = false)
-    private Integer CPU;
+    private String CPU;
 
     @Column(nullable = false)
     private String os;
@@ -53,7 +53,7 @@ public class Phone extends Product {
 
     public Phone(String image, String name, Float price, String brand, String payment, Float rating, Integer discount,
                  String gifts, Boolean isAvailable, Integer warranty, Date addedAt, Integer sold, Category category,
-                 String series, String built_in_memory, Boolean RAM_slot, Integer CPU, String os, Boolean NFC,
+                 String series, String built_in_memory, Boolean RAM_slot, String CPU, String os, Boolean NFC,
                  String sc_diagonal, Boolean biometric_security, String main_camera, String front_camera,
                  String battery, Boolean wireless_charger, Integer cores, Integer screen_refresh) {
         super(image, name, price, brand, payment, rating, discount, gifts, isAvailable, warranty, addedAt, sold, category);
@@ -97,11 +97,11 @@ public class Phone extends Product {
         this.RAM_slot = RAM_slot;
     }
 
-    public Integer getCPU() {
+    public String getCPU() {
         return CPU;
     }
 
-    public void setCPU(Integer CPU) {
+    public void setCPU(String CPU) {
         this.CPU = CPU;
     }
 

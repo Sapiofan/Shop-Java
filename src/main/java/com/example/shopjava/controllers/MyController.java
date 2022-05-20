@@ -90,11 +90,7 @@ public class MyController {
             model.addAttribute("userExist", result);
             return "home";
         }
-        String name = SecurityContextHolder.getContext().getAuthentication().getName();
-        Favorite favorite = favoriteService.getUserProducts(userDetailsService.getUserByEmail(name).getId());
-        model.addAttribute("favoriteProducts", favorite.getFavoriteProducts());
-        model.addAttribute("favoriteSize", favorite.getFavoriteProducts().size());
-        return "home";
+        return login(email, psw, request, model);
     }
 
     @PostMapping(value = "/", params = "login")
@@ -104,12 +100,8 @@ public class MyController {
                         Model model
     ){
         log.info(email);
-        log.info(psw);
         String res = userDetailsService.signIn(email, psw, request);
         SecurityContext securityContext = SecurityContextHolder.getContext();
-        log.info(""+securityContext.getAuthentication().getName());
-        log.info(res);
-
         String name = SecurityContextHolder.getContext().getAuthentication().getName();
         Favorite favorite = favoriteService.getUserProducts(userDetailsService.getUserByEmail(name).getId());
         model.addAttribute("favoriteProducts", favorite.getFavoriteProducts());

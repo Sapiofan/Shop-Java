@@ -1,9 +1,6 @@
 package com.example.shopjava.controllers;
 
-import com.example.shopjava.entities.Career;
-import com.example.shopjava.entities.FAQ;
-import com.example.shopjava.entities.Product;
-import com.example.shopjava.entities.Review;
+import com.example.shopjava.entities.*;
 import com.example.shopjava.entities.admin.AdminHome;
 import com.example.shopjava.entities.contacts.Contact;
 import com.example.shopjava.entities.contacts.Message;
@@ -19,11 +16,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpServletRequest;
 import java.time.Instant;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Controller
 public class AdminController {
@@ -305,7 +300,7 @@ public class AdminController {
     }
 
     @PostMapping("/admin/addProduct")
-    public String generalProduct(Model model,
+    public String generalProduct(Model model, HttpServletRequest request,
                                  @RequestParam("name") String name,
                                  @RequestParam("category") String category,
                                  @RequestParam("brand") String brand,
@@ -327,9 +322,126 @@ public class AdminController {
         }
         Product product = new Product(link, name, price, brand, payment, (float) 0, discount, gifts, available, warranty,
                 Date.from(Instant.now()), 0, filterProducts.getCategory(category));
-        model.addAttribute("product", product);
-//        model.addAttribute("values", defineCategoryValue());
+        request.getSession().setAttribute("product", product);
+        if(category.equals("Phones")){
+            Map<String, List<String>> phoneFilters = filterProducts.getPhoneCharacteristics();
+            Set<String> keys = phoneFilters.keySet();
+            model.addAttribute("keys", keys);
+            model.addAttribute("phoneFilters", phoneFilters);
+        }
+        else if(category.equals("Laptops")){
+            Map<String, List<String>> laptopFilters = filterProducts.getLaptopCharacteristics();
+            Set<String> keys = laptopFilters.keySet();
+            model.addAttribute("keys", keys);
+            model.addAttribute("laptopFilters", laptopFilters);
+        }
+        else if(category.equals("Watches")){
+            Map<String, List<String>> watchFilters = filterProducts.getWatchCharacteristics();
+            Set<String> keys = watchFilters.keySet();
+            model.addAttribute("keys", keys);
+            model.addAttribute("watchFilters", watchFilters);
+        }
+        model.addAttribute("category", category);
         return "add-certain-product";
+    }
+
+    @PostMapping(value = "/admin/products", params = "phone")
+    public String savePhone(Model model, HttpServletRequest request,
+                            @RequestParam("Brand") String brand,
+                            @RequestParam("Built-in memory") String built_in_memory,
+                            @RequestParam("OS") String os,
+                            @RequestParam("RAM slot") String ram_slot,
+                            @RequestParam("CPU") String cpu,
+                            @RequestParam("Screen diagonal") String screen_diagonal,
+                            @RequestParam("Biometric security") String biometric_security,
+                            @RequestParam("Cores") String cores,
+                            @RequestParam("Wireless charger") String wireless_charger,
+                            @RequestParam("NFC") String nfc,
+                            @RequestParam("Series") String series,
+                            @RequestParam("Screen refresh") String screen_refresh,
+                            @RequestParam("mainC") String mainC,
+                            @RequestParam("frontC") String frontC,
+                            @RequestParam("battery") String battery
+                            ){
+        Product product = (Product) request.getSession().getAttribute("product");
+//        filterProducts.saveProduct(product);
+        boolean ram_slotB = ram_slot.equals("yes");
+        boolean NFC = nfc.equals("yes");
+        boolean bs = biometric_security.equals("yes");
+        boolean wc = wireless_charger.equals("yes");
+        Phone phone = new Phone(product.getImage(), product.getName(), product.getPrice(), product.getBrand(),
+                product.getPayment(), product.getRating(), product.getDiscount(), product.getGifts(), product.getAvailable(),
+                product.getWarranty(), Date.from(Instant.now()), product.getSold(), product.getCategory(), series,
+                built_in_memory, ram_slotB, cpu, os, NFC, screen_diagonal, bs, mainC, frontC,
+                battery, wc, Integer.valueOf(cores), Integer.valueOf(screen_refresh));
+        filterProducts.savePhone(phone);
+        return getAdminFirstProducts(model);
+    }
+
+    @PostMapping(value = "/admin/products", params = "laptop")
+    public String saveLaptop(Model model, HttpServletRequest request,
+                             @RequestParam("Brand") String brand,
+                             @RequestParam("Screen diagonal") String sc_diagonals,
+                             @RequestParam("Device type") String deviceType,
+                             @RequestParam("RAM") String ram,
+                             @RequestParam("Cores") String core,
+                             @RequestParam("Processor series") String processor_series,
+                             @RequestParam("Drive type") String drive_type,
+                             @RequestParam("Discrete graphics") String discrete_graphics,
+                             @RequestParam("Series") String series,
+                             @RequestParam("Installed OS") String inst_os,
+                             @RequestParam("Storage") String storage,
+                             @RequestParam("Screen refresh") String screen_refresh,
+                             @RequestParam("Color") String color,
+                             @RequestParam("Video size") String video_size,
+                             @RequestParam("Processor manufacturer") String processorManufacturers,
+                             @RequestParam("weight") String weight
+    ){
+        Product product = (Product) request.getSession().getAttribute("product");
+
+        Laptop laptop = new Laptop(product.getImage(), product.getName(), product.getPrice(), product.getBrand(),
+                product.getPayment(), product.getRating(), product.getDiscount(), product.getGifts(), product.getAvailable(),
+                product.getWarranty(), Date.from(Instant.now()), product.getSold(), product.getCategory(),
+                deviceType, sc_diagonals, processorManufacturers, Integer.valueOf(core), processor_series,
+                ram, drive_type, discrete_graphics, series, inst_os, storage, Integer.valueOf(screen_refresh),
+                "", color, video_size, "", "", Float.valueOf(weight), false);
+        filterProducts.saveLaptop(laptop);
+        return getAdminFirstProducts(model);
+    }
+
+    @PostMapping(value = "/admin/products", params = "watch")
+    public String saveWatch(Model model, HttpServletRequest request,
+                            @RequestParam("Brand") String brand,
+                            @RequestParam("Shape") String shape,
+                            @RequestParam("Waterproof") String waterproof,
+                            @RequestParam("Call support") String call_support,
+                            @RequestParam("Music control") String music_control,
+                            @RequestParam("Pulse measurement") String pulse_measurement,
+                            @RequestParam("Step counting") String step_counting,
+                            @RequestParam("Sleep monitoring") String sleep_monitoring,
+                            @RequestParam("Color") String color,
+                            @RequestParam("Working hours") String working_hours,
+                            @RequestParam("Display diagonal") String display_diagonal,
+                            @RequestParam("Touch screen") String touch_sc,
+                            @RequestParam("purpose") String purpose
+    ){
+        Product product = (Product) request.getSession().getAttribute("product");
+
+        boolean touch_screen = touch_sc.equals("yes");
+        boolean wp = waterproof.equals("yes");
+        boolean cs = call_support.equals("yes");
+        boolean mc = music_control.equals("yes");
+        boolean pm = pulse_measurement.equals("yes");
+        boolean sc = step_counting.equals("yes");
+        boolean sm = sleep_monitoring.equals("yes");
+
+        Watch watch = new Watch(product.getImage(), product.getName(), product.getPrice(), product.getBrand(),
+                product.getPayment(), product.getRating(), product.getDiscount(), product.getGifts(), product.getAvailable(),
+                product.getWarranty(), Date.from(Instant.now()), product.getSold(), product.getCategory(),
+                purpose, shape, touch_screen, wp, cs, mc, pm, sc, sm, color, working_hours, display_diagonal);
+
+        filterProducts.saveWatch(watch);
+        return getAdminFirstProducts(model);
     }
 
     @GetMapping(value = "/admin/reviews/{pageNum}/delete/{id}")

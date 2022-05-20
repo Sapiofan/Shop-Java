@@ -33,9 +33,11 @@ public class User {
     private List<Review> reviews = new ArrayList<>();
 
     @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "favorite_id", referencedColumnName = "id")
     private Favorite favorite;
 
     @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "cart_id", referencedColumnName = "id")
     private Cart cart;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")

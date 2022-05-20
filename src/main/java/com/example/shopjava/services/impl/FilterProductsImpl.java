@@ -158,6 +158,26 @@ public class FilterProductsImpl implements FilterProducts {
     }
 
     @Override
+    public void saveProduct(Product product) {
+        productRepository.save(product);
+    }
+
+    @Override
+    public void saveLaptop(Laptop laptop) {
+        laptopRepository.save(laptop);
+    }
+
+    @Override
+    public void saveWatch(Watch watch) {
+        watchRepository.save(watch);
+    }
+
+    @Override
+    public void savePhone(Phone phone) {
+        phoneRepository.save(phone);
+    }
+
+    @Override
     @Transactional
     public void deleteById(Long id) {
         productRepository.deleteById(id);

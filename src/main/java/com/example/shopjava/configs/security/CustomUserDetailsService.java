@@ -4,7 +4,11 @@ import com.example.shopjava.entities.Cart;
 import com.example.shopjava.entities.Favorite;
 import com.example.shopjava.entities.Role;
 import com.example.shopjava.entities.User;
+import com.example.shopjava.repos.CartRepository;
+import com.example.shopjava.repos.FavoriteRepository;
 import com.example.shopjava.repos.UserRepository;
+import com.example.shopjava.services.CartService;
+import com.example.shopjava.services.FavoriteService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,10 +37,17 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Autowired
     AuthenticationManager authenticationManager;
 
+    @Autowired
+    private CartRepository cartRepository;
+
+    @Autowired
+    private FavoriteRepository favoriteRepository;
+
     private static final Logger log = LoggerFactory.getLogger(CustomUserDetailsService.class);
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        createDefaultAdmin();
         User user = userRepository.findByEmail(email);
         if (user == null) {
             throw new UsernameNotFoundException("User not found");
@@ -58,21 +69,26 @@ public class CustomUserDetailsService implements UserDetailsService {
         String encodedPassword = passwordEncoder.encode(password);
         user.setPassword(encodedPassword);
         user.setRole(Role.USER);
-        user.setFavorite(new Favorite());
-        user.setCart(new Cart(0, 0));
+        Favorite favorite = new Favorite();
+        favorite.setUser(user);
+        Cart cart = new Cart(0, 0);
+        cart.setUser(user);
+        user.setFavorite(favorite);
+        user.setCart(cart);
         userRepository.save(user);
-        //Automatically sign in after registration
-        signIn(email, password, request);
         return "";
     }
 
     public String signIn(String email, String password, HttpServletRequest request) {
+        log.info("Sign in method is opened");
         User user = userRepository.findByEmail(email);
         if (user == null) {
+            log.warn("Wrong email");
             return "Email was wrong";
         }
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         if (!passwordEncoder.matches(password, user.getPassword())) {
+            log.warn("Wrong password");
             return "Password was wrong";
         }
 
@@ -83,10 +99,32 @@ public class CustomUserDetailsService implements UserDetailsService {
         sc.setAuthentication(auth);
         HttpSession session = request.getSession(true);
         session.setAttribute(SPRING_SECURITY_CONTEXT_KEY, sc);
+        log.info("Login was successful: " + email);
         return "";
     }
 
     public User getUserByEmail(String email) {
         return userRepository.findByEmail(email);
+    }
+
+    public void createDefaultAdmin(){
+        User user = userRepository.findByEmail("somemail@gmail.com");
+        if (user != null) {
+            log.info("Admin has already exists");
+            return;
+        }
+        user = new User();
+        user.setEmail("somemail@gmail.com");
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        String encodedPassword = passwordEncoder.encode("somePassword");
+        user.setPassword(encodedPassword);
+        user.setRole(Role.ADMIN);
+        Favorite favorite = new Favorite();
+        favorite.setUser(user);
+        Cart cart = new Cart(0, 0);
+        cart.setUser(user);
+        user.setFavorite(favorite);
+        user.setCart(cart);
+        userRepository.save(user);
     }
 }

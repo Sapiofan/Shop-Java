@@ -44,6 +44,14 @@ public interface FilterProducts {
 
     Category getCategory(String category);
 
+    void saveProduct(Product product);
+
+    void savePhone(Phone phone);
+
+    void saveLaptop(Laptop laptop);
+
+    void saveWatch(Watch watch);
+
     void deleteById(Long id);
 
 }

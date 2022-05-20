@@ -10,9 +10,6 @@ import java.util.Set;
 public class Watch extends Product {
 
     @Column(nullable = false)
-    private String series;
-
-    @Column(nullable = false)
     private String purpose;
 
     @Column(nullable = false)
@@ -43,7 +40,7 @@ public class Watch extends Product {
     private String color;
 
     @Column(nullable = false)
-    private Integer working_hours;
+    private String working_hours;
 
     @Column(nullable = false)
     private String display_diagonal;
@@ -53,11 +50,10 @@ public class Watch extends Product {
 
     public Watch(String image, String name, Float price, String brand, String payment, Float rating, Integer discount,
                  String gifts, Boolean isAvailable, Integer warranty, Date addedAt, Integer sold, Category category,
-                 String series, String purpose, String display_shape, Boolean touch_screen, Boolean waterproof,
+                 String purpose, String display_shape, Boolean touch_screen, Boolean waterproof,
                  Boolean call_support, Boolean music_control, Boolean pulse_measurement, Boolean step_counting,
-                 Boolean sleep_monitoring, String color, Integer working_hours, String display_diagonal) {
+                 Boolean sleep_monitoring, String color, String working_hours, String display_diagonal) {
         super(image, name, price, brand, payment, rating, discount, gifts, isAvailable, warranty, addedAt, sold, category);
-        this.series = series;
         this.purpose = purpose;
         this.display_shape = display_shape;
         this.touch_screen = touch_screen;
@@ -70,14 +66,6 @@ public class Watch extends Product {
         this.color = color;
         this.working_hours = working_hours;
         this.display_diagonal = display_diagonal;
-    }
-
-    public String getSeries() {
-        return series;
-    }
-
-    public void setSeries(String series) {
-        this.series = series;
     }
 
     public String getPurpose() {
@@ -160,11 +148,11 @@ public class Watch extends Product {
         this.color = color;
     }
 
-    public Integer getWorking_hours() {
+    public String getWorking_hours() {
         return working_hours;
     }
 
-    public void setWorking_hours(Integer working_hours) {
+    public void setWorking_hours(String working_hours) {
         this.working_hours = working_hours;
     }
 
