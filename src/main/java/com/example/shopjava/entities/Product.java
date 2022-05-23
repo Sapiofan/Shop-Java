@@ -1,11 +1,15 @@
 package com.example.shopjava.entities;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import javax.persistence.*;
 import java.util.*;
 
 @Entity
 @Table(name = "products")
 @Inheritance(strategy = InheritanceType.JOINED)
+@OnDelete(action = OnDeleteAction.CASCADE)
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

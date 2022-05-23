@@ -63,7 +63,7 @@
                     <td>${product.gifts}</td>
                     <td>${product.discount}</td>
                     <td>${product.warranty}</td>
-                    <td>Edit</td>
+                    <td><a href="/admin/editProduct/${product.id}" class="btn btn-warning">Edit</a></td>
                     <td><a href="/admin/products/${currentPage}/delete/${product.id}" class="btn btn-danger"
                            onclick="if (!confirm('Are you sure you want to delete the message?')) return false;">Delete</a></td>
                 </tr>

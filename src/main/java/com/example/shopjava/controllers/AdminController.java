@@ -259,6 +259,7 @@ public class AdminController {
             products = filterProducts.searchUncertainProducts(search);
         }
         model.addAttribute("products", products);
+        model.addAttribute("currentPage", 1);
         return "admin-products";
     }
 
@@ -299,6 +300,42 @@ public class AdminController {
         return "add-product";
     }
 
+    @GetMapping("/admin/editProduct/{id}")
+    public String editProduct(Model model, @PathVariable("id") Long id, HttpServletRequest request){
+        Product product = filterProducts.getProductById(id);
+        request.getSession().setAttribute("productEdit", product);
+        model.addAttribute("product", product);
+        model.addAttribute("editMode", true);
+        return "add-product";
+    }
+
+    @PostMapping(value = "/admin/products", params = "edit")
+    public String postEdit(Model model, HttpServletRequest request,
+                           @RequestParam("name") String name,
+                           @RequestParam("category") String category,
+                           @RequestParam("brand") String brand,
+                           @RequestParam("price") String stringPrice,
+                           @RequestParam("payment") String payment,
+                           @RequestParam("warranty") Integer warranty,
+                           @RequestParam("available") boolean available,
+                           @RequestParam(value = "gifts", required = false) String gifts,
+                           @RequestParam(value = "discount", required = false) int discount,
+                           @RequestParam("link") String link){
+        Product product = (Product) request.getSession().getAttribute("productEdit");
+        product.setName(name);
+        product.setCategory(filterProducts.getCategory(category));
+        product.setBrand(brand);
+        product.setPrice(Float.valueOf(stringPrice));
+        product.setPayment(payment);
+        product.setWarranty(warranty);
+        product.setAvailable(available);
+        product.setGifts(gifts);
+        product.setDiscount(discount);
+        product.setImage(link);
+        filterProducts.saveProduct(product);
+        return getAdminFirstProducts(model);
+    }
+
     @PostMapping("/admin/addProduct")
     public String generalProduct(Model model, HttpServletRequest request,
                                  @RequestParam("name") String name,
@@ -323,23 +360,28 @@ public class AdminController {
         Product product = new Product(link, name, price, brand, payment, (float) 0, discount, gifts, available, warranty,
                 Date.from(Instant.now()), 0, filterProducts.getCategory(category));
         request.getSession().setAttribute("product", product);
-        if(category.equals("Phones")){
-            Map<String, List<String>> phoneFilters = filterProducts.getPhoneCharacteristics();
-            Set<String> keys = phoneFilters.keySet();
-            model.addAttribute("keys", keys);
-            model.addAttribute("phoneFilters", phoneFilters);
-        }
-        else if(category.equals("Laptops")){
-            Map<String, List<String>> laptopFilters = filterProducts.getLaptopCharacteristics();
-            Set<String> keys = laptopFilters.keySet();
-            model.addAttribute("keys", keys);
-            model.addAttribute("laptopFilters", laptopFilters);
-        }
-        else if(category.equals("Watches")){
-            Map<String, List<String>> watchFilters = filterProducts.getWatchCharacteristics();
-            Set<String> keys = watchFilters.keySet();
-            model.addAttribute("keys", keys);
-            model.addAttribute("watchFilters", watchFilters);
+        switch (category) {
+            case "Phones": {
+                Map<String, List<String>> phoneFilters = filterProducts.getPhoneCharacteristics();
+                Set<String> keys = phoneFilters.keySet();
+                model.addAttribute("keys", keys);
+                model.addAttribute("phoneFilters", phoneFilters);
+                break;
+            }
+            case "Laptops": {
+                Map<String, List<String>> laptopFilters = filterProducts.getLaptopCharacteristics();
+                Set<String> keys = laptopFilters.keySet();
+                model.addAttribute("keys", keys);
+                model.addAttribute("laptopFilters", laptopFilters);
+                break;
+            }
+            case "Watches": {
+                Map<String, List<String>> watchFilters = filterProducts.getWatchCharacteristics();
+                Set<String> keys = watchFilters.keySet();
+                model.addAttribute("keys", keys);
+                model.addAttribute("watchFilters", watchFilters);
+                break;
+            }
         }
         model.addAttribute("category", category);
         return "add-certain-product";

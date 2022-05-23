@@ -1,11 +1,39 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<script type="text/javascript">
+    function ajax() {
+        $("#wishlist").remove();
+        url = "cleanWishlist";
+        htmlTable = `<div id="wishlist" class="wishlist">`;
+        data = ``;
+        $.get(url, function (responseJSON){
+           $.each(responseJSON, function (index, product){
+               data += `<div class="wishlist-product"> <a href="/product/`+product.id+`><img width="150px" height="150px" src="`+product.image+`"></a>`;
+               data += `<a href="/product/`+product.id+`><div class="product-description">
+                                <p class="wish-product-name">`+product.name+`</p>
+                                <p class="wish-price">`+product.price+`</p>
+                                <div class="Stars" style="--rating: "`+product.rating+`"></div>
+                            </div>
+                        </a>
+                        <button class="heart" name="heart">&#10084;</button>
+                    </div>`;
+           })
+        }).done(function (){
+            htmlTable += data + `</div>`;
+            $("#w").append(htmlTable);
+        }).fail(function (){
+            alert("Error")
+        });
+    }
+</script>
 <div id="likes" class="modal-likes">
-    <form id='favform' class="likes-content" action="updateFavorites" method="post">
+    <form id='favform' class="likes-content" action="/updateFavorites" method="get">
         <input type="hidden" value="${pageContext.servletContext.contextPath}" name="path">
         <div class="container-likes">
             <span onclick="document.getElementById('likes').style.display='none'" class="close">&times;</span>
             <h2>Wishlist</h2>
-            <div class="wishlist">
+            <div id="w">
+
+            <div id="wishlist" class="wishlist">
                 <c:forEach items="${favoriteProducts}" var="product">
                     <input type="hidden" value="${product.id}" name="productId">
                     <div class="wishlist-product">
@@ -42,10 +70,12 @@
 <%--                    </a>--%>
 <%--                    <button class="heart">&#10084;</button>--%>
 <%--                </div>--%>
+<%--            </div>--%>
+                <div class="clearfix">
+                    <button type="submit" onclick="ajax()" class="clean-button" id="clean-button" name="clean">Clear wishlist</button>
+                </div>
             </div>
-            <div class="clearfix">
-                <button type="submit" class="clean-button" name="clean">Clear wishlist</button>
-            </div>
+        </div>
         </div>
     </form>
 </div>

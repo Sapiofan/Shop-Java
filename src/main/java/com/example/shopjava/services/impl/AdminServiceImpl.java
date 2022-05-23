@@ -27,9 +27,6 @@ public class AdminServiceImpl implements AdminService {
     public List<AdminHome> getBannerData() {
         List<AdminHome> banners = new ArrayList<>();
         List<AdminHome> adminHomeList = adminRepo.findAll(Sort.by("date").descending());
-        for (AdminHome adminHome : adminHomeList) {
-            log.info(""+adminHome.getId());
-        }
         for (int i = 1; i <= 2; i++) {
             for (AdminHome adminHome : adminHomeList) {
                 if(adminHome.getImageNumber() == i){
@@ -45,9 +42,6 @@ public class AdminServiceImpl implements AdminService {
     @Transactional
     public void addNewBannerState(List<AdminHome> adminHomeList) {
         List<AdminHome> dbAdminHomeList = adminRepo.findAll(Sort.by("date").descending());
-        for (AdminHome adminHome : dbAdminHomeList) {
-            log.info(""+adminHome.getId());
-        }
         boolean flag = false;
         for (AdminHome adminHome : adminHomeList) {
             for (AdminHome home : dbAdminHomeList) {

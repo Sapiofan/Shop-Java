@@ -1,8 +1,9 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Smart shop | Technics</title>
+    <title>Smart shop | Product actiions</title>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
     <meta
@@ -30,7 +31,7 @@
         <div class="big-group">
             <div class="input-group">
                 <p>Name</p>
-                <input name="name" type="text" required>
+                <input name="name" value="${product.name}" type="text" required>
             </div>
             <div class="input-group">
                 <p>Category</p>
@@ -42,27 +43,32 @@
             </div>
             <div class="input-group">
                 <p>Brand</p>
-                <input name="brand" type="text" required>
+                <input name="brand" value="${product.brand}" type="text" required>
             </div>
         </div>
         <div class="big-group">
             <div class="input-group">
                 <p>Price</p>
-                <input name="price" type="text" required>
+                <input name="price" value="${product.price}" type="text" required>
             </div>
             <div class="input-group">
                 <p>Payment</p>
-                <input name="payment" type="text" required>
+                <input name="payment" value="${product.payment}" type="text" required>
             </div>
             <div class="input-group">
                 <p>Warranty</p>
-                <input name="warranty" type="number" required>
+                <input name="warranty" value="${product.warranty}" type="number" required>
             </div>
         </div>
         <div class="big-group">
             <div class="input-group">
                 <label class="container1">
-                    <input name="available" type="checkbox">
+                    <c:if test="${product.available}">
+                        <input name="available" type="checkbox" checked>
+                    </c:if>
+                    <c:if test="${!product.available}">
+                        <input name="available" type="checkbox">
+                    </c:if>
                     <span class="checkmark"></span>
                     Is available?
                 </label>
@@ -71,21 +77,37 @@
         <div class="big-group">
             <div class="input-group">
                 <p>Gifts</p>
-                <input name="gifts" value="none" type="text">
+                <c:if test="${!editMode}">
+                    <input name="gifts" value="none" type="text">
+                </c:if>
+                <c:if test="${editMode}">
+                    <input value="${product.gifts}" name="gifts" type="text">
+                </c:if>
             </div>
             <div class="input-group">
                 <p>Discount (%)</p>
-                <input name="discount" value="0" type="number">
+                <c:if test="${!editMode}">
+                    <input name="discount" value="0" type="number">
+                </c:if>
+                <c:if test="${editMode}">
+                    <input value="${product.discount}" name="discount" type="number">
+                </c:if>
             </div>
         </div>
         <div class="big-group">
             <div class="input-group">
                 <p>Image link</p>
-                <input name="link" type="text" style="width: 34vw" required>
+                <input value="${product.image}" name="link" type="text" style="width: 34vw" required>
             </div>
         </div>
         <button onclick="history.back()" class="history-back">Back</button>
-        <button type="submit" class="add-product-button">Continue</button>
+<%--        <a href="/admin/products"><button class="history-back">Back</button></a>--%>
+        <c:if test="${!editMode}">
+            <button type="submit" class="add-product-button">Continue</button>
+        </c:if>
+        <c:if test="${editMode}">
+            <button type="submit" name="edit" class="add-product-button" formmethod="post" formaction="/admin/products">Save</button>
+        </c:if>
     </form>
 </main>
 </body>

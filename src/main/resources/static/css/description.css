@@ -654,6 +654,7 @@ html {
 #chars {
     margin: 20px 0;
     padding: 20px 50px;
+    scroll-margin-top: 150px;
 }
 
 #chars h5 {
@@ -725,6 +726,7 @@ html {
 #reviews {
     padding: 70px 50px 0 50px;
     margin-bottom: 50px;
+    scroll-margin-top: 100px;
 }
 
 .statistics-block {
@@ -800,12 +802,18 @@ html {
 .date {
     color: rgb(167, 167, 167);
     font-size: 14px;
-    float: left;
+    /*float: left;*/
+}
+
+.date-check {
+    display: flex;
+    justify-content: space-between;
+    width: 65vw;
 }
 
 .recommend {
     display: flex;
-    float: right;
+    /*float: right;*/
 }
 
 .recommend p {
@@ -923,6 +931,10 @@ html {
     border: none;
     border-bottom: solid 1px rgb(70, 70, 70);
     outline: none;
+}
+
+.name-input {
+    height: 30px;
 }
 
 .container1 {

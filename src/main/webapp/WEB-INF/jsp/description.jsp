@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -135,6 +136,16 @@
                         </div>
                     </c:if>
                 </div>
+                <sec:authorize access="isAuthenticated()">
+                    <form action="/product/${product.id}" method="post">
+                        <button class="add-to-cart">Add to cart</button>
+                    </form>
+                </sec:authorize>
+                <sec:authorize access="isAnonymous()">
+                    <form action="/checkout" method="post">
+                        <button class="add-to-cart">Buy</button>
+                    </form>
+                </sec:authorize>
                 <button class="add-to-cart">Buy</button>
                 <div class="like-container">
                     <img src="/img/heart.png" style="width: 32px; height: 32px;">
@@ -283,11 +294,20 @@
                     <p>Recommended</p>
                 </div>
             </div>
-            <div class="feedback-but-cont">
-                <button class="feedback-but" onclick="document.getElementById('feedback').style.display='block'">
-                    Leave feedback
-                </button>
-            </div>
+            <sec:authorize access="isAuthenticated()">
+                <div class="feedback-but-cont">
+                    <button class="feedback-but" onclick="document.getElementById('feedback').style.display='block'">
+                        Leave feedback
+                    </button>
+                </div>
+            </sec:authorize>
+            <sec:authorize access="isAnonymous()">
+                <div class="feedback-but-cont">
+                    <button class="feedback-but" onclick="document.getElementById('registration').style.display='block'">
+                        Leave feedback
+                    </button>
+                </div>
+            </sec:authorize>
         </div>
         <div class="rewiews-container">
             <c:forEach items="${reviews}" var="review">
@@ -304,37 +324,12 @@
                                 <img src="/img/check.png" width="16px" height="16px">
                                 <p>Recommended</p>
                             </div>
-                            <div style="clear: both;"></div>
                         </c:if>
                     </div>
                     <p class="rev-text">${review.review}</p>
                 </div>
             </div>
             </c:forEach>
-            <%--            <div class="review-container">--%>
-            <%--                <div class="name">--%>
-            <%--                    <p>Alexey</p>--%>
-            <%--                    <div class="Stars" style="--rating: 3;"></div>--%>
-            <%--                </div>--%>
-            <%--                <div class="comment-container">--%>
-            <%--                    <div class="date-check">--%>
-            <%--                        <p class="date">March 4, 2022</p>--%>
-            <%--                        <div class="recommend">--%>
-            <%--                            <img src="/img/check.png" width="16px" height="16px">--%>
-            <%--                            <p>Recommended</p>--%>
-            <%--                        </div>--%>
-            <%--                        <div style="clear: both;"></div>--%>
-            <%--                    </div>--%>
-            <%--                    <p class="rev-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.--%>
-            <%--                        Maecenas porttitor nec est sed auctor. Cras ultrices blandit sapien et tempor. Praesent ipsum lectus,--%>
-            <%--                        tempus at bibendum nec, sollicitudin id arcu. Nam bibendum eget lacus at imperdiet.--%>
-            <%--                        Quisque ac blandit felis. Suspendisse aliquam lacus et arcu sagittis,--%>
-            <%--                        vel vehicula odio imperdiet. Nunc a lorem vehicula, convallis libero ut, vestibulum tellus.--%>
-            <%--                        Cras ultrices blandit sapien et tempor. Praesent ipsum lectus,--%>
-            <%--                        tempus at bibendum nec, sollicitudin id arcu. Nam bibendum eget lacus at imperdiet.  </p>--%>
-            <%--                </div>--%>
-            <%--            </div>--%>
-            <%--        </div>--%>
             <div id="feedback" class="modal-feed">
                 <form class="modal-feed-content" action="/product/${product.id}" method="post">
                     <div class="container">
@@ -343,18 +338,19 @@
                         <div class="rate-product">
                             <p>Rate this product:</p>
                             <div class="rate">
-                                <input type="radio" id="star5" name="rate" value="5"/>
+                                <input type="radio" id="star5" name="rate" value="5" required/>
                                 <label for="star5" title="text">5 stars</label>
-                                <input type="radio" id="star4" name="rate" value="4"/>
+                                <input type="radio" id="star4" name="rate" value="4" required/>
                                 <label for="star4" title="text">4 stars</label>
-                                <input type="radio" id="star3" name="rate" value="3"/>
+                                <input type="radio" id="star3" name="rate" value="3" required/>
                                 <label for="star3" title="text">3 stars</label>
-                                <input type="radio" id="star2" name="rate" value="2"/>
+                                <input type="radio" id="star2" name="rate" value="2" required/>
                                 <label for="star2" title="text">2 stars</label>
-                                <input type="radio" id="star1" name="rate" value="1"/>
+                                <input type="radio" id="star1" name="rate" value="1" required/>
                                 <label for="star1" title="text">1 star</label>
                             </div>
                         </div>
+                        <input type="text" name="name" value="${user.name}" class="rev-input name-input" placeholder="Your name" required>
                         <textarea class="rev-input" type="text" name="review" placeholder="Your review"
                                   required></textarea>
                         <label class="container1">I recommend this product

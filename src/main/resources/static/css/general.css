@@ -1232,13 +1232,15 @@ aside div.action-buttons a.checkout-button:active, aside div.action-buttons a.ch
 }
 
 .clean-button {
+    position: absolute;
     background-color: rgb(112, 0, 0);
     height: 40px;
     width: 150px;
     border: none;
     border-radius: 4px;
     color: white;
-    margin: 20px 0 0 40%;
+    top: 78%;
+    left: 46%;
     transition: .3s;
 }
 

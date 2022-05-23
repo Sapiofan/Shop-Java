@@ -1,5 +1,6 @@
 package com.example.shopjava.services.impl;
 
+import com.example.shopjava.entities.Product;
 import com.example.shopjava.entities.Review;
 import com.example.shopjava.entities.User;
 import com.example.shopjava.repos.ProductRepository;
@@ -91,6 +92,14 @@ public class ReviewServiceImpl implements ReviewService {
         }
         if (count == 0)
             return 0;
+        Product product = reviews.get(0).getProduct();
+        float counter = 0;
+        for (Review review : reviews) {
+            counter += review.getRating();
+        }
+        float res = counter / reviews.size();
+        product.setRating(res);
+        productRepository.save(product);
         return count * 100 / reviews.size();
     }
 }

@@ -2,6 +2,7 @@
 var reg = document.getElementById('registration');
 var log = document.getElementById('login');
 var likes = document.getElementById('likes');
+var rev = document.getElementById('feedback');
 
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function (event) {
@@ -14,10 +15,9 @@ window.onclick = function (event) {
     if (event.target == likes) {
         likes.style.display = "none";
     }
-//   if (event.target == nav) {
-// 	navigation.className = 'navigation';
-// 	nav.className = 'nav';
-//   }
+    if (event.target == rev) {
+        rev.style.display = "none";
+    }
 }
 
 'use strict';

@@ -10,16 +10,15 @@ import com.example.shopjava.services.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.*;
@@ -107,13 +106,14 @@ public class MyController {
         model.addAttribute("favoriteProducts", favorite.getFavoriteProducts());
         model.addAttribute("favoriteSize", favorite.getFavoriteProducts().size());
         model.addAttribute("isAuthenticated", securityContext.getAuthentication().isAuthenticated());
-        return "home";
+        return getHomePage(model, securityContext.getAuthentication());
     }
 
     @PostMapping(value = "/", params = "logout")
-    public String logout(){
+    public String logout(Model model){
+        log.info("logout: "+SecurityContextHolder.getContext().getAuthentication().getName());
         SecurityContextHolder.getContext().setAuthentication(null);
-        return "home";
+        return getHomePage(model, null);
     }
 
     @GetMapping("/searching")
@@ -226,22 +226,28 @@ public class MyController {
                                  @PathVariable("id") Long id){
         if(utils.checkAuth(authentication))
             model.addAttribute("isAuthenticated", true);
-//        Phone phone = filterProducts.getPhoneByName(name);
-        Phone phone = filterProducts.getPhoneById(id);
         List<Review> reviews = reviewService.findReviewsByProduct(id);
-
+        Integer rec = reviewService.calculateRecommended(reviews);
+        Phone phone = filterProducts.getPhoneById(id);
+        if(authentication != null)
+            model.addAttribute("user", userDetailsService.getUserByEmail(authentication.getName()));
         log.info(phone.getName());
         model.addAttribute("product", phone);
         model.addAttribute("reviews", reviews);
-        model.addAttribute("recommended", reviewService.calculateRecommended(reviews));
+        model.addAttribute("recommended", rec);
         return "description";
     }
 
     @PostMapping(value = "/product/{id}", params = "reviewSend")
     public String sendReview(Model model, Authentication authentication,
-                             @PathVariable("id") Long id,
+                             @PathVariable("id") Long id, @RequestParam("name") String name,
                              @RequestParam("rate") Integer rate, @RequestParam("review") String review,
                              @RequestParam("recommend") Boolean recommend){
+        if(authentication != null) {
+            User user = userDetailsService.getUserByEmail(authentication.getName());
+            user.setName(name);
+            userDetailsService.saveUser(user);
+        }
         Phone phone = filterProducts.getPhoneById(id);
         boolean flag = reviewService.addReview(rate, review, recommend, authentication, id);
         List<Review> reviews = reviewService.findReviewsByProduct(id);
@@ -393,8 +399,11 @@ public class MyController {
 
     @GetMapping("/help")
     public String getHelpPage(Model model, Authentication authentication){
-        if(utils.checkAuth(authentication))
+        if(utils.checkAuth(authentication)){
             model.addAttribute("isAuthenticated", true);
+            User user = userDetailsService.getUserByEmail(authentication.getName());
+            model.addAttribute("favoriteProducts", user.getFavorite().getFavoriteProducts());
+        }
         List<FAQ> faqs = faqService.getFaqs();
         model.addAttribute("faqs", faqs);
         return "help";
@@ -407,7 +416,7 @@ public class MyController {
         return "success";
     }
 
-    @PostMapping(value = "updateFavorites", params = "heart")
+    @PostMapping(value = "/updateFavorites", params = "heart")
     public String updateFavorites(Model model, Authentication authentication,
                                   @RequestParam("productId") Long productId,
                                   @RequestParam("path") String path
@@ -418,6 +427,16 @@ public class MyController {
         log.info(path);
         String redirect = "redirect:" + path;
         return redirect;
+    }
+
+    @GetMapping(value = "/cleanWishlist")
+    public String cleanFavorites(Model model, Authentication authentication
+    ){
+        User user = userDetailsService.getUserByEmail(authentication.getName());
+        user.getFavorite().getFavoriteProducts().clear();
+        userDetailsService.saveUser(user);
+        model.addAttribute("favoriteProducts", user.getFavorite().getFavoriteProducts());
+        return getHomePage(model, authentication);
     }
 
     @PostMapping(value = "/phone", params = "addFavorite")
