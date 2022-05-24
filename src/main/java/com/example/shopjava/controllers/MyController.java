@@ -130,8 +130,13 @@ public class MyController {
 
     @GetMapping("/phones")
     public String phoneFilters(Model model, Authentication authentication){
-        if(utils.checkAuth(authentication))
+        if(utils.checkAuth(authentication)){
             model.addAttribute("isAuthenticated", true);
+            User user = userDetailsService.getUserByEmail(authentication.getName());
+            model.addAttribute("favoriteProducts", user.getFavorite().getFavoriteProducts());
+            model.addAttribute("cartProducts", user.getCart().getProducts());
+            model.addAttribute("total", user.getCart().getTotalPrice());
+        }
         List<Phone> phones = filterProducts.getAllPhones();
         Map<String, List<String>> phoneFilters = filterProducts.getPhoneCharacteristics();
         Set<String> keys = phoneFilters.keySet();
@@ -155,8 +160,11 @@ public class MyController {
                                    @RequestParam(value = "filter-name", required = false) LinkedHashSet<String> filters,
                                    @RequestParam("input-min") Integer minValue, @RequestParam("input-max") Integer maxValue,
                                    @RequestParam("sort") String sortType){
-        if(utils.checkAuth(authentication))
+        if(utils.checkAuth(authentication)){
             model.addAttribute("isAuthenticated", true);
+            User user = userDetailsService.getUserByEmail(authentication.getName());
+            model.addAttribute("favoriteProducts", user.getFavorite().getFavoriteProducts());
+        }
         Map<String, List<String>> phoneFilters = filterProducts.getPhoneCharacteristics();
         Set<String> keys = phoneFilters.keySet();
         List<Phone> phones = filterProducts.phones(filters, phoneFilters, minValue, maxValue);
@@ -390,13 +398,6 @@ public class MyController {
         return "contact";
     }
 
-//    @GetMapping("/description")
-//    public String getDescriptionPage(Model model, Authentication authentication){
-//        if(utils.checkAuth(authentication))
-//            model.addAttribute("isAuthenticated", true);
-//        return "description";
-//    }
-
     @GetMapping("/help")
     public String getHelpPage(Model model, Authentication authentication){
         if(utils.checkAuth(authentication)){
@@ -416,27 +417,70 @@ public class MyController {
         return "success";
     }
 
-    @PostMapping(value = "/updateFavorites", params = "heart")
-    public String updateFavorites(Model model, Authentication authentication,
-                                  @RequestParam("productId") Long productId,
-                                  @RequestParam("path") String path
-                                  ){
-        Favorite favorite = favoriteService.getUserProducts(userDetailsService.getUserByEmail(authentication.getName()).getId());
-        favorite = favoriteService.deleteProduct(favorite, productId);
-        model.addAttribute("favoriteProducts", favorite.getFavoriteProducts());
-        log.info(path);
-        String redirect = "redirect:" + path;
-        return redirect;
+    @GetMapping(value = "/addProduct/{id}")
+    @ResponseBody
+    public Set<Product> addProductToFavorites(Model model, Authentication authentication,
+                                        @PathVariable("id") Long productId
+    ){
+        if(authentication != null){
+            User user = userDetailsService.getUserByEmail(authentication.getName());
+            user.getFavorite().getFavoriteProducts().add(filterProducts.getProductById(productId));
+            userDetailsService.saveUser(user);
+            return user.getFavorite().getFavoriteProducts();
+        }
+        return null;
     }
 
     @GetMapping(value = "/cleanWishlist")
-    public String cleanFavorites(Model model, Authentication authentication
+    @ResponseBody
+    public Set<Product> cleanFavorites(Model model, Authentication authentication
     ){
-        User user = userDetailsService.getUserByEmail(authentication.getName());
-        user.getFavorite().getFavoriteProducts().clear();
-        userDetailsService.saveUser(user);
-        model.addAttribute("favoriteProducts", user.getFavorite().getFavoriteProducts());
-        return getHomePage(model, authentication);
+        if(authentication != null){
+            User user = userDetailsService.getUserByEmail(authentication.getName());
+            user.getFavorite().getFavoriteProducts().clear();
+            userDetailsService.saveUser(user);
+            return user.getFavorite().getFavoriteProducts();
+        }
+        return null;
+    }
+
+    @GetMapping(value = "/deleteFavorite/{id}")
+    @ResponseBody
+    public Set<Product> deleteFavorite(Model model, Authentication authentication, @PathVariable("id") Long productId
+    ){
+        if(authentication != null){
+            User user = userDetailsService.getUserByEmail(authentication.getName());
+            user.getFavorite().getFavoriteProducts().remove(filterProducts.getProductById(productId));
+            userDetailsService.saveUser(user);
+            return user.getFavorite().getFavoriteProducts();
+        }
+        return null;
+    }
+
+    @GetMapping(value = "/deleteCartProduct/{id}")
+    @ResponseBody
+    public Set<Product> deleteCartProduct(Model model, Authentication authentication, @PathVariable("id") Long productId
+    ){
+        if(authentication != null){
+            User user = userDetailsService.getUserByEmail(authentication.getName());
+            user.getCart().getProducts().remove(filterProducts.getProductById(productId));
+            userDetailsService.saveUser(user);
+            return user.getCart().getProducts();
+        }
+        return null;
+    }
+
+    @GetMapping(value = "/addToCart/{id}")
+    @ResponseBody
+    public Set<Product> addToCart(Model model, Authentication authentication, @PathVariable("id") Long productId
+    ){
+        if(authentication != null){
+            User user = userDetailsService.getUserByEmail(authentication.getName());
+            user.getCart().getProducts().add(filterProducts.getProductById(productId));
+            userDetailsService.saveUser(user);
+            return user.getCart().getProducts();
+        }
+        return null;
     }
 
     @PostMapping(value = "/phone", params = "addFavorite")

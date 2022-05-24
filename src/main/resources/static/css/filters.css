@@ -416,7 +416,7 @@ input[type="range"]::-moz-range-thumb {
     bottom: 0;
 }
 
-.price {
+.filters-price {
     position: absolute;
     bottom: 0;
 }

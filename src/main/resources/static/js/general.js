@@ -157,3 +157,23 @@ function scale() {
 window.addEventListener("resize", scale);
 
 scale();
+
+let subtotal = document.getElementById("subtotal")
+
+function addTotal(price, inputId) {
+    let integer = parseInt(subtotal.innerHTML);
+    subtotal.innerHTML = integer + price + "$";
+}
+
+function subtractTotal(price, inputId) {
+    let integer = parseInt(subtotal.innerHTML);
+    let minus = document.getElementById(inputId);
+    if(parseInt(minus.value) !== 1){
+        subtotal.innerHTML = integer - price + "$";
+    }
+}
+
+function disableInput(inputId) {
+    console.log("disabled"+inputId);
+    document.getElementById(inputId).disabled = true;
+}

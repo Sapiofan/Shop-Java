@@ -249,7 +249,6 @@ aside {
 
 #sidebar-cart a, #main-nav a {
     text-decoration: none;
-    color: white;
     transition: color 0.5s linear;
     transition: .3s;
 }
@@ -618,7 +617,6 @@ aside ul.products li.product a.product-link span.product-details span.qty-price 
 aside ul.products li.product a.product-link span.product-details span.qty-price span.price {
     color: #4dc0e3;
     font-weight: 500;
-    font-size: 13px;
     display: inline-flex;
 }
 

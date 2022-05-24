@@ -55,10 +55,10 @@
             </div>
             <div class="sign">
                 <c:if test="${isAuthenticated}">
-                    <button onclick="document.getElementById('likes').style.display='block'"
+                    <button id="header-heart" onclick="document.getElementById('likes').style.display='block'"
                             class="likes">
                         <img src="/img/heart (2).png" style="width: 36px; height: 36px;">
-                        <span class="wishlist-count">${favoriteProducts.size()}</span>
+                        <span id="header-heart-n" class="wishlist-count">${favoriteProducts.size()}</span>
                     </button>
                 </c:if>
                 <c:if test="${!isAuthenticated}">
@@ -71,7 +71,7 @@
             <div class="sign" id="cart">
                 <c:if test="${!isAuthenticated}">
                     <nav id="main-nav">
-                        <a class="cart-button" href="#" onclick="document.getElementById('body').style = '--visibility: auto';
+                        <a class="cart-button" href="" onclick="document.getElementById('body').style = '--visibility: auto';
                     document.getElementById('registration').style.display='block';">
                             <span class="bag-icon"></span>
                         </a>
@@ -79,9 +79,9 @@
                 </c:if>
                 <c:if test="${isAuthenticated}">
                     <nav id="main-nav">
-                        <a class="cart-button" href="#"
+                        <a class="cart-button" href=""
                            onclick="document.getElementById('body').style = '--visibility: hidden';">
-                            <span class="bag-count">${cartProducts.size()}</span>
+                            <span id="cart-counter" class="bag-count">${cartProducts.size()}</span>
                             <span class="bag-icon"></span>
                         </a>
                     </nav>

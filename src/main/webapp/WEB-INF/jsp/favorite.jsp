@@ -1,27 +1,72 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script type="text/javascript">
     function ajax() {
-        $("#wishlist").remove();
-        url = "cleanWishlist";
-        htmlTable = `<div id="wishlist" class="wishlist">`;
-        data = ``;
-        $.get(url, function (responseJSON){
-           $.each(responseJSON, function (index, product){
-               data += `<div class="wishlist-product"> <a href="/product/`+product.id+`><img width="150px" height="150px" src="`+product.image+`"></a>`;
-               data += `<a href="/product/`+product.id+`><div class="product-description">
-                                <p class="wish-product-name">`+product.name+`</p>
-                                <p class="wish-price">`+product.price+`</p>
-                                <div class="Stars" style="--rating: "`+product.rating+`"></div>
-                            </div>
-                        </a>
-                        <button class="heart" name="heart">&#10084;</button>
-                    </div>`;
-           })
-        }).done(function (){
-            htmlTable += data + `</div>`;
-            $("#w").append(htmlTable);
-        }).fail(function (){
-            alert("Error")
+        $.ajax({
+            type: "GET",
+            url: "cleanWishlist",
+            dataType: "json",
+            complete: [
+                function (response) {
+                    $("#wishlist").remove();
+                    $("#header-heart-n").remove();
+                    htmlTable = `<div id="wishlist" class="wishlist">`;
+                    var data = ``;
+                    var obj = $.parseJSON(response.responseText);
+                    number = obj.length;
+                    for (var i = 0; i < obj.length; i++) {
+                        data += `<div class="wishlist-product"> <a href="/product/`+obj[i].id+`"><img width="150px" height="150px" src="`+obj[i].image+`"></a>`;
+                        data += `<a href="/product/`+obj[i].id+`"><div class="product-description">
+                                        <p class="wish-product-name">`+obj[i].name+`</p>
+                                        <p class="wish-price">`+obj[i].price+`$</p>
+                                        <div class="Stars" style="--rating: `+obj[i].rating+`"></div>
+                                    </div>
+                                </a>
+                                <button class="heart" name="heart">&#10084;</button>
+                            </div>`;
+                    }
+                    htmlTable += data + `<div class="clearfix">
+                    <button type="button" onclick="ajax()" class="clean-button" id="clean-button" name="clean">Clear wishlist</button>
+                    </div></div>`;
+                    counter = `<span id="header-heart-n" class="wishlist-count">`+ number +`</span>`;
+                    $("#w").append(htmlTable);
+                    $("#header-heart").append(counter);
+                }
+            ]
+        });
+    }
+
+    function productChanges(url) {
+        $.ajax({
+            type: "GET",
+            url: url,
+            dataType: "json",
+            complete: [
+                function (response) {
+                    $("#wishlist").remove();
+                    $("#header-heart-n").remove();
+                    htmlTable = `<div id="wishlist" class="wishlist">`;
+                    var data = ``;
+                    var obj = $.parseJSON(response.responseText);
+                    number = obj.length;
+                    for (var i = 0; i < obj.length; i++) {
+                        data += `<div class="wishlist-product"> <a href="/product/`+obj[i].id+`"><img width="150px" height="150px" src="`+obj[i].image+`"></a>`;
+                        data += `<a href="/product/`+obj[i].id+`"><div class="product-description">
+                                        <p class="wish-product-name">`+obj[i].name+`</p>
+                                        <p class="wish-price">`+obj[i].price+`$</p>
+                                        <div class="Stars" style="--rating: `+obj[i].rating+`"></div>
+                                    </div>
+                                </a>
+                                <button type="button" onclick="productChanges('/deleteFavorite/`+ obj[i].id +`')" class="heart" name="heart">&#10084;</button>
+                            </div>`;
+                    }
+                    htmlTable += data + `<div class="clearfix">
+                    <button type="button" onclick="ajax()" class="clean-button" id="clean-button" name="clean">Clear wishlist</button>
+                    </div></div>`;
+                    counter = `<span id="header-heart-n" class="wishlist-count">`+ number +`</span>`;
+                    $("#w").append(htmlTable);
+                    $("#header-heart").append(counter);
+                }
+            ]
         });
     }
 </script>
@@ -45,7 +90,7 @@
                                 <div class="Stars" style="--rating: ${product.rating};"></div>
                             </div>
                         </a>
-                        <button type="submit" class="heart" name="heart">&#10084;</button>
+                        <button type="button" onclick="productChanges('/deleteFavorite/${product.id}')" class="heart" name="heart">&#10084;</button>
                     </div>
                 </c:forEach>
 <%--                <div class="wishlist-product">--%>
@@ -72,7 +117,7 @@
 <%--                </div>--%>
 <%--            </div>--%>
                 <div class="clearfix">
-                    <button type="submit" onclick="ajax()" class="clean-button" id="clean-button" name="clean">Clear wishlist</button>
+                    <button type="button" onclick="ajax()" class="clean-button" id="clean-button" name="clean">Clear wishlist</button>
                 </div>
             </div>
         </div>

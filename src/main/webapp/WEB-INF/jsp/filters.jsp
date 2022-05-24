@@ -153,7 +153,6 @@
                 </div>
                 <div class="product-list">
                     <c:forEach items="${products}" var="product">
-                        <input type="hidden" value="${product.id}" name="productId">
                         <div class="product-card">
                             <a href="/product/${product.id}">
                                 <div class="card-image">
@@ -173,22 +172,22 @@
                                              style="width: 20px; height: 20px; margin-right: 10px;">
                                     </a>
                                     <c:if test="${isAuthenticated}">
-                                        <c:set var="contains" value="false"/>
-                                        <c:forEach var="favorite" items="${userFavorites}">
-                                            <c:if test="${favorite.product.id == product.id}">
-                                                <c:set var="contains" value="true"/>
-                                            </c:if>
-                                        </c:forEach>
-                                        <c:if test="${!contains}">
-                                            <button class="empty-heart" type="submit" name="addFavorite"><img
+<%--                                        <c:set var="contains" value="false"/>--%>
+<%--                                        <c:forEach var="favorite" items="${userFavorites}">--%>
+<%--                                            <c:if test="${favorite.product.id == product.id}">--%>
+<%--                                                <c:set var="contains" value="true"/>--%>
+<%--                                            </c:if>--%>
+<%--                                        </c:forEach>--%>
+<%--                                        <c:if test="${!contains}">--%>
+                                            <button type="button" class="empty-heart" onclick="productChanges('addProduct/${product.id}')"><img
                                                     src="img/heart.png"
                                                     style="width: 20px; height: 20px; margin-right: 10px;"></button>
-                                        </c:if>
-                                        <c:if test="${contains}">
-                                            <button class="empty-heart" type="submit" name="addFavorite"><img
-                                                    src="img/red-heart.png"
-                                                    style="width: 20px; height: 20px; margin-right: 10px;"></button>
-                                        </c:if>
+<%--                                        </c:if>--%>
+<%--                                        <c:if test="${contains}">--%>
+<%--                                            <button class="empty-heart" name="addFavorite"><img--%>
+<%--                                                    src="img/red-heart.png"--%>
+<%--                                                    style="width: 20px; height: 20px; margin-right: 10px;"></button>--%>
+<%--                                        </c:if>--%>
                                     </c:if>
                                     <c:if test="${!isAuthenticated}">
                                         <button class="empty-heart"
@@ -199,7 +198,7 @@
                                     </c:if>
                                 </div>
                                 <div class="buy-elements">
-                                    <div class="price">
+                                    <div class="filters-price">
                                         <c:choose>
                                             <c:when test="${product.discount != 0}">
                                                 <div class="pre-price">${product.price} &#8372;</div>
@@ -212,7 +211,7 @@
                                             </c:otherwise>
                                         </c:choose>
                                     </div>
-                                    <button class="add-product">Buy</button>
+                                    <button type="button" onclick="cartChanges('/addToCart/${product.id}')" class="add-product">Buy</button>
                                 </div>
                             </div>
                         </div>

@@ -1,5 +1,7 @@
 package com.example.shopjava.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +16,7 @@ public class Category {
     @Column(nullable = false, unique = true)
     private String name;
 
+    @JsonIgnore
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "category")
     private List<Product> products = new ArrayList<>();
 
