@@ -247,6 +247,7 @@ main {
 
 
 .cart-container {
+    position: relative;
     margin: 50px 0;
     padding: 50px;
     box-shadow: 4px 4px rgb(0, 0, 0, 0.2);
@@ -266,7 +267,7 @@ main {
 }
 
 .total-price {
-    margin-left: 65%;
+    margin-left: 10px;
 }
 
 .products {
@@ -280,9 +281,11 @@ main {
 }
 
 .sum {
+    position: absolute;
     display: flex;
     font-size: 18px;
-    margin-top: 20px;
+    bottom: 30px;
+    left: 50px;
 }
 
 input::-webkit-outer-spin-button,
@@ -318,7 +321,7 @@ input[type=number] {
     margin-top: 10px;
 }
 
-#close {
+.close {
     background: transparent;
     color: red;
     height: 30px;
@@ -326,10 +329,12 @@ input[type=number] {
     border: none;
 }
 
-#close:hover {
+.close:hover {
     color: rgb(177, 0, 0);
     cursor: pointer;
 }
+
+
 
 @media screen and (max-width: 600px) {
     main {

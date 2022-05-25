@@ -43,11 +43,6 @@
                 <div style="clear: both;"></div>
             </div>
             <div class="success-child">
-                <p class="general-success">Mobile</p>
-                <p class="certain-success">${transaction.mobile}</p>
-                <div style="clear: both;"></div>
-            </div>
-            <div class="success-child">
                 <p class="general-success">Email</p>
                 <p class="certain-success">${transaction.email}</p>
                 <div style="clear: both;"></div>

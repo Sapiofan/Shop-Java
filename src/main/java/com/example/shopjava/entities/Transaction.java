@@ -1,6 +1,7 @@
 package com.example.shopjava.entities;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "transactions")
@@ -15,13 +16,31 @@ public class Transaction {
     @Column(nullable = false)
     private String bank;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    private User user;
+    @Column(nullable = false)
+    private String email;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    private Product product;
+    @Column(nullable = false)
+    private String mobile;
+
+    @Column(nullable = false)
+    private String city;
+
+    @Column(nullable = false)
+    private String name;
+
+//    @ManyToMany
+//    Set<Product> products;
 
     public Transaction() {
+    }
+
+    public Transaction(Integer amount, String bank, String email, String mobile, String city, String name) {
+        this.amount = amount;
+        this.bank = bank;
+        this.email = email;
+        this.mobile = mobile;
+        this.city = city;
+        this.name = name;
     }
 
     public Long getId() {
@@ -48,21 +67,35 @@ public class Transaction {
         this.bank = bank;
     }
 
-    public User getUser() {
-        return user;
+    public String getEmail() {
+        return email;
     }
 
-    public void setUser(User user) {
-        this.user = user;
-        this.user.addTransaction(this);
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public Product getProduct() {
-        return product;
+    public String getMobile() {
+        return mobile;
     }
 
-    public void setProduct(Product product) {
-        this.product = product;
-//        this.product.addTransaction(product);
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

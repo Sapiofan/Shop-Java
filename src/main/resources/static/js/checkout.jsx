@@ -153,10 +153,10 @@ class Checkout extends React.Component {
 
     render() {
         if (this.state.cardInput) {
-            window.location.href = "success.html"
+            return null;
         } else if (this.state.data) {
             return (
-                <form className="data-form">
+                <form className="data-form" method="post" action="/checkout">
                     <h4>2. Credit card</h4>
                     <div className="text-container">
                         <p>Card number</p>
@@ -236,14 +236,14 @@ class Checkout extends React.Component {
                         <p>Security code</p>
                         <input
                             onChange={this.handleInputChange}
-                            name="cvv" type={"text"}
+                            name="cvv" type={"password"}
                             className="text-field cvv"
                             value={this.state.cvv}
                             maxLength="3"
                             placeholder="xxx"></input>
                     </div>
                     <input onClick={this.handleCard} className="back" value={"Back"}/>
-                    <input onClick={this.handleData}
+                    <input onClick={this.handleData} type="submit"
                            disabled={!this.state.part1 || !this.state.part2 || !this.state.part3
                                || !this.state.part4 || !this.state.prefix || !this.state.suffix || !this.state.cvv}
                            className="submit" value="Pay"/>

@@ -69,11 +69,6 @@ public class Product {
     @ManyToMany(mappedBy = "favoriteProducts")
     private Set<Favorite> favorites = new HashSet<>();
 
-//    @OneToMany(fetch = FetchType.LAZY, mappedBy = "product")
-//    private List<Favorite> favorites = new ArrayList<>();
-
-    // Like favorites the same with cart
-
     public Product() {
     }
 

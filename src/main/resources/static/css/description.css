@@ -609,6 +609,11 @@ html {
     margin-top: 10px;
 }
 
+.empty-heart {
+    background: transparent;
+    border: none;
+}
+
 @media screen and (max-width: 600px) {
     #carousel {
         display: block;

@@ -57,9 +57,19 @@
                 <div class="header-price">
                     ${product.price-(product.price*product.discount/100)}$
                 </div>
-                <button class="header-buy" id="header-buy">Buy</button>
+                <sec:authorize access="isAuthenticated()">
+                    <button type="button" onclick="cartChanges('/addToCart/${product.id}')" class="header-buy" id="header-buy">Add to cart</button>
+                </sec:authorize>
+                <sec:authorize access="isAnonymous()">
+                    <a href="/checkout/${product.id}">
+                        <button class="header-buy">Buy</button>
+                    </a>
+                </sec:authorize>
+<%--                <button class="header-buy" id="header-buy">Buy</button>--%>
                 <div class="header-like">
-                    <img src="/img/heart (2).png">
+                    <button type="button" class="empty-heart" onclick="productChanges('/addProduct/${product.id}')">
+                        <img src="/img/heart (2).png">
+                    </button>
                 </div>
             </div>
         </div>
@@ -137,18 +147,18 @@
                     </c:if>
                 </div>
                 <sec:authorize access="isAuthenticated()">
-                    <form action="/product/${product.id}" method="post">
-                        <button class="add-to-cart">Add to cart</button>
-                    </form>
+                        <button type="button" onclick="cartChanges('/addToCart/${product.id}')" class="add-to-cart">Add to cart</button>
                 </sec:authorize>
                 <sec:authorize access="isAnonymous()">
                     <form action="/checkout" method="post">
                         <button class="add-to-cart">Buy</button>
                     </form>
                 </sec:authorize>
-                <button class="add-to-cart">Buy</button>
+<%--                <button class="add-to-cart">Buy</button>--%>
                 <div class="like-container">
-                    <img src="/img/heart.png" style="width: 32px; height: 32px;">
+                    <button type="button" class="empty-heart" onclick="productChanges('/addProduct/${product.id}')">
+                        <img src="/img/heart.png" style="width: 32px; height: 32px;">
+                    </button>
                 </div>
             </div>
             <c:if test="${product.discount != 0 || product.gifts != 'none'}">

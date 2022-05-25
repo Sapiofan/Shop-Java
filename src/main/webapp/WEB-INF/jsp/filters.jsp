@@ -179,7 +179,7 @@
 <%--                                            </c:if>--%>
 <%--                                        </c:forEach>--%>
 <%--                                        <c:if test="${!contains}">--%>
-                                            <button type="button" class="empty-heart" onclick="productChanges('addProduct/${product.id}')"><img
+                                            <button type="button" class="empty-heart" onclick="productChanges('/addProduct/${product.id}')"><img
                                                     src="img/heart.png"
                                                     style="width: 20px; height: 20px; margin-right: 10px;"></button>
 <%--                                        </c:if>--%>
@@ -211,7 +211,12 @@
                                             </c:otherwise>
                                         </c:choose>
                                     </div>
-                                    <button type="button" onclick="cartChanges('/addToCart/${product.id}')" class="add-product">Buy</button>
+                                    <c:if test="${isAuthenticated}">
+                                        <button type="button" onclick="cartChanges('/addToCart/${product.id}')" class="add-product">In Cart</button>
+                                    </c:if>
+                                    <c:if test="${!isAuthenticated}">
+                                        <a href="/checkout/${product.id}"><button type="button" class="add-product">Buy</button></a>
+                                    </c:if>
                                 </div>
                             </div>
                         </div>

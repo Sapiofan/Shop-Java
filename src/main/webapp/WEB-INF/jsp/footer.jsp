@@ -59,9 +59,6 @@
                 <a href="/help#terms">
                     <li>Terms & Conditions</li>
                 </a>
-                <a href="#">
-                    <li>Payment Methods</li>
-                </a>
             </ul>
         </div>
     </div>

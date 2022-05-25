@@ -3,7 +3,7 @@
     function ajax() {
         $.ajax({
             type: "GET",
-            url: "cleanWishlist",
+            url: "/cleanWishlist",
             dataType: "json",
             complete: [
                 function (response) {

@@ -45,10 +45,6 @@ public class User {
     @JoinColumn(name = "cart_id", referencedColumnName = "id")
     private Cart cart;
 
-    @JsonIgnore
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
-    private List<Transaction> transactions = new ArrayList<>();
-
     public User() {
     }
 
@@ -124,20 +120,8 @@ public class User {
         this.cart = cart;
     }
 
-    public List<Transaction> getTransactions() {
-        return transactions;
-    }
-
-    public void setTransactions(List<Transaction> transactions) {
-        this.transactions = transactions;
-    }
-
     public void addReview(Review review) {
         this.reviews.add(review);
-    }
-
-    public void addTransaction(Transaction transaction) {
-        this.transactions.add(transaction);
     }
 
     @Override
@@ -148,12 +132,11 @@ public class User {
         return Objects.equals(id, user.id) && Objects.equals(name, user.name)
                 && Objects.equals(password, user.password) && Objects.equals(email, user.email)
                 && Objects.equals(createdAt, user.createdAt) && role == user.role && Objects.equals(reviews, user.reviews)
-                && Objects.equals(favorite, user.favorite) && Objects.equals(cart, user.cart)
-                && Objects.equals(transactions, user.transactions);
+                && Objects.equals(favorite, user.favorite) && Objects.equals(cart, user.cart);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, password, email, createdAt, role, reviews, favorite, cart, transactions);
+        return Objects.hash(id, name, password, email, createdAt, role, reviews, favorite, cart);
     }
 }

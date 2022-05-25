@@ -36,7 +36,7 @@
                                 </span>
                             </span>
                         </a>
-                        <button type="button" onclick="cartChanges('deleteCartProduct/`+obj[i].id+`')" class="remove-button"><span class="remove-icon">X</span></button>
+                        <button type="button" onclick="cartChanges('/deleteCartProduct/`+obj[i].id+`')" class="remove-button"><span class="remove-icon">X</span></button>
                     </li>`;
                     }
                     htmlTable += data + `</ul>`;
@@ -77,7 +77,7 @@
                                 </span>
                             </span>
                         </a>
-                        <button type="button" onclick="cartChanges('deleteCartProduct/${product.id}')" class="remove-button"><span class="remove-icon">X</span></button>
+                        <button type="button" onclick="cartChanges('/deleteCartProduct/${product.id}')" class="remove-button"><span class="remove-icon">X</span></button>
                     </li>
                 </c:forEach>
             </ul>
@@ -88,7 +88,7 @@
             </div>
         </div>
         <div class="action-buttons">
-            <a class="checkout-button" href="#">Checkout</a>
+            <a class="checkout-button" href="/checkout">Checkout</a>
         </div>
     </main>
 </aside>
