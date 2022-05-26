@@ -88,64 +88,75 @@
         <div class="sellers-padding">
             <h1>Best sellers</h1>
             <div class="products">
-                <div class="product">
-                    <div class="img-container">
-                        <img class="zoom" src="https://static.wixstatic.com/media/c22c23_75059a72af5e4949aecdfbda8746f4ef~mv2.jpg/v1/fill/w_343,h_343,al_c,q_80,usm_0.66_1.00_0.01/c22c23_75059a72af5e4949aecdfbda8746f4ef~mv2.webp">
+                <c:forEach items="${bestsellers}" var="bestseller">
+                    <div class="product">
+                        <a href="/product/${bestseller.id}">
+                            <div class="img-container">
+                                <img class="zoom" src="${bestseller.image}">
+                            </div>
+                        </a>
+                        <a href="/product/${bestseller.id}">
+                            <div class="description">
+                                <p>${bestseller.name}</p>
+                            </div>
+                        </a>
+                        <div class="prices">
+                            <c:if test="${bestseller.discount != 0}">
+                                <p class="crossed-out">${bestseller.price}$</p>
+                                <p>${bestseller.price - (bestseller.discount / 100 * bestseller.price)}$</p>
+                            </c:if>
+                            <c:if test="${bestseller.discount == 0}">
+                                <p>${bestseller.price}$</p>
+                            </c:if>
+                        </div>
                     </div>
-                    <div class="description">
-                        <p>Fitboot Inspire Fitness Tracker With Heart Rate Tracking</p>
-                    </div>
-                    <div class="prices">
-                        <p class="crossed-out">$85.00</p>
-                        <p>$70.00</p>
-                    </div>
-                </div>
-                <div class="product">
-                    <div class="img-container">
-                        <img class="zoom" src="https://static.wixstatic.com/media/c22c23_3ab3d3acd73843deba1dece7b2254e2f~mv2.jpg/v1/fill/w_343,h_343,al_c,q_80,usm_0.66_1.00_0.01/c22c23_3ab3d3acd73843deba1dece7b2254e2f~mv2.webp">
-                    </div>
-                    <div class="description">
-                        <p>JP Gaming Laptop 15.6" Laptop 256GB</p>
-                    </div>
-                    <div class="prices">
-                        <p class="crossed-out">$85.00</p>
-                        <p>$70.00</p>
-                    </div>
-                </div>
-                <div class="product">
-                    <div class="img-container">
-                        <img class="zoom" src="https://static.wixstatic.com/media/c22c23_77a52a8e6f8b4879a6548e11a3df3613~mv2.jpg/v1/fill/w_343,h_343,al_c,q_80,usm_0.66_1.00_0.01/c22c23_77a52a8e6f8b4879a6548e11a3df3613~mv2.webp">
-                    </div>
-                    <div class="description">
-                        <p>HKI Tech Quadcopter Drone With 360 Camera & Controller</p>
-                    </div>
-                    <div class="prices">
-                        <p>$85.00</p>
-                    </div>
-                </div>
-                <div class="product">
-                    <div class="img-container">
-                        <img class="zoom" src="https://static.wixstatic.com/media/c22c23_75059a72af5e4949aecdfbda8746f4ef~mv2.jpg/v1/fill/w_343,h_343,al_c,q_80,usm_0.66_1.00_0.01/c22c23_75059a72af5e4949aecdfbda8746f4ef~mv2.webp">
-                    </div>
-                    <div class="description">
-                        <p>Smartphone Z Pixel Max 128GB Unlocked</p>
-                    </div>
-                    <div class="prices">
-                        <p class="crossed-out">$85.00</p>
-                        <p>$70.00</p>
-                    </div>
-                </div>
-                <div class="product">
-                    <div class="img-container">
-                        <img class="zoom" src="https://static.wixstatic.com/media/c22c23_3ab3d3acd73843deba1dece7b2254e2f~mv2.jpg/v1/fill/w_343,h_343,al_c,q_80,usm_0.66_1.00_0.01/c22c23_3ab3d3acd73843deba1dece7b2254e2f~mv2.webp">
-                    </div>
-                    <div class="description">
-                        <p>In-ear Noise Cancelling & Isolating Wireless Earbuds</p>
-                    </div>
-                    <div class="prices">
-                        <p>$85.00</p>
-                    </div>
-                </div>
+                </c:forEach>
+<%--                <div class="product">--%>
+<%--                    <div class="img-container">--%>
+<%--                        <img class="zoom" src="https://static.wixstatic.com/media/c22c23_3ab3d3acd73843deba1dece7b2254e2f~mv2.jpg/v1/fill/w_343,h_343,al_c,q_80,usm_0.66_1.00_0.01/c22c23_3ab3d3acd73843deba1dece7b2254e2f~mv2.webp">--%>
+<%--                    </div>--%>
+<%--                    <div class="description">--%>
+<%--                        <p>JP Gaming Laptop 15.6" Laptop 256GB</p>--%>
+<%--                    </div>--%>
+<%--                    <div class="prices">--%>
+<%--                        <p class="crossed-out">$85.00</p>--%>
+<%--                        <p>$70.00</p>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--                <div class="product">--%>
+<%--                    <div class="img-container">--%>
+<%--                        <img class="zoom" src="https://static.wixstatic.com/media/c22c23_77a52a8e6f8b4879a6548e11a3df3613~mv2.jpg/v1/fill/w_343,h_343,al_c,q_80,usm_0.66_1.00_0.01/c22c23_77a52a8e6f8b4879a6548e11a3df3613~mv2.webp">--%>
+<%--                    </div>--%>
+<%--                    <div class="description">--%>
+<%--                        <p>HKI Tech Quadcopter Drone With 360 Camera & Controller</p>--%>
+<%--                    </div>--%>
+<%--                    <div class="prices">--%>
+<%--                        <p>$85.00</p>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--                <div class="product">--%>
+<%--                    <div class="img-container">--%>
+<%--                        <img class="zoom" src="https://static.wixstatic.com/media/c22c23_75059a72af5e4949aecdfbda8746f4ef~mv2.jpg/v1/fill/w_343,h_343,al_c,q_80,usm_0.66_1.00_0.01/c22c23_75059a72af5e4949aecdfbda8746f4ef~mv2.webp">--%>
+<%--                    </div>--%>
+<%--                    <div class="description">--%>
+<%--                        <p>Smartphone Z Pixel Max 128GB Unlocked</p>--%>
+<%--                    </div>--%>
+<%--                    <div class="prices">--%>
+<%--                        <p class="crossed-out">$85.00</p>--%>
+<%--                        <p>$70.00</p>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--                <div class="product">--%>
+<%--                    <div class="img-container">--%>
+<%--                        <img class="zoom" src="https://static.wixstatic.com/media/c22c23_3ab3d3acd73843deba1dece7b2254e2f~mv2.jpg/v1/fill/w_343,h_343,al_c,q_80,usm_0.66_1.00_0.01/c22c23_3ab3d3acd73843deba1dece7b2254e2f~mv2.webp">--%>
+<%--                    </div>--%>
+<%--                    <div class="description">--%>
+<%--                        <p>In-ear Noise Cancelling & Isolating Wireless Earbuds</p>--%>
+<%--                    </div>--%>
+<%--                    <div class="prices">--%>
+<%--                        <p>$85.00</p>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
             </div>
             <button class="view-all">View All</button>
         </div>

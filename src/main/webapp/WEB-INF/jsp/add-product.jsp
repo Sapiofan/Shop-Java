@@ -100,7 +100,7 @@
                 <input value="${product.image}" name="link" type="text" style="width: 34vw" required>
             </div>
         </div>
-        <button onclick="history.back()" class="history-back">Back</button>
+        <button type="button" onclick="history.back()" class="history-back">Back</button>
 <%--        <a href="/admin/products"><button class="history-back">Back</button></a>--%>
         <c:if test="${!editMode}">
             <button type="submit" class="add-product-button">Continue</button>

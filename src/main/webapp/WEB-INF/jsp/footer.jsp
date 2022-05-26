@@ -32,6 +32,9 @@
                     <li>Discounts</li>
                 </a>
                 <a href="#">
+                    <li>Bestsellers</li>
+                </a>
+                <a href="#">
                     <li>Computers</li>
                 </a>
             </ul>

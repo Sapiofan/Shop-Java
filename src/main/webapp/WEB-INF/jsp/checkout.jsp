@@ -48,9 +48,7 @@
 <main>
     <div class="form">
         <h2>Ordering</h2>
-<%--        <form method="post" action="/checkout">--%>
         <div id="checkout-form"></div>
-<%--        </form>--%>
     </div>
     <div class="cart-container">
         <h3>Cart</h3>
@@ -81,13 +79,13 @@
         </div>
         <div class="sum">
             <p>Sum:</p>
-            <p class="total-price">${total}$</p>
+            <p id="total" class="total-price">${total}$</p>
         </div>
     </div>
 </main>
 <footer>
     <div class="copyright">
-        <p>2022 © by SmartShop. All rights are reserved</p>
+        <p>2022 &copy; by SmartShop. All rights are reserved</p>
     </div>
 </footer>
 </body>

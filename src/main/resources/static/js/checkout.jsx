@@ -28,7 +28,7 @@ class Checkout extends React.Component {
         };
 
         this.handleInputChange = this.handleInputChange.bind(this);
-        this.handleCard = this.handleCard.bind(this);
+        // this.handleCard = this.handleCard.bind(this);
         this.handleData = this.handleData.bind(this);
         this.setInputRef = this.setInputRef.bind(this);
 
@@ -37,6 +37,8 @@ class Checkout extends React.Component {
         this.handleCardChange = this.handleCardChange.bind(this);
 
         this.handlePhoneChange = this.handlePhoneChange.bind(this);
+        this.submitForm1 = this.submitForm1.bind(this);
+        this.submitForm2 = this.submitForm2.bind(this);
     }
 
     handleInputChange(event) {
@@ -49,14 +51,14 @@ class Checkout extends React.Component {
         });
     }
 
-    handleCard() {
-        if (!this.state.data)
-            this.setState({data: true})
-        else {
-            this.setState({data: false})
-        }
-
-    }
+    // handleCard() {
+    //     if (!this.state.data)
+    //         this.setState({data: true})
+    //     else {
+    //         this.setState({data: false})
+    //     }
+    //
+    // }
 
     handleData() {
         this.setState({cardInput: true})
@@ -151,12 +153,29 @@ class Checkout extends React.Component {
         }
     }
 
+    submitForm1(event){
+        if (!this.state.data)
+            this.setState({data: true})
+        else {
+            this.setState({data: false})
+        }
+        event.preventDefault();
+    }
+
+    submitForm2(event){
+    }
+
     render() {
-        if (this.state.cardInput) {
-            return null;
-        } else if (this.state.data) {
+        if (this.state.data) {
             return (
-                <form className="data-form" method="post" action="/checkout">
+                <form className="data-form" method="post" action="/checkout" onSubmit={this.submitForm2}>
+                    <input type="hidden" value={this.state.name} name="name"/>
+                    <input type="hidden" value={this.state.phone1} name="phone1"/>
+                    <input type="hidden" value={this.state.phone2} name="phone2"/>
+                    <input type="hidden" value={this.state.phone3} name="phone3"/>
+                    <input type="hidden" value={this.state.email} name="email"/>
+                    <input type="hidden" value={this.state.city} name="city"/>
+                    <input type="hidden" value={window.getTotal()} name="total"/>
                     <h4>2. Credit card</h4>
                     <div className="text-container">
                         <p>Card number</p>
@@ -251,7 +270,7 @@ class Checkout extends React.Component {
             )
         } else {
             return (
-                <form className="data-form">
+                <form className="data-form" method="post" action="/checkout" onSubmit={this.submitForm1}>
                     <h4>1. Contact data</h4>
                     <div className="text-container">
                         <p>Name</p>
@@ -319,7 +338,7 @@ class Checkout extends React.Component {
                             value={this.state.city}
                             placeholder="Input city"></input>
                     </div>
-                    <input onClick={this.handleCard}
+                    <input type="submit"
                            className="submit" value="Next"
                            disabled={!this.state.city || !this.state.name || !this.state.email ||
                                !this.state.phone1 || !this.state.phone2 || !this.state.phone3}/>

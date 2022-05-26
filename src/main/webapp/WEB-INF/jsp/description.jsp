@@ -193,27 +193,39 @@
     </section>
     <section id="chars" class="">
         <h3>Characteristics</h3>
+        <c:forEach items="${descTableKeys}" var="key">
+            <h5>${key}</h5>
+            <table class="screen-table">
+            <col style="width: 50%;" />
+            <c:forEach items="${descTable[key]}" var="value">
+                    <tr>
+                        <td>${value}</td>
+                        <td>6.8'</td>
+                    </tr>
+            </c:forEach>
+            </table>
+        </c:forEach>
         <%--        <c:forEach items="${filters}" var="filter">--%>
         <%--            <h5>Screen</h5>--%>
-        <%--            <table class="screen-table">--%>
-        <%--                <col style="width: 50%;" />--%>
-        <%--                <tr>--%>
-        <%--                    <td>Screen size</td>--%>
-        <%--                    <td>6.8'</td>--%>
-        <%--                </tr>--%>
-        <%--                <tr>--%>
-        <%--                    <td>Screen resolution</td>--%>
-        <%--                    <td>3200x1440</td>--%>
-        <%--                </tr>--%>
-        <%--                <tr>--%>
-        <%--                    <td>Screen refresh rate</td>--%>
-        <%--                    <td>120 Hz</td>--%>
-        <%--                </tr>--%>
-        <%--                <tr>--%>
-        <%--                    <td>Number of colors</td>--%>
-        <%--                    <td>16 millions</td>--%>
-        <%--                </tr>--%>
-        <%--            </table>--%>
+<%--                    <table class="screen-table">--%>
+<%--                        <col style="width: 50%;" />--%>
+<%--                        <tr>--%>
+<%--                            <td>Screen size</td>--%>
+<%--                            <td>6.8'</td>--%>
+<%--                        </tr>--%>
+<%--                        <tr>--%>
+<%--                            <td>Screen resolution</td>--%>
+<%--                            <td>3200x1440</td>--%>
+<%--                        </tr>--%>
+<%--                        <tr>--%>
+<%--                            <td>Screen refresh rate</td>--%>
+<%--                            <td>120 Hz</td>--%>
+<%--                        </tr>--%>
+<%--                        <tr>--%>
+<%--                            <td>Number of colors</td>--%>
+<%--                            <td>16 millions</td>--%>
+<%--                        </tr>--%>
+<%--                    </table>--%>
         <%--        </c:forEach>--%>
 
         <%--        <h5>Screen</h5>--%>

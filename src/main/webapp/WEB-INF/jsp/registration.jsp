@@ -12,7 +12,7 @@
             <div class="clearfix">
                 <button type="submit" class="signupbtn" name="registration">Sign Up</button>
             </div>
-            <p>By creating an account you agree to our <a href="#" style="color:dodgerblue">Terms & Conditions</a>.</p>
+            <p>By creating an account you agree to our <a href="/help#terms" style="color:dodgerblue">Terms & Conditions</a>.</p>
         </div>
     </form>
 </div>

@@ -441,6 +441,11 @@ img {
     padding: 20px;
 }
 
+.product a {
+    text-decoration: none;
+    color: black;
+}
+
 .sellers-padding h1 {
     font-size: 28px;
     text-align: center;

@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Controller
 public class MyController {
@@ -76,6 +77,9 @@ public class MyController {
         model.addAttribute("banner21", banner2Text[0]);
         model.addAttribute("banner22", banner2Text[1]);
         model.addAttribute("banner23", banner2Text[2]);
+
+        List<Product> bestsellers = filterProducts.bestsellers().stream().limit(5).collect(Collectors.toList());
+        model.addAttribute("bestsellers", bestsellers);
 
         return "home";
     }
@@ -233,12 +237,16 @@ public class MyController {
         List<Review> reviews = reviewService.findReviewsByProduct(id);
         Integer rec = reviewService.calculateRecommended(reviews);
         Phone phone = filterProducts.getPhoneById(id);
+        Map<String, List<String>> descTable = filterProducts.getPhoneDescTable();
+        Set<String> descTableKeys = descTable.keySet();
         if (authentication != null)
             model.addAttribute("user", userDetailsService.getUserByEmail(authentication.getName()));
         log.info(phone.getName());
         model.addAttribute("product", phone);
         model.addAttribute("reviews", reviews);
         model.addAttribute("recommended", rec);
+        model.addAttribute("descTable", descTable);
+        model.addAttribute("descTableKeys", descTableKeys);
         return "description";
     }
 
@@ -398,7 +406,8 @@ public class MyController {
         String phone = phone1 + phone2 + phone3;
         String card = card1 + card2 + card3 + card4;
         String date = date1 + "/" + date2;
-        Transaction transaction = transactionService.addNewTransaction(name, phone, email, city, card, date, cvv, Integer.valueOf(total));
+        Transaction transaction = transactionService.addNewTransaction(name, phone, email, city, card,
+                date, cvv, Integer.valueOf(total.substring(0, total.length()-3)));
         model.addAttribute("transaction", transaction);
         return "success";
     }

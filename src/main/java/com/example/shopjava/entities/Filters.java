@@ -10,12 +10,15 @@ public class Filters {
 
     public Map<String, List<String>> phoneCharacteristics;
 
+    public Map<String, List<String>> descriptionTable;
+
     public Map<String, List<String>> laptopCharacteristics;
 
     public Map<String, List<String>> watchCharacteristics;
 
     public Filters() {
         phoneCharacteristics = new LinkedHashMap<>();
+        descriptionTable = new LinkedHashMap<>();
         laptopCharacteristics = new LinkedHashMap<>();
         watchCharacteristics = new LinkedHashMap<>();
     }
@@ -96,6 +99,23 @@ public class Filters {
         phoneCharacteristics.put("NFC", nfc);
         phoneCharacteristics.put("Series", series);
         phoneCharacteristics.put("Screen refresh", screen_refresh);
+
+        List<String> memory = new ArrayList<>();
+        memory.add("RAM");
+        memory.add("Card slot");
+        memory.add("Built-in memory");
+
+        List<String> processor = new ArrayList<>();
+        processor.add("Cores");
+        processor.add("Processor");
+        processor.add("Screen refresh");
+
+        List<String> OS = new ArrayList<>();
+        OS.add("OS");
+
+        descriptionTable.put("Memory", memory);
+        descriptionTable.put("Processor", processor);
+        descriptionTable.put("OS", OS);
     }
 
     public void initLaptopChars() {

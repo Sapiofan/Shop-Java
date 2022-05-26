@@ -16,6 +16,8 @@ public interface FilterProducts {
 
     Map<String, List<String>> getPhoneCharacteristics();
 
+    Map<String, List<String>> getPhoneDescTable();
+
     Map<String, List<String>> getLaptopCharacteristics();
 
     Map<String, List<String>> getWatchCharacteristics();
@@ -53,5 +55,7 @@ public interface FilterProducts {
     void saveWatch(Watch watch);
 
     void deleteById(Long id);
+
+    List<Product> bestsellers();
 
 }

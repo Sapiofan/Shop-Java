@@ -14,6 +14,7 @@
                     <a href="/laptops">Laptops</a>
                     <a href="/watches">Watches</a>
                     <a href="/discounts">Discounts</a>
+                    <a href="#">Bestsellers</a>
                     <a href="#">Computers</a>
                     <a href="#">Drones</a>
                 </div>
@@ -36,14 +37,12 @@
                 <c:if test="${isAuthenticated}">
                     <form action="/" method="post">
                         <div class="dropdown-user">
-                            <button class="dropbtn-user user"><img src="/img/user.png"
+                            <button type="button" class="dropbtn-user user"><img src="/img/user.png"
                                                                    style="width: 36px; height: 36px;"></button>
                             <div class="dropdown-content-user">
                                 <a href="#">SmartShop money</a>
                                 <a href="#">My orders</a>
-                                <a href="/">
-                                    <button type="submit" class="logout" name="logout">Logout</button>
-                                </a>
+                                <a><button type="submit" class="logout" name="logout">Logout</button></a>
                             </div>
                         </div>
                     </form>

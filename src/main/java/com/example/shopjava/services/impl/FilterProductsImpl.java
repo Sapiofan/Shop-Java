@@ -62,6 +62,13 @@ public class FilterProductsImpl implements FilterProducts {
     }
 
     @Override
+    public Map<String, List<String>> getPhoneDescTable() {
+        Filters filters = new Filters();
+        filters.initPhoneChars();
+        return filters.descriptionTable;
+    }
+
+    @Override
     public Map<String, List<String>> getLaptopCharacteristics() {
         Filters filters = new Filters();
         filters.initLaptopChars();
@@ -181,6 +188,13 @@ public class FilterProductsImpl implements FilterProducts {
     @Transactional
     public void deleteById(Long id) {
         productRepository.deleteById(id);
+    }
+
+    @Override
+    @Transactional
+    public List<Product> bestsellers() {
+        List<Product> products = productRepository.findAll();
+        return products.stream().sorted(Comparator.comparingInt(Product::getSold)).collect(Collectors.toList());
     }
 
     public List<Phone> sortFromCheapToExp(List<Phone> phones) {

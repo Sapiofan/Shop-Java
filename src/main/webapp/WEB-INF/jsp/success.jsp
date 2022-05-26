@@ -58,12 +58,12 @@
                 <div style="clear: both;"></div>
             </div>
         </div>
-        <button class="home-return">Home page</button>
+        <a href="/"><button class="home-return">Home page</button></a>
     </div>
 </main>
 <footer>
     <div class="copyright">
-        <p>2022 © by SmartShop. All rights are reserved</p>
+        <p>2022 &copy; by SmartShop. All rights are reserved</p>
     </div>
 </footer>
 </body>

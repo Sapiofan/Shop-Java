@@ -20,3 +20,7 @@ jQuery(document).ready(function(){
         }
     });
 });
+
+function getTotal(){
+    return document.getElementById("total").innerText;
+}
