@@ -85,11 +85,11 @@
                 <div class="about-input-block">
                     <p>Position You Apply For</p>
                     <select name="pos" class="input" id="positions">
-                        <option value="in-store-sales">In-store Sales</option>
-                        <option value="store-leadership">Store Leadership</option>
-                        <option value="in-store-operations">In-store Operations</option>
-                        <option value="logistics">Wearhouse & Logistics</option>
-                        <option value="ecommerce">eCommerce</option>
+                        <option value="In-store Sales">In-store Sales</option>
+                        <option value="Store Leadership">Store Leadership</option>
+                        <option value="In-store Operations">In-store Operations</option>
+                        <option value="Wearhouse & Logistics">Wearhouse & Logistics</option>
+                        <option value="eCommerce">eCommerce</option>
                     </select>
                 </div>
                 <div class="about-input-block">

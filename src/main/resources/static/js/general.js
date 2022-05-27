@@ -177,3 +177,10 @@ function disableInput(inputId) {
     console.log("disabled"+inputId);
     document.getElementById(inputId).disabled = true;
 }
+
+function errorAlert(res) {
+    if(res != ""){
+        console.log(res);
+        alert(res);
+    }
+}

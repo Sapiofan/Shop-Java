@@ -16,7 +16,7 @@ public interface FilterProducts {
 
     Map<String, List<String>> getPhoneCharacteristics();
 
-    Map<String, List<String>> getPhoneDescTable();
+    Map<String, List<String>> getDescTable(Product product);
 
     Map<String, List<String>> getLaptopCharacteristics();
 
@@ -57,5 +57,7 @@ public interface FilterProducts {
     void deleteById(Long id);
 
     List<Product> bestsellers();
+
+    Map<String, String> descData(Product product);
 
 }

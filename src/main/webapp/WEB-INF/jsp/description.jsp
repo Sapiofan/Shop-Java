@@ -200,90 +200,11 @@
             <c:forEach items="${descTable[key]}" var="value">
                     <tr>
                         <td>${value}</td>
-                        <td>6.8'</td>
+                        <td>${descData[value]}</td>
                     </tr>
             </c:forEach>
             </table>
         </c:forEach>
-        <%--        <c:forEach items="${filters}" var="filter">--%>
-        <%--            <h5>Screen</h5>--%>
-<%--                    <table class="screen-table">--%>
-<%--                        <col style="width: 50%;" />--%>
-<%--                        <tr>--%>
-<%--                            <td>Screen size</td>--%>
-<%--                            <td>6.8'</td>--%>
-<%--                        </tr>--%>
-<%--                        <tr>--%>
-<%--                            <td>Screen resolution</td>--%>
-<%--                            <td>3200x1440</td>--%>
-<%--                        </tr>--%>
-<%--                        <tr>--%>
-<%--                            <td>Screen refresh rate</td>--%>
-<%--                            <td>120 Hz</td>--%>
-<%--                        </tr>--%>
-<%--                        <tr>--%>
-<%--                            <td>Number of colors</td>--%>
-<%--                            <td>16 millions</td>--%>
-<%--                        </tr>--%>
-<%--                    </table>--%>
-        <%--        </c:forEach>--%>
-
-        <%--        <h5>Screen</h5>--%>
-        <%--        <table class="screen-table">--%>
-        <%--            <col style="width: 50%;" />--%>
-        <%--            <tr>--%>
-        <%--                <td>Screen size</td>--%>
-        <%--                <td>6.8'</td>--%>
-        <%--            </tr>--%>
-        <%--            <tr>--%>
-        <%--                <td>Screen resolution</td>--%>
-        <%--                <td>3200x1440</td>--%>
-        <%--            </tr>--%>
-        <%--            <tr>--%>
-        <%--                <td>Screen refresh rate</td>--%>
-        <%--                <td>120 Hz</td>--%>
-        <%--            </tr>--%>
-        <%--            <tr>--%>
-        <%--                <td>Number of colors</td>--%>
-        <%--                <td>16 millions</td>--%>
-        <%--            </tr>--%>
-        <%--        </table>--%>
-        <h5>Memory</h5>
-        <table class="memory-table">
-            <col style="width: 50%;"/>
-            <tr>
-                <td>Internal memory</td>
-                <td>128 GB</td>
-            </tr>
-            <tr>
-                <td>RAM</td>
-                <td>12 GB</td>
-            </tr>
-            <tr>
-                <td>Memory card slot</td>
-                <td>No</td>
-            </tr>
-        </table>
-        <h5>Processor</h5>
-        <table class="processor-table">
-            <col style="width: 50%;"/>
-            <tr>
-                <td>Processor</td>
-                <td>Exynos 2100</td>
-            </tr>
-            <tr>
-                <td>Number of cores</td>
-                <td>8</td>
-            </tr>
-            <tr>
-                <td>Processor frequency</td>
-                <td>1 x 2.9 GHz + 3 x 2.8 GHz + 4 x 2.2 GHz</td>
-            </tr>
-            <tr>
-                <td>GPU</td>
-                <td>Mali-G78 MP14</td>
-            </tr>
-        </table>
     </section>
     <section id="reviews" class="">
         <h3>Reviews: <span class="reviews-num">${reviews.size()}</span></h3>
@@ -393,7 +314,7 @@
 <script src="/js/general.js"></script>
 <script>
     window.onload = ev => {
-        if (${existReview}) {
+        if (${reviewExists}) {
             alert("Sorry, but you have already sent a review for this product")
         }
     }

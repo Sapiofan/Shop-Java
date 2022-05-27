@@ -61,8 +61,7 @@ public class MyController {
 
     @GetMapping("/")
     public String getHomePage(Model model, Authentication authentication) {
-        if (utils.checkAuth(authentication))
-            model.addAttribute("isAuthenticated", true);
+        getUserPreferences(model, authentication);
 
         List<AdminHome> banners = adminService.getBannerData();
 
@@ -93,8 +92,8 @@ public class MyController {
     ) {
         String result = userDetailsService.signUp(email, psw, pswRepeat, request);
         if (!result.isEmpty()) {
-            model.addAttribute("userExist", result);
-            return "home";
+            model.addAttribute("error", result);
+            return getHomePage(model, null);
         }
         return login(email, psw, request, model);
     }
@@ -108,11 +107,10 @@ public class MyController {
         log.info(email);
         String res = userDetailsService.signIn(email, psw, request);
         SecurityContext securityContext = SecurityContextHolder.getContext();
-        String name = SecurityContextHolder.getContext().getAuthentication().getName();
-        Favorite favorite = favoriteService.getUserProducts(userDetailsService.getUserByEmail(name).getId());
-        model.addAttribute("favoriteProducts", favorite.getFavoriteProducts());
-        model.addAttribute("favoriteSize", favorite.getFavoriteProducts().size());
-        model.addAttribute("isAuthenticated", securityContext.getAuthentication().isAuthenticated());
+        if(!res.isEmpty()){
+            getUserPreferences(model, SecurityContextHolder.getContext().getAuthentication());
+        }
+        model.addAttribute("error", res);
         return getHomePage(model, securityContext.getAuthentication());
     }
 
@@ -127,6 +125,7 @@ public class MyController {
     public String filtersPage(Model model, @RequestParam("search") String searchKey, Authentication authentication) {
         if (utils.checkAuth(authentication))
             model.addAttribute("isAuthenticated", true);
+        getUserPreferences(model, authentication);
         List<? extends Product> products = filterProducts.searchProducts(searchKey);
         model.addAttribute("products", products);
         model.addAttribute("searchKey", searchKey);
@@ -161,11 +160,7 @@ public class MyController {
                                    @RequestParam(value = "filter-name", required = false) LinkedHashSet<String> filters,
                                    @RequestParam("input-min") Integer minValue, @RequestParam("input-max") Integer maxValue,
                                    @RequestParam("sort") String sortType) {
-        if (utils.checkAuth(authentication)) {
-            model.addAttribute("isAuthenticated", true);
-            User user = userDetailsService.getUserByEmail(authentication.getName());
-            model.addAttribute("favoriteProducts", user.getFavorite().getFavoriteProducts());
-        }
+        getUserPreferences(model, authentication);
         Map<String, List<String>> phoneFilters = filterProducts.getPhoneCharacteristics();
         Set<String> keys = phoneFilters.keySet();
         List<Phone> phones = filterProducts.phones(filters, phoneFilters, minValue, maxValue);
@@ -185,8 +180,7 @@ public class MyController {
 
     @GetMapping("/laptops")
     public String laptopFilters(Model model, Authentication authentication) {
-        if (utils.checkAuth(authentication))
-            model.addAttribute("isAuthenticated", true);
+        getUserPreferences(model, authentication);
         List<Laptop> laptops = filterProducts.getAllLaptops();
         Map<String, List<String>> laptopFilters = filterProducts.getLaptopCharacteristics();
         Set<String> keys = laptopFilters.keySet();
@@ -210,8 +204,7 @@ public class MyController {
                                     @RequestParam(value = "filter-name", required = false) LinkedHashSet<String> filters,
                                     @RequestParam("input-min") Integer minValue, @RequestParam("input-max") Integer maxValue,
                                     @RequestParam("sort") String sortType) {
-        if (utils.checkAuth(authentication))
-            model.addAttribute("isAuthenticated", true);
+        getUserPreferences(model, authentication);
         Map<String, List<String>> laptopFilters = filterProducts.getLaptopCharacteristics();
         Set<String> keys = laptopFilters.keySet();
         List<Laptop> laptops = filterProducts.laptops(filters, laptopFilters, minValue, maxValue);
@@ -236,17 +229,17 @@ public class MyController {
         getUserPreferences(model, authentication);
         List<Review> reviews = reviewService.findReviewsByProduct(id);
         Integer rec = reviewService.calculateRecommended(reviews);
-        Phone phone = filterProducts.getPhoneById(id);
-        Map<String, List<String>> descTable = filterProducts.getPhoneDescTable();
+        Product product = filterProducts.getProductById(id);
+        Map<String, List<String>> descTable = filterProducts.getDescTable(product);
         Set<String> descTableKeys = descTable.keySet();
         if (authentication != null)
             model.addAttribute("user", userDetailsService.getUserByEmail(authentication.getName()));
-        log.info(phone.getName());
-        model.addAttribute("product", phone);
+        model.addAttribute("product", product);
         model.addAttribute("reviews", reviews);
         model.addAttribute("recommended", rec);
         model.addAttribute("descTable", descTable);
         model.addAttribute("descTableKeys", descTableKeys);
+        model.addAttribute("descData", filterProducts.descData(product));
         return "description";
     }
 
@@ -265,6 +258,7 @@ public class MyController {
                              @PathVariable("id") Long id, @RequestParam("name") String name,
                              @RequestParam("rate") Integer rate, @RequestParam("review") String review,
                              @RequestParam("recommend") Boolean recommend) {
+        getUserPreferences(model, authentication);
         if (authentication != null) {
             User user = userDetailsService.getUserByEmail(authentication.getName());
             user.setName(name);
@@ -283,8 +277,7 @@ public class MyController {
 
     @GetMapping("/watches")
     public String watchesFilters(Model model, Authentication authentication) {
-        if (utils.checkAuth(authentication))
-            model.addAttribute("isAuthenticated", true);
+        getUserPreferences(model, authentication);
         List<Watch> watches = filterProducts.getAllWatches();
         Map<String, List<String>> watchFilters = filterProducts.getWatchCharacteristics();
         Set<String> keys = watchFilters.keySet();
@@ -308,8 +301,7 @@ public class MyController {
                                      @RequestParam(value = "filter-name", required = false) LinkedHashSet<String> filters,
                                      @RequestParam("input-min") Integer minValue, @RequestParam("input-max") Integer maxValue,
                                      @RequestParam("sort") String sortType) {
-        if (utils.checkAuth(authentication))
-            model.addAttribute("isAuthenticated", true);
+        getUserPreferences(model, authentication);
         Map<String, List<String>> watchFilters = filterProducts.getWatchCharacteristics();
         Set<String> keys = watchFilters.keySet();
         List<Watch> watches = filterProducts.watches(filters, watchFilters, minValue, maxValue);
@@ -330,8 +322,7 @@ public class MyController {
 
     @GetMapping("/discounts")
     public String discounts(Model model, Authentication authentication) {
-        if (utils.checkAuth(authentication))
-            model.addAttribute("isAuthenticated", true);
+        getUserPreferences(model, authentication);
         List<Product> products = filterProducts.getProductsWithDiscount();
         model.addAttribute("products", products);
         model.addAttribute("seacrhBool", true);
@@ -340,8 +331,7 @@ public class MyController {
 
     @PostMapping("/discounts")
     public String sortedDiscounts(Model model, Authentication authentication, @RequestParam("sort") String sortType) {
-        if (utils.checkAuth(authentication))
-            model.addAttribute("isAuthenticated", true);
+        getUserPreferences(model, authentication);
         List<Product> products = filterProducts.getProductsWithDiscount();
 //        products = filterProducts.sort(products, sortType);
         model.addAttribute("products", products);
@@ -351,8 +341,7 @@ public class MyController {
 
     @GetMapping("/about")
     public String getAboutPage(Model model, Authentication authentication) {
-        if (utils.checkAuth(authentication))
-            model.addAttribute("isAuthenticated", true);
+        getUserPreferences(model, authentication);
         return "about";
     }
 
@@ -364,8 +353,7 @@ public class MyController {
                                @RequestParam("phone") String phone,
                                @RequestParam("pos") String pos,
                                @RequestParam("link") String link) {
-        if (utils.checkAuth(authentication))
-            model.addAttribute("isAuthenticated", true);
+        getUserPreferences(model, authentication);
         Career career = new Career(fname, lname, email, phone, pos, link);
         String result = careerService.addCareerUser(career);
         model.addAttribute("result", result);
@@ -414,8 +402,7 @@ public class MyController {
 
     @GetMapping("/contact")
     public String getContactPage(Model model, Authentication authentication) {
-        if (utils.checkAuth(authentication))
-            model.addAttribute("isAuthenticated", true);
+        getUserPreferences(model, authentication);
         return "contact";
     }
 
@@ -427,8 +414,7 @@ public class MyController {
                                     @RequestParam("subject") String subject,
                                     @RequestParam("message") String message
     ) {
-        if (utils.checkAuth(authentication))
-            model.addAttribute("isAuthenticated", true);
+        getUserPreferences(model, authentication);
         Contact contact = new Contact(fname, lname, email);
         String result = contactService.addContactMessage(contact, subject, message);
         model.addAttribute("result", result);
@@ -438,8 +424,7 @@ public class MyController {
     @PostMapping(value = "/contact", params = "subs")
     public String filledEmail(Model model, Authentication authentication,
                               @RequestParam("email") String email) {
-        if (utils.checkAuth(authentication))
-            model.addAttribute("isAuthenticated", true);
+        getUserPreferences(model, authentication);
         String result = contactService.subs(email);
         model.addAttribute("result", result);
         return "contact";
@@ -447,26 +432,15 @@ public class MyController {
 
     @GetMapping("/help")
     public String getHelpPage(Model model, Authentication authentication) {
-        if (utils.checkAuth(authentication)) {
-            model.addAttribute("isAuthenticated", true);
-            User user = userDetailsService.getUserByEmail(authentication.getName());
-            model.addAttribute("favoriteProducts", user.getFavorite().getFavoriteProducts());
-        }
+        getUserPreferences(model, authentication);
         List<FAQ> faqs = faqService.getFaqs();
         model.addAttribute("faqs", faqs);
         return "help";
     }
 
-    @GetMapping("/success")
-    public String getSuccessPage(Model model, Authentication authentication) {
-        if (utils.checkAuth(authentication))
-            model.addAttribute("isAuthenticated", true);
-        return "success";
-    }
-
     @GetMapping(value = "/addProduct/{id}")
     @ResponseBody
-    public Set<Product> addProductToFavorites(Model model, Authentication authentication,
+    public Set<Product> addProductToFavorites(Authentication authentication,
                                               @PathVariable("id") Long productId
     ) {
         if (authentication != null) {
@@ -480,7 +454,7 @@ public class MyController {
 
     @GetMapping(value = "/cleanWishlist")
     @ResponseBody
-    public Set<Product> cleanFavorites(Model model, Authentication authentication
+    public Set<Product> cleanFavorites(Authentication authentication
     ) {
         if (authentication != null) {
             User user = userDetailsService.getUserByEmail(authentication.getName());
@@ -493,7 +467,7 @@ public class MyController {
 
     @GetMapping(value = "/deleteFavorite/{id}")
     @ResponseBody
-    public Set<Product> deleteFavorite(Model model, Authentication authentication, @PathVariable("id") Long productId
+    public Set<Product> deleteFavorite(Authentication authentication, @PathVariable("id") Long productId
     ) {
         if (authentication != null) {
             User user = userDetailsService.getUserByEmail(authentication.getName());
@@ -506,7 +480,7 @@ public class MyController {
 
     @GetMapping(value = "/deleteCartProduct/{id}")
     @ResponseBody
-    public Set<Product> deleteCartProduct(Model model, Authentication authentication, @PathVariable("id") Long productId
+    public Set<Product> deleteCartProduct(Authentication authentication, @PathVariable("id") Long productId
     ) {
         if (authentication != null) {
             User user = userDetailsService.getUserByEmail(authentication.getName());
@@ -519,7 +493,7 @@ public class MyController {
 
     @GetMapping(value = "/addToCart/{id}")
     @ResponseBody
-    public Set<Product> addToCart(Model model, Authentication authentication, @PathVariable("id") Long productId
+    public Set<Product> addToCart(Authentication authentication, @PathVariable("id") Long productId
     ) {
         if (authentication != null) {
             User user = userDetailsService.getUserByEmail(authentication.getName());
@@ -535,8 +509,7 @@ public class MyController {
                                    @RequestParam(value = "filter-name", required = false) LinkedHashSet<String> filters,
                                    @RequestParam("input-min") Integer minValue, @RequestParam("input-max") Integer maxValue,
                                    @RequestParam("sort") String sortType, @RequestParam("productId") Long productId) {
-        if (utils.checkAuth(authentication))
-            model.addAttribute("isAuthenticated", true);
+        getUserPreferences(model, authentication);
         Favorite favorite = favoriteService.getUserProducts(userDetailsService.getUserByEmail(authentication.getName()).getId());
         favoriteService.addProduct(favorite, productId);
 

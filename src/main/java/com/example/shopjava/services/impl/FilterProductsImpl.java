@@ -62,10 +62,21 @@ public class FilterProductsImpl implements FilterProducts {
     }
 
     @Override
-    public Map<String, List<String>> getPhoneDescTable() {
-        Filters filters = new Filters();
-        filters.initPhoneChars();
-        return filters.descriptionTable;
+    public Map<String, List<String>> getDescTable(Product product) {
+        if (product.getCategory().getId() == 1) {
+            Filters filters = new Filters();
+            filters.initPhoneChars();
+            return filters.descriptionTablePhone;
+        } else if (product.getCategory().getId() == 2) {
+            Filters filters = new Filters();
+            filters.initLaptopChars();
+            return filters.descriptionTableLaptop;
+        } else if (product.getCategory().getId() == 3) {
+            Filters filters = new Filters();
+            filters.initWatchChars();
+            return filters.descriptionTableWatch;
+        }
+        return null;
     }
 
     @Override
@@ -195,6 +206,57 @@ public class FilterProductsImpl implements FilterProducts {
     public List<Product> bestsellers() {
         List<Product> products = productRepository.findAll();
         return products.stream().sorted(Comparator.comparingInt(Product::getSold)).collect(Collectors.toList());
+    }
+
+    @Override
+    public Map<String, String> descData(Product product) {
+        Map<String, String> data = new HashMap<>();
+        if (product.getCategory().getId() == 1) {
+            Phone phone = phoneRepository.getPhoneById(product.getId());
+            data.put("Card slot", phone.getRAM_slot() ? "yes" : "no");
+            data.put("Built-in memory", phone.getBuilt_in_memory());
+            data.put("Cores", phone.getCores().toString());
+            data.put("Processor", phone.getCPU());
+            data.put("Screen refresh", phone.getScreen_refresh().toString());
+            data.put("OS", phone.getOs());
+            data.put("Main camera", phone.getMain_camera());
+            data.put("Front camera", phone.getFront_camera());
+            data.put("NFC", phone.getNFC() ? "yes" : "no");
+            data.put("Biometric security", phone.getBiometric_security() ? "yes" : "no");
+            data.put("Wireless charger", phone.getWireless_charger() ? "yes" : "no");
+            data.put("Capacity", phone.getBattery());
+        } else if (product.getCategory().getId() == 2) {
+            Laptop laptop = laptopRepository.getById(product.getId());
+            data.put("Screen diagonal", laptop.getSc_diagonal());
+            data.put("Matrix type", laptop.getMatrix_type());
+            data.put("Screen resolution", laptop.getSc_resolution());
+            data.put("Cores", laptop.getCores().toString());
+            data.put("Processor series", laptop.getProcessor_series());
+            data.put("Processor manufacturer", laptop.getProcessor_manufacturer());
+            data.put("Storage", laptop.getStorage());
+            data.put("Drive type", laptop.getDrive_type());
+            data.put("Discrete graphics", laptop.getDiscrete_graphics());
+            data.put("Video size", laptop.getVideo_size());
+            data.put("Optical drive", laptop.getOptical_drive());
+            data.put("Touch screen", laptop.getTouch_screen() ? "yes" : "no");
+            data.put("Color", laptop.getColor());
+            data.put("Weight", laptop.getWeight().toString());
+            data.put("OS", laptop.getInst_os());
+        } else if (product.getCategory().getId() == 3) {
+            Watch watch = watchRepository.getById(product.getId());
+            data.put("Purpose", watch.getPurpose());
+            data.put("Waterproof", watch.getWaterproof() ? "yes" : "no");
+            data.put("Touch screen", watch.getTouch_screen() ? "yes" : "no");
+            data.put("Call support", watch.getCall_support() ? "yes" : "no");
+            data.put("Music control", watch.getMusic_control() ? "yes" : "no");
+            data.put("Pulse measurement", watch.getPulse_measurement() ? "yes" : "no");
+            data.put("Sleep monitoring", watch.getSleep_monitoring() ? "yes" : "no");
+            data.put("Display shape", watch.getDisplay_shape());
+            data.put("Display diagonal", watch.getDisplay_diagonal());
+            data.put("Color", watch.getColor());
+            data.put("Working hours", watch.getWorking_hours());
+        }
+        return data;
     }
 
     public List<Phone> sortFromCheapToExp(List<Phone> phones) {

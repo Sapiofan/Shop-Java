@@ -10,17 +10,23 @@ public class Filters {
 
     public Map<String, List<String>> phoneCharacteristics;
 
-    public Map<String, List<String>> descriptionTable;
+    public Map<String, List<String>> descriptionTablePhone;
 
     public Map<String, List<String>> laptopCharacteristics;
 
+    public Map<String, List<String>> descriptionTableLaptop;
+
     public Map<String, List<String>> watchCharacteristics;
+
+    public Map<String, List<String>> descriptionTableWatch;
 
     public Filters() {
         phoneCharacteristics = new LinkedHashMap<>();
-        descriptionTable = new LinkedHashMap<>();
+        descriptionTablePhone = new LinkedHashMap<>();
         laptopCharacteristics = new LinkedHashMap<>();
+        descriptionTableLaptop = new LinkedHashMap<>();
         watchCharacteristics = new LinkedHashMap<>();
+        descriptionTableWatch = new LinkedHashMap<>();
     }
 
     public void initPhoneChars() {
@@ -101,7 +107,6 @@ public class Filters {
         phoneCharacteristics.put("Screen refresh", screen_refresh);
 
         List<String> memory = new ArrayList<>();
-        memory.add("RAM");
         memory.add("Card slot");
         memory.add("Built-in memory");
 
@@ -113,9 +118,24 @@ public class Filters {
         List<String> OS = new ArrayList<>();
         OS.add("OS");
 
-        descriptionTable.put("Memory", memory);
-        descriptionTable.put("Processor", processor);
-        descriptionTable.put("OS", OS);
+        List<String> camera = new ArrayList<>();
+        camera.add("Main camera");
+        camera.add("Front camera");
+
+        List<String> interfaces = new ArrayList<>();
+        interfaces.add("NFC");
+        interfaces.add("Biometric security");
+        interfaces.add("Wireless charger");
+
+        List<String> battery = new ArrayList<>();
+        battery.add("Capacity");
+
+        descriptionTablePhone.put("Memory", memory);
+        descriptionTablePhone.put("Processor", processor);
+        descriptionTablePhone.put("OS", OS);
+        descriptionTablePhone.put("Camera", camera);
+        descriptionTablePhone.put("Interfaces/Connectors", interfaces);
+        descriptionTablePhone.put("Battery", battery);
     }
 
     public void initLaptopChars() {
@@ -239,6 +259,44 @@ public class Filters {
         laptopCharacteristics.put("Color", color);
         laptopCharacteristics.put("Video size", video_size);
         laptopCharacteristics.put("Processor manufacturer", processorManufacturers);
+
+
+        List<String> general = new ArrayList<>();
+        general.add("Screen diagonal");
+        general.add("Matrix type");
+        general.add("Screen resolution");
+
+        List<String> processor = new ArrayList<>();
+        processor.add("Cores");
+        processor.add("Processor series");
+        processor.add("Processor manufacturer");
+
+        List<String> hardDisk = new ArrayList<>();
+        hardDisk.add("Storage");
+
+        List<String> videoCard = new ArrayList<>();
+        videoCard.add("Drive type");
+        videoCard.add("Discrete graphics");
+        videoCard.add("Video size");
+
+        List<String> interfaces = new ArrayList<>();
+        interfaces.add("Optical drive");
+        interfaces.add("Touch screen");
+
+        List<String> frame = new ArrayList<>();
+        frame.add("Color");
+        frame.add("Weight");
+
+        List<String> OS = new ArrayList<>();
+        OS.add("OS");
+
+        descriptionTableLaptop.put("General", general);
+        descriptionTableLaptop.put("Processor", processor);
+        descriptionTableLaptop.put("Hard disk", hardDisk);
+        descriptionTableLaptop.put("Video card", videoCard);
+        descriptionTableLaptop.put("Interfaces/connectors", interfaces);
+        descriptionTableLaptop.put("OS", OS);
+        descriptionTableLaptop.put("Frame", frame);
     }
 
     public void initWatchChars() {
@@ -251,11 +309,6 @@ public class Filters {
         brands.add("Garmin");
         brands.add("2E");
         brands.add("Amico");
-
-        List<String> displayForm = new ArrayList<>();
-        displayForm.add("Square");
-        displayForm.add("Circle");
-        displayForm.add("Rectangular");
 
         List<String> touch_sc = new ArrayList<>();
         touch_sc.add("Yes");
@@ -329,6 +382,30 @@ public class Filters {
         watchCharacteristics.put("Color", color);
         watchCharacteristics.put("Working hours", working_hours);
         watchCharacteristics.put("Display diagonal", display_diagonal);
-        watchCharacteristics.put("Touch screen", touch_sc); // purpose
+        watchCharacteristics.put("Touch screen", touch_sc);
+
+        List<String> mainChars = new ArrayList<>();
+        mainChars.add("Purpose");
+        mainChars.add("Waterproof");
+        mainChars.add("Touch screen");
+        mainChars.add("Call support");
+
+        List<String> displayChars = new ArrayList<>();
+        displayChars.add("Display shape");
+        displayChars.add("Display diagonal");
+
+        List<String> sensors = new ArrayList<>();
+        sensors.add("Music control");
+        sensors.add("Pulse measurement");
+        sensors.add("Sleep monitoring");
+
+        List<String> physicalChars = new ArrayList<>();
+        physicalChars.add("Color");
+        physicalChars.add("Working hours");
+
+        descriptionTableWatch.put("Main characteristics", mainChars);
+        descriptionTableWatch.put("Display characteristics", displayChars);
+        descriptionTableWatch.put("Sensors", sensors);
+        descriptionTableWatch.put("Physical characteristics", physicalChars);
     }
 }
