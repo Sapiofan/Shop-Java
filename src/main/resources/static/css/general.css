@@ -384,7 +384,7 @@ aside#menu {
     transition: left 0.5s ease-in-out;
 }
 
-aside a.close-button {
+.close-button {
     height: 16px;
     width: 16px;
     margin: 0 0 15px 0;
@@ -395,7 +395,7 @@ aside a.close-button {
     display: flex;
 }
 
-aside a.close-button span.close-icon {
+.close-icon {
     width: 16px;
     height: 16px;
     background: rgba(255, 255, 255, 0.3);
@@ -407,7 +407,7 @@ aside a.close-button span.close-icon {
     transition: all 0.5s linear;
 }
 
-aside a.close-button:active span.close-icon, aside a.close-button:hover span.close-icon {
+.close-button:active span.close-icon, .close-button:hover span.close-icon {
     background: #fff;
 }
 
@@ -424,7 +424,7 @@ aside h2 {
     justify-content: center;
 }
 
-aside h2 span.count {
+aside .count {
     color: #fff;
     background: #4dc0e3;
     padding: 8px;
@@ -464,11 +464,11 @@ aside ul.products:after {
     bottom: 0;
 }
 
-aside ul.products li.product {
+aside .product {
     margin: 0 0 10px 0;
     padding: 0;
     width: 100%;
-    min-height: 30px;
+    min-height: 150px;
     background: #dee2ee;
     border-radius: 3px;
     color: #98989b;
@@ -484,7 +484,7 @@ aside ul.products li.product:active, aside ul.products li.product:hover {
 }
 
 aside ul.products li.product:active span.product-details h3, aside ul.products li.product:hover span.product-details h3 {
-    color: #4dc0e3 !important;
+    color: rebeccapurple !important;
 }
 
 aside ul.products li.product:active img, aside ul.products li.product:hover img {
@@ -501,37 +501,44 @@ aside ul.products li.product a.product-link {
     flex-wrap: nowrap;
 }
 
-aside ul.products li.product a.product-link span.product-image {
+.product-image {
     display: inline-block;
-    width: 75px;
-    height: 50px;
-    padding-right: 10px;
+    width: 100px;
+    height: 150px;
+    margin-right: 15px;
+    position: relative;
+    top: 50%;
+    left: 50%;
 }
 
-aside ul.products li.product a.product-link span.product-image img {
-    width: 60px;
-    height: 50px;
+.product-image img {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    position: absolute;
+    object-fit: scale-down;
     border: 1px solid #d7d7de;
     transition: all 0.5s linear;
+    transform: translate(-50%, -50%)
 }
 
-aside ul.products li.product a.product-link span.product-details {
+.product-details {
     display: inline-block;
-    width: 100%;
+    width: 50%;
     min-height: 30px;
     color: #75757a;
 }
 
-aside ul.products li.product a.product-link span.product-details h3 {
-    margin: 3px 25px 5px 0;
-    font-size: 13px;
+.product-details h3 {
+    margin: 3px 10px 5px 0;
+    font-size: 14px;
     font-weight: 500;
     color: #44444a;
     transition: all 0.5s linear;
 }
 
-aside ul.products li.product a.product-link span.product-details span.qty-price {
-    display: flex;
+.product-details .qty-price {
     flex-direction: row;
     flex-wrap: nowrap;
     align-content: center;
@@ -539,18 +546,17 @@ aside ul.products li.product a.product-link span.product-details span.qty-price 
     justify-content: space-between;
     width: 100%;
     position: relative;
-    /* z-index: 5px; */
-    margin-top: 8px;
+    margin-top: 10px;
 }
 
-aside ul.products li.product a.product-link span.product-details span.qty-price span.qty,
-aside ul.products li.product a.product-link span.product-details span.qty-price span.price {
+.product-details .qty,
+.product-details .price {
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
 }
 
-aside ul.products li.product a.product-link span.product-details span.qty-price span.qty {
+.product-details .qty {
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
@@ -559,8 +565,8 @@ aside ul.products li.product a.product-link span.product-details span.qty-price 
     justify-content: flex-start;
 }
 
-aside ul.products li.product a.product-link span.product-details span.qty-price span.qty button.minus-button,
-aside ul.products li.product a.product-link span.product-details span.qty-price span.qty button.plus-button {
+.minus-button,
+.plus-button {
     width: 25px;
     height: 24px;
     border-radius: 3px;
@@ -574,9 +580,9 @@ aside ul.products li.product a.product-link span.product-details span.qty-price 
     transition: all 0.3s linear;
 }
 
-aside ul.products li.product a.product-link span.product-details span.qty-price span.qty button.minus-button:active, aside ul.products li.product a.product-link span.product-details span.qty-price span.qty button.minus-button:hover,
-aside ul.products li.product a.product-link span.product-details span.qty-price span.qty button.plus-button:active,
-aside ul.products li.product a.product-link span.product-details span.qty-price span.qty button.plus-button:hover {
+.minus-button:active, .minus-button:hover,
+.plus-button:active,
+.plus-button:hover {
     color: #fff;
     background: #4dc0e3;
     border-color: #4dc0e3;
@@ -584,12 +590,12 @@ aside ul.products li.product a.product-link span.product-details span.qty-price 
     outline: none;
 }
 
-aside ul.products li.product a.product-link span.product-details span.qty-price span.qty button.minus-button:focus,
-aside ul.products li.product a.product-link span.product-details span.qty-price span.qty button.plus-button:focus {
+.minus-button:focus,
+.plus-button:focus {
     outline: none;
 }
 
-aside ul.products li.product a.product-link span.product-details span.qty-price span.qty input.qty-input {
+.qty-input {
     width: 24px;
     height: 24px;
     text-align: center;
@@ -599,30 +605,30 @@ aside ul.products li.product a.product-link span.product-details span.qty-price 
     transition: all 0.5s linear;
 }
 
-aside ul.products li.product a.product-link span.product-details span.qty-price span.qty input.qty-input:active, aside ul.products li.product a.product-link span.product-details span.qty-price span.qty input.qty-input:hover {
+.qty-input:active, .qty-input:hover {
     border: 1px solid #4dc0e3;
 }
 
-aside ul.products li.product a.product-link span.product-details span.qty-price span.qty input.qty-input:focus {
+.qty-input:focus {
     outline: none;
     border: 1px solid #4dc0e3;
 }
 
-aside ul.products li.product a.product-link span.product-details span.qty-price span.qty input.qty-input::-webkit-inner-spin-button, aside ul.products li.product a.product-link span.product-details span.qty-price span.qty input.qty-input::-webkit-outer-spin-button {
+.qty-input::-webkit-inner-spin-button, .qty input.qty-input::-webkit-outer-spin-button {
     -webkit-appearance: none;
     appearance: none;
     margin: 0;
 }
 
-aside ul.products li.product a.product-link span.product-details span.qty-price span.price {
-    color: #4dc0e3;
+.qty-price .price {
+    color: rebeccapurple;
     font-weight: 500;
     display: inline-flex;
+    margin-top: 10px;
 }
 
-aside ul.products li.product a.remove-button {
+.remove-button {
     height: 16px;
-    width: 16px;
     margin: 10px 10px 0 0;
     text-decoration: none;
     position: absolute;
@@ -630,11 +636,13 @@ aside ul.products li.product a.remove-button {
     right: 0;
     z-index: 2;
     display: flex;
+    background: transparent;
+    border: none;
 }
 
-aside ul.products li.product a.remove-button span.remove-icon {
-    width: 15px;
-    height: 16px;
+.remove-icon {
+    width: 18px;
+    height: 20px;
     background: rgba(117, 117, 122, 0.5);
     text-indent: -9999px;
     overflow: hidden;
@@ -644,11 +652,11 @@ aside ul.products li.product a.remove-button span.remove-icon {
     transition: all 0.5s linear;
 }
 
-aside ul.products li.product a.remove-button:active span.remove-icon, aside ul.products li.product a.remove-button:hover span.remove-icon {
+.remove-icon, .remove-button:hover .remove-icon {
     background: #cc0000;
 }
 
-aside div.totals {
+.totals {
     position: absolute;
     bottom: 80px;
     left: 0;
@@ -661,9 +669,9 @@ aside div.totals {
     flex-wrap: nowrap;
 }
 
-aside div.totals div.subtotal,
-aside div.totals div.shipping,
-aside div.totals div.tax {
+.subtotal,
+.shipping,
+.tax {
     padding: 15px;
     text-align: center;
     color: #44444a;
@@ -678,15 +686,13 @@ aside div.totals div.tax {
     justify-content: space-between;
 }
 
-aside div.totals div.subtotal span.amount,
-aside div.totals div.shipping span.amount,
-aside div.totals div.tax span.amount {
-    color: #1f9ec5;
+.amount {
+    color: rebeccapurple;
     margin-left: 10px;
     font-weight: 600;
 }
 
-aside div.action-buttons {
+.action-buttons {
     padding: 0;
     position: absolute;
     bottom: 0;
@@ -699,8 +705,8 @@ aside div.action-buttons {
     white-space: nowrap;
 }
 
-aside div.action-buttons a.view-cart-button,
-aside div.action-buttons a.checkout-button {
+.view-cart-button,
+.checkout-button {
     display: inline-block;
     padding: 10px;
     margin: 20px 15px;
@@ -714,20 +720,13 @@ aside div.action-buttons a.checkout-button {
     transition: all 0.5s linear;
 }
 
-aside div.action-buttons a.view-cart-button {
+.view-cart-button {
     background: #fff;
-    border-color: #4dc0e3;
     margin-right: 5px;
-    color: #4dc0e3;
     width: 80px;
 }
 
-aside div.action-buttons a.view-cart-button:active, aside div.action-buttons a.view-cart-button:hover {
-    background: rgba(77, 192, 227, 0.2);
-    color: #4dc0e3;
-}
-
-aside div.action-buttons a.checkout-button {
+.checkout-button {
     border-color: rgb(138, 43, 226);
     background: blueviolet;
     margin-left: 65px;
@@ -735,7 +734,7 @@ aside div.action-buttons a.checkout-button {
     width: 200px;
 }
 
-aside div.action-buttons a.checkout-button:after {
+.checkout-button:after {
     content: url("data:image/svg+xml,%3Csvg fill='%23fff' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 448 512'%3E%3Cpath d='M311.03 131.515l-7.071 7.07c-4.686 4.686-4.686 12.284 0 16.971L387.887 239H12c-6.627 0-12 5.373-12 12v10c0 6.627 5.373 12 12 12h375.887l-83.928 83.444c-4.686 4.686-4.686 12.284 0 16.971l7.071 7.07c4.686 4.686 12.284 4.686 16.97 0l116.485-116c4.686-4.686 4.686-12.284 0-16.971L328 131.515c-4.686-4.687-12.284-4.687-16.97 0z'/%3E%3C/svg%3E");
     width: 20px;
     height: 14px;
@@ -747,7 +746,7 @@ aside div.action-buttons a.checkout-button:after {
     z-index: 1;
 }
 
-aside div.action-buttons a.checkout-button:active, aside div.action-buttons a.checkout-button:hover {
+.checkout-button:active, .checkout-button:hover {
     background: rgba(138, 43, 226, 0.6);
     border-color: rgba(138, 43, 226, 0.6);
 }

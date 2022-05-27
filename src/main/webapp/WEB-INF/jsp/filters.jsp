@@ -134,7 +134,7 @@
 
                 </div>
             </c:if>
-            <section id="products">
+            <section id="serction-products">
                 <div class="sort-part">
                     <p class="sort-text">Show:</p>
                     <select name="sort" onchange="submit()" id="sort" class="sort">

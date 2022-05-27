@@ -30,7 +30,7 @@ public interface FilterProducts {
 
     Phone getPhoneById(Long id);
 
-    List<Phone> sort(List<Phone> phones, String sortType);
+    List<? extends Product> sort(List<? extends Product> products, String sortType);
 
     List<Laptop> getAllLaptops();
 

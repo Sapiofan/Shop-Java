@@ -118,18 +118,18 @@ public class FilterProductsImpl implements FilterProducts {
     }
 
     @Override
-    public List<Phone> sort(List<Phone> phones, String sortType) {
+    public List<? extends Product> sort(List<? extends Product> products, String sortType) {
         switch (sortType) {
             case "From cheap to expensive":
-                return sortFromCheapToExp(phones);
+                return sortFromCheapToExp(products);
             case "From expensive to cheap":
-                return sortFromExpToCheap(phones);
+                return sortFromExpToCheap(products);
             case "By popularity":
-                return sortByPopularity(phones);
+                return sortByPopularity(products);
             case "Novelties":
-                return sortByNovelties(phones);
+                return sortByNovelties(products);
             case "By name":
-                return sortByName(phones);
+                return sortByName(products);
         }
         return null;
     }
@@ -259,29 +259,29 @@ public class FilterProductsImpl implements FilterProducts {
         return data;
     }
 
-    public List<Phone> sortFromCheapToExp(List<Phone> phones) {
-        return phones.stream()
-                .sorted(Comparator.comparingDouble(Phone::getPrice))
+    public List<? extends Product> sortFromCheapToExp(List<? extends Product> products) {
+        return products.stream()
+                .sorted(Comparator.comparingDouble(Product::getPrice))
                 .collect(Collectors.toList());
     }
 
-    public List<Phone> sortFromExpToCheap(List<Phone> phones) {
-        return phones.stream()
-                .sorted(Comparator.comparingDouble(Phone::getPrice).reversed())
+    public List<? extends Product> sortFromExpToCheap(List<? extends Product> products) {
+        return products.stream()
+                .sorted(Comparator.comparingDouble(Product::getPrice).reversed())
                 .collect(Collectors.toList());
     }
 
-    public List<Phone> sortByPopularity(List<Phone> phones) {
+    public List<? extends Product> sortByPopularity(List<? extends Product> products) {
         return null;
     }
 
-    public List<Phone> sortByNovelties(List<Phone> phones) {
+    public List<? extends Product> sortByNovelties(List<? extends Product> products) {
         return null;
     }
 
-    public List<Phone> sortByName(List<Phone> phones) {
-        return phones.stream()
-                .sorted(Comparator.comparing(Phone::getName))
+    public List<? extends Product> sortByName(List<? extends Product> products) {
+        return products.stream()
+                .sorted(Comparator.comparing(Product::getName))
                 .collect(Collectors.toList());
     }
 }

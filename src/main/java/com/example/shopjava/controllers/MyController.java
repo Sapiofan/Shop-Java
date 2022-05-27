@@ -163,7 +163,7 @@ public class MyController {
         getUserPreferences(model, authentication);
         Map<String, List<String>> phoneFilters = filterProducts.getPhoneCharacteristics();
         Set<String> keys = phoneFilters.keySet();
-        List<Phone> phones = filterProducts.phones(filters, phoneFilters, minValue, maxValue);
+        List<? extends Product> phones = filterProducts.phones(filters, phoneFilters, minValue, maxValue);
         phones = filterProducts.sort(phones, sortType);
         model = filterPostModel(model, "Phones", phoneFilters, keys, filters, minValue, maxValue, sortType, authentication);
 //        model.addAttribute("category", "Phones");
@@ -515,7 +515,7 @@ public class MyController {
 
         Map<String, List<String>> phoneFilters = filterProducts.getPhoneCharacteristics();
         Set<String> keys = phoneFilters.keySet();
-        List<Phone> phones = filterProducts.phones(filters, phoneFilters, minValue, maxValue);
+        List<? extends Product> phones = filterProducts.phones(filters, phoneFilters, minValue, maxValue);
         phones = filterProducts.sort(phones, sortType);
         model = filterPostModel(model, "Phones", phoneFilters, keys, filters, minValue, maxValue, sortType, authentication);
         model.addAttribute("products", phones);
@@ -528,7 +528,6 @@ public class MyController {
                                   Set<String> keys, Set<String> filters,
                                   Integer minValue, Integer maxValue, String sortType,
                                   Authentication authentication) {
-        model.addAttribute("userFavorites", userDetailsService.getUserByEmail(authentication.getName()).getFavorite());
         model.addAttribute("category", category);
         model.addAttribute("filters", mapFilters);
         model.addAttribute("filtersKeys", keys);
