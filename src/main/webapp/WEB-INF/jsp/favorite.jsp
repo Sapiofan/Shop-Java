@@ -44,6 +44,9 @@
                 function (response) {
                     $("#wishlist").remove();
                     $("#header-heart-n").remove();
+                    var productId = parseInt(url.split("/")[2]);
+                    var action = url.split("/")[1];
+                    $("#"+productId).remove();
                     htmlTable = `<div id="wishlist" class="wishlist">`;
                     var data = ``;
                     var obj = $.parseJSON(response.responseText);
@@ -63,6 +66,18 @@
                     <button type="button" onclick="ajax()" class="clean-button" id="clean-button" name="clean">Clear wishlist</button>
                     </div></div>`;
                     counter = `<span id="header-heart-n" class="wishlist-count">`+ number +`</span>`;
+                    if(action === 'addProduct'){
+                        likeBut = `<button id="`+productId+`" type="button" class="empty-heart" onclick="productChanges('/deleteFavorite/`+productId+`')"><img
+                                                    src="img/red-heart.png"
+                                                    style="width: 20px; height: 20px; margin-right: 10px;"></button>`;
+                        $("#"+productId+"-signs").append(likeBut);
+                    }
+                    if(action === 'deleteFavorite'){
+                        likeBut = `<button id="`+productId+`" type="button" class="empty-heart" onclick="productChanges('/addProduct/`+productId+`')"><img
+                                                    src="img/heart.png"
+                                                    style="width: 20px; height: 20px; margin-right: 10px;"></button>`;
+                        $("#"+productId+"-signs").append(likeBut);
+                    }
                     $("#w").append(htmlTable);
                     $("#header-heart").append(counter);
                 }

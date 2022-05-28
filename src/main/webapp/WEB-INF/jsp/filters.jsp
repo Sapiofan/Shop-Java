@@ -165,29 +165,29 @@
                                         <p>${product.name}</p>
                                     </div>
                                 </a>
-                                <div class="card-signs">
+                                <div id="${product.id}-signs" class="card-signs">
                                     <div class="Stars" style="--rating: ${product.rating};"></div>
                                     <a href="/product/${product.id}#reviews">
                                         <img src="img/chat-bubble.png"
                                              style="width: 20px; height: 20px; margin-right: 10px;">
                                     </a>
                                     <c:if test="${isAuthenticated}">
-<%--                                        <c:set var="contains" value="false"/>--%>
-<%--                                        <c:forEach var="favorite" items="${userFavorites}">--%>
-<%--                                            <c:if test="${favorite.product.id == product.id}">--%>
-<%--                                                <c:set var="contains" value="true"/>--%>
-<%--                                            </c:if>--%>
-<%--                                        </c:forEach>--%>
-<%--                                        <c:if test="${!contains}">--%>
-                                            <button type="button" class="empty-heart" onclick="productChanges('/addProduct/${product.id}')"><img
+                                        <c:set var="contains" value="false"/>
+                                        <c:forEach var="favorite" items="${favoriteProducts}">
+                                            <c:if test="${favorite.id == product.id}">
+                                                <c:set var="contains" value="true"/>
+                                            </c:if>
+                                        </c:forEach>
+                                        <c:if test="${!contains}">
+                                            <button id="${product.id}" type="button" class="empty-heart" onclick="productChanges('/addProduct/${product.id}')"><img
                                                     src="img/heart.png"
                                                     style="width: 20px; height: 20px; margin-right: 10px;"></button>
-<%--                                        </c:if>--%>
-<%--                                        <c:if test="${contains}">--%>
-<%--                                            <button class="empty-heart" name="addFavorite"><img--%>
-<%--                                                    src="img/red-heart.png"--%>
-<%--                                                    style="width: 20px; height: 20px; margin-right: 10px;"></button>--%>
-<%--                                        </c:if>--%>
+                                        </c:if>
+                                        <c:if test="${contains}">
+                                            <button id="${product.id}" type="button" class="empty-heart" onclick="productChanges('/deleteFavorite/${product.id}')"><img
+                                                    src="img/red-heart.png"
+                                                    style="width: 20px; height: 20px; margin-right: 10px;"></button>
+                                        </c:if>
                                     </c:if>
                                     <c:if test="${!isAuthenticated}">
                                         <button class="empty-heart"
