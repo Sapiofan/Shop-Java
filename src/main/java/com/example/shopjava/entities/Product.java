@@ -25,7 +25,7 @@ public class Product {
     private String name;
 
     @Column(nullable = false)
-    private Float price;
+    private Integer price;
 
     @Column(nullable = false)
     private String brand;
@@ -48,8 +48,8 @@ public class Product {
     @Column(nullable = false)
     private Integer warranty;
 
-//    @Column
-//    private Date addedAt;
+    @Column
+    private Date addedAt;
 
     @Column
     private Integer sold;
@@ -62,8 +62,8 @@ public class Product {
     private List<Review> reviews = new ArrayList<>();
 
     @JsonIgnore
-    @ManyToMany(mappedBy = "cartProducts")
-    private Set<Cart> carts = new HashSet<>();
+    @OneToOne(mappedBy = "product")
+    private CartProduct cartProduct;
 
     @JsonIgnore
     @ManyToMany(mappedBy = "favoriteProducts")
@@ -72,7 +72,7 @@ public class Product {
     public Product() {
     }
 
-    public Product(String image, String name, Float price, String brand, String payment, Float rating,
+    public Product(String image, String name, Integer price, String brand, String payment, Float rating,
                    Integer discount, String gifts, Boolean isAvailable, Integer warranty, Date addedAt,
                    Integer sold, Category category) {
         this.image = image;
@@ -85,7 +85,7 @@ public class Product {
         this.gifts = gifts;
         this.isAvailable = isAvailable;
         this.warranty = warranty;
-//        this.addedAt = addedAt;
+        this.addedAt = addedAt;
         this.sold = sold;
         this.category = category;
     }
@@ -114,12 +114,20 @@ public class Product {
         this.image = image;
     }
 
-    public Float getPrice() {
+    public Integer getPrice() {
         return price;
     }
 
-    public void setPrice(Float price) {
+    public void setPrice(Integer price) {
         this.price = price;
+    }
+
+    public Date getAddedAt() {
+        return addedAt;
+    }
+
+    public void setAddedAt(Date addedAt) {
+        this.addedAt = addedAt;
     }
 
     public String getBrand() {
@@ -187,12 +195,12 @@ public class Product {
         this.category.addProduct(this);
     }
 
-    public Set<Cart> getCarts() {
-        return carts;
+    public CartProduct getCartProduct() {
+        return cartProduct;
     }
 
-    public void setCarts(Set<Cart> carts) {
-        this.carts = carts;
+    public void setCartProduct(CartProduct cartProduct) {
+        this.cartProduct = cartProduct;
     }
 
     public Set<Favorite> getFavorites() {
@@ -211,14 +219,6 @@ public class Product {
         this.reviews = reviews;
     }
 
-//    public Date getAddedAt() {
-//        return addedAt;
-//    }
-//
-//    public void setAddedAt(Date addedAt) {
-//        this.addedAt = addedAt;
-//    }
-
     public Integer getSold() {
         return sold;
     }
@@ -231,21 +231,17 @@ public class Product {
         this.reviews.add(review);
     }
 
-//    public void addFavorite(Favorite favorite){
-//        this.favorites.add(favorite);
-//    }
-
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Product product = (Product) o;
-        return Objects.equals(id, product.id) && Objects.equals(name, product.name) && Objects.equals(price, product.price) && Objects.equals(brand, product.brand) && Objects.equals(payment, product.payment) && Objects.equals(rating, product.rating) && Objects.equals(discount, product.discount) && Objects.equals(gifts, product.gifts) && Objects.equals(isAvailable, product.isAvailable) && Objects.equals(warranty, product.warranty) && Objects.equals(category, product.category) && Objects.equals(reviews, product.reviews) && Objects.equals(carts, product.carts) && Objects.equals(favorites, product.favorites);
+        return Objects.equals(id, product.id) && Objects.equals(name, product.name) && Objects.equals(price, product.price) && Objects.equals(brand, product.brand) && Objects.equals(payment, product.payment) && Objects.equals(rating, product.rating) && Objects.equals(discount, product.discount) && Objects.equals(gifts, product.gifts) && Objects.equals(isAvailable, product.isAvailable) && Objects.equals(warranty, product.warranty) && Objects.equals(category, product.category) && Objects.equals(reviews, product.reviews) && Objects.equals(cartProduct, product.cartProduct) && Objects.equals(favorites, product.favorites);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, price, brand, payment, rating, discount, gifts, isAvailable, warranty, category, reviews, carts, favorites);
+        return Objects.hash(id, name, price, brand, payment, rating, discount, gifts, isAvailable, warranty, category, reviews, cartProduct, favorites);
     }
 }

@@ -51,7 +51,7 @@ public class Phone extends Product {
     public Phone() {
     }
 
-    public Phone(String image, String name, Float price, String brand, String payment, Float rating, Integer discount,
+    public Phone(String image, String name, Integer price, String brand, String payment, Float rating, Integer discount,
                  String gifts, Boolean isAvailable, Integer warranty, Date addedAt, Integer sold, Category category,
                  String series, String built_in_memory, Boolean RAM_slot, String CPU, String os, Boolean NFC,
                  String sc_diagonal, Boolean biometric_security, String main_camera, String front_camera,

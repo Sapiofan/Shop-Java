@@ -7,5 +7,9 @@ public interface CartService {
 
     Cart getUserProducts(Long id);
 
-    Cart deleteProduct(Cart cart, Long productId);
+    void increaseQuantity(Long productId, Cart cart);
+
+    void decreaseQuantity(Long productId, Cart cart);
+
+    void deleteProduct(Cart cart, Long productId);
 }

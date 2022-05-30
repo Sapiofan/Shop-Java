@@ -11,40 +11,46 @@
                     $("#products").remove();
                     $("#cart-counter").remove();
                     $("#cart-count-top").remove();
+                    $("#subtotal").remove();
                     htmlTable = `<ul id="products" class="products">`;
                     var data = ``;
                     var obj = $.parseJSON(response.responseText);
+                    total = 0;
                     number = obj.length;
                     for (var i = 0; i < obj.length; i++) {
+                        var product = obj[i].product;
+                        total += product.price;
                         data += `<li class="product">
-                        <a href="/product/`+obj[i].id+`">
+                        <a href="/product/`+product.id+`">
                         <span class="product-image">
-                            <img src="`+obj[i].image+`" alt="Product Photo" width="60" height="120">
+                            <img src="`+product.image+`" alt="Product Photo" width="60" height="120">
                         </span>
                         </a>
                         <span class="product-details">
-                            <a href="/product/`+obj[i].id+`">
-                                <h3>`+obj[i].name+`</h3>
+                            <a href="/product/`+product.id+`">
+                                <h3>`+product.name+`</h3>
                             </a>
                                 <span class="qty-price">
                                     <span class="qty">
-                                        <button class="minus-button" id="minus-button-`+obj[i].id+`">-</button>
-                                        <input type="number" id="qty-`+obj[i].id+`" class="qty-input" step="1" min="1" max="1000" name="qty-input" value="1" pattern="[0-9]*" title="Quantity" inputmode="numeric">
-                                        <button class="plus-button" id="plus-button-`+obj[i].id+`">+</button>
+                                        <button onclick="subtractTotal(`+product.price+`, 'qty-`+product.id+`')" class="minus-button" id="minus-button-`+product.id+`">-</button>
+                                        <input type="number" id="qty-`+product.id+`" class="qty-input" step="1" min="1" max="1000" name="qty-input" value="`+obj[i].quantity+`" pattern="[0-9]*" title="Quantity" inputmode="numeric">
+                                        <button  onclick="addTotal(`+product.price+`, 'qty-`+product.id+`')" class="plus-button" id="plus-button-`+product.id+`">+</button>
                                     </span>
-                                    <span class="price">`+obj[i].price+`</span>
+                                    <span class="price">`+product.price+`$</span>
                                 </span>
                             </span>
                         </a>
-                        <button type="button" onclick="cartChanges('/deleteCartProduct/`+obj[i].id+`')" class="remove-button"><span class="remove-icon">X</span></button>
+                        <button type="button" onclick="cartChanges('/deleteCartProduct/`+product.id+`')" class="remove-button"><span class="remove-icon">X</span></button>
                     </li>`;
                     }
                     htmlTable += data + `</ul>`;
                     counter = `<span id="cart-counter" class="bag-count">`+ number +`</span>`;
                     counter2 = `<span id="cart-count-top" class="count">`+ number +`</span>`;
+                    subtotal = `<span id="subtotal" class="amount">`+ total +`$</span>`
                     $("#pr").append(htmlTable);
                     $("#main-nav a").append(counter);
                     $("#cart-count-h2").append(counter2);
+                    $("#subtotal-container").append(subtotal);
                 }
             ]
         });
@@ -58,32 +64,33 @@
             <ul id="products" class="products">
                 <c:forEach items="${cartProducts}" var="product">
                     <li class="product">
-                        <a href="/product/${product.id}">
+                        <a href="/product/${product.product.id}">
                         <span class="product-image">
-                            <img src="${product.image}" alt="Product Photo">
+                            <img src="${product.product.image}" alt="Product Photo">
                         </span>
                         </a>
                         <span class="product-details">
-                            <a href="/product/${product.id}">
-                                <h3>${product.name}</h3>
+                            <a href="/product/${product.product.id}">
+                                <h3>${product.product.name}</h3>
                             </a>
                                 <span class="qty-price">
                                     <span class="qty">
-                                        <button onclick="subtractTotal(${product.price}, 'qty-${product.id}')" class="minus-button" id="minus-button-${product.id}">-</button>
-                                        <input data-onload="disableInput('qty-${product.id}')" type="number" id="qty-${product.id}" class="qty-input" step="1" min="1" max="1000" name="qty-input" value="1" pattern="[0-9]*" title="Quantity" inputmode="numeric">
-                                        <button onclick="addTotal(${product.price}, 'qty-${product.id}')" class="plus-button" id="plus-button-${product.id}">+</button>
+                                        <button onclick="subtractTotal(${product.product.price}, 'qty-${product.product.id}')" class="minus-button" id="minus-button-${product.product.id}">-</button>
+                                        <input data-onload="disableInput('qty-${product.product.id}')" type="number" id="qty-${product.product.id}" class="qty-input" step="1" min="1"
+                                               max="10" name="qty-input" value="${product.quantity}" pattern="[0-9]*" title="Quantity" inputmode="numeric">
+                                        <button onclick="addTotal(${product.product.price}, 'qty-${product.product.id}')" class="plus-button" id="plus-button-${product.product.id}">+</button>
                                     </span>
-                                    <span class="price">${product.price}$</span>
+                                    <span class="price">${product.product.price}$</span>
                                 </span>
                             </span>
                         </a>
-                        <button type="button" onclick="cartChanges('/deleteCartProduct/${product.id}')" class="remove-button"><span class="remove-icon">X</span></button>
+                        <button type="button" onclick="cartChanges('/deleteCartProduct/${product.product.id}')" class="remove-button"><span class="remove-icon">X</span></button>
                     </li>
                 </c:forEach>
             </ul>
         </div>
         <div class="totals">
-            <div class="subtotal">
+            <div id="subtotal-container" class="subtotal">
                 <span class="label">Subtotal:</span> <span id="subtotal" class="amount">${total}$</span>
             </div>
         </div>

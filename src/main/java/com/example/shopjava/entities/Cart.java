@@ -20,13 +20,8 @@ public class Cart {
     @OneToOne(mappedBy = "cart")
     private User user;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "cart_products",
-            joinColumns = @JoinColumn(name = "card_id"),
-            inverseJoinColumns = @JoinColumn(name = "product_id")
-    )
-    private Set<Product> cartProducts = new HashSet<>();
+    @OneToMany(mappedBy = "cart")
+    private Set<CartProduct> cartProducts = new HashSet<>();
 
     public Cart() {
     }
@@ -68,12 +63,11 @@ public class Cart {
         this.user = user;
     }
 
-    public Set<Product> getProducts() {
+    public Set<CartProduct> getCartProducts() {
         return cartProducts;
     }
 
-    public void setProducts(Set<Product> products) {
-        this.cartProducts = products;
+    public void setCartProducts(Set<CartProduct> cartProducts) {
+        this.cartProducts = cartProducts;
     }
-
 }

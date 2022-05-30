@@ -64,7 +64,7 @@ public class Laptop extends Product {
     public Laptop() {
     }
 
-    public Laptop(String image, String name, Float price, String brand, String payment, Float rating, Integer discount,
+    public Laptop(String image, String name, Integer price, String brand, String payment, Float rating, Integer discount,
                   String gifts, Boolean isAvailable, Integer warranty, Date addedAt, Integer sold, Category category,
                   String device_type, String sc_diagonal, String processor_manufacturer, Integer cores, String processor_series,
                   String RAM, String drive_type, String discrete_graphics, String series, String inst_os, String storage,

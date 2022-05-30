@@ -325,7 +325,7 @@ public class AdminController {
         product.setName(name);
         product.setCategory(filterProducts.getCategory(category));
         product.setBrand(brand);
-        product.setPrice(Float.valueOf(stringPrice));
+        product.setPrice(Integer.valueOf(stringPrice));
         product.setPayment(payment);
         product.setWarranty(warranty);
         product.setAvailable(available);
@@ -351,11 +351,12 @@ public class AdminController {
                                  ){
         stringPrice = stringPrice.replace(" ", "");
         stringPrice = stringPrice.replace(",", ".");
-        Float price;
+        Integer price;
         try {
-            price = Float.valueOf(stringPrice);
+            price = Integer.valueOf(stringPrice);
         } catch (NumberFormatException e){
-            price = (float) 0;
+            log.info(""+e);
+            price = 0;
         }
         Product product = new Product(link, name, price, brand, payment, (float) 0, discount, gifts, available, warranty,
                 Date.from(Instant.now()), 0, filterProducts.getCategory(category));

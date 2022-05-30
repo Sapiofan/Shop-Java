@@ -49,7 +49,7 @@
         <div class="big-group">
             <div class="input-group">
                 <p>Price</p>
-                <input name="price" value="${product.price}" type="text" required>
+                <input name="price" value="${product.price}" type="number" required>
             </div>
             <div class="input-group">
                 <p>Payment</p>
@@ -101,7 +101,6 @@
             </div>
         </div>
         <button type="button" onclick="history.back()" class="history-back">Back</button>
-<%--        <a href="/admin/products"><button class="history-back">Back</button></a>--%>
         <c:if test="${!editMode}">
             <button type="submit" class="add-product-button">Continue</button>
         </c:if>

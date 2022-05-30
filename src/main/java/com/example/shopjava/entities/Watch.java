@@ -48,7 +48,7 @@ public class Watch extends Product {
     public Watch() {
     }
 
-    public Watch(String image, String name, Float price, String brand, String payment, Float rating, Integer discount,
+    public Watch(String image, String name, Integer price, String brand, String payment, Float rating, Integer discount,
                  String gifts, Boolean isAvailable, Integer warranty, Date addedAt, Integer sold, Category category,
                  String purpose, String display_shape, Boolean touch_screen, Boolean waterproof,
                  Boolean call_support, Boolean music_control, Boolean pulse_measurement, Boolean step_counting,

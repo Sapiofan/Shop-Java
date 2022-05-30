@@ -55,6 +55,9 @@ public class MyController {
     private TransactionService transactionService;
 
     @Autowired
+    private CartService cartService;
+
+    @Autowired
     private Utils utils;
 
     private static final Logger log = LoggerFactory.getLogger(MyController.class);
@@ -248,7 +251,7 @@ public class MyController {
             model.addAttribute("isAuthenticated", true);
             User user = userDetailsService.getUserByEmail(authentication.getName());
             model.addAttribute("favoriteProducts", user.getFavorite().getFavoriteProducts());
-            model.addAttribute("cartProducts", user.getCart().getProducts());
+            model.addAttribute("cartProducts", user.getCart().getCartProducts());
             model.addAttribute("total", user.getCart().getTotalPrice());
         }
     }
@@ -365,7 +368,7 @@ public class MyController {
         if (utils.checkAuth(authentication)) {
             model.addAttribute("isAuthenticated", true);
             User user = userDetailsService.getUserByEmail(authentication.getName());
-            model.addAttribute("cartProducts", user.getCart().getProducts());
+            model.addAttribute("cartProducts", user.getCart().getCartProducts());
             model.addAttribute("total", user.getCart().getTotalPrice());
         }
         return "checkout";
@@ -480,26 +483,46 @@ public class MyController {
 
     @GetMapping(value = "/deleteCartProduct/{id}")
     @ResponseBody
-    public Set<Product> deleteCartProduct(Authentication authentication, @PathVariable("id") Long productId
+    public Set<CartProduct> deleteCartProduct(Authentication authentication, @PathVariable("id") Long productId
     ) {
         if (authentication != null) {
             User user = userDetailsService.getUserByEmail(authentication.getName());
-            user.getCart().getProducts().remove(filterProducts.getProductById(productId));
-            userDetailsService.saveUser(user);
-            return user.getCart().getProducts();
+            cartService.deleteProduct(user.getCart(), productId);
+            return user.getCart().getCartProducts();
         }
         return null;
     }
 
     @GetMapping(value = "/addToCart/{id}")
     @ResponseBody
-    public Set<Product> addToCart(Authentication authentication, @PathVariable("id") Long productId
+    public Set<CartProduct> addToCart(Authentication authentication, @PathVariable("id") Long productId
     ) {
         if (authentication != null) {
             User user = userDetailsService.getUserByEmail(authentication.getName());
-            user.getCart().getProducts().add(filterProducts.getProductById(productId));
-            userDetailsService.saveUser(user);
-            return user.getCart().getProducts();
+            cartService.addProduct(user.getCart(), productId);
+            return user.getCart().getCartProducts();
+        }
+        return null;
+    }
+
+    @GetMapping(value = "/addAdditionalProduct/{id}")
+    @ResponseBody
+    public Set<CartProduct> addAdditionalProduct(Authentication authentication, @PathVariable("id") Long productId){
+        if (authentication != null) {
+            User user = userDetailsService.getUserByEmail(authentication.getName());
+            cartService.increaseQuantity(productId, user.getCart());
+            return user.getCart().getCartProducts();
+        }
+        return null;
+    }
+
+    @GetMapping(value = "/subtractAdditionalProduct/{id}")
+    @ResponseBody
+    public Set<CartProduct> subtractAdditionalProduct(Authentication authentication, @PathVariable("id") Long productId){
+        if (authentication != null) {
+            User user = userDetailsService.getUserByEmail(authentication.getName());
+            cartService.decreaseQuantity(productId, user.getCart());
+            return user.getCart().getCartProducts();
         }
         return null;
     }
