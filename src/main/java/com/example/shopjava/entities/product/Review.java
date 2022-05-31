@@ -1,4 +1,6 @@
-package com.example.shopjava.entities;
+package com.example.shopjava.entities.product;
+
+import com.example.shopjava.entities.user.User;
 
 import javax.persistence.*;
 import java.time.Instant;
@@ -88,5 +90,17 @@ public class Review {
     public void setProduct(Product product) {
         this.product = product;
         this.product.addReview(this);
+    }
+
+    @Override
+    public String toString() {
+        return "Review{" +
+                "rating=" + rating +
+                ", date=" + date +
+                ", review='" + review + '\'' +
+                ", isRecommended=" + isRecommended +
+                ", user=" + user +
+                ", product=" + product +
+                '}';
     }
 }

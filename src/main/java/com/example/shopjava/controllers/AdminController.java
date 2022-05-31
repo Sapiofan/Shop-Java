@@ -1,9 +1,10 @@
 package com.example.shopjava.controllers;
 
-import com.example.shopjava.entities.*;
 import com.example.shopjava.entities.admin.AdminHome;
-import com.example.shopjava.entities.contacts.Contact;
+import com.example.shopjava.entities.another.Career;
+import com.example.shopjava.entities.another.FAQ;
 import com.example.shopjava.entities.contacts.Message;
+import com.example.shopjava.entities.product.*;
 import com.example.shopjava.services.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -45,20 +46,7 @@ public class AdminController {
 
     @GetMapping("/admin/home")
     public String getAdminHome(Model model) {
-        List<AdminHome> banners = adminService.getBannerData();
-
-        model.addAttribute("link1", banners.get(0).getLink());
-        String[] banner1Text = banners.get(0).getText().split("#");
-        model.addAttribute("banner11", banner1Text[0]);
-        model.addAttribute("banner12", banner1Text[1]);
-        model.addAttribute("banner13", banner1Text[2]);
-
-        model.addAttribute("link2", banners.get(1).getLink());
-        String[] banner2Text = banners.get(1).getText().split("#");
-        model.addAttribute("banner21", banner2Text[0]);
-        model.addAttribute("banner22", banner2Text[1]);
-        model.addAttribute("banner23", banner2Text[2]);
-
+        bannersModel(model, adminService);
         return "admin-home";
     }
 
@@ -68,16 +56,8 @@ public class AdminController {
                                  @RequestParam("banner11") String banner11, @RequestParam("banner12") String banner12,
                                  @RequestParam("banner13") String banner13, @RequestParam("banner21") String banner21,
                                  @RequestParam("banner22") String banner22, @RequestParam("banner23") String banner23
-                                 ){
-        model.addAttribute("link1", link1);
-        model.addAttribute("link2", link2);
-        model.addAttribute("banner11", banner11);
-        model.addAttribute("banner12", banner12);
-        model.addAttribute("banner13", banner13);
-        model.addAttribute("banner21", banner21);
-        model.addAttribute("banner22", banner22);
-        model.addAttribute("banner23", banner23);
-        return "admin-home";
+    ) {
+        return addBannersProps(model, link1, link2, banner11, banner12, banner13, banner21, banner22, banner23);
     }
 
     @PostMapping(value = "/admin/home", params = "save")
@@ -85,7 +65,7 @@ public class AdminController {
                                   @RequestParam("link1") String link1, @RequestParam("link2") String link2,
                                   @RequestParam("banner11") String banner11, @RequestParam("banner12") String banner12,
                                   @RequestParam("banner13") String banner13, @RequestParam("banner21") String banner21,
-                                  @RequestParam("banner22") String banner22, @RequestParam("banner23") String banner23){
+                                  @RequestParam("banner22") String banner22, @RequestParam("banner23") String banner23) {
         List<AdminHome> adminHomeList = new ArrayList<>();
         String banner1Text = banner11 + "#" + banner12 + "#" + banner13;
         String banner2Text = banner21 + "#" + banner22 + "#" + banner23;
@@ -93,19 +73,11 @@ public class AdminController {
         adminHomeList.add(new AdminHome(2, link2, banner2Text));
         adminService.addNewBannerState(adminHomeList);
 
-        model.addAttribute("link1", link1);
-        model.addAttribute("link2", link2);
-        model.addAttribute("banner11", banner11);
-        model.addAttribute("banner12", banner12);
-        model.addAttribute("banner13", banner13);
-        model.addAttribute("banner21", banner21);
-        model.addAttribute("banner22", banner22);
-        model.addAttribute("banner23", banner23);
-        return "admin-home";
+        return addBannersProps(model, link1, link2, banner11, banner12, banner13, banner21, banner22, banner23);
     }
 
     @GetMapping("/admin/career")
-    public String getAdminCareerFirst(Model model){
+    public String getAdminCareerFirst(Model model) {
         return getAdminCareer(model, 1);
     }
 
@@ -127,8 +99,8 @@ public class AdminController {
         careerService.deleteCareerUserById(id);
         Page<Career> pageCareers = careerService.getCareers(pageNum);
         List<Career> careers = pageCareers.getContent();
-        if(careers.isEmpty() && pageNum != 1){
-            pageCareers = careerService.getCareers(pageNum-1);
+        if (careers.isEmpty() && pageNum != 1) {
+            pageCareers = careerService.getCareers(pageNum - 1);
             careers = pageCareers.getContent();
         }
         model.addAttribute("currentPage", pageNum);
@@ -202,7 +174,7 @@ public class AdminController {
     }
 
     @GetMapping("/admin/feedback")
-    public String getFirstAdminFeedback(Model model){
+    public String getFirstAdminFeedback(Model model) {
         return getAdminFeedback(model, 1);
     }
 
@@ -222,8 +194,8 @@ public class AdminController {
         contactService.deleteById(id);
         Page<Message> pageContacts = contactService.contacts(pageNum);
         List<Message> messages = pageContacts.getContent();
-        if(messages.isEmpty() && pageNum != 1){
-            pageContacts = contactService.contacts(pageNum-1);
+        if (messages.isEmpty() && pageNum != 1) {
+            pageContacts = contactService.contacts(pageNum - 1);
             messages = pageContacts.getContent();
         }
         model.addAttribute("messages", messages);
@@ -234,7 +206,7 @@ public class AdminController {
     }
 
     @GetMapping("/admin/products")
-    public String getAdminFirstProducts(Model model){
+    public String getAdminFirstProducts(Model model) {
         return getAdminProducts(model, 1);
     }
 
@@ -250,12 +222,12 @@ public class AdminController {
     }
 
     @PostMapping(value = "/admin/products")
-    public String findProducts(Model model, @RequestParam("searchKey") String search){
+    public String findProducts(Model model, @RequestParam("searchKey") String search) {
         List<Product> products = new ArrayList<>();
         try {
             Product product = filterProducts.getProductById(Long.valueOf(search));
             products.add(product);
-        }catch (NumberFormatException e){
+        } catch (NumberFormatException e) {
             products = filterProducts.searchUncertainProducts(search);
         }
         model.addAttribute("products", products);
@@ -264,12 +236,12 @@ public class AdminController {
     }
 
     @GetMapping("/admin/products/{pageNum}/delete/{id}")
-    public String deleteProduct(Model model, @PathVariable("id") Long id, @PathVariable("pageNum") int pageNum){
+    public String deleteProduct(Model model, @PathVariable("id") Long id, @PathVariable("pageNum") int pageNum) {
         filterProducts.deleteById(id);
         Page<Product> pageProducts = filterProducts.getAllProducts(pageNum);
         List<Product> products = pageProducts.getContent();
-        if(products.isEmpty() && pageNum != 1){
-            pageProducts = filterProducts.getAllProducts(pageNum-1);
+        if (products.isEmpty() && pageNum != 1) {
+            pageProducts = filterProducts.getAllProducts(pageNum - 1);
             products = pageProducts.getContent();
         }
         model.addAttribute("products", products);
@@ -280,7 +252,7 @@ public class AdminController {
     }
 
     @GetMapping("/admin/reviews")
-    public String getAdminFirstReviews(Model model){
+    public String getAdminFirstReviews(Model model) {
         return getAdminReviews(model, 1);
     }
 
@@ -296,12 +268,12 @@ public class AdminController {
     }
 
     @GetMapping("/admin/addProduct")
-    public String addProduct(Model model){
+    public String addProduct(Model model) {
         return "add-product";
     }
 
     @GetMapping("/admin/editProduct/{id}")
-    public String editProduct(Model model, @PathVariable("id") Long id, HttpServletRequest request){
+    public String editProduct(Model model, @PathVariable("id") Long id, HttpServletRequest request) {
         Product product = filterProducts.getProductById(id);
         request.getSession().setAttribute("productEdit", product);
         model.addAttribute("product", product);
@@ -320,7 +292,7 @@ public class AdminController {
                            @RequestParam("available") boolean available,
                            @RequestParam(value = "gifts", required = false) String gifts,
                            @RequestParam(value = "discount", required = false) int discount,
-                           @RequestParam("link") String link){
+                           @RequestParam("link") String link) {
         Product product = (Product) request.getSession().getAttribute("productEdit");
         product.setName(name);
         product.setCategory(filterProducts.getCategory(category));
@@ -333,6 +305,7 @@ public class AdminController {
         product.setDiscount(discount);
         product.setImage(link);
         filterProducts.saveProduct(product);
+        request.removeAttribute("productEdit");
         return getAdminFirstProducts(model);
     }
 
@@ -348,14 +321,14 @@ public class AdminController {
                                  @RequestParam(value = "gifts", required = false) String gifts,
                                  @RequestParam(value = "discount", required = false) int discount,
                                  @RequestParam("link") String link
-                                 ){
+    ) {
         stringPrice = stringPrice.replace(" ", "");
         stringPrice = stringPrice.replace(",", ".");
-        Integer price;
+        int price;
         try {
-            price = Integer.valueOf(stringPrice);
-        } catch (NumberFormatException e){
-            log.info(""+e);
+            price = Integer.parseInt(stringPrice);
+        } catch (NumberFormatException e) {
+            log.info("" + e);
             price = 0;
         }
         Product product = new Product(link, name, price, brand, payment, (float) 0, discount, gifts, available, warranty,
@@ -405,19 +378,18 @@ public class AdminController {
                             @RequestParam("mainC") String mainC,
                             @RequestParam("frontC") String frontC,
                             @RequestParam("battery") String battery
-                            ){
+    ) {
         Product product = (Product) request.getSession().getAttribute("product");
-//        filterProducts.saveProduct(product);
         boolean ram_slotB = ram_slot.equals("yes");
         boolean NFC = nfc.equals("yes");
-        boolean bs = biometric_security.equals("yes");
         boolean wc = wireless_charger.equals("yes");
         Phone phone = new Phone(product.getImage(), product.getName(), product.getPrice(), product.getBrand(),
                 product.getPayment(), product.getRating(), product.getDiscount(), product.getGifts(), product.getAvailable(),
                 product.getWarranty(), Date.from(Instant.now()), product.getSold(), product.getCategory(), series,
-                built_in_memory, ram_slotB, cpu, os, NFC, screen_diagonal, bs, mainC, frontC,
+                built_in_memory, ram_slotB, cpu, os, NFC, screen_diagonal, biometric_security, mainC, frontC,
                 battery, wc, Integer.valueOf(cores), Integer.valueOf(screen_refresh));
         filterProducts.savePhone(phone);
+        request.removeAttribute("product");
         return getAdminFirstProducts(model);
     }
 
@@ -439,7 +411,7 @@ public class AdminController {
                              @RequestParam("Video size") String video_size,
                              @RequestParam("Processor manufacturer") String processorManufacturers,
                              @RequestParam("weight") String weight
-    ){
+    ) {
         Product product = (Product) request.getSession().getAttribute("product");
 
         Laptop laptop = new Laptop(product.getImage(), product.getName(), product.getPrice(), product.getBrand(),
@@ -449,6 +421,7 @@ public class AdminController {
                 ram, drive_type, discrete_graphics, series, inst_os, storage, Integer.valueOf(screen_refresh),
                 "", color, video_size, "", "", Float.valueOf(weight), false);
         filterProducts.saveLaptop(laptop);
+        request.removeAttribute("product");
         return getAdminFirstProducts(model);
     }
 
@@ -467,7 +440,7 @@ public class AdminController {
                             @RequestParam("Display diagonal") String display_diagonal,
                             @RequestParam("Touch screen") String touch_sc,
                             @RequestParam("purpose") String purpose
-    ){
+    ) {
         Product product = (Product) request.getSession().getAttribute("product");
 
         boolean touch_screen = touch_sc.equals("yes");
@@ -484,16 +457,17 @@ public class AdminController {
                 purpose, shape, touch_screen, wp, cs, mc, pm, sc, sm, color, working_hours, display_diagonal);
 
         filterProducts.saveWatch(watch);
+        request.removeAttribute("product");
         return getAdminFirstProducts(model);
     }
 
     @GetMapping(value = "/admin/reviews/{pageNum}/delete/{id}")
     public String deleteReview(Model model,
-                               @PathVariable("id") Long id, @PathVariable("pageNum") int pageNum){
+                               @PathVariable("id") Long id, @PathVariable("pageNum") int pageNum) {
         reviewService.deleteById(id);
         Page<Review> pagesReviews = reviewService.getAll(pageNum);
         List<Review> reviews = pagesReviews.getContent();
-        if(reviews.isEmpty() && pageNum != 1){
+        if (reviews.isEmpty() && pageNum != 1) {
             pagesReviews = reviewService.getAll(pageNum - 1);
             reviews = pagesReviews.getContent();
         }
@@ -505,14 +479,42 @@ public class AdminController {
     }
 
     @PostMapping("/admin/reviews")
-    public String searchReviews(Model model, @RequestParam("search") String searchKey){
+    public String searchReviews(Model model, @RequestParam("search") String searchKey) {
         List<Review> reviews = null;
         try {
             reviews = reviewService.findReviewsByProduct(Long.valueOf(searchKey));
-        } catch (NumberFormatException e){
+        } catch (NumberFormatException e) {
             reviews = reviewService.findReviewsByUser(searchKey);
         }
         model.addAttribute("reviews", reviews);
         return "admin-reviews";
+    }
+
+    static void bannersModel(Model model, AdminService adminService) {
+        List<AdminHome> banners = adminService.getBannerData();
+
+        model.addAttribute("link1", banners.get(0).getLink());
+        String[] banner1Text = banners.get(0).getText().split("#");
+        model.addAttribute("banner11", banner1Text[0]);
+        model.addAttribute("banner12", banner1Text[1]);
+        model.addAttribute("banner13", banner1Text[2]);
+
+        model.addAttribute("link2", banners.get(1).getLink());
+        String[] banner2Text = banners.get(1).getText().split("#");
+        model.addAttribute("banner21", banner2Text[0]);
+        model.addAttribute("banner22", banner2Text[1]);
+        model.addAttribute("banner23", banner2Text[2]);
+    }
+
+    private String addBannersProps(Model model, @RequestParam("link1") String link1, @RequestParam("link2") String link2, @RequestParam("banner11") String banner11, @RequestParam("banner12") String banner12, @RequestParam("banner13") String banner13, @RequestParam("banner21") String banner21, @RequestParam("banner22") String banner22, @RequestParam("banner23") String banner23) {
+        model.addAttribute("link1", link1);
+        model.addAttribute("link2", link2);
+        model.addAttribute("banner11", banner11);
+        model.addAttribute("banner12", banner12);
+        model.addAttribute("banner13", banner13);
+        model.addAttribute("banner21", banner21);
+        model.addAttribute("banner22", banner22);
+        model.addAttribute("banner23", banner23);
+        return "admin-home";
     }
 }

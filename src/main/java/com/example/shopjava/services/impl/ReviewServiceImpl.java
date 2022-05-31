@@ -1,12 +1,14 @@
 package com.example.shopjava.services.impl;
 
-import com.example.shopjava.entities.Product;
-import com.example.shopjava.entities.Review;
-import com.example.shopjava.entities.User;
+import com.example.shopjava.entities.product.Product;
+import com.example.shopjava.entities.product.Review;
+import com.example.shopjava.entities.user.User;
 import com.example.shopjava.repos.ProductRepository;
 import com.example.shopjava.repos.ReviewRepository;
 import com.example.shopjava.repos.UserRepository;
 import com.example.shopjava.services.ReviewService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -17,7 +19,6 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.time.Instant;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
@@ -34,12 +35,13 @@ public class ReviewServiceImpl implements ReviewService {
     @Autowired
     private ProductRepository productRepository;
 
+    private static final Logger log = LoggerFactory.getLogger(ReviewServiceImpl.class);
+
     @Override
     @Transactional
     public Page<Review> getAll(int pageNum) {
         Pageable pageable = PageRequest.of(pageNum - 1, 5, Sort.by("date").descending());
-        Page<Review> reviews = reviewRepository.findAll(pageable);
-        return reviews;
+        return reviewRepository.findAll(pageable);
     }
 
     @Override
@@ -49,6 +51,7 @@ public class ReviewServiceImpl implements ReviewService {
         List<Review> reviews = reviewRepository.findByUser(user.getId());
         for (Review review : reviews) {
             if (review.getProduct().getId().equals(productId)) {
+                log.warn("Such review has already exist for this product: " + review.getId());
                 return true;
             }
         }
@@ -80,6 +83,7 @@ public class ReviewServiceImpl implements ReviewService {
     @Override
     @Transactional
     public void deleteById(Long id) {
+        log.warn("Review was deleted: " + reviewRepository.findById(id).get());
         reviewRepository.deleteById(id);
     }
 

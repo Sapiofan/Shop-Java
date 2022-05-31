@@ -1,6 +1,6 @@
 package com.example.shopjava.services.impl;
 
-import com.example.shopjava.entities.*;
+import com.example.shopjava.entities.product.*;
 import com.example.shopjava.repos.*;
 import com.example.shopjava.services.FilterProducts;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -149,7 +149,7 @@ public class FilterProductsImpl implements FilterProducts {
     @Override
     @Transactional
     public List<Watch> getAllWatches() {
-        return watchRepository.findAllWatches();
+        return watchRepository.findAll();
     }
 
     @Override
@@ -216,13 +216,13 @@ public class FilterProductsImpl implements FilterProducts {
             data.put("Card slot", phone.getRAM_slot() ? "yes" : "no");
             data.put("Built-in memory", phone.getBuilt_in_memory());
             data.put("Cores", phone.getCores().toString());
-            data.put("Processor", phone.getCPU());
+            data.put("Processor", phone.getCpu());
             data.put("Screen refresh", phone.getScreen_refresh().toString());
             data.put("OS", phone.getOs());
             data.put("Main camera", phone.getMain_camera());
             data.put("Front camera", phone.getFront_camera());
-            data.put("NFC", phone.getNFC() ? "yes" : "no");
-            data.put("Biometric security", phone.getBiometric_security() ? "yes" : "no");
+            data.put("NFC", phone.getNfc() ? "yes" : "no");
+            data.put("Biometric security", phone.getBiometric_security());
             data.put("Wireless charger", phone.getWireless_charger() ? "yes" : "no");
             data.put("Capacity", phone.getBattery());
         } else if (product.getCategory().getId() == 2) {

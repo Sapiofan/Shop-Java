@@ -1,10 +1,8 @@
 package com.example.shopjava.services;
 
 
-import com.example.shopjava.entities.Career;
+import com.example.shopjava.entities.another.Career;
 import org.springframework.data.domain.Page;
-
-import java.util.List;
 
 public interface CareerService {
     String addCareerUser(Career career);

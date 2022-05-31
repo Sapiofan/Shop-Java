@@ -1,4 +1,4 @@
-package com.example.shopjava.entities;
+package com.example.shopjava.entities.user;
 
 import javax.persistence.*;
 import java.util.Set;

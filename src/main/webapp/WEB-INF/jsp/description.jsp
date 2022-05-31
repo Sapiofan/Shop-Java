@@ -31,8 +31,8 @@
 <main class="main" id="main">
     <header id="chars-header" class="">
         <div class="product-chars">
-            <div class="product-image">
-                <img src="https://unsplash.it/800?random">
+            <div class="product-image-description">
+                <img src="${product.image}">
             </div>
             <div class="full-product">
                 <p>${product.name}</p>
@@ -65,7 +65,6 @@
                         <button class="header-buy">Buy</button>
                     </a>
                 </sec:authorize>
-<%--                <button class="header-buy" id="header-buy">Buy</button>--%>
                 <div class="header-like">
                     <button type="button" class="empty-heart" onclick="productChanges('/addProduct/${product.id}')">
                         <img src="/img/heart (2).png">
@@ -107,13 +106,13 @@
                     <label class="carousel__control carousel__control--backward" for="N"></label>
                     <label class="carousel__control carousel__control--forward" for="K"></label>
                 </div>
-                <li class="carousel__slide" style="background-image: url('https://unsplash.it/800?random');"></li>
+                <li class="carousel__slide" style="background-image: url('${product.image}');"></li>
                 <li class="carousel__slide"></li>
                 <li class="carousel__slide"></li>
                 <li class="carousel__slide"></li>
                 <li class="carousel__slide"></li>
                 <div class="carousel__indicators">
-                    <label class="carousel__indicator" style="background-image: url('https://unsplash.it/800?random');"
+                    <label class="carousel__indicator" style="background-image: url('${product.image}');"
                            for="K"></label>
                     <label class="carousel__indicator" for="L"></label>
                     <label class="carousel__indicator" for="M"></label>
@@ -154,7 +153,6 @@
                         <button class="add-to-cart">Buy</button>
                     </form>
                 </sec:authorize>
-<%--                <button class="add-to-cart">Buy</button>--%>
                 <div class="like-container">
                     <button type="button" class="empty-heart" onclick="productChanges('/addProduct/${product.id}')">
                         <img src="/img/heart.png" style="width: 32px; height: 32px;">

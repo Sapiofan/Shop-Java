@@ -1,6 +1,6 @@
 package com.example.shopjava.services;
 
-import com.example.shopjava.entities.Review;
+import com.example.shopjava.entities.product.Review;
 import org.springframework.data.domain.Page;
 import org.springframework.security.core.Authentication;
 

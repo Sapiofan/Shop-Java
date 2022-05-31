@@ -1,7 +1,6 @@
 package com.example.shopjava.configs.security;
 
-import com.example.shopjava.entities.User;
-import com.example.shopjava.services.impl.AdminServiceImpl;
+import com.example.shopjava.entities.user.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.GrantedAuthority;
@@ -12,9 +11,7 @@ import java.util.Collection;
 import java.util.Collections;
 
 public class CustomUserDetails implements UserDetails {
-    private User user;
-
-    private static final Logger log = LoggerFactory.getLogger("log");
+    private final User user;
 
     public CustomUserDetails(User user) {
         this.user = user;
@@ -23,8 +20,7 @@ public class CustomUserDetails implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         SimpleGrantedAuthority authority =
-                new SimpleGrantedAuthority("ROLE_"+user.getRole().toString());
-        log.info(user.getRole().toString());
+                new SimpleGrantedAuthority("ROLE_" + user.getRole().toString());
         return Collections.singletonList(authority);
     }
 

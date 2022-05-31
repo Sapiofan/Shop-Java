@@ -1,6 +1,6 @@
 package com.example.shopjava.services;
 
-import com.example.shopjava.entities.Cart;
+import com.example.shopjava.entities.user.cart.Cart;
 
 public interface CartService {
     Cart addProduct(Cart cart, Long productId);

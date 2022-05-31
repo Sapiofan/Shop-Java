@@ -1,8 +1,8 @@
 package com.example.shopjava.repos;
 
-import com.example.shopjava.entities.Laptop;
-import com.example.shopjava.entities.Phone;
-import com.example.shopjava.entities.Watch;
+import com.example.shopjava.entities.product.Laptop;
+import com.example.shopjava.entities.product.Phone;
+import com.example.shopjava.entities.product.Watch;
 import org.springframework.security.core.Authentication;
 
 import java.util.List;

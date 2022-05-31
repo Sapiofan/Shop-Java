@@ -1,9 +1,7 @@
-package com.example.shopjava.entities;
+package com.example.shopjava.entities.product;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
-import java.util.Set;
 
 @Entity
 @Table(name = "phones")
@@ -19,18 +17,18 @@ public class Phone extends Product {
     private Boolean RAM_slot;
 
     @Column(nullable = false)
-    private String CPU;
+    private String cpu;
 
     @Column(nullable = false)
     private String os;
 
     @Column(nullable = false)
-    private Boolean NFC;
+    private Boolean nfc;
 
     @Column(nullable = false)
-    private String sc_diagonal;
+    private String screen_diagonal;
 
-    private Boolean biometric_security;
+    private String biometric_security;
 
     @Column(nullable = false)
     private String main_camera;
@@ -54,16 +52,16 @@ public class Phone extends Product {
     public Phone(String image, String name, Integer price, String brand, String payment, Float rating, Integer discount,
                  String gifts, Boolean isAvailable, Integer warranty, Date addedAt, Integer sold, Category category,
                  String series, String built_in_memory, Boolean RAM_slot, String CPU, String os, Boolean NFC,
-                 String sc_diagonal, Boolean biometric_security, String main_camera, String front_camera,
+                 String sc_diagonal, String biometric_security, String main_camera, String front_camera,
                  String battery, Boolean wireless_charger, Integer cores, Integer screen_refresh) {
         super(image, name, price, brand, payment, rating, discount, gifts, isAvailable, warranty, addedAt, sold, category);
         this.series = series;
         this.built_in_memory = built_in_memory;
         this.RAM_slot = RAM_slot;
-        this.CPU = CPU;
+        this.cpu = CPU;
         this.os = os;
-        this.NFC = NFC;
-        this.sc_diagonal = sc_diagonal;
+        this.nfc = NFC;
+        this.screen_diagonal = sc_diagonal;
         this.biometric_security = biometric_security;
         this.main_camera = main_camera;
         this.front_camera = front_camera;
@@ -97,14 +95,6 @@ public class Phone extends Product {
         this.RAM_slot = RAM_slot;
     }
 
-    public String getCPU() {
-        return CPU;
-    }
-
-    public void setCPU(String CPU) {
-        this.CPU = CPU;
-    }
-
     public String getOs() {
         return os;
     }
@@ -113,27 +103,36 @@ public class Phone extends Product {
         this.os = os;
     }
 
-    public Boolean getNFC() {
-        return NFC;
+
+    public String getCpu() {
+        return cpu;
     }
 
-    public void setNFC(Boolean NFC) {
-        this.NFC = NFC;
+    public void setCpu(String cpu) {
+        this.cpu = cpu;
     }
 
-    public String getSc_diagonal() {
-        return sc_diagonal;
+    public Boolean getNfc() {
+        return nfc;
     }
 
-    public void setSc_diagonal(String sc_diagonal) {
-        this.sc_diagonal = sc_diagonal;
+    public void setNfc(Boolean nfc) {
+        this.nfc = nfc;
     }
 
-    public Boolean getBiometric_security() {
+    public String getScreen_diagonal() {
+        return screen_diagonal;
+    }
+
+    public void setScreen_diagonal(String screen_diagonal) {
+        this.screen_diagonal = screen_diagonal;
+    }
+
+    public String getBiometric_security() {
         return biometric_security;
     }
 
-    public void setBiometric_security(Boolean biometric_security) {
+    public void setBiometric_security(String biometric_security) {
         this.biometric_security = biometric_security;
     }
 

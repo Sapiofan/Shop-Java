@@ -1,8 +1,8 @@
-package com.example.shopjava.entities;
+package com.example.shopjava.entities.product;
 
+import com.example.shopjava.entities.user.cart.CartProduct;
+import com.example.shopjava.entities.user.Favorite;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -58,7 +58,7 @@ public class Product {
     private Category category;
 
     @JsonIgnore
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "product")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "product", cascade = CascadeType.REMOVE)
     private List<Review> reviews = new ArrayList<>();
 
     @JsonIgnore

@@ -1,9 +1,8 @@
 package com.example.shopjava.repos;
 
-import com.example.shopjava.entities.Laptop;
-import com.example.shopjava.entities.Phone;
-import com.example.shopjava.entities.Product;
-import com.example.shopjava.entities.Watch;
+import com.example.shopjava.entities.product.Laptop;
+import com.example.shopjava.entities.product.Phone;
+import com.example.shopjava.entities.product.Watch;
 
 import java.util.List;
 import java.util.Map;

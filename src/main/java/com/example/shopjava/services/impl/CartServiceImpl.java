@@ -1,9 +1,8 @@
 package com.example.shopjava.services.impl;
 
-import com.example.shopjava.controllers.MyController;
-import com.example.shopjava.entities.Cart;
-import com.example.shopjava.entities.CartProduct;
-import com.example.shopjava.entities.Product;
+import com.example.shopjava.entities.user.cart.Cart;
+import com.example.shopjava.entities.user.cart.CartProduct;
+import com.example.shopjava.entities.product.Product;
 import com.example.shopjava.repos.CartProductRepo;
 import com.example.shopjava.repos.CartRepository;
 import com.example.shopjava.repos.ProductRepository;
@@ -14,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.Set;
 
 @Service
 public class CartServiceImpl implements CartService {
@@ -28,8 +26,6 @@ public class CartServiceImpl implements CartService {
     @Autowired
     private CartProductRepo cartProductRepo;
 
-    private static final Logger log = LoggerFactory.getLogger(CartServiceImpl.class);
-
     @Override
     @Transactional
     public Cart addProduct(Cart cart, Long productId) {
@@ -37,9 +33,6 @@ public class CartServiceImpl implements CartService {
         CartProduct cartProduct = new CartProduct(cart, product, 1, product.getPrice());
         cartProductRepo.save(cartProduct);
         cart.setTotalPrice(cart.getTotalPrice()+product.getPrice());
-        log.info("addProduct: " + cart.getTotalPrice());
-        log.info("addProduct: " + cartProduct.getQuantity());
-        log.info("addProduct: " + cartProduct.getTotal());
         cartRepository.save(cart);
         return cart;
     }
@@ -52,9 +45,6 @@ public class CartServiceImpl implements CartService {
         cartProduct.setTotal(cartProduct.getTotal() + productPrice);
         cartProduct.setQuantity(cartProduct.getQuantity() + 1);
         cart.setTotalPrice(cart.getTotalPrice()+productPrice);
-        log.info("increaseQuantity: " + cart.getTotalPrice());
-        log.info("increaseQuantity: " + cartProduct.getQuantity());
-        log.info("increaseQuantity: " + cartProduct.getTotal());
         cartRepository.save(cart);
         cartProductRepo.save(cartProduct);
     }
@@ -69,9 +59,6 @@ public class CartServiceImpl implements CartService {
             cartProduct.setQuantity(cartProduct.getQuantity() - 1);
             cart.setTotalPrice(cart.getTotalPrice()-productPrice);
             cartRepository.save(cart);
-            log.info("decreaseQuantity: " + cart.getTotalPrice());
-            log.info("decreaseQuantity: " + cartProduct.getQuantity());
-            log.info("decreaseQuantity: " + cartProduct.getTotal());
         }
         cartProductRepo.save(cartProduct);
     }
@@ -89,8 +76,5 @@ public class CartServiceImpl implements CartService {
         cart.setTotalPrice(cart.getTotalPrice() - cartProduct.getTotal());
         cartRepository.save(cart);
         cartProductRepo.delete(cartProduct);
-        log.info("deleteProduct: " + cart.getTotalPrice());
-        log.info("deleteProduct: " + cartProduct.getQuantity());
-        log.info("deleteProduct: " + cartProduct.getTotal());
     }
 }

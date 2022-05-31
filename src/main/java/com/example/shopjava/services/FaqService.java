@@ -1,6 +1,6 @@
 package com.example.shopjava.services;
 
-import com.example.shopjava.entities.FAQ;
+import com.example.shopjava.entities.another.FAQ;
 
 import java.util.List;
 

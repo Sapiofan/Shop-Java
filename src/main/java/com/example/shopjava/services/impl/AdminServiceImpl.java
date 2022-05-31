@@ -1,11 +1,8 @@
 package com.example.shopjava.services.impl;
 
-import com.example.shopjava.controllers.AdminController;
 import com.example.shopjava.entities.admin.AdminHome;
 import com.example.shopjava.repos.AdminRepo;
 import com.example.shopjava.services.AdminService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -19,8 +16,6 @@ public class AdminServiceImpl implements AdminService {
 
     @Autowired
     private AdminRepo adminRepo;
-
-    private static final Logger log = LoggerFactory.getLogger(AdminServiceImpl.class);
 
     @Override
     @Transactional

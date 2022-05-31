@@ -1,6 +1,6 @@
 package com.example.shopjava.services;
 
-import com.example.shopjava.entities.*;
+import com.example.shopjava.entities.product.*;
 import org.springframework.data.domain.Page;
 
 import java.util.List;

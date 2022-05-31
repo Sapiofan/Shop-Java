@@ -87,7 +87,7 @@
                                 </div>
                                 <div class="separator">-</div>
                                 <div class="field">
-                                    <input type="number" name="input-max" class="input-max" value="${maxValue}">
+                                    <input type="number" name="input-max" class="input-max" value="${maxValue + 1000}">
                                 </div>
                             </div>
                             <div class="slider">
@@ -96,7 +96,7 @@
                             <div class="range-input">
                                 <input type="range" class="range-min" min="0" max="${max}" value="${minValue}"
                                        step="500">
-                                <input type="range" class="range-max" min="0" max="${max}" value="${maxValue}"
+                                <input type="range" class="range-max" min="0" max="${max+1000}" value="${maxValue+1000}"
                                        step="500">
                             </div>
                         </div>

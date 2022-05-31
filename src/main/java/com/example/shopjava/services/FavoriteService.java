@@ -1,9 +1,6 @@
 package com.example.shopjava.services;
 
-import com.example.shopjava.entities.Favorite;
-import com.example.shopjava.entities.Product;
-
-import java.util.Set;
+import com.example.shopjava.entities.user.Favorite;
 
 public interface FavoriteService {
     Favorite addProduct(Favorite favorite, Long productId);

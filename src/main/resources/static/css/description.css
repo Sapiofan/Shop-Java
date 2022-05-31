@@ -54,6 +54,7 @@ html {
     width: 80%;
 }
 
+
 .reviews-link {
     margin-left: 10px;
     text-decoration: none;
@@ -115,13 +116,13 @@ html {
     display: none;
 }
 
-.product-image img {
+.product-image-description img{
     display: none;
     width: 64px;
     height: 64px;
 }
 
-.fix .product-image img {
+.fix .product-image-description img{
     display: block;
 }
 
@@ -203,7 +204,7 @@ html {
         width: 100%;
     }
 
-    .fix .full-product p, .product-image, .fix-but .signs-desc {
+    .fix .full-product p, .product-image-description, .fix-but .signs-desc {
         display: none;
     }
 

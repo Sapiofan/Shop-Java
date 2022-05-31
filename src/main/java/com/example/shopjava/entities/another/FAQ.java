@@ -1,4 +1,4 @@
-package com.example.shopjava.entities;
+package com.example.shopjava.entities.another;
 
 import javax.persistence.*;
 

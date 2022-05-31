@@ -24,7 +24,7 @@ public class ContactServiceImpl implements ContactService {
     @Autowired
     private MessageRepository messageRepository;
 
-    private static final Logger log = LoggerFactory.getLogger("log");
+    private static final Logger log = LoggerFactory.getLogger(ContactServiceImpl.class);
 
     @Override
     @Transactional
@@ -40,7 +40,7 @@ public class ContactServiceImpl implements ContactService {
             messageRepository.save(message1);
             contactRepository.save(contact);
         }
-        return "Message was successfully sent. We will answer during the day.";
+        return "Message was successfully sent. We will answer during the week.";
     }
 
     @Override
@@ -72,6 +72,7 @@ public class ContactServiceImpl implements ContactService {
         Message message = messageRepository.findMessageById(id);
         Contact contact = message.getContact();
         contact.getMessages().remove(message);
+        log.warn("Message was deleted: " + message);
         messageRepository.deleteById(id);
         if(contact.getMessages().isEmpty())
             contactRepository.deleteById(contact.getId());

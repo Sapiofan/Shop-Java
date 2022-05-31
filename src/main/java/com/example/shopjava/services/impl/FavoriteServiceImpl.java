@@ -1,7 +1,7 @@
 package com.example.shopjava.services.impl;
 
-import com.example.shopjava.entities.Favorite;
-import com.example.shopjava.entities.Product;
+import com.example.shopjava.entities.user.Favorite;
+import com.example.shopjava.entities.product.Product;
 import com.example.shopjava.repos.FavoriteRepository;
 import com.example.shopjava.repos.ProductRepository;
 import com.example.shopjava.services.FavoriteService;

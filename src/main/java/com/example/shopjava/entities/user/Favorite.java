@@ -1,4 +1,6 @@
-package com.example.shopjava.entities;
+package com.example.shopjava.entities.user;
+
+import com.example.shopjava.entities.product.Product;
 
 import javax.persistence.*;
 import java.util.HashSet;

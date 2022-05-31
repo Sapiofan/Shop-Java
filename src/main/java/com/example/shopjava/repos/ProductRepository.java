@@ -1,8 +1,7 @@
 package com.example.shopjava.repos;
 
 
-import com.example.shopjava.entities.Product;
-import com.example.shopjava.entities.contacts.Contact;
+import com.example.shopjava.entities.product.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;

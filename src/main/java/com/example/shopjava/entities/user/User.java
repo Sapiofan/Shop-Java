@@ -1,5 +1,7 @@
-package com.example.shopjava.entities;
+package com.example.shopjava.entities.user;
 
+import com.example.shopjava.entities.product.Review;
+import com.example.shopjava.entities.user.cart.Cart;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;

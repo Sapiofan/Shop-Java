@@ -1,9 +1,9 @@
-package com.example.shopjava.entities;
+package com.example.shopjava.entities.user.cart;
 
+import com.example.shopjava.entities.product.Product;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
-import java.util.Objects;
 
 @Entity
 @Table(name = "cart_products")
@@ -25,7 +25,7 @@ public class CartProduct {
     @Column(nullable = false)
     private Integer total;
 
-    public CartProduct(){
+    public CartProduct() {
     }
 
     public CartProduct(Cart cart, Product product, Integer quantity, Integer total) {

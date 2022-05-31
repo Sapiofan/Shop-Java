@@ -85,4 +85,14 @@ public class Message {
     public int hashCode() {
         return Objects.hash(id, subject, message, sent, contact);
     }
+
+    @Override
+    public String toString() {
+        return "Message{" +
+                "subject='" + subject + '\'' +
+                ", message='" + message + '\'' +
+                ", sent=" + sent +
+                ", contact=" + contact +
+                '}';
+    }
 }

@@ -1,8 +1,8 @@
 package com.example.shopjava.repos.impl;
 
-import com.example.shopjava.entities.Laptop;
-import com.example.shopjava.entities.Phone;
-import com.example.shopjava.entities.Watch;
+import com.example.shopjava.entities.product.Laptop;
+import com.example.shopjava.entities.product.Phone;
+import com.example.shopjava.entities.product.Watch;
 import com.example.shopjava.repos.FilterProductsRepo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
