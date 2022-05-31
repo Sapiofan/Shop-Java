@@ -36,7 +36,10 @@ public class CartServiceImpl implements CartService {
         Product product = productRepository.findProductById(productId);
         CartProduct cartProduct = new CartProduct(cart, product, 1, product.getPrice());
         cartProductRepo.save(cartProduct);
-        cart.setTotalPrice(cartProduct.getTotal()+product.getPrice());
+        cart.setTotalPrice(cart.getTotalPrice()+product.getPrice());
+        log.info("addProduct: " + cart.getTotalPrice());
+        log.info("addProduct: " + cartProduct.getQuantity());
+        log.info("addProduct: " + cartProduct.getTotal());
         cartRepository.save(cart);
         return cart;
     }
@@ -48,7 +51,10 @@ public class CartServiceImpl implements CartService {
         Integer productPrice = cartProduct.getTotal() / cartProduct.getQuantity();
         cartProduct.setTotal(cartProduct.getTotal() + productPrice);
         cartProduct.setQuantity(cartProduct.getQuantity() + 1);
-        cart.setTotalPrice(cartProduct.getTotal()+productPrice);
+        cart.setTotalPrice(cart.getTotalPrice()+productPrice);
+        log.info("increaseQuantity: " + cart.getTotalPrice());
+        log.info("increaseQuantity: " + cartProduct.getQuantity());
+        log.info("increaseQuantity: " + cartProduct.getTotal());
         cartRepository.save(cart);
         cartProductRepo.save(cartProduct);
     }
@@ -61,8 +67,11 @@ public class CartServiceImpl implements CartService {
             Integer productPrice = cartProduct.getTotal() / cartProduct.getQuantity();
             cartProduct.setTotal(cartProduct.getTotal() - productPrice);
             cartProduct.setQuantity(cartProduct.getQuantity() - 1);
-            cart.setTotalPrice(cartProduct.getTotal()-productPrice);
+            cart.setTotalPrice(cart.getTotalPrice()-productPrice);
             cartRepository.save(cart);
+            log.info("decreaseQuantity: " + cart.getTotalPrice());
+            log.info("decreaseQuantity: " + cartProduct.getQuantity());
+            log.info("decreaseQuantity: " + cartProduct.getTotal());
         }
         cartProductRepo.save(cartProduct);
     }
@@ -76,6 +85,12 @@ public class CartServiceImpl implements CartService {
     @Override
     @Transactional
     public void deleteProduct(Cart cart, Long productId) {
-        cartProductRepo.deleteCartProduct(productId, cart.getId());
+        CartProduct cartProduct = cartProductRepo.findCartProduct(productId, cart.getId());
+        cart.setTotalPrice(cart.getTotalPrice() - cartProduct.getTotal());
+        cartRepository.save(cart);
+        cartProductRepo.delete(cartProduct);
+        log.info("deleteProduct: " + cart.getTotalPrice());
+        log.info("deleteProduct: " + cartProduct.getQuantity());
+        log.info("deleteProduct: " + cartProduct.getTotal());
     }
 }

@@ -48,7 +48,7 @@
                     </form>
                 </c:if>
                 <c:if test="${!isAuthenticated}">
-                    <button onclick="document.getElementById('registration').style.display='block'"
+                    <button onclick="document.getElementById('login').style.display='block'"
                             class="user"><img src="/img/user.png" style="width: 36px; height: 36px;"></button>
                 </c:if>
             </div>
@@ -61,7 +61,7 @@
                     </button>
                 </c:if>
                 <c:if test="${!isAuthenticated}">
-                    <button onclick="document.getElementById('registration').style.display='block'"
+                    <button onclick="document.getElementById('login').style.display='block'"
                             class="likes">
                         <img src="/img/heart (2).png" style="width: 36px; height: 36px;">
                     </button>
@@ -71,7 +71,7 @@
                 <c:if test="${!isAuthenticated}">
                     <nav id="main-nav">
                         <a class="cart-button" href="" onclick="document.getElementById('body').style = '--visibility: auto';
-                    document.getElementById('registration').style.display='block';">
+                    document.getElementById('login').style.display='block';">
                             <span class="bag-icon"></span>
                         </a>
                     </nav>

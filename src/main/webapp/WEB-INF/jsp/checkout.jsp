@@ -39,41 +39,99 @@
 
 </head>
 <body>
+<script>
+    function checkoutChanges(url) {
+        $.ajax({
+            type: "GET",
+            url: url,
+            dataType: "json",
+            complete: [
+                function (response) {
+                    $("#cart-container").remove();
+                    htmlTable = ` <div id="cart-container" class="cart-container">
+                                        <h3>Cart</h3>
+                                        <div class="products">`;
+                    var data = ``;
+                    var obj = $.parseJSON(response.responseText);
+                    var total = 0;
+                    number = obj.length;
+                    if(number < 1){
+                        window.location.replace("/");
+                    }
+                    for (var i = 0; i < obj.length; i++) {
+                        var product = obj[i].product;
+                        total += obj[i].total;
+                        data += `<div class="product">
+                    <img src="`+product.image+`"
+                         width="64px" height="64px">
+                    <p class="prod-name">`+product.name+`</p>
+                    <div class="input-group">
+                        <div class="input-group-button">
+                            <button onclick="checkoutChanges('/subtractAdditionalProduct/`+product.id+`')" type="button" class="op" data-quantity="minus" data-field="quantity">
+                                <i class="fa fa-minus" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                        <input data-onload="disableInput('qty-`+product.id+`')" id="qty-`+product.id+`"
+                               class="input-group-field quantity" min="1" max="1000" type="number" name="quantity" value="`+obj[i].quantity+`">
+                        <div class="input-group-button">
+                            <button type="button" onclick="checkoutChanges('/addAdditionalProduct/`+product.id+`')" class="op" data-quantity="plus" data-field="quantity">
+                                <i class="fa fa-plus" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <p class="price">`+product.price+`$</p>
+                    <button type="button" onclick="checkoutChanges('/deleteCartProduct/`+product.id+`')"
+                            class="close">&#10006;</button>
+                </div>`;
+                    }
+                    htmlTable += data + `</div>
+                                        <div class="sum">
+                                            <p>Sum:</p>
+                                            <p id="total" class="total-price">`+total+`$</p>
+                                        </div>
+                                    </div>`;
+                    $("#main-checkout").append(htmlTable);
+                }
+            ]
+        });
+    }
+</script>
 <header>
     <nav>
         <a href="/" id="logo"><p class="logo">SmartShop</p></a>
         <p>Questions by phone:<br><span class="phone">0 800 800 800</span></p>
     </nav>
 </header>
-<main>
+<main id="main-checkout">
     <div class="form">
         <h2>Ordering</h2>
         <div id="checkout-form"></div>
     </div>
-    <div class="cart-container">
+    <div id="cart-container" class="cart-container">
         <h3>Cart</h3>
         <div class="products">
             <c:forEach items="${cartProducts}" var="product">
                 <div class="product">
-                    <img src="${product.image}"
+                    <img src="${product.product.image}"
                          width="64px" height="64px">
-                    <p class="prod-name">${product.name}</p>
+                    <p class="prod-name">${product.product.name}</p>
                     <div class="input-group">
                         <div class="input-group-button">
-                            <button type="button" class="op" data-quantity="minus" data-field="quantity">
+                            <button onclick="checkoutChanges('/subtractAdditionalProduct/${product.product.id}')" type="button" class="op" data-quantity="minus" data-field="quantity">
                                 <i class="fa fa-minus" aria-hidden="true"></i>
                             </button>
                         </div>
-                        <input class="input-group-field quantity" min="1" max="1000" type="number" name="quantity"
-                               value="1">
+                        <input data-onload="disableInput('qty-${product.product.id}')" id="qty-${product.product.id}"
+                               class="input-group-field quantity" min="1" max="1000" type="number" name="quantity" value="${product.quantity}">
                         <div class="input-group-button">
-                            <button type="button" class="op" data-quantity="plus" data-field="quantity">
+                            <button type="button" onclick="checkoutChanges('/addAdditionalProduct/${product.product.id}')" class="op" data-quantity="plus" data-field="quantity">
                                 <i class="fa fa-plus" aria-hidden="true"></i>
                             </button>
                         </div>
                     </div>
-                    <p class="price">${product.price}$</p>
-                    <button class="close">&#10006;</button>
+                    <p class="price">${product.product.price}$</p>
+                    <button type="button" onclick="checkoutChanges('/deleteCartProduct/${product.product.id}')"
+                            class="close">&#10006;</button>
                 </div>
             </c:forEach>
         </div>

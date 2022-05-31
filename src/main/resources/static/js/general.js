@@ -161,22 +161,11 @@ scale();
 let subtotal = document.getElementById("subtotal")
 
 function addTotal(price, inputId) {
-    console.log(price);
-    console.log(inputId);
-    let integer = parseInt(subtotal.innerHTML);
-    subtotal.innerHTML = integer + price + "$";
     let url = "/addAdditionalProduct/" + inputId.split('-')[1];
     cartChanges(url);
 }
 
 function subtractTotal(price, inputId) {
-    console.log(price);
-    console.log(inputId);
-    let integer = parseInt(subtotal.innerHTML);
-    let minus = document.getElementById(inputId);
-    if(parseInt(minus.value) !== 1){
-        subtotal.innerHTML = integer - price + "$";
-    }
     let url = "/subtractAdditionalProduct/" + inputId.split('-')[1];
     cartChanges(url);
 }

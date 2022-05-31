@@ -15,11 +15,11 @@
                     htmlTable = `<ul id="products" class="products">`;
                     var data = ``;
                     var obj = $.parseJSON(response.responseText);
-                    total = 0;
+                    var total = 0;
                     number = obj.length;
                     for (var i = 0; i < obj.length; i++) {
                         var product = obj[i].product;
-                        total += product.price;
+                        total += obj[i].total;
                         data += `<li class="product">
                         <a href="/product/`+product.id+`">
                         <span class="product-image">
