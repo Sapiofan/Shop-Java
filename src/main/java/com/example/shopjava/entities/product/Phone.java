@@ -14,7 +14,7 @@ public class Phone extends Product {
     private String built_in_memory;
 
     @Column(nullable = false)
-    private Boolean RAM_slot;
+    private Boolean ram_slot;
 
     @Column(nullable = false)
     private String cpu;
@@ -57,7 +57,7 @@ public class Phone extends Product {
         super(image, name, price, brand, payment, rating, discount, gifts, isAvailable, warranty, addedAt, sold, category);
         this.series = series;
         this.built_in_memory = built_in_memory;
-        this.RAM_slot = RAM_slot;
+        this.ram_slot = RAM_slot;
         this.cpu = CPU;
         this.os = os;
         this.nfc = NFC;
@@ -87,12 +87,12 @@ public class Phone extends Product {
         this.built_in_memory = built_in_memory;
     }
 
-    public Boolean getRAM_slot() {
-        return RAM_slot;
+    public Boolean getRam_slot() {
+        return ram_slot;
     }
 
-    public void setRAM_slot(Boolean RAM_slot) {
-        this.RAM_slot = RAM_slot;
+    public void setRam_slot(Boolean ram_slot) {
+        this.ram_slot = ram_slot;
     }
 
     public String getOs() {

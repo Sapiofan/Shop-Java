@@ -18,7 +18,7 @@ public class FilterProductsRepoImpl implements FilterProductsRepo {
     @PersistenceContext
     private EntityManager entityManager;
 
-    private static final Logger log = LoggerFactory.getLogger("log");
+    private static final Logger log = LoggerFactory.getLogger(FilterProductsRepoImpl.class);
 
     @Override
     public List<Phone> filterPhones(Set<String> filters, Map<String, List<String>> fullFilters, Integer min, Integer max) {
@@ -47,14 +47,37 @@ public class FilterProductsRepoImpl implements FilterProductsRepo {
                                  Integer min, Integer max) {
         String temp, init, query = init = temp = "select p from " + table + " p where (p.price between " + min + " and " + max + ") and (";
         if (filters != null) {
+            Map<String, Boolean> checkedFilters = new HashMap<>();
+            for (String filter : filters) {
+                checkedFilters.put(filter, false);
+            }
             for (Map.Entry<String, List<String>> entry : fullFilters.entrySet()) {
                 List<String> list = entry.getValue();
-                Collections.replaceAll(list, "Yes", "true");
                 String key = entry.getKey().toLowerCase().replace('-', '_');
                 key = key.replace(' ', '_');
                 for (String filter : filters) {
+                    if(filter.contains("present") && !checkedFilters.get(filter)){
+                        String[] filterSplit = filter.split(" ");
+                        String obj = "";
+                        if(filterSplit[filterSplit.length-1].equals("present") && filterSplit[filterSplit.length-2].equals("doesn't")){
+                            for (int i = 0; i < filterSplit.length - 2; i++) {
+                                obj += filterSplit[i] + "_";
+                            }
+                            obj = obj.substring(0, obj.length()-1).toLowerCase();
+                            query += " p." + obj + "=false or";
+                        }
+                        else {
+                            for (int i = 0; i < filterSplit.length - 1; i++) {
+                                obj += filterSplit[i] + "_";
+                            }
+                            obj = obj.substring(0, obj.length()-1).toLowerCase();
+                            query += " p." + obj + "=true or";
+                        }
+                        checkedFilters.put(filter, true);
+                        break;
+                    }
                     for (String s : list) {
-                        if (filter.equals(s)) {
+                        if (filter.equals(s) && !filter.contains("present")) {
                             query += " p." + key + "='" + filter + "' or";
                         }
                     }
@@ -65,7 +88,6 @@ public class FilterProductsRepoImpl implements FilterProductsRepo {
                     query = String.join(" ", arr2) + ") and (";
                     temp = query;
                 }
-                Collections.replaceAll(list, "true", "Yes");
             }
         }
         if (init.equals(query)) {

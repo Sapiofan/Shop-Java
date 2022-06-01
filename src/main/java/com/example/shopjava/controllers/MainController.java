@@ -59,6 +59,15 @@ public class MainController {
     private CartService cartService;
 
     @Autowired
+    private PhoneService phoneService;
+
+    @Autowired
+    private LaptopService laptopService;
+
+    @Autowired
+    private WatchService watchService;
+
+    @Autowired
     private Utils utils;
 
     private static final Logger log = LoggerFactory.getLogger(MainController.class);
@@ -127,8 +136,8 @@ public class MainController {
     @GetMapping("/phones")
     public String phoneFilters(Model model, Authentication authentication) {
         getUserPreferences(model, authentication);
-        List<Phone> phones = filterProducts.getAllPhones();
-        Map<String, List<String>> phoneFilters = filterProducts.getPhoneCharacteristics();
+        List<Phone> phones = phoneService.getAllPhones();
+        Map<String, List<String>> phoneFilters = phoneService.getPhoneCharacteristics();
         Set<String> keys = phoneFilters.keySet();
         LinkedHashSet<String> filters = new LinkedHashSet<>();
         int max = utils.max(phones).getPrice();
@@ -145,22 +154,22 @@ public class MainController {
                                    @RequestParam("input-min") Integer minValue, @RequestParam("input-max") Integer maxValue,
                                    @RequestParam("sort") String sortType) {
         getUserPreferences(model, authentication);
-        Map<String, List<String>> phoneFilters = filterProducts.getPhoneCharacteristics();
+        Map<String, List<String>> phoneFilters = phoneService.getPhoneCharacteristics();
         Set<String> keys = phoneFilters.keySet();
-        List<? extends Product> phones = filterProducts.phones(filters, phoneFilters, minValue, maxValue);
+        List<? extends Product> phones = phoneService.phones(filters, phoneFilters, minValue, maxValue);
         phones = filterProducts.sort(phones, sortType);
         filterPostModel(model, "Phones", phoneFilters, keys, filters, minValue, maxValue, sortType);
         model.addAttribute("products", phones);
         model.addAttribute("maxValue", maxValue);
-        model.addAttribute("max", utils.max(filterProducts.getAllPhones()).getPrice());
+        model.addAttribute("max", utils.max(phoneService.getAllPhones()).getPrice());
         return "filters";
     }
 
     @GetMapping("/laptops")
     public String laptopFilters(Model model, Authentication authentication) {
         getUserPreferences(model, authentication);
-        List<Laptop> laptops = filterProducts.getAllLaptops();
-        Map<String, List<String>> laptopFilters = filterProducts.getLaptopCharacteristics();
+        List<Laptop> laptops = laptopService.getAllLaptops();
+        Map<String, List<String>> laptopFilters = laptopService.getLaptopCharacteristics();
         Set<String> keys = laptopFilters.keySet();
         LinkedHashSet<String> filters = new LinkedHashSet<>();
         int max = utils.maxLaptop(laptops).getPrice();
@@ -176,12 +185,12 @@ public class MainController {
                                     @RequestParam("input-min") Integer minValue, @RequestParam("input-max") Integer maxValue,
                                     @RequestParam("sort") String sortType) {
         getUserPreferences(model, authentication);
-        Map<String, List<String>> laptopFilters = filterProducts.getLaptopCharacteristics();
+        Map<String, List<String>> laptopFilters = laptopService.getLaptopCharacteristics();
         Set<String> keys = laptopFilters.keySet();
-        List<Laptop> laptops = filterProducts.laptops(filters, laptopFilters, minValue, maxValue);
+        List<Laptop> laptops = laptopService.laptops(filters, laptopFilters, minValue, maxValue);
         filterPostModel(model, "Laptops", laptopFilters, keys, filters, minValue, maxValue, sortType);
         model.addAttribute("products", laptops);
-        model.addAttribute("max", utils.maxLaptop(filterProducts.getAllLaptops()).getPrice());
+        model.addAttribute("max", utils.maxLaptop(laptopService.getAllLaptops()).getPrice());
         return "filters";
     }
 
@@ -226,7 +235,7 @@ public class MainController {
             user.setName(name);
             userDetailsService.saveUser(user);
         }
-        Phone phone = filterProducts.getPhoneById(id);
+        Phone phone = phoneService.getPhoneById(id);
         boolean flag = reviewService.addReview(rate, review, recommend, authentication, id);
         List<Review> reviews = reviewService.findReviewsByProduct(id);
 
@@ -240,8 +249,8 @@ public class MainController {
     @GetMapping("/watches")
     public String watchesFilters(Model model, Authentication authentication) {
         getUserPreferences(model, authentication);
-        List<Watch> watches = filterProducts.getAllWatches();
-        Map<String, List<String>> watchFilters = filterProducts.getWatchCharacteristics();
+        List<Watch> watches = watchService.getAllWatches();
+        Map<String, List<String>> watchFilters = watchService.getWatchCharacteristics();
         Set<String> keys = watchFilters.keySet();
         LinkedHashSet<String> filters = new LinkedHashSet<>();
         int max = utils.maxWatch(watches).getPrice();
@@ -258,13 +267,13 @@ public class MainController {
                                      @RequestParam("input-min") Integer minValue, @RequestParam("input-max") Integer maxValue,
                                      @RequestParam("sort") String sortType) {
         getUserPreferences(model, authentication);
-        Map<String, List<String>> watchFilters = filterProducts.getWatchCharacteristics();
+        Map<String, List<String>> watchFilters = watchService.getWatchCharacteristics();
         Set<String> keys = watchFilters.keySet();
-        List<Watch> watches = filterProducts.watches(filters, watchFilters, minValue, maxValue);
+        List<Watch> watches = watchService.watches(filters, watchFilters, minValue, maxValue);
 
         filterPostModel(model, "Watches", watchFilters, keys, filters, minValue, maxValue, sortType);
         model.addAttribute("products", watches);
-        model.addAttribute("max", utils.maxWatch(filterProducts.getAllWatches()).getPrice());
+        model.addAttribute("max", utils.maxWatch(watchService.getAllWatches()).getPrice());
         return "filters";
     }
 
@@ -481,14 +490,14 @@ public class MainController {
         Favorite favorite = favoriteService.getUserProducts(userDetailsService.getUserByEmail(authentication.getName()).getId());
         favoriteService.addProduct(favorite, productId);
 
-        Map<String, List<String>> phoneFilters = filterProducts.getPhoneCharacteristics();
+        Map<String, List<String>> phoneFilters = phoneService.getPhoneCharacteristics();
         Set<String> keys = phoneFilters.keySet();
-        List<? extends Product> phones = filterProducts.phones(filters, phoneFilters, minValue, maxValue);
+        List<? extends Product> phones = phoneService.phones(filters, phoneFilters, minValue, maxValue);
         phones = filterProducts.sort(phones, sortType);
         filterPostModel(model, "Phones", phoneFilters, keys, filters, minValue, maxValue, sortType);
         model.addAttribute("products", phones);
         model.addAttribute("maxValue", maxValue);
-        model.addAttribute("max", utils.max(filterProducts.getAllPhones()).getPrice());
+        model.addAttribute("max", utils.max(phoneService.getAllPhones()).getPrice());
         return "filters";
     }
 

@@ -56,8 +56,8 @@ public class Filters {
         os.add("iOS");
 
         List<String> ram_slot = new ArrayList<>();
-        ram_slot.add("Yes");
-        ram_slot.add("No");
+        ram_slot.add("RAM slot present");
+        ram_slot.add("RAM slot doesn't present");
 
         List<String> cpu = new ArrayList<>();
         cpu.add("Apple cpu");
@@ -66,12 +66,12 @@ public class Filters {
         cpu.add("UNISOC");
 
         List<String> wireless_charger = new ArrayList<>();
-        wireless_charger.add("Yes");
-        wireless_charger.add("No");
+        wireless_charger.add("Wireless charger present");
+        wireless_charger.add("Wireless charger doesn't present");
 
         List<String> nfc = new ArrayList<>();
-        nfc.add("Yes");
-        nfc.add("No");
+        nfc.add("NFC present");
+        nfc.add("NFC doesn't present");
 
         List<String> screen_diagonal = new ArrayList<>();
         screen_diagonal.add("7 and more");
@@ -311,8 +311,8 @@ public class Filters {
         brands.add("Amico");
 
         List<String> touch_sc = new ArrayList<>();
-        touch_sc.add("Yes");
-        touch_sc.add("No");
+        touch_sc.add("Touch screen present");
+        touch_sc.add("Touch screen doesn't present");
 
         List<String> shape = new ArrayList<>();
         shape.add("Square");
@@ -320,28 +320,28 @@ public class Filters {
         shape.add("Rectangle");
 
         List<String> waterproof = new ArrayList<>();
-        waterproof.add("Yes");
-        waterproof.add("No");
+        waterproof.add("Waterproof present");
+        waterproof.add("Waterproof doesn't present");
 
         List<String> call_support = new ArrayList<>();
-        call_support.add("Yes");
-        call_support.add("No");
+        call_support.add("Call support present");
+        call_support.add("Call support doesn't present");
 
         List<String> music_control = new ArrayList<>();
-        music_control.add("Yes");
-        music_control.add("No");
+        music_control.add("Music control present");
+        music_control.add("Music control doesn't present");
 
         List<String> pulse_measurement = new ArrayList<>();
-        pulse_measurement.add("Yes");
-        pulse_measurement.add("No");
+        pulse_measurement.add("Pulse measurement present");
+        pulse_measurement.add("Pulse measurement doesn't present");
 
         List<String> step_counting = new ArrayList<>();
-        step_counting.add("Yes");
-        step_counting.add("No");
+        step_counting.add("Step counting present");
+        step_counting.add("Step counting doesn't present");
 
         List<String> sleep_monitoring = new ArrayList<>();
-        sleep_monitoring.add("Yes");
-        sleep_monitoring.add("No");
+        sleep_monitoring.add("Sleep monitoring present");
+        sleep_monitoring.add("Sleep monitoring doesn't present");
 
         List<String> color = new ArrayList<>();
         color.add("Black");

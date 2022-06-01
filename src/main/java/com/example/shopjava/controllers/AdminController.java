@@ -42,6 +42,15 @@ public class AdminController {
     private FilterProducts filterProducts;
 
     @Autowired
+    private PhoneService phoneService;
+
+    @Autowired
+    private LaptopService laptopService;
+
+    @Autowired
+    private WatchService watchService;
+
+    @Autowired
     private AdminService adminService;
 
     @GetMapping("/admin/home")
@@ -336,21 +345,21 @@ public class AdminController {
         request.getSession().setAttribute("product", product);
         switch (category) {
             case "Phones": {
-                Map<String, List<String>> phoneFilters = filterProducts.getPhoneCharacteristics();
+                Map<String, List<String>> phoneFilters = phoneService.getPhoneCharacteristics();
                 Set<String> keys = phoneFilters.keySet();
                 model.addAttribute("keys", keys);
                 model.addAttribute("phoneFilters", phoneFilters);
                 break;
             }
             case "Laptops": {
-                Map<String, List<String>> laptopFilters = filterProducts.getLaptopCharacteristics();
+                Map<String, List<String>> laptopFilters = laptopService.getLaptopCharacteristics();
                 Set<String> keys = laptopFilters.keySet();
                 model.addAttribute("keys", keys);
                 model.addAttribute("laptopFilters", laptopFilters);
                 break;
             }
             case "Watches": {
-                Map<String, List<String>> watchFilters = filterProducts.getWatchCharacteristics();
+                Map<String, List<String>> watchFilters = watchService.getWatchCharacteristics();
                 Set<String> keys = watchFilters.keySet();
                 model.addAttribute("keys", keys);
                 model.addAttribute("watchFilters", watchFilters);
@@ -388,7 +397,7 @@ public class AdminController {
                 product.getWarranty(), Date.from(Instant.now()), product.getSold(), product.getCategory(), series,
                 built_in_memory, ram_slotB, cpu, os, NFC, screen_diagonal, biometric_security, mainC, frontC,
                 battery, wc, Integer.valueOf(cores), Integer.valueOf(screen_refresh));
-        filterProducts.savePhone(phone);
+        phoneService.savePhone(phone);
         request.removeAttribute("product");
         return getAdminFirstProducts(model);
     }
@@ -420,7 +429,7 @@ public class AdminController {
                 deviceType, sc_diagonals, processorManufacturers, Integer.valueOf(core), processor_series,
                 ram, drive_type, discrete_graphics, series, inst_os, storage, Integer.valueOf(screen_refresh),
                 "", color, video_size, "", "", Float.valueOf(weight), false);
-        filterProducts.saveLaptop(laptop);
+        laptopService.saveLaptop(laptop);
         request.removeAttribute("product");
         return getAdminFirstProducts(model);
     }
@@ -456,7 +465,7 @@ public class AdminController {
                 product.getWarranty(), Date.from(Instant.now()), product.getSold(), product.getCategory(),
                 purpose, shape, touch_screen, wp, cs, mc, pm, sc, sm, color, working_hours, display_diagonal);
 
-        filterProducts.saveWatch(watch);
+        watchService.saveWatch(watch);
         request.removeAttribute("product");
         return getAdminFirstProducts(model);
     }

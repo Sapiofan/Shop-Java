@@ -11,7 +11,7 @@ public class Laptop extends Product {
     private String device_type;
 
     @Column(nullable = false)
-    private String sc_diagonal;
+    private String screen_diagonal;
 
     @Column(nullable = false)
     private String processor_manufacturer;
@@ -23,7 +23,7 @@ public class Laptop extends Product {
     private String processor_series;
 
     @Column(nullable = false)
-    private String RAM;
+    private String ram;
 
     @Column(nullable = false)
     private String drive_type;
@@ -70,11 +70,11 @@ public class Laptop extends Product {
                   String sc_resolution, Float weight, Boolean touch_screen) {
         super(image, name, price, brand, payment, rating, discount, gifts, isAvailable, warranty, addedAt, sold, category);
         this.device_type = device_type;
-        this.sc_diagonal = sc_diagonal;
+        this.screen_diagonal = sc_diagonal;
         this.processor_manufacturer = processor_manufacturer;
         this.cores = cores;
         this.processor_series = processor_series;
-        this.RAM = RAM;
+        this.ram = RAM;
         this.drive_type = drive_type;
         this.discrete_graphics = discrete_graphics;
         this.series = series;
@@ -98,12 +98,12 @@ public class Laptop extends Product {
         this.device_type = device_type;
     }
 
-    public String getSc_diagonal() {
-        return sc_diagonal;
+    public String getScreen_diagonal() {
+        return screen_diagonal;
     }
 
-    public void setSc_diagonal(String sc_diagonal) {
-        this.sc_diagonal = sc_diagonal;
+    public void setScreen_diagonal(String screen_diagonal) {
+        this.screen_diagonal = screen_diagonal;
     }
 
     public String getProcessor_manufacturer() {
@@ -130,12 +130,12 @@ public class Laptop extends Product {
         this.processor_series = processor_series;
     }
 
-    public String getRAM() {
-        return RAM;
+    public String getRam() {
+        return ram;
     }
 
-    public void setRAM(String RAM) {
-        this.RAM = RAM;
+    public void setRam(String ram) {
+        this.ram = ram;
     }
 
     public String getDrive_type() {

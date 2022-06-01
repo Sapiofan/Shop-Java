@@ -5,7 +5,6 @@ import org.springframework.data.domain.Page;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 public interface FilterProducts {
     List<? extends Product> searchProducts(String keyword);
@@ -14,31 +13,9 @@ public interface FilterProducts {
 
     Product getProductById(Long id);
 
-    Map<String, List<String>> getPhoneCharacteristics();
-
     Map<String, List<String>> getDescTable(Product product);
 
-    Map<String, List<String>> getLaptopCharacteristics();
-
-    Map<String, List<String>> getWatchCharacteristics();
-
-    List<Phone> phones(Set<String> filters, Map<String, List<String>> fullFilters, Integer min, Integer max);
-
-    List<Phone> getAllPhones();
-
-    Phone getPhoneByName(String name);
-
-    Phone getPhoneById(Long id);
-
     List<? extends Product> sort(List<? extends Product> products, String sortType);
-
-    List<Laptop> getAllLaptops();
-
-    List<Laptop> laptops(Set<String> filters, Map<String, List<String>> fullFilters, Integer min, Integer max);
-
-    List<Watch> getAllWatches();
-
-    List<Watch> watches(Set<String> filters, Map<String, List<String>> fullFilters, Integer min, Integer max);
 
     Page<Product> getAllProducts(int pageNum);
 
@@ -47,12 +24,6 @@ public interface FilterProducts {
     Category getCategory(String category);
 
     void saveProduct(Product product);
-
-    void savePhone(Phone phone);
-
-    void saveLaptop(Laptop laptop);
-
-    void saveWatch(Watch watch);
 
     void deleteById(Long id);
 
