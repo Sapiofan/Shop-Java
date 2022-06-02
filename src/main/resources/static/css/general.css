@@ -1413,7 +1413,7 @@ aside ul.products li.product a.product-link {
     }
 
     .cat-container:hover ~ .menu-category {
-        max-height: 250px;
+        max-height: 280px;
         transform: scaleY(1);
     }
 
@@ -1427,10 +1427,15 @@ aside ul.products li.product a.product-link {
         padding: 20px 5px;
     }
 
-    /* .menu-category:focus .menu-category a {
-      max-height: 250px;
-      transition: max-height 0.5s ease-in;
-    } */
+    .user, .likes {
+        background: transparent;
+        border: none;
+        padding: 0;
+    }
+
+    .user p, .likes p {
+        font-size: 16px;
+    }
 }
 
 /*///////////////////////////////////////////

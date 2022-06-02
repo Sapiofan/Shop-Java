@@ -4,46 +4,33 @@
         <p>SmartShop</p>
     </div>
     <div class="menu-choice">
-<%--        <a href="#" onclick="document.getElementById('login').style.display='block'">--%>
-<%--            <div class="menu-item menu-user">--%>
-<%--                <img src="img/user-2.svg" style="width: 26px; height: 26px; margin-left: 2px;">--%>
-<%--                <p>Log in profile</p>--%>
-<%--            </div>--%>
-<%--        </a>--%>
-<%--        <a href="#" onclick="document.getElementById('likes').style.display='block'">--%>
-<%--            <div class="menu-item">--%>
-<%--                <img src="img/heart-1.png" style="width: 30px; height: 30px;">--%>
-<%--                <p>Favorites</p>--%>
-<%--            </div>--%>
-<%--        </a>--%>
         <c:if test="${isAuthenticated}">
             <form action="/" method="post">
-                <div class="dropdown-user">
-                    <button type="button" class="dropbtn-user user"><img src="/img/user.png"
-                                                                         style="width: 36px; height: 36px;"></button>
-                    <div class="dropdown-content-user">
-                        <a href="#">SmartShop money</a>
-                        <a href="#">My orders</a>
-                        <a><button type="submit" class="logout" name="logout">Logout</button></a>
-                    </div>
-                </div>
+                <button type="submit" name="logout" class="user menu-item">
+                    <img src="/img/user.png" style="width: 30px; height: 30px;">
+                    <p>Logout</p>
+                </button>
             </form>
         </c:if>
         <c:if test="${!isAuthenticated}">
-            <button onclick="document.getElementById('login').style.display='block'"
-                    class="user"><img src="/img/user.png" style="width: 36px; height: 36px;"></button>
+                <button onclick="document.getElementById('login').style.display='block'"
+                        class="user menu-item">
+                    <img src="/img/user.png" style="width: 30px; height: 30px;">
+                    <p>Sign in</p>
+                </button>
         </c:if>
         <c:if test="${isAuthenticated}">
             <button id="header-heart" onclick="document.getElementById('likes').style.display='block'"
-                    class="likes">
-                <img src="/img/heart (2).png" style="width: 36px; height: 36px;">
-                <span id="header-heart-n" class="wishlist-count">${favoriteProducts.size()}</span>
+                    class="likes menu-item">
+                <img src="/img/heart (2).png" style="width: 30px; height: 30px;">
+                <p>Favorites</p>
             </button>
         </c:if>
         <c:if test="${!isAuthenticated}">
             <button onclick="document.getElementById('login').style.display='block'"
-                    class="likes">
-                <img src="/img/heart (2).png" style="width: 36px; height: 36px;">
+                    class="likes menu-item">
+                <img src="/img/heart (2).png" style="width: 30px; height: 30px;">
+                <p>Favorites</p>
             </button>
         </c:if>
         <a href="/">
