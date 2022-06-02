@@ -352,7 +352,7 @@ public class MainController {
         String card = card1 + card2 + card3 + card4;
         String date = date1 + "/" + date2;
         Transaction transaction = transactionService.addNewTransaction(name, phone, email, city, card,
-                date, cvv, Integer.valueOf(total.substring(0, total.length()-3)));
+                date, cvv, Integer.valueOf(total.substring(0, total.length()-1)));
         model.addAttribute("transaction", transaction);
         return "success";
     }

@@ -83,5 +83,11 @@
                 <p>Help</p>
             </div>
         </a>
+    <a href="/contact">
+        <div class="menu-item">
+            <img src="img/messenger.png" style="width: 30px; height: 30px;">
+            <p>Contact</p>
+        </div>
+    </a>
     </div>
 </aside>

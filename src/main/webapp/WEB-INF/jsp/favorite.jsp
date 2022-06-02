@@ -108,11 +108,11 @@
                         <button type="button" onclick="productChanges('/deleteFavorite/${product.id}')" class="heart" name="heart">&#10084;</button>
                     </div>
                 </c:forEach>
-                <div class="clearfix">
-                    <button type="button" onclick="ajax()" class="clean-button" id="clean-button" name="clean">Clear wishlist</button>
-                </div>
             </div>
         </div>
+        </div>
+        <div class="clearfix-likes">
+            <button type="button" onclick="ajax()" class="clean-button" id="clean-button" name="clean">Clear wishlist</button>
         </div>
     </form>
 </div>

@@ -22,8 +22,8 @@
           href="https://ru.seaicons.com/wp-content/uploads/2015/10/Flat-TV-icon.png">
     <link rel="stylesheet" href="/css/filters.css">
     <link rel="stylesheet" href="/css/general.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+    <link rel="stylesheet" src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 </head>
@@ -145,7 +145,7 @@
                         <option id="bn" class="sort-choose">By name</option>
                     </select>
                     <div class="filters-icon">
-                        <button onclick="document.getElementById('filters').style.display='block';
+                        <button type="button" onclick="document.getElementById('filters').style.display='block';
                             document.body.style.overflowY = 'hidden';">
                             <img src="/img/filter-_2_.svg">
                         </button>
@@ -190,8 +190,8 @@
                                         </c:if>
                                     </c:if>
                                     <c:if test="${!isAuthenticated}">
-                                        <button class="empty-heart"
-                                                onclick="document.getElementById('registration').style.display='block';">
+                                        <button type="button" class="empty-heart"
+                                                onclick="document.getElementById('login').style.display='block';">
                                             <img src="img/heart.png"
                                                  style="width: 20px; height: 20px; margin-right: 10px;">
                                         </button>

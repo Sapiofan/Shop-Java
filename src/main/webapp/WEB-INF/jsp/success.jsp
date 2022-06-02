@@ -54,7 +54,7 @@
             </div>
             <div class="success-child">
                 <p class="general-success bold">Amount paid</p>
-                <p class="certain-success bold">${transaction.amount}</p>
+                <p class="certain-success bold">${transaction.amount}$</p>
                 <div style="clear: both;"></div>
             </div>
         </div>

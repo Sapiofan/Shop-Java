@@ -85,7 +85,7 @@ section h1 {
     background-color: rgb(235, 235, 235);
     color: black;
     cursor: pointer;
-    width: 100%;
+    width: 95%;
     height: 20px;
     border: none;
     text-align: left;
@@ -93,7 +93,7 @@ section h1 {
     font-size: 18px;
     margin-bottom: 20px;
     background: url('https://icons-for-free.com/iconfiles/png/512/arrows+bottom+chevron+direction+down+icon-1320085938044424744.png') no-repeat right;
-    background-size: 16px;
+    background-size: 20px;
 }
 
 .active-faq1 {
