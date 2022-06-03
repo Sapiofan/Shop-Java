@@ -66,7 +66,7 @@ public class Product {
     private CartProduct cartProduct;
 
     @JsonIgnore
-    @ManyToMany(mappedBy = "favoriteProducts")
+    @ManyToMany(mappedBy = "favoriteProducts", fetch = FetchType.EAGER)
     private Set<Favorite> favorites = new HashSet<>();
 
     public Product() {

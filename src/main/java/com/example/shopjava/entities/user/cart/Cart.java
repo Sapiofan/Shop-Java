@@ -22,7 +22,7 @@ public class Cart {
     @OneToOne(mappedBy = "cart")
     private User user;
 
-    @OneToMany(mappedBy = "cart")
+    @OneToMany(mappedBy = "cart", fetch = FetchType.EAGER)
     private Set<CartProduct> cartProducts = new HashSet<>();
 
     public Cart() {
