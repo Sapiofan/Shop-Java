@@ -19,7 +19,6 @@
     />
     <link rel="icon"
           href="https://ru.seaicons.com/wp-content/uploads/2015/10/Flat-TV-icon.png">
-    <link rel="stylesheet" href="/css/checkout.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
 
@@ -32,6 +31,8 @@
 
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"
             integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="/css/checkout.css">
 
     <script type="text/babel" src="/js/checkout.jsx"></script>
 
@@ -110,30 +111,44 @@
     <div id="cart-container" class="cart-container">
         <h3>Cart</h3>
         <div class="products">
-            <c:forEach items="${cartProducts}" var="product">
-                <div class="product">
-                    <img src="${product.product.image}"
-                         width="64px" height="64px">
-                    <p class="prod-name">${product.product.name}</p>
-                    <div class="input-group">
-                        <div class="input-group-button">
-                            <button onclick="checkoutChanges('/subtractAdditionalProduct/${product.product.id}')" type="button" class="op" data-quantity="minus" data-field="quantity">
-                                <i class="fa fa-minus" aria-hidden="true"></i>
-                            </button>
+            <c:if test="${cartProducts.size() != 0}">
+                <c:forEach items="${cartProducts}" var="product">
+                    <div class="product">
+                        <img src="${product.product.image}"
+                             width="64px" height="64px">
+                        <p class="prod-name">${product.product.name}</p>
+                        <div class="input-group">
+                            <div class="input-group-button">
+                                <button onclick="checkoutChanges('/subtractAdditionalProduct/${product.product.id}')" type="button" class="op" data-quantity="minus" data-field="quantity">
+                                    <i class="fa fa-minus" aria-hidden="true"></i>
+                                </button>
+                            </div>
+                            <input data-onload="disableInput('qty-${product.product.id}')" id="qty-${product.product.id}"
+                                   class="input-group-field quantity" min="1" max="1000" type="number" name="quantity" value="${product.quantity}">
+                            <div class="input-group-button">
+                                <button type="button" onclick="checkoutChanges('/addAdditionalProduct/${product.product.id}')" class="op" data-quantity="plus" data-field="quantity">
+                                    <i class="fa fa-plus" aria-hidden="true"></i>
+                                </button>
+                            </div>
                         </div>
-                        <input data-onload="disableInput('qty-${product.product.id}')" id="qty-${product.product.id}"
-                               class="input-group-field quantity" min="1" max="1000" type="number" name="quantity" value="${product.quantity}">
-                        <div class="input-group-button">
-                            <button type="button" onclick="checkoutChanges('/addAdditionalProduct/${product.product.id}')" class="op" data-quantity="plus" data-field="quantity">
-                                <i class="fa fa-plus" aria-hidden="true"></i>
-                            </button>
-                        </div>
+                        <p class="price">${product.product.price}$</p>
+                        <button type="button" onclick="checkoutChanges('/deleteCartProduct/${product.product.id}')"
+                                class="close">&#10006;</button>
                     </div>
-                    <p class="price">${product.product.price}$</p>
-                    <button type="button" onclick="checkoutChanges('/deleteCartProduct/${product.product.id}')"
-                            class="close">&#10006;</button>
+                </c:forEach>
+            </c:if>
+            <c:if test="${product != null}">
+                <div class="product">
+                    <img src="${product.image}"
+                         width="64px" height="64px">
+                    <p class="prod-name">${product.name}</p>
+                    <div class="input-group">
+                        <input data-onload="disableInput('qty-${product.id}')" id="qty-${product.id}"
+                               class="input-group-field quantity" min="1" max="1000" type="number" name="quantity" value="1">
+                    </div>
+                    <p class="price">${product.price}$</p>
                 </div>
-            </c:forEach>
+            </c:if>
         </div>
         <div class="sum">
             <p>Sum:</p>
@@ -147,4 +162,11 @@
     </div>
 </footer>
 </body>
+<%--<script>--%>
+<%--    let x = document.getElementById('qty-${product.id}')--%>
+<%--    window.onload = ev => {--%>
+<%--        x.disabled = true;--%>
+<%--    }--%>
+<%--</script>--%>
 </html>
+

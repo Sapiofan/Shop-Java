@@ -24,9 +24,7 @@
                                 <button class="heart" name="heart">&#10084;</button>
                             </div>`;
                     }
-                    htmlTable += data + `<div class="clearfix">
-                    <button type="button" onclick="ajax()" class="clean-button" id="clean-button" name="clean">Clear wishlist</button>
-                    </div></div>`;
+                    htmlTable += data;
                     counter = `<span id="header-heart-n" class="wishlist-count">`+ number +`</span>`;
                     $("#w").append(htmlTable);
                     $("#header-heart").append(counter);
@@ -62,9 +60,7 @@
                                 <button type="button" onclick="productChanges('/deleteFavorite/`+ obj[i].id +`')" class="heart" name="heart">&#10084;</button>
                             </div>`;
                     }
-                    htmlTable += data + `<div class="clearfix">
-                    <button type="button" onclick="ajax()" class="clean-button" id="clean-button" name="clean">Clear wishlist</button>
-                    </div></div>`;
+                    htmlTable += data;
                     counter = `<span id="header-heart-n" class="wishlist-count">`+ number +`</span>`;
                     if(action === 'addProduct'){
                         likeBut = `<button id="`+productId+`" type="button" class="empty-heart" onclick="productChanges('/deleteFavorite/`+productId+`')"><img

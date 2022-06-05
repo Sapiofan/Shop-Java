@@ -7,6 +7,7 @@
             dataType: "json",
             complete: [
                 function (response) {
+                console.log("In ajax function")
                     $("#products").remove();
                     $("#cart-counter").remove();
                     $("#cart-count-top").remove();
@@ -22,7 +23,7 @@
                         data += `<li class="product">
                         <a href="/product/`+product.id+`">
                         <span class="product-image">
-                            <img src="`+product.image+`" alt="Product Photo" width="60" height="120">
+                            <img src="`+product.image+`" alt="Product Photo">
                         </span>
                         </a>
                         <span class="product-details">
@@ -32,7 +33,7 @@
                                 <span class="qty-price">
                                     <span class="qty">
                                         <button onclick="subtractTotal(`+product.price+`, 'qty-`+product.id+`')" class="minus-button" id="minus-button-`+product.id+`">-</button>
-                                        <input type="number" id="qty-`+product.id+`" class="qty-input" step="1" min="1" max="1000" name="qty-input" value="`+obj[i].quantity+`" pattern="[0-9]*" title="Quantity" inputmode="numeric">
+                                        <input data-onload="disableInput('qty-`+product.id+`')" type="number" id="qty-`+product.id+`" class="qty-input" step="1" min="1" max="10" name="qty-input" value="`+obj[i].quantity+`" pattern="[0-9]*" title="Quantity" inputmode="numeric">
                                         <button  onclick="addTotal(`+product.price+`, 'qty-`+product.id+`')" class="plus-button" id="plus-button-`+product.id+`">+</button>
                                     </span>
                                     <span class="price">`+product.price+`$</span>

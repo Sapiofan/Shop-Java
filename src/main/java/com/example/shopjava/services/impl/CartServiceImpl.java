@@ -30,10 +30,12 @@ public class CartServiceImpl implements CartService {
     @Transactional
     public Cart addProduct(Cart cart, Long productId) {
         Product product = productRepository.findProductById(productId);
-        CartProduct cartProduct = new CartProduct(cart, product, 1, product.getPrice());
-        cartProductRepo.save(cartProduct);
-        cart.setTotalPrice(cart.getTotalPrice()+product.getPrice());
-        cartRepository.save(cart);
+        if(cartProductRepo.findCartProduct(productId, cart.getId()) == null){
+            CartProduct cartProduct = new CartProduct(cart, product, 1, product.getPrice());
+            cartProductRepo.save(cartProduct);
+            cart.setTotalPrice(cart.getTotalPrice()+product.getPrice());
+            return cartRepository.save(cart);
+        }
         return cart;
     }
 

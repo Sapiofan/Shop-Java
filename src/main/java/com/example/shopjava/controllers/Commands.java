@@ -6,6 +6,8 @@ import com.example.shopjava.entities.user.User;
 import com.example.shopjava.entities.user.cart.CartProduct;
 import com.example.shopjava.services.CartService;
 import com.example.shopjava.services.FilterProducts;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -26,6 +28,8 @@ public class Commands {
 
     @Autowired
     private CartService cartService;
+
+    private static final Logger log = LoggerFactory.getLogger(Commands.class);
 
     @GetMapping(value = "/cleanWishlist")
     @ResponseBody
@@ -72,6 +76,10 @@ public class Commands {
         if (authentication != null) {
             User user = userDetailsService.getUserByEmail(authentication.getName());
             cartService.addProduct(user.getCart(), productId);
+            Set<CartProduct> cartProducts = cartService.addProduct(user.getCart(), productId).getCartProducts();
+            for (CartProduct cartProduct : cartProducts) {
+                log.info(cartProduct.getProduct().getName());
+            }
             return user.getCart().getCartProducts();
         }
         return null;

@@ -4,6 +4,7 @@ import com.example.shopjava.entities.product.Product;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Table(name = "cart_products")
@@ -73,5 +74,18 @@ public class CartProduct {
 
     public void setTotal(Integer total) {
         this.total = total;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        CartProduct that = (CartProduct) o;
+        return Objects.equals(cart, that.cart) && Objects.equals(product, that.product);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(cart, product);
     }
 }
