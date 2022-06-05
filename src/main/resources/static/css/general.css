@@ -581,6 +581,7 @@ aside ul.products li.product a.product-link {
     border-radius: 3px;
     margin: 0 2px;
     transition: all 0.5s linear;
+    -moz-appearance:textfield;
 }
 
 .qty-input:active, .qty-input:hover {

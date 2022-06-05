@@ -24,13 +24,11 @@ jQuery(document).ready(function(){
 function getTotal(){
     return document.getElementById("total").innerText;
 }
-//
-// function disableInput(inputId) {
-//     console.log("Here")
-//     document.getElementById(inputId).disabled = true;
-// }
-//
-// $('[data-onload]').each(function(){
-//     console.log("data")
-//     eval($(this).data('onload'));
-// });
+
+function disableInput(inputId) {
+    document.getElementById(inputId).disabled = true;
+}
+
+$('[data-onload]').each(function(){
+    eval($(this).data('onload'));
+});

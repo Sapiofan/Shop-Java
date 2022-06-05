@@ -162,11 +162,12 @@
     </div>
 </footer>
 </body>
-<%--<script>--%>
-<%--    let x = document.getElementById('qty-${product.id}')--%>
-<%--    window.onload = ev => {--%>
-<%--        x.disabled = true;--%>
-<%--    }--%>
-<%--</script>--%>
+<script>
+    let x = document.getElementById('qty-${product.id}')
+    window.onload = ev => {
+        if(x !== null)
+            x.disabled = true;
+    }
+</script>
 </html>
 
