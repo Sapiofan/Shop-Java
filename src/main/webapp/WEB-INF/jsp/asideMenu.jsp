@@ -42,7 +42,7 @@
         <div id="cat-id">
             <div class="menu-item">
                 <div class="menu-container">
-                    <div class="cat-container" id="cat-container">
+                    <div class="cat-container" id="cat-container" onclick="openList()">
                         <img src="img/application.png" style="width: 30px; height: 30px;">
                         <p class="menu-coll">Categories</p>
                     </div>
@@ -78,3 +78,4 @@
     </a>
     </div>
 </aside>
+<div id="menu-curtain"></div>

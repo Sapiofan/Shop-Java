@@ -1,10 +1,8 @@
 package com.example.shopjava.entities.product;
 
-import com.example.shopjava.entities.user.cart.CartProduct;
 import com.example.shopjava.entities.user.Favorite;
+import com.example.shopjava.entities.user.cart.CartProduct;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.util.*;
@@ -12,7 +10,6 @@ import java.util.*;
 @Entity
 @Table(name = "products")
 @Inheritance(strategy = InheritanceType.JOINED)
-@OnDelete(action = OnDeleteAction.CASCADE)
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

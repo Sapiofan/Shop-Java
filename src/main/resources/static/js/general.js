@@ -183,3 +183,19 @@ function errorAlert(res) {
 $('[data-onload]').each(function(){
     eval($(this).data('onload'));
 });
+
+let flag = false;
+let asideList = document.getElementById("menu-category")
+
+function openList(){
+    if(!flag){
+        asideList.style.maxHeight = "280px";
+        asideList.style.transform = "scaleY(1)";
+        flag = true;
+    }
+    else {
+        asideList.style.maxHeight = "0px";
+        asideList.style.transform = "scaleY(0)";
+        flag = false;
+    }
+}

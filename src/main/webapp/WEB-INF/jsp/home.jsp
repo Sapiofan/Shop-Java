@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -103,7 +104,10 @@
                         <div class="prices">
                             <c:if test="${bestseller.discount != 0}">
                                 <p class="crossed-out">${bestseller.price}$</p>
-                                <p>${bestseller.price - (bestseller.discount / 100 * bestseller.price)}$</p>
+                                <c:set var = "i" value = "${bestseller.price - (bestseller.discount / 100 * bestseller.price)}" />
+                                <fmt:parseNumber var = "discount" integerOnly = "true"
+                                                 type = "number" value = "${i}" />
+                                <p>${discount}$</p>
                             </c:if>
                             <c:if test="${bestseller.discount == 0}">
                                 <p>${bestseller.price}$</p>

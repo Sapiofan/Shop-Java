@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -55,7 +56,10 @@
             </div>
             <div class="signs-desc">
                 <div class="header-price">
-                    ${product.price-(product.price*product.discount/100)}$
+                    <c:set var = "i" value = "${product.price-(product.price*product.discount/100)}" />
+                    <fmt:parseNumber var = "discount" integerOnly = "true"
+                                     type = "number" value = "${i}" />
+                    ${discount}$
                 </div>
                 <sec:authorize access="isAuthenticated()">
                     <button type="button" onclick="cartChanges('/addToCart/${product.id}')" class="header-buy" id="header-buy">Add to cart</button>
@@ -133,10 +137,10 @@
                     <c:if test="${product.discount != 0}">
                         <div class="discount-price">
                             <p class="old-price">${product.price} $</p>
-                            <p class="profit">-${product.price*product.discount/100}</p>
+                            <p class="profit">-${product.price-discount}</p>
                         </div>
                         <div class="price-now">
-                                ${product.price-(product.price*product.discount/100)} $
+                                ${discount} $
                         </div>
                     </c:if>
                     <c:if test="${product.discount == 0}">
@@ -166,7 +170,7 @@
                         <div class="discount-type">
                             <img src="/img/badge.png" width="30px" height="30px">
                             <p><span class="bold-text">Discount</span> Benefit up
-                                to ${product.price*product.discount/100} UAH</p>
+                                to ${product.price-discount} UAH</p>
                         </div>
                     </c:if>
                     <c:if test="${product.gifts != 'none'}">

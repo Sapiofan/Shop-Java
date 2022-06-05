@@ -1,5 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -202,7 +203,10 @@
                                         <c:choose>
                                             <c:when test="${product.discount != 0}">
                                                 <div class="pre-price">${product.price} &#8372;</div>
-                                                <div class="cur-price">${product.price-(product.price*product.discount/100)}
+                                                <c:set var = "i" value = "${product.price-(product.price*product.discount/100)}" />
+                                                <fmt:parseNumber var = "discount" integerOnly = "true"
+                                                                 type = "number" value = "${i}" />
+                                                <div class="cur-price">${discount}
                                                     &#8372;
                                                 </div>
                                             </c:when>

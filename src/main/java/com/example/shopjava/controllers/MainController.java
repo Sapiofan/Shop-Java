@@ -328,7 +328,7 @@ public class MainController {
     @GetMapping("/checkout/{id}")
     public String buyProduct(Model model, @PathVariable("id") Long productId){
         Product product = filterProducts.getProductById(productId);
-        model.addAttribute("cartProducts", Collections.singletonList(product));
+        model.addAttribute("product", product);
         model.addAttribute("total", product.getPrice());
         return "checkout";
     }
