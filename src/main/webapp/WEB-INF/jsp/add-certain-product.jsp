@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -34,6 +35,9 @@
                     <p>${key}</p>
                     <select name="${key}" class="categories">
                         <c:forEach items="${phoneFilters[key]}" var="item">
+                            <c:if test='${fn:containsIgnoreCase(item, "present")}'>
+                                <option value="">Present?</option>
+                            </c:if>
                             <option value="${item}">${item}</option>
                         </c:forEach>
                     </select>
@@ -61,6 +65,9 @@
                     <p>${key}</p>
                     <select name="${key}" class="categories">
                         <c:forEach items="${laptopFilters[key]}" var="item">
+                            <c:if test='${fn:containsIgnoreCase(item, "present")}'>
+                                <option value="">Present?</option>
+                            </c:if>
                             <option value="${item}">${item}</option>
                         </c:forEach>
                     </select>
@@ -80,6 +87,9 @@
                     <p>${key}</p>
                     <select name="${key}" class="categories">
                         <c:forEach items="${watchFilters[key]}" var="item">
+                            <c:if test='${fn:containsIgnoreCase(item, "present")}'>
+                                <option value="${item} doesn't present">Not present</option>
+                            </c:if>
                             <option value="${item}">${item}</option>
                         </c:forEach>
                     </select>

@@ -57,6 +57,14 @@ public class FilterProductsRepoImpl implements FilterProductsRepo {
                 key = key.replace(' ', '_');
                 for (String filter : filters) {
                     if(filter.contains("present") && !checkedFilters.get(filter)){
+
+                        String[] arr1 = query.split(" ");
+                        if(!arr1[arr1.length-1].equals("(")){
+                            String[] arr2 = Arrays.copyOfRange(arr1, 0, arr1.length - 1);
+                            query = String.join(" ", arr2) + ") and (";
+                            temp = query;
+                        }
+
                         String[] filterSplit = filter.split(" ");
                         String obj = "";
                         if(filterSplit[filterSplit.length-1].equals("present") && filterSplit[filterSplit.length-2].equals("doesn't")){
@@ -64,14 +72,14 @@ public class FilterProductsRepoImpl implements FilterProductsRepo {
                                 obj += filterSplit[i] + "_";
                             }
                             obj = obj.substring(0, obj.length()-1).toLowerCase();
-                            query += " p." + obj + "=false or";
+                            query += "p." + obj + "=false and";
                         }
                         else {
                             for (int i = 0; i < filterSplit.length - 1; i++) {
                                 obj += filterSplit[i] + "_";
                             }
                             obj = obj.substring(0, obj.length()-1).toLowerCase();
-                            query += " p." + obj + "=true or";
+                            query += "p." + obj + "=true and";
                         }
                         checkedFilters.put(filter, true);
                         break;
@@ -79,6 +87,8 @@ public class FilterProductsRepoImpl implements FilterProductsRepo {
                     for (String s : list) {
                         if (filter.equals(s) && !filter.contains("present")) {
                             query += " p." + key + "='" + filter + "' or";
+                            log.info(query);
+                            break;
                         }
                     }
                 }
@@ -87,6 +97,7 @@ public class FilterProductsRepoImpl implements FilterProductsRepo {
                     String[] arr2 = Arrays.copyOfRange(arr1, 0, arr1.length - 1);
                     query = String.join(" ", arr2) + ") and (";
                     temp = query;
+                    log.info(query);
                 }
             }
         }

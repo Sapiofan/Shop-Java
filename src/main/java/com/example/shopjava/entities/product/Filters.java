@@ -57,7 +57,7 @@ public class Filters {
 
         List<String> ram_slot = new ArrayList<>();
         ram_slot.add("RAM slot present");
-        ram_slot.add("RAM slot doesn't present");
+//        ram_slot.add("RAM slot doesn't present");
 
         List<String> cpu = new ArrayList<>();
         cpu.add("Apple cpu");
@@ -67,11 +67,11 @@ public class Filters {
 
         List<String> wireless_charger = new ArrayList<>();
         wireless_charger.add("Wireless charger present");
-        wireless_charger.add("Wireless charger doesn't present");
+//        wireless_charger.add("Wireless charger doesn't present");
 
         List<String> nfc = new ArrayList<>();
         nfc.add("NFC present");
-        nfc.add("NFC doesn't present");
+//        nfc.add("NFC doesn't present");
 
         List<String> screen_diagonal = new ArrayList<>();
         screen_diagonal.add("7 and more");
@@ -303,6 +303,7 @@ public class Filters {
         List<String> brands = new ArrayList<>();
         brands.add("Apple");
         brands.add("Samsung");
+        brands.add("Xiaomi");
         brands.add("Amazfit");
         brands.add("Elari");
         brands.add("AgiGo");
@@ -312,7 +313,6 @@ public class Filters {
 
         List<String> touch_sc = new ArrayList<>();
         touch_sc.add("Touch screen present");
-        touch_sc.add("Touch screen doesn't present");
 
         List<String> shape = new ArrayList<>();
         shape.add("Square");
@@ -321,27 +321,21 @@ public class Filters {
 
         List<String> waterproof = new ArrayList<>();
         waterproof.add("Waterproof present");
-        waterproof.add("Waterproof doesn't present");
 
         List<String> call_support = new ArrayList<>();
         call_support.add("Call support present");
-        call_support.add("Call support doesn't present");
 
         List<String> music_control = new ArrayList<>();
         music_control.add("Music control present");
-        music_control.add("Music control doesn't present");
 
         List<String> pulse_measurement = new ArrayList<>();
         pulse_measurement.add("Pulse measurement present");
-        pulse_measurement.add("Pulse measurement doesn't present");
 
         List<String> step_counting = new ArrayList<>();
         step_counting.add("Step counting present");
-        step_counting.add("Step counting doesn't present");
 
         List<String> sleep_monitoring = new ArrayList<>();
         sleep_monitoring.add("Sleep monitoring present");
-        sleep_monitoring.add("Sleep monitoring doesn't present");
 
         List<String> color = new ArrayList<>();
         color.add("Black");
@@ -372,7 +366,7 @@ public class Filters {
         display_diagonal.add("39 mm");
 
         watchCharacteristics.put("Brand", brands);
-        watchCharacteristics.put("Shape", shape);
+        watchCharacteristics.put("Display shape", shape);
         watchCharacteristics.put("Waterproof", waterproof);
         watchCharacteristics.put("Call support", call_support);
         watchCharacteristics.put("Music control", music_control);

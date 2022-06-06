@@ -389,9 +389,9 @@ public class AdminController {
                             @RequestParam("battery") String battery
     ) {
         Product product = (Product) request.getSession().getAttribute("product");
-        boolean ram_slotB = ram_slot.equals("yes");
-        boolean NFC = nfc.equals("yes");
-        boolean wc = wireless_charger.equals("yes");
+        boolean ram_slotB = !ram_slot.contains("doesn't");
+        boolean NFC = !nfc.contains("doesn't");
+        boolean wc = !wireless_charger.contains("doesn't");
         Phone phone = new Phone(product.getImage(), product.getName(), product.getPrice(), product.getBrand(),
                 product.getPayment(), product.getRating(), product.getDiscount(), product.getGifts(), product.getAvailable(),
                 product.getWarranty(), Date.from(Instant.now()), product.getSold(), product.getCategory(), series,
@@ -452,13 +452,13 @@ public class AdminController {
     ) {
         Product product = (Product) request.getSession().getAttribute("product");
 
-        boolean touch_screen = touch_sc.equals("yes");
-        boolean wp = waterproof.equals("yes");
-        boolean cs = call_support.equals("yes");
-        boolean mc = music_control.equals("yes");
-        boolean pm = pulse_measurement.equals("yes");
-        boolean sc = step_counting.equals("yes");
-        boolean sm = sleep_monitoring.equals("yes");
+        boolean touch_screen = touch_sc.contains("doesn't");
+        boolean wp = !waterproof.contains("doesn't");
+        boolean cs = !call_support.contains("doesn't");
+        boolean mc = !music_control.contains("doesn't");
+        boolean pm = !pulse_measurement.contains("doesn't");
+        boolean sc = !step_counting.contains("doesn't");
+        boolean sm = !sleep_monitoring.contains("doesn't");
 
         Watch watch = new Watch(product.getImage(), product.getName(), product.getPrice(), product.getBrand(),
                 product.getPayment(), product.getRating(), product.getDiscount(), product.getGifts(), product.getAvailable(),
