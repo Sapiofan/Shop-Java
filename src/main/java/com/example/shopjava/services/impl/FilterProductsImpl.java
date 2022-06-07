@@ -99,6 +99,14 @@ public class FilterProductsImpl implements FilterProducts {
     }
 
     @Override
+    public List<Product> getBestsellers() {
+        return productRepository.findAll()
+                .stream()
+                .sorted(Comparator.comparingInt(Product::getSold).reversed())
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public Category getCategory(String category) {
         return categoryRepository.getCategoryByName(category);
     }
@@ -118,7 +126,7 @@ public class FilterProductsImpl implements FilterProducts {
     @Transactional
     public List<Product> bestsellers() {
         List<Product> products = productRepository.findAll();
-        return products.stream().sorted(Comparator.comparingInt(Product::getSold)).collect(Collectors.toList());
+        return products.stream().sorted(Comparator.comparingInt(Product::getSold)).limit(40).collect(Collectors.toList());
     }
 
     @Override
@@ -185,7 +193,7 @@ public class FilterProductsImpl implements FilterProducts {
     }
 
     public List<? extends Product> sortByPopularity(List<? extends Product> products) {
-        return null;
+        return products.stream().sorted(Comparator.comparingInt(Product::getSold)).collect(Collectors.toList());
     }
 
     public List<? extends Product> sortByNovelties(List<? extends Product> products) {

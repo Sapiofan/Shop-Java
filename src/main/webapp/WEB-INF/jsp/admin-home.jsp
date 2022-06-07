@@ -61,6 +61,7 @@
                 <input name="banner11" type="text" class="footnote-input" value="${banner11}"><br>
                 <input name="banner12" type="text" class="footnote-input" value="${banner12}"><br>
                 <input name="banner13" type="text" class="footnote-input" value="${banner13}">
+                <input name="productId1" type="number" class="footnote-input" value="${productId1}">
             </div>
             <div class="block2">
                 <input type="text" name="link2" class="footnote-input footnote-link"
@@ -68,6 +69,7 @@
                 <input name="banner21" type="text" class="footnote-input" value="${banner21}"><br>
                 <input name="banner22" type="text" class="footnote-input" value="${banner22}"><br>
                 <input name="banner23" type="text" class="footnote-input" value="${banner23}">
+                <input name="productId2" type="number" class="footnote-input" value="${productId2}">
             </div>
         </div>
     </form>

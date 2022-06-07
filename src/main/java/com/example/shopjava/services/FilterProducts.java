@@ -21,6 +21,8 @@ public interface FilterProducts {
 
     List<Product> getProductsWithDiscount();
 
+    List<Product> getBestsellers();
+
     Category getCategory(String category);
 
     void saveProduct(Product product);

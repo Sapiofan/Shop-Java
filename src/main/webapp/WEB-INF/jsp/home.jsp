@@ -71,7 +71,7 @@
                 <p>${banner11}</p>
                 <h1>${banner12}</h1>
                 <p>${banner13}</p>
-                <a href="/product/4"><button class="b-button">Shop</button></a>
+                <a href="/product/${productId1}"><button class="b-button">Shop</button></a>
             </div>
         </div>
         <div class="banner">
@@ -80,7 +80,7 @@
                 <p>${banner21}</p>
                 <h1>${banner22}</h1>
                 <p>${banner23}</p>
-                <a href="/product/4"><button class="b-button">Shop</button></a>
+                <a href="/product/${productId2}"><button class="b-button">Shop</button></a>
             </div>
         </div>
     </section>
@@ -116,7 +116,7 @@
                     </div>
                 </c:forEach>
             </div>
-            <button class="view-all">View All</button>
+            <a href="/bestsellers"><button class="view-all">View All</button></a>
         </div>
     </section>
     <section id="special-offer">
@@ -127,7 +127,7 @@
             <h2>on professional camera drones</h2>
             <p>Limited quantities.<br>
                 See product detail pages for availability.</p>
-            <a href="/product/4"><button class="shop">Shop</button></a>
+            <a href="/product/${productId1}"><button class="shop">Shop</button></a>
         </div>
         <div class="offer-image">
             <img class="special-img" src="https://static.wixstatic.com/media/c837a6_ecf32c7284d4430582fcc90f60a1b4e6~mv2.png/v1/fill/w_1753,h_750,al_c,q_90,usm_0.66_1.00_0.01/c837a6_ecf32c7284d4430582fcc90f60a1b4e6~mv2.webp">

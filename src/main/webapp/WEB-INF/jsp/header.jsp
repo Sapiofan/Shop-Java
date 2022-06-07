@@ -14,7 +14,7 @@
                     <a href="/laptops">Laptops</a>
                     <a href="/watches">Watches</a>
                     <a href="/discounts">Discounts</a>
-                    <a href="#">Bestsellers</a>
+                    <a href="/bestsellers">Bestsellers</a>
                     <a href="#">Computers</a>
                     <a href="#">Drones</a>
                 </div>

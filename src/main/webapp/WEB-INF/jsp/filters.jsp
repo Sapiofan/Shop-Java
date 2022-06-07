@@ -58,6 +58,11 @@
                                 Discounts
                             </div>
                         </a>
+                        <a href="/bestsellers">
+                            <div class="aside-category">
+                                Bestsellers
+                            </div>
+                        </a>
                         <a href="#">
                             <div class="aside-category">
                                 Drones

@@ -1,6 +1,6 @@
 <header>
     <nav class="nav" id="nav">
-        <a href="home.html" id="logo"><p class="logo">SmartShop</p></a>
+        <a href="/" id="logo"><p class="logo">SmartShop</p></a>
         <button class="mobile-icon" id="mobile-icon">
             <a href="javascript:void(0);" class="icon">&#9776;</a>
         </button>

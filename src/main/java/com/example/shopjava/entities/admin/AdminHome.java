@@ -20,13 +20,16 @@ public class AdminHome {
 
     private Date date = Date.from(Instant.now());
 
+    private Long productId;
+
     public AdminHome() {
     }
 
-    public AdminHome(Integer imageNumber, String link, String text) {
+    public AdminHome(Integer imageNumber, String link, String text, Long productId) {
         this.imageNumber = imageNumber;
         this.link = link;
         this.text = text;
+        this.productId = productId;
     }
 
     public Long getId() {
@@ -69,16 +72,24 @@ public class AdminHome {
         this.date = date;
     }
 
+    public Long getProductId() {
+        return productId;
+    }
+
+    public void setProductId(Long productId) {
+        this.productId = productId;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         AdminHome adminHome = (AdminHome) o;
-        return Objects.equals(imageNumber, adminHome.imageNumber) && Objects.equals(link, adminHome.link) && Objects.equals(text, adminHome.text);
+        return Objects.equals(imageNumber, adminHome.imageNumber) && Objects.equals(link, adminHome.link) && Objects.equals(text, adminHome.text) && Objects.equals(date, adminHome.date) && Objects.equals(productId, adminHome.productId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(imageNumber, link, text);
+        return Objects.hash(imageNumber, link, text, date, productId);
     }
 }

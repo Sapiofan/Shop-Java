@@ -64,9 +64,10 @@ public class AdminController {
                                  @RequestParam("link1") String link1, @RequestParam("link2") String link2,
                                  @RequestParam("banner11") String banner11, @RequestParam("banner12") String banner12,
                                  @RequestParam("banner13") String banner13, @RequestParam("banner21") String banner21,
-                                 @RequestParam("banner22") String banner22, @RequestParam("banner23") String banner23
+                                 @RequestParam("banner22") String banner22, @RequestParam("banner23") String banner23,
+                                 @RequestParam("productId1") Long productId1, @RequestParam("productId2") Long productId2
     ) {
-        return addBannersProps(model, link1, link2, banner11, banner12, banner13, banner21, banner22, banner23);
+        return addBannersProps(model, link1, link2, banner11, banner12, banner13, banner21, banner22, banner23, productId1, productId2);
     }
 
     @PostMapping(value = "/admin/home", params = "save")
@@ -74,15 +75,17 @@ public class AdminController {
                                   @RequestParam("link1") String link1, @RequestParam("link2") String link2,
                                   @RequestParam("banner11") String banner11, @RequestParam("banner12") String banner12,
                                   @RequestParam("banner13") String banner13, @RequestParam("banner21") String banner21,
-                                  @RequestParam("banner22") String banner22, @RequestParam("banner23") String banner23) {
+                                  @RequestParam("banner22") String banner22, @RequestParam("banner23") String banner23,
+                                  @RequestParam("productId1") Long productId1, @RequestParam("productId2") Long productId2
+                                  ) {
         List<AdminHome> adminHomeList = new ArrayList<>();
         String banner1Text = banner11 + "#" + banner12 + "#" + banner13;
         String banner2Text = banner21 + "#" + banner22 + "#" + banner23;
-        adminHomeList.add(new AdminHome(1, link1, banner1Text));
-        adminHomeList.add(new AdminHome(2, link2, banner2Text));
+        adminHomeList.add(new AdminHome(1, link1, banner1Text, productId1));
+        adminHomeList.add(new AdminHome(2, link2, banner2Text, productId2));
         adminService.addNewBannerState(adminHomeList);
 
-        return addBannersProps(model, link1, link2, banner11, banner12, banner13, banner21, banner22, banner23);
+        return addBannersProps(model, link1, link2, banner11, banner12, banner13, banner21, banner22, banner23, productId1, productId2);
     }
 
     @GetMapping("/admin/career")
@@ -507,15 +510,23 @@ public class AdminController {
         model.addAttribute("banner11", banner1Text[0]);
         model.addAttribute("banner12", banner1Text[1]);
         model.addAttribute("banner13", banner1Text[2]);
+        model.addAttribute("productId1", banners.get(0).getProductId());
 
         model.addAttribute("link2", banners.get(1).getLink());
         String[] banner2Text = banners.get(1).getText().split("#");
         model.addAttribute("banner21", banner2Text[0]);
         model.addAttribute("banner22", banner2Text[1]);
         model.addAttribute("banner23", banner2Text[2]);
+        model.addAttribute("productId2", banners.get(1).getProductId());
     }
 
-    private String addBannersProps(Model model, @RequestParam("link1") String link1, @RequestParam("link2") String link2, @RequestParam("banner11") String banner11, @RequestParam("banner12") String banner12, @RequestParam("banner13") String banner13, @RequestParam("banner21") String banner21, @RequestParam("banner22") String banner22, @RequestParam("banner23") String banner23) {
+    private String addBannersProps(Model model, @RequestParam("link1") String link1,
+                                   @RequestParam("link2") String link2, @RequestParam("banner11") String banner11,
+                                   @RequestParam("banner12") String banner12, @RequestParam("banner13") String banner13,
+                                   @RequestParam("banner21") String banner21, @RequestParam("banner22") String banner22,
+                                   @RequestParam("banner23") String banner23,
+                                   @RequestParam("productId1") Long productId1, @RequestParam("productId2") Long productId2
+                                   ) {
         model.addAttribute("link1", link1);
         model.addAttribute("link2", link2);
         model.addAttribute("banner11", banner11);
@@ -524,6 +535,8 @@ public class AdminController {
         model.addAttribute("banner21", banner21);
         model.addAttribute("banner22", banner22);
         model.addAttribute("banner23", banner23);
+        model.addAttribute("productId1", productId1);
+        model.addAttribute("productId2", productId2);
         return "admin-home";
     }
 }
