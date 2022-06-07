@@ -72,7 +72,7 @@
                                 <i class="fa fa-minus" aria-hidden="true"></i>
                             </button>
                         </div>
-                        <input data-onload="disableInput('qty-`+product.id+`')" id="qty-`+product.id+`"
+                        <input disabled id="qty-`+product.id+`"
                                class="input-group-field quantity" min="1" max="1000" type="number" name="quantity" value="`+obj[i].quantity+`">
                         <div class="input-group-button">
                             <button type="button" onclick="checkoutChanges('/addAdditionalProduct/`+product.id+`')" class="op" data-quantity="plus" data-field="quantity">
@@ -123,7 +123,7 @@
                                     <i class="fa fa-minus" aria-hidden="true"></i>
                                 </button>
                             </div>
-                            <input data-onload="disableInput('qty-${product.product.id}')" id="qty-${product.product.id}"
+                            <input disabled id="qty-${product.product.id}"
                                    class="input-group-field quantity" min="1" max="1000" type="number" name="quantity" value="${product.quantity}">
                             <div class="input-group-button">
                                 <button type="button" onclick="checkoutChanges('/addAdditionalProduct/${product.product.id}')" class="op" data-quantity="plus" data-field="quantity">
