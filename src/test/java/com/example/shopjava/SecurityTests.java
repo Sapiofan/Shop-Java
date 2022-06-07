@@ -7,6 +7,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 
 import javax.transaction.Transactional;
@@ -16,8 +17,7 @@ import static org.springframework.security.test.web.servlet.response.SecurityMoc
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -43,7 +43,8 @@ public class SecurityTests {
                         .param("login", "login"))
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andExpect(authenticated());
+                .andExpect(authenticated())
+                .andExpect(model().attribute("error", ""));
     }
 
     @Test
@@ -52,6 +53,30 @@ public class SecurityTests {
                         .param("email", "somemail@gmail.com")
                         .param("psw", "badPassword")
                         .param("login", "login"))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(unauthenticated())
+                .andExpect(model().attribute("error", "Password was wrong"));
+    }
+
+    @Test
+    public void existedEmailWhileRegistration() throws Exception {
+        this.mvc.perform(post("/")
+                        .param("email", "somemail@gmail.com")
+                        .param("psw", "badPassword")
+                        .param("psw-repeat", "badPassword")
+                        .param("registration", "registration"))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(unauthenticated())
+                .andExpect(model().attribute("error", "User with such email already exists"));
+    }
+
+    @Test
+    @WithMockUser(username = "somemail@gmail.com", password = "somePassword")
+    public void successfulLogout() throws Exception {
+        this.mvc.perform(post("/")
+                        .param("logout", "logout"))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(unauthenticated());
