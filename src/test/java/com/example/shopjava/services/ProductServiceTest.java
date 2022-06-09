@@ -1,4 +1,4 @@
-package com.example.shopjava;
+package com.example.shopjava.services;
 
 import com.example.shopjava.entities.product.Product;
 import com.example.shopjava.repos.ProductRepository;

@@ -1,4 +1,4 @@
-package com.example.shopjava;
+package com.example.shopjava.controllers;
 
 import com.example.shopjava.controllers.MainController;
 import com.example.shopjava.entities.user.cart.CartProduct;
