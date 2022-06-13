@@ -35,10 +35,12 @@ public class ContactServiceImpl implements ContactService {
             message1.setContact(ContactInDb);
             messageRepository.save(message1);
             contactRepository.save(ContactInDb);
+            log.info("The contact exists. Message was added.");
         } else {
             message1.setContact(contact);
             messageRepository.save(message1);
             contactRepository.save(contact);
+            log.warn("The contact doesn't exists. The Contact was created and the message was added.");
         }
         return "Message was successfully sent. We will answer during the week.";
     }

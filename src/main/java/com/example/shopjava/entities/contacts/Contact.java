@@ -94,11 +94,11 @@ public class Contact {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Contact contact = (Contact) o;
-        return Objects.equals(id, contact.id) && Objects.equals(first_name, contact.first_name) && Objects.equals(last_name, contact.last_name) && Objects.equals(email, contact.email) && Objects.equals(messages, contact.messages) && Objects.equals(sendMails, contact.sendMails);
+        return Objects.equals(id, contact.id) && Objects.equals(first_name, contact.first_name) && Objects.equals(last_name, contact.last_name) && Objects.equals(email, contact.email) && Objects.equals(sendMails, contact.sendMails);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, first_name, last_name, email, messages, sendMails);
+        return Objects.hash(id, first_name, last_name, email, sendMails);
     }
 }

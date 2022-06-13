@@ -83,7 +83,7 @@ public class ReviewServiceImpl implements ReviewService {
     @Override
     @Transactional
     public void deleteById(Long id) {
-        log.warn("Review was deleted: " + reviewRepository.findById(id).get());
+        log.warn("Review was deleted: " + reviewRepository.findReviewById(id));
         reviewRepository.deleteById(id);
     }
 
