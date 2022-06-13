@@ -40,17 +40,15 @@ public class CartServiceTests {
     public void addToCart() {
         Cart cart = new Cart();
         cart.setId(1l);
+        cart.setTotalPrice(10000);
 
         Product product = new Product();
         product.setId(1l);
         product.setName("product");
+        product.setPrice(5000);
 
         User user = new User();
         user.setId(1l);
-
-        CartProduct cartProduct = new CartProduct();
-        cartProduct.setProduct(product);
-        cartProduct.setQuantity(5);
 
         when(cartRepository.save(cart)).thenReturn(cart);
 
@@ -58,15 +56,13 @@ public class CartServiceTests {
 
         when(cartProductRepo.findCartProduct(1l, 1l)).thenReturn(null);
 
-        when(cartProductRepo.save(cartProduct)).thenReturn(cartProduct);
-
         Cart cart1 = cartService.addProduct(cart, 1l);
 
         verify(cartRepository).save(cart);
 
         Assertions.assertAll(() -> {
-            assertEquals(1, cart1.getCartProducts().size());
             assertEquals(1l, cart1.getId());
+            assertEquals(15000, cart1.getTotalPrice());
         });
     }
 
